@@ -1,0 +1,20 @@
+package examine;
+
+public class ex5 {
+
+	public static void main(String[] args) {
+
+		int dan, i, j;
+		for (dan = 1; dan < 10; dan += 3) {
+			for (i = 1; i < 10; i++) {
+				for (j = dan; j < 3 + dan; j++) {
+					System.out.print(j + "*" + i + "=" + j * i+"\t");
+
+				}
+				System.out.println();
+			}
+			System.out.println();
+		}
+
+	}
+}

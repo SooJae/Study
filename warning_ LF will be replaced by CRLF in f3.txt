@@ -1,0 +1,11 @@
+warning: LF will be replaced by CRLF in f3.txt.
+The file will have its original line endings in your working directory.
+
+윈도우 환경에서는 줄바꿈 문자를 CR(carriage return) LF(line feed) 문자를 둘 다 사용하고, Mac과 Linux는 LF 문자만 사용. 
+윈도우와 유닉스가 서로 작업하는 환경 설정을 위해 core.autocrlf를 사용한다.
+commit할 땐 crlf->lf으로 checkout할 때는 lf->crlf으로 전환 시켜 줌.
+"LF will be replaced by CRLF"라는 오류는 autocrlf = true인 상태에서 발생.
+윈도우가 아닌 유닉스 스타일인 lf로 줄바꿈이 된 파일이 존재할 때 발생. 
+
+
+한가지의 환경에서 사용시 git config --global core.autocrlf false 을 입력해서 이 기능을 꺼도 됨.
