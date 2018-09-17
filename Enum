@@ -14,3 +14,8 @@ class Fruit{
   
   배열 : 서로 연관된 변수들의 집합
   Enum : 서로 연관된 상수들의 집합 (열거형)
+
+
+for ( Fruit f : Fruit.values()){
+	//values()가 호출되면 Enum에 있는걸 f에 하나씩 담는다.
+	}
