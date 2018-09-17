@@ -1,0 +1,12 @@
+class Fruit{
+		public static final Fruit Apple = new Fruit();
+		public static final Fruit PEACH = new Fruit();
+		public static final Fruit BANANA = new Fruit();
+		
+	}
+
+	enum Fruit{
+		APPLE, PEACH, BANANA
+	}
+  
+  둘이 같은 말이다.
