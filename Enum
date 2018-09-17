@@ -1,5 +1,6 @@
 class Fruit{
-		public static final Fruit Apple = new Fruit();
+		public static final Fruit Apple = new Fruit(); // 구글의 Apple과 같기때문에 식별해주기 위해서 Fruit()으로 객체 생성.
+								  but 상수가 아니기 때문에 Switch문에서 에러남
 		public static final Fruit PEACH = new Fruit();
 		public static final Fruit BANANA = new Fruit();
 		
