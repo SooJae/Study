@@ -39,3 +39,30 @@ hi.next()를 다시 호출하면 2를 가져오고 hi라는 이터레이터 안�
 반복작업 종료.
 
 hi에 담겨있는 값은 실제값이 아니라 참조 값만 갖고 있기 때문에, hi.next()를 통해서 hi의 값이 사라진다고 해서 오리지널 값이 사라지는 것은 아니다.
+
+
+ArrayList<Integer> A = new ArrayList<Integer>();
+A.add(1);
+A.add(2);
+A.add(3);
+
+
+Iterator it = (Iterator) A.iterator();
+while(it.hasNext()){
+System.out.println(it.next());
+}
+
+HashSet을 ArrayList로 바꿔도 오류가 안난다.
+그 이유는 컬렉션 인터페이스를 구현하고 있기 때문이다.
+그래서 ArrayList대신 Collection으로 바꿔도 된다.
+
+Collection<Integer> A = new ArrayList<Integer>();
+A.add(1);
+A.add(2);
+A.add(3);
+
+
+Iterator it = (Iterator) A.iterator();
+while(it.hasNext()){
+System.out.println(it.next());
+}
