@@ -1,0 +1,12 @@
+Iterator it = (Iterator) A.iterator();
+while(it.hasNext()){
+System.out.println(it.next());
+}
+
+
+Set
+
+A.ContainsAll(B) : B가 A의 부분집합이냐
+A.addAll(B) : A와 B의 합집합을 A에 담겠다
+A.retainAll(B) : A와 B의 교집합을 A에 담겠다
+A.removeAll(B) : A-B (차집합)
