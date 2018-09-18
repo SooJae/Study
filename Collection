@@ -1,3 +1,6 @@
+Set : 중복되는 값 X, 순서대로 저장 X
+List : 중복되는 값 O, 순서대로 저장 O
+
 Iterator it = (Iterator) A.iterator();
 while(it.hasNext()){
 System.out.println(it.next());
