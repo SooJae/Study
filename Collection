@@ -1,10 +1,7 @@
 Set : 중복되는 값 X, 순서대로 저장 X
 List : 중복되는 값 O, 순서대로 저장 O
 
-Iterator it = (Iterator) A.iterator();
-while(it.hasNext()){
-System.out.println(it.next());
-}
+
 
 
 Set
@@ -13,3 +10,20 @@ A.ContainsAll(B) : B가 A의 부분집합이냐
 A.addAll(B) : A와 B의 합집합을 A에 담겠다
 A.retainAll(B) : A와 B의 교집합을 A에 담겠다
 A.removeAll(B) : A-B (차집합)
+
+
+Iterator it = (Iterator) A.iterator();
+while(it.hasNext()){
+System.out.println(it.next());
+}
+
+Iterator
+인터페이스임
+
+Iterator hi = (Iterator) A.iterator();
+iterator()라는 메소드의 리턴값은 Iterator에 객체를 리턴하기 때문에, hi는 Iterator라는 데이터타입을 갖고 객체가 된다.
+A라고 하는 인스턴스안에 값은 그대로 존재하는데 iter()라는 메서드를 통해서 hi라고하는 Iterator 인스턴스를 만들게 되면, hi라고하는 집합이 생긴다.
+hi.hasnext()를 호출하게 되면, hi라는 이터레이터 안에 들어가있는 값들이 존재하는지 확인.
+
+iterator의 메소드
+hasNext, next
