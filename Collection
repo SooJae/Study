@@ -66,3 +66,27 @@ Iterator it = (Iterator) A.iterator();
 while(it.hasNext()){
 System.out.println(it.next());
 }
+
+
+
+MAP
+
+HashMap<String,Integer> A = new HashMap<String,Integer>();
+A.add(1); --> A.put("one",1);
+A.add(2); --> A.put("two",2);
+A.add(3); --> A.put("three",3);
+System.out.println(A.get("one")); //1 
+System.out.println(A.get("two")); //2 
+System.out.println(A.get("three")); //3
+
+Iterator it = (Iterator) A.iterator();
+while(it.hasNext()){
+System.out.println(it.next());
+}
+
+
+key 와 value가 있다.
+key는 중복 X
+value는 중복 O
+
+entrySet() : Set
