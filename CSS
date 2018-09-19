@@ -63,6 +63,7 @@
  id값은 중복 X. 유일무이
  
  
+ 
  박스모델 
  
  block level element : 화면 전체를 씀 ex)h1
@@ -82,3 +83,28 @@ h1 ,a{
 h1 ,a{
     border : 5px solid red;
   }
+
+
+
+  h1 ,a{
+      border : 5px solid red;
+      padding : 20px;
+      margin : 0;
+      display:block
+    }
+    
+    padding : border와 글자 사이
+    margin : border와 border 사이
+    폭 width 높이 height
+    
+    
+    block 단위일때 inline을 안쓰고 width로 조절 할수 있다.
+    
+    
+    grid
+    <h1>태그 같은경우 제목이라는 뜻을 가지고 있어서 그냥 사용하기는 어색하다.
+    그럴때 쓰는 것이 div인데 div는 무색무취와 같은 아무 의미없는 태그이다.
+    
+    div 는 block level element
+    span은 inline element
+    
