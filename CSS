@@ -1,0 +1,84 @@
+웹페이지 안에 CSS를 삽입하는 방법
+1. style 태그를 쓴다. 
+2. style 속성을 쓴다.
+
+  <style>
+    a {
+      color:black;
+      text-decoration : none; // 밑줄이 없어진다.
+    }
+  </style>
+
+</head>
+<body>
+  <h1><a href="index.html">WEB</a></h1>
+  <ol>
+    <li><a href="1.html">HTML</a></li>
+    <li><a href="2.html" style="color:red"(CSS속성을 쓴다는 뜻.)>CSS</a></li>
+    <li><a href="3.html">JavaScript</a></li>
+  </ol>
+  
+  
+  <style>
+    a {
+      color:black;
+      text-decoration : none; // 밑줄이 없어진다.
+    }
+  </style>
+  
+  a{} = 선택자 selector (태그 a가 들어가있는 곳을 지정)
+  color:black = 효과 declaration
+  color = 속성 property
+  black = 값 value
+  
+  
+  
+  <style>
+    #active {
+      color:red;
+    }
+    .saw {
+      color:gray;
+    }
+    a {
+      color:black;
+      text-decoration: none;
+    }
+    
+  </style>
+  
+  <li><a href="1.html" class="saw">HTML</a></li>
+    <li><a href="2.html" class="saw" id="active">CSS</a></li>
+    <li><a href="3.html">JavaScript</a></li>
+  
+  saw{}: 태그 saw가 들어가 있는 곳을 지정
+  .saw{} : saw라는 class를 지정
+   #saw{} : id가 들어가있는 곳을 지정
+  
+ CSS는 뒤에 쓴것이 오버라이딩 됨.
+ 그래서 우선순위를 위해 id 선택자를 씀
+ id > class > tag 선택자
+ 
+ id 선택자는 단 한번만 쓰게 되어있다.
+ id값은 중복 X. 유일무이
+ 
+ 
+ 박스모델 
+ 
+ block level element : 화면 전체를 씀 ex)h1
+ inline element : 자기 자신의 크기만큼 씀 ex)a
+
+block level element 에서 display:inline 하면 inline element가 됨.
+반대도 가능
+display : none 하면 화면에서 사라짐. 
+
+h1 ,a{
+    border-width :5px;
+    border-color:red;
+    border-style : solid;
+  }
+ 
+-> 
+h1 ,a{
+    border : 5px solid red;
+  }
