@@ -4,3 +4,9 @@
 BUT 자바스크립트를 이용하면 body 태그를 바꿔줄수 있다.
 
 즉 JS가 HTML을 제어하는 언어이다. 
+
+<input type="button" value="hi" onclick="alert('hi')">
+    <input type="text" onchange="alert('changed')">
+    <input type="text" onkeydown="alert('key down!')">
+    
+    on~ 이벤트 약 20개정도 있다.
