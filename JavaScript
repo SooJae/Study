@@ -48,4 +48,68 @@ javascript의 this가 해당 함수 호출 패턴에 따라 어떻게 객체를 
 
 JavaScript에서는 내부 함수 호출 패턴을 정의해 놓지 않기 때문입니다. 내부 함수도 결국 함수이므로 이를 호출할 때는 함수 호출로 취급되어 함수 호출 패턴 규칙에 따라 내부 함수의 this는 전역 객체를 참조하게 됩니다.
 
+
+
+<input id="night_day" type="button" value="night" onclick=" 
+if(document.queruySelector('#night_day').value === "night") 
+{
+document.queruySelector(body).style.backgroundColor = 'black'; 
+document.queruySelector(body).style.color = 'white'; 
+document.queruySelector(''#night_day").value = 'day'; 
+
+}else{ 
+document.queruySelector(body).style.backgroundColor = 'white';
+document.queruySelector(body).style.color = 'black';
+document.queruySelector('#night_day').value = night
+}
+
+
+
+document.queruySelector(#night_day) 라는 태그는 id="night_day" 와 의미가 같다.
+의미가 같은 코드가 중복이 되므로 이것은 매우 비효율적인 일이므로
+해당 코드를 = this로 바꾸게되면 더 효율적인 코딩이 가능하다 
+
+<input id="night_day" type="button" value="night" onclick="
+
+이 코드안에 있는 onclick 과 같이 이벤트로 실행되는 이 코드들은
+이 코드가 속해 있는 태그(ex: input) 의 인덱스 태그
+( 인덱스 태그는 해당 태그의 선택자(ex: id , class 등등) 를 의미한다.)
+를 대신할수 있는 태그는
+this 이다.
+
+그러므로
+
+<input type="butten" value="night" onclick"
+if(this.value === "night"){
+document.querySelector('body').style.color = 'white'';
+
+이렇게 인덱스 코드를 생략 가능하다.
+
+
 출처: http://k9e4h.tistory.com/141 [Kim's :D]
+
+
+var Body = {
+  SetColor : function(color){
+    document.querySelector('body').style.color = color;
+  },
+  SetBackgroundColor : function(color){
+    document.querySelector('body').style.backgroundColor =color;
+  }
+}
+
+
+Body, document : 객체
+SetColor, SetBackgroundColo, querySelector('body') : 메소드
+
+라이브러리 : 내가 프로그램을 만들기 위해 필요한 소프트웨어. 부품
+프레임워크 : 만들고자 하는 것이 무엇이냐에 따라서 그것을 만들려고 할때 공통적인 부분을 프레임 워크가 만들어 놓고, 
+우리가 필요한 부분을 살짝살짝 바꿈(완제품)
+
+라이브러리는 필요한 것을 갖고 와서 작업. 프레임 워크는 안에 들어가서 작업함.
+
+CDN : Content Delivery Network
+
+$('a') : a태그를 J쿼리로 제어하겠다.
+UI - 사용자 (User) 가 목적달성을 위해 마주하는 조작체계
+API - 프로그래머 (Programmer) 의 개발을 돕기위해 마련된 도구 및 환경
