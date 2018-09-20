@@ -1,5 +1,6 @@
 바뀌지 않을 부분은 냅두고, 바뀔수 있는 부분은 -> Ajax로 변경
 
+
 <input type = "button" value="fetch" onClick="  
 fetch('html').then(function(response){
       response.text().then(function(text){
@@ -71,4 +72,23 @@ function callbackme(){
 });
     console.log(1);
     console.log(2);
+    
+    
+    
+    fetch('html').then(function(response){
+    }))
+    
+    response : 서버에 요청했을 때 서버가 응답한 결과를 담고있는 객체(여러가지 속성이 있다. 서버와 통신하는 귀중한 단서있음)
+    
+    
+    
+    
+    hash = 북마크
+    
+    # hash ! bang 
+   href="#!html"
+   !는 관습적으로 붙여준다.
+   
+   jax는 다시 공부할것...
+    
     
