@@ -40,3 +40,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
 
 
+http:// < - 프로토콜 (통신규칙)
+http://github.com : 도메인(호스트) 특정한 인터넷에 연결되어있는 컴퓨터
+http://github.com:3000 : 포트번호 80번포트는 생략해줘도 된다. 80은 웹서버를 쓴다는 뜻이기 때문에
+http://github.com:3000/main : path 어떤디텍토리에 어떤 파일인지
+http://github.com:3000/main?id=html&page=12 : 쿼리스트링, 값과 값은 &, 값은 =로 구분
