@@ -245,3 +245,14 @@ input에 value값을 넣으면 자동으로 value값이 들어가게된다.
 또한 value에 title을 넣음으로써 나중에 이름을 교체할때 구(id)를 신(title)로 교체 해줄 것이다.
 
       
+<a href="/delete?id"=${title}>delete</a>
+는 보안상의 문제로(get 방식이기때문에, 주소가 다 보인다.)
+post로 해야한다.
+
+즉 form을 이용해야함.
+
+<form action="delete_process" method="post">
+          <input type ="hidden" name="id" value="${title}">
+          <input type ="submit" value="delete">
+          </form>
+          
