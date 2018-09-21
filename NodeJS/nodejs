@@ -234,3 +234,13 @@ response.writeHead(302, {Location:`/?id=${title}`});
 200은 성공이라는 뜻 , 301을 완전 거기로 바뀐것, 302는 리다이렉션.
 
 post를 보내면 자동적으로 id에 해당되는 이지로 간다.
+
+<input type="text" name="title" placeholder="title" value="${title}">
+
+input에 value값을 넣으면 자동으로 value값이 들어가게된다.
+
+<input type="text" name="title" placeholder="title" value="${title}"> //name에 title이 들어가있고
+사용자가 마음대로 수정할 수 있다.
+<input type = "hidden" name="id" value="${title}"> //id로 바꿔주고 바꾸지 파일이름을 못하게 hidden을 써준다.
+
+      
