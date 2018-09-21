@@ -164,9 +164,9 @@ npm install module -g ----> 내가 설치하는 소프트웨어는 독립적이�
 
 pm2 start main.js --watch --> 시작
 
-mp2 monit -> 프로그램 관리ㅡ
+pm2 monit -> 프로그램 관리ㅡ
 
-mp2 list -> 프로그램 확인
+pm2 list -> 프로그램 확인
 pm2 stop main -> 프로그램 종료
 pm2 log -> 에러나 변경사항의 기록을 보여줌
 
@@ -195,3 +195,30 @@ POST를 이용해서 보낸다.(대용량도 가능, URL로 보내면 대용량�
 <form action="http://localhost:3000/process_create"method="post">
 get의 경우 method="get"이거나 생략되어있음.
 
+placeholder="title"는 회색글씨를 희미하게 보여줌
+
+
+http.createServer(function(request, response)
+request에는 요청할때 웹부라우저가 보낸 정보들
+response는 응답할때 우리가 웹브라우저한테 보낼 정보들 (즉 post정보가 있음.)
+
+request.on('data',function(data){
+    body= body+data;      
+    });
+
+//post방식에 데이터가 많을경우 컴퓨터가 꺼질수도 있다. 그래서 이걸쓴다.
+100이있으면 조각조각의 양을 서버에서 수신할때마다, 콜백함수를 호출하게 되어있다.
+호출할때 data라는 인자를 통해서 수신한 정보를 주기로 약속되어있다.
+
+request.on('end',function(){
+  var post = qs.parse(body); 
+  console.log(post);
+    });
+//더 이상 들어올 정보가 없으면(end) qs.parse(body);로 post정보를 갖고올수 있다.
+
+{ title: 'dltnwo', description: 'dltnwosla\r\ndd' }
+
+requst뒤에 .on은 이벤트를 객체에 바인딩한다. 이벤트가 일어날 경우 사용자의 의도를 표현한다. 
+이런 스타일의 프로그래밍을 Event-driven 프로그래밍이라고 부른다. (위에는 각각 post를 받고, 데이터를 다 받으면
+data, end기능을 한다.)
+그 후에 파라미터가 추가된 function을 실행한다.
