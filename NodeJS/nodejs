@@ -242,5 +242,6 @@ input에 value값을 넣으면 자동으로 value값이 들어가게된다.
 <input type="text" name="title" placeholder="title" value="${title}"> //name에 title이 들어가있고
 사용자가 마음대로 수정할 수 있다.
 <input type = "hidden" name="id" value="${title}"> //id로 바꿔주고 바꾸지 파일이름을 못하게 hidden을 써준다.
+또한 value에 title을 넣음으로써 나중에 이름을 교체할때 구(id)를 신(title)로 교체 해줄 것이다.
 
       
