@@ -161,3 +161,36 @@ a();
 pm2 -> 1.서버가 꺼지면 다시켜줌 2. 서버를 수정할때마다 알아서 껐다켜줌
 
 npm install module -g ----> 내가 설치하는 소프트웨어는 독립적이라서 내 컴퓨터 어디서든지 사용할수 있다.
+
+pm2 start main.js --watch --> 시작
+
+mp2 monit -> 프로그램 관리ㅡ
+
+mp2 list -> 프로그램 확인
+pm2 stop main -> 프로그램 종료
+pm2 log -> 에러나 변경사항의 기록을 보여줌
+
+
+
+
+
+<form action="http://localhost:3000/process_create">
+<p><input type="text" name="title"></p>
+<p>
+  <textarea name ="description"></textarea>
+</p>
+<p>
+  <input type="submit">
+
+</p>
+</form>
+
+이 폼을 http://localhost:3000/process_create에 보내고싶다.
+(쿼리스트링으로 보냄 ex) http://localhost:3000/process_create?title=hi&description=hello)
+
+서버에서 데이터를 갖고올때(get) 쿼리스트링이 좋고,
+서버에 데이터를 생성하고 수정하고 삭제할때는 url로 보내면 안된다.(보안문제)
+그래서 눈에 보이지 않는 방식으로 보내야한다.
+
+
+
