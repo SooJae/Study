@@ -106,4 +106,58 @@ undefined = 아무값도 없는 것 (null?)
 배열에 값을 넣으려면 arr.push(data);를 하면 된다.
 
 
+function sum(x,y){ // parameter
+  console.log(x+y));
+}
 
+sum(2,4); //argument
+
+
+syncronous 끝날때까지 기다리는 것
+
+asyncronous 끝날때까지 다른일을 하는 것
+
+
+
+console.log('A');
+var result = fs.readFileSync('syntax/sample.txt','utf8');
+console.log(result);
+console.log('C');
+
+A
+B
+C
+
+
+console.log('A');
+fs.readFile('syntax/sample.txt','utf8',function(err,result){
+  console.log(result);
+});
+
+console.log('C');
+
+A
+C
+B
+
+: 작업이 끝나면 function(err,result)를 실행시켜~ (나중에 전화해~ : call back)
+파일을 읽은 다음 함수로 나를 호출해~
+
+
+
+function a(){
+  console.log('A');
+}
+a();
+
+
+var a = function(){
+  console.log('A');
+}
+a();
+
+----> JavaScript에서는 함수가 값이다!
+
+pm2 -> 1.서버가 꺼지면 다시켜줌 2. 서버를 수정할때마다 알아서 껐다켜줌
+
+npm install module -g ----> 내가 설치하는 소프트웨어는 독립적이라서 내 컴퓨터 어디서든지 사용할수 있다.
