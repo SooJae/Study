@@ -45,3 +45,42 @@ http://github.com : 도메인(호스트) 특정한 인터넷에 연결되어있�
 http://github.com:3000 : 포트번호 80번포트는 생략해줘도 된다. 80은 웹서버를 쓴다는 뜻이기 때문에
 http://github.com:3000/main : path 어떤디텍토리에 어떤 파일인지
 http://github.com:3000/main?id=html&page=12 : 쿼리스트링, 값과 값은 &, 값은 =로 구분
+
+
+npm install module(A) --save
+특정 A모듈을 install 할때 --save 옵션을 넣으면 package.json에 depencies 목록에 포함. 즉 npm모듈이 A모듈없이 사용할 수 없다
+즉 A모듈 없이는 동작 X
+
+npm install module(A) --save-dev 
+특정 A모듈을 install 할때 --save-dev옵션을 넣으면  package.json에 devDepencies 목록에 포함. 이건 현재 npm 모듈은 A모듈과는 dependency가 없지만
+개발 환경에는 연관성이 있다는 뜻이다.
+
+package.json 파일 내의 dependencies, devDependencies의 차이를 알기 위해서 구글링을 하던 중, 보아도 잘 모르겠는 부분이 있어서 우리 drfts프로젝트인 lib-tz의 package.json파일을 보았지만.. 잘 모르겠어서 구글링의 도움을 받았습니다.
+
+결과 1 => 프로젝트를 개발/테스트하려는 것이 아니라 활용만 하려는 목적이라면 개발의존성을 설치하는 것이 불필요하므로, devDependencies의 패키지를 제외하고 설치할 수도 있다. 
+
+결과 2 => dependencies, devDependencies는 해당 패키지가 다른 패키지에 의존할 경우 의존성에 대한 항목이다
+
+결과 3 => dependencies와 devDependencies의 차이는 배포용 패키지(실제 상품에서 사용할 패키지)와 개발용 패키지(목, 테스트 패키지 등)의 차이다.
+
+결과 4 => dependencies 는 이 패키지에 의존하는 다른 프로젝트에서 구동시키기 위한 의존성이다. 즉, 이 패키지를 활용할 때 필요한 의존성을 명시한다. npm install --save 명령을 통해 패키지를 설치하면 이 항목에 프로젝트 정보가 저장된다. devDependencies 에는 이 패키지를 테스트하거나 개발할 때 필요한 패키지들을 명시한다. npm install --save-dev 명령을 통해 패키지를 설치하면 이 항목에 프로젝트 정보가 저장된다.
+
+용어가 어렵다... 그러던 중, 우리 lib-tz의 package.json 파일에서 다시 한 번 힌트를 얻고자 보았는데, devDependencies에 'Babel'이라는 애를 보았고(이건 종빈님께서 저번에 설명해주셨는데, 그 때 당시 잘 이해가 가지 않았던 걸로 기억..), 'Babel'이 무엇인가 궁금해져서 구글링을 바로 해봤죠.(이름도 귀엽고..)
+
+Babel => Transform Complier, 업데이트가 자주되는 트랜스파일러 중 하나. 여기서 ‘트랜스파일러' 라는 애도 모르는 애라서 검색을 해보았습니다. 트랜스파일러란, ES2015 이후의 문법으로 적힌 JavaScript를 지금 사용 중인 브라우저에서도 사용할 수 있게 변환하는 도구... 뭐 각각 버전에 맞게 변환(컴파일...? 맞으려나요..?) 해주는 Transfer라고 보면 될 거 같네요. ’ES2015’도 모르는 애라서 검색을 해보았습니다.(모르는 게 넘나 많은 롬..) ES2015란 ES가 ECMA(European Computer Manufacturers Association)Script니까, ECMAScript2015 => 자바스크립트의 스펙 중 하나(버전 중 하나라고 봐도 될 것).
+
+결과적으로 'Bable'을 우리 Drfts_ 프로젝트에서 사용하는 React를 예로 들어본다면, React를 사용하는 우리는 React에서 적용되는 문법인 JSX를 사용하게 되는데(자바스크립트문법이 아닌 문법이죠), 이를 자바스크립트 엔진에서 동작 가능한 코드로 변환해주는 역할을 해주는, 즉 트랜스파일러가 바벨인 것이다.
+
+돌고 돌아 제가 원하던 답이었던 dependencies, devDependencies의 차이를 알 수 있었습니다.
+
+::: 결론 ::: 우리가 개발 시 필요한 (컴파일러 같은) 라이브러리들은 devDependencies에 적어주고, 진짜 우리 프로젝트에서 기술스펙으로 사용되어야할 라이브러리들은 dependencies에 적어줍니다.
+
+출처 : https://github.com/saeromCho/shumblr/wiki/package.json-%ED%8C%8C%EC%9D%BC-%EB%82%B4%EC%9D%98-dependencies%EC%99%80-devDependencies%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90%EA%B3%BC-%EC%B6%94%EA%B0%80%EC%A0%81%EC%9D%B8-%EA%B3%B5%EB%B6%80(About-Babel)
+
+
+
+
+
+
+반복작업을 자동화하는 빌드 도구 : 걸프와 그런트 ( 걸프를 더 많이 쓴다.)
+
