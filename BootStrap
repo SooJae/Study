@@ -4,3 +4,21 @@ content : 기기의 해상도에 맞게 하겠다.
 initial-scale : 기기의 화면에 크기에 따라서 1:1 비율로 하겠다.
 
 점보트론 : 홈페이지에 처음 보이는 전광판
+
+
+
+
+
+만약 반응형 고정폭 콘테이너를 만들려면 그냥 .container 사용 하시면 되구요
+<div class="container"> </div>
+
+만약
+ .container-fluid를 사용하면 폭의 최대값에 맞춰서 container가 만들어집니다
+<div class="container-fluid">
+
+form = 서버로 요청할수 있는 태그
+
+
+a:hover{} a태그에 마우스가 올라갔을때.
+
+navbar-brand 네비게이션의 대표제목
