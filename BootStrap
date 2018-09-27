@@ -1,0 +1,6 @@
+<meta name="viewport" content="width=device-width", initial-scale="1"> // 기본설정
+
+content : 기기의 해상도에 맞게 하겠다.
+initial-scale : 기기의 화면에 크기에 따라서 1:1 비율로 하겠다.
+
+점보트론 : 홈페이지에 처음 보이는 전광판
