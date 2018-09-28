@@ -33,3 +33,6 @@ session.invalidate();
 
 
 외우기!
+
+DTO : 데이터베이스에서 가져온 DATA를 객체 데이터로 바꿔주는 클래스 ( DATABASE transfer Object)
+DAO : 데이터를 직접 접속을 해서 데이터를 관리, 수정하는 클래스
