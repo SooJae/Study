@@ -4,3 +4,32 @@ http://mangkyu.tistory.com/14
 스크립트릿 코드 : <% 자바코드 %> 사이에 실행할 자바코드가 위치
 표현식 : <%= sum %>  어떤값을 출력 결과에 포함시키고자 할때 사용
 선언부 : <%! %> JSP 페이지의 스크립트릿이나 표현식에서 사용할 수 있는 함수를 작성할 때 사용.
+
+
+Cookie
+
+Cookie cookie = new Cookie("변수명","값");
+cookie.setMaxAge(60);
+response.addCookie(cookie);
+
+
+
+Session
+
+Enumeration enumeration = session.getAttributeNames();
+
+while(enumeration.hasMoreElements()){
+	sName=enumeration.nextElement().toString();
+	sValue=session.getAttribute(sName).toString();
+	out.println("sName : " + sName +"<br>");
+	out.println("sValue: "+ sValue +"<br>");
+}
+
+
+session.removeAttribute("mySessionName");
+
+
+session.invalidate();
+
+
+외우기!
