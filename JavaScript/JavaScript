@@ -150,3 +150,12 @@ script 선언은 브라우저의 기본 설정에 맞추어갑니다. 혹시나 
 html 5 부터는 디폴트로 script 는 js로 쓰기때문에 <script> 로만 사용하셔도 무방합니다. 아니라면 <script type="text/javascript"> 이렇게 써주시는게 맞겠죠. style 태그의 경우에도 type="text/css" 이렇게 명시해줘야 합니다만 html 5 부터는 디폴트로 <style> 을 적으면 css를 의미하죠.
 
 현재 표준은 <script type="text/javascript"> 라고 만든 개발자가 이야기 했어요.ㅋ
+
+
+push :배열 마지막에 넣기
+pop : 배열 마지막 꺼내기
+shift : 배열 첫번째 꺼내기
+unshift: 배열 첫번째에 넣기
+slice(1,4) : 인덱스 1에서 3까지 substring 함 (본 배열에 변화는 안생김. 조회용.)
+groceryList.indexOf('pasta') : 해당 변수의 인덱스 번호 알려줌
+
