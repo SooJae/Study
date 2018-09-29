@@ -113,3 +113,13 @@ CDN : Content Delivery Network
 $('a') : a태그를 J쿼리로 제어하겠다.
 UI - 사용자 (User) 가 목적달성을 위해 마주하는 조작체계
 API - 프로그래머 (Programmer) 의 개발을 돕기위해 마련된 도구 및 환경
+
+
+const logCitySkyline = ()=>{
+  
+};
+
+
+function logCitySkyline (){
+  
+}
