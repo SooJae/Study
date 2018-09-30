@@ -33,6 +33,22 @@ coworkers.showAll=function(){
       
       coworkers가 바뀌면 동작을 안할테니 coworkers = this로 바꿔준다.
       
+      
+      의존성 (dependency): 프로젝트에 설치하고 사용하는 모듈
+     
+      --save , --save-dev 옵션 : 패키지 설치 + package.json에 등록을 해준다.
+      
+      --save-dev is used to save the package for development purpose. Example: unit tests, minification..
+--save is used to save the package required for the application to run
+
+package.json을 쓰는 이유
+1. Managing dependencies of your project
+2. Scripts, that helps in generating builds, running tests and other stuff in regards to your project.
+
+자세한 내용은
+https://medium.com/beginners-guide-to-mobile-web-development/why-package-json-npm-basics-cab3e8cd150
+      
+      
       JavaScript의 this는 기존 언어에서 사용하던 this와는 다릅니다. 비슷한 의미로 사용될 때도 있지만, JavaScript의 this는 여러 가지 함수가 호출되는 방식(호출 패턴)에 따라 참조(바인딩)하는 객체가 다르기 때문입니다.
 
 자바에서의 this는 인스턴스 자신을 가리키는 참조변수입니다. this가 객체 자신에 대한 참조 값을 가지고 있다는 것입니다. 주로 매개변수와 객체 자신이 가지고 있는 변수의 이름이 같을 경우 이를 구분하기 위해서 사용됩니다.
