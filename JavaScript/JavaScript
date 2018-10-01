@@ -197,3 +197,7 @@ const is2p2 = checkThatTwoPlusTwoEqualsFourAMillionTimes;
 is2p2();
 console.log(is2p2)          //[Function: checkThatTwoPlusTwoEqualsFourAMillionTimes]
 console.log(is2p2.name);  //checkThatTwoPlusTwoEqualsFourAMillionTimes
+
+
+화살표함수에 call, apply 메서드를 사용할 수 없다.
+this키워드 에 효과적이다.
