@@ -15,4 +15,10 @@ npm uninstall --save-dev babel-preset-env
 
 
 
+ gulpInst.start.apply(gulpInst, toRun); 에러
+ 
+ 해결 : npm install -g gulp-cli
+
+Cannot read property 'bindings' of null
+
 
