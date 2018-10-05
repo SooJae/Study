@@ -8,5 +8,44 @@ Version Control Sytems에는 많은 것이 있었다.
 CVS -> SVN -> GIT
 
 add : git에게 이 파일을 추적하라고 명령함(관리해야 할 파일들)
+stage area로 올라감
+stage :커밋이 될 파일들이 가는 곳
+
+버전 : 작업이완결된 상태
+
+git log -p : 작업 사이사이의 변화를 알려줌
 
 
+
+    3
+
+diff --git a/f2.txt b/f2.txt
+new file mode 100644
+index 0000000..23f5f78
+--- /dev/null
++++ b/f2.txt
+@@ -0,0 +1 @@
++source : 2
+
+commit 706f9c7165bb8cd36b97f85445e1129007de93eb   //이 커밋메세지가 가르키는 고유한 주소
+Author: SooJae <mynameisleesujae@gmail.com>
+Date:   Sat Oct 6 00:06:35 2018 +0900
+
+    2
+
+2에서는 null이었다가 3에서 f2.txt가 생겼다.
+-는 사라진 내용
++는 추가된 내용
+
+
+$ git diff 63aa5b67ded2b29e22c8588e15e922f1e9bfc116..20f319e79620987dcfa52f0667460cffd9ab899f
+커밋 두개 사이에 소스상의 차이점을 보여줌
+
+$git diff
+방금 내가 한 작업의 변화를 보여줌 (내가 작업한 내용이 문제가 있는지 없는지를 마지막으로 리뷰해주는 기능.
+git diff는 add 하기전에 수정된 파일을 전의 commit한 시점의 파일과의 차이를 보여준다.
+
+$git reset 63aa5b67ded2b29e22c8588e15e922f1e9bfc116 --hard
+
+3번째의 주소값을 입력하면 3번째빼고 다 없어진다.
+reset은 공유하는 데이터에는 절대 쓰면 안된다. (협업)
