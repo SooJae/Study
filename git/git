@@ -6,3 +6,7 @@ pull 원격저장소의 문서를 다운로드
 
 Version Control Sytems에는 많은 것이 있었다.
 CVS -> SVN -> GIT
+
+add : git에게 이 파일을 추적하라고 명령함(관리해야 할 파일들)
+
+
