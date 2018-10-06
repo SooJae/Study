@@ -243,8 +243,56 @@ master -> branch abc생성 -> branch hotfix생성 ->branch hotfix merge
 master가 hotfix를 병합하면, master 가리키는 branch를 hotfix가 가리키는 branch로 fast-forward(빨리감기)한다.
 따라서 별도의 commit을 생성하지 않고, master가 가리키는 commit이 누구인지를 hotfix가 가리키는 commit으로 바꾸기만 하면된다.
 
-abc가 master로부터 독립한 이후에 master의 변화가 생기면, fast forward를 할수 없다. master와 iss53의 공통적인 조상을 찾는다.
-recursive
-
+abc가 master로부터 독립한 이후에 master의 변화가 생기면, fast forward를 할수 없다. master와 abc의 공통적인 조상을 찾는다.
+그리고 3-way merge라는 방법을 이용해서 c4와 c5를 합치고 합쳤다는 것을 알려주는 별도의 commit을 만든다.
+그리고 c4와 c5의 정보를 담고있는 c6를 만든다.
+이것은 recursive(!=fast-forward)라고 한다.
 
 https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+
+
+stash를 사용하면 작업했던 내용을 어딘가에 숨겨둘 수 있다.
+그 후에 head의 버전으로 이동해서 작업할 수 있다.
+
+
+$ git stash
+The file will have its original line endings in your working directory
+Saved working directory and index state WIP on exp: 606784f 1
+working directory의 내용과 index의 상태가 exp에 save 되었다. Working In Process 작업중이라는 뜻.
+하게되면 내가 수정되었던 부분이 감춰져있다.
+
+$ git stash apply
+하면 숨겨져있던 내가 수정한 부분이 살아난다.
+
+$ git stash list
+
+$ git reset --hard HEAD
+하면 최신 commit 삭제.
+$ git stash list
+여기에 stash에 정보가 아직 살아있다.
+그래서
+
+$ git stash apply
+하면 다시 살아난다.
+
+f2.txt를 만들어서 add하고 stash를 하면. 사라진다.
+
+$ git stash list
+stash@{0}: WIP on exp: 606784f 1
+stash@{1}: WIP on exp: 606784f 1
+
+0이 최근꺼, 1이 예전꺼. (shift형식으로 넣는듯.)
+apply를 하면 최근것을 적용한다.
+
+$ git stash apply
+$ git stash drop 하면 0이 사라진다.
+
+$ git stash apply; git stash drop;
+0을 적용하고 stash list에서 사라지게 한다.
+
+이제 stash list에는 아무것도 없음
+
+$ git stash apply; git stash drop; = $ git stash pop
+
+git stash는 최소한 버전관리가 되고있는 파일(git add)에만 해당된다.
+
