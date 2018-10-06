@@ -30,5 +30,7 @@ git에서 branch라는 것은 중요하고 강력하지만, 단지 파일 하나
 $ git checkout exp를 하면
 HEAD는 exp를 가리킨다.
 
+현재 사용하고있는 branch 무엇인가를 가리키는 약속된 기호가 head인데 head는 어떤 특정한 파일이다.
+HEAD가 하는 역할은 현재 checkout된 가장 최신 commit이 무엇인가를 나타내준다..
 
 
