@@ -120,3 +120,17 @@ f2.txt는 add가 되어서 commit 대기상태라는 것을 알수 있다.
 commit을 하면 인덱스도 04ec이고, 저장소와, 인덱스와, 프로젝트 폴더(working copy)가 정확하게 일치하기 때문에
 git status를 할때 더이상 commit할게 없다고 한다.
 
+working directory => index, staging area, cache => repository
+
+branch = 가지
+
+기존의 파일을 고객에게 제공하며(branch라고 한다.)파일이 2개이므로 branch가 2개다.
+그 후에 각각 파일을 수정해 나간다.
+고객에게 제공한 문서의 내용이 우리의 문서에 담겨야 할 경우
+합쳐서 report2.xls라는 것을 만들어야한다.(사실 거의 새로 만든다.)
+그리고 업데이트할때 report3.xls로 바꾼다.
+
+파일을 나누는 행위를 branch라고 한다. 
+branch를 하건 하지 않았건, 작업을 계속 해왔다면 하나의 branch를 갖고 있다고 생각할 수 있다.
+
+
