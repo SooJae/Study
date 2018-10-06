@@ -33,4 +33,69 @@ HEAD는 exp를 가리킨다.
 현재 사용하고있는 branch 무엇인가를 가리키는 약속된 기호가 head인데 head는 어떤 특정한 파일이다.
 HEAD가 하는 역할은 현재 checkout된 가장 최신 commit이 무엇인가를 나타내준다..
 
+master branch와 exp branch의 같은 이름의 파일을 만들어보자
+exp branch로 가서 common.txt파일을 만든 후, master branch로 와서
+exp branch와 병합을 해준다. 그 이후에 master branch에서 common.txt파일을 수정한다.
+다시 exp로 가서 common.txt파일을 수정한다.
+즉, common.txt인 파일을 서로 다르게 수정했다.
+
+$ git merge exp
+를 하면 내용의 위치가 다를경우, master에서 작성된 내용과 exp에서 작성한 내용이 합쳐진다.
+(common.txt 내용이 b이고 , master에서 a b이고, exp 에서 b c이면 a b c 가 출력된다.)
+BUT!!! 같은 부분을 수정하면(master에서 a를 a(master)라고 하고 exp에서는 a(exp)라고 할때)
+
+$ git merge exp
+Auto-merging common.txt
+CONFLICT (content): Merge conflict in common.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+        both modified:   common.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+충돌이 일어난다.
+$ vim common.txt
+
+function b(){
+}
+<<<<<<< HEAD   //HEAD부분이 checkout한 branch의 수정사항(즉 master)
+function a(master){
+=======
+function a(exp){
+>>>>>>> exp // exp branch의 수정사항
+}
+function c(){
+}
+
+git이 우리에게 merge를 실패했기 때문에 우리에게 해결하라고 표시해준것.
+
+예를들어
+
+function b(){
+}
+function a(master,exp){
+}
+function c(){
+}
+
+로 바꿔준다.
+
+다 하고 commit을 해보면 충돌이 났었다고 써져있다.
+
+$ git reset --hard c7081fa5659e1d4430c578493bb6ca2f45cc1bc1
+
+
+
+
+
 
