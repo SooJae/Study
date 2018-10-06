@@ -133,4 +133,34 @@ branch = 가지
 파일을 나누는 행위를 branch라고 한다. 
 branch를 하건 하지 않았건, 작업을 계속 해왔다면 하나의 branch를 갖고 있다고 생각할 수 있다.
 
+원래 branch는 있었다. 그러나 느렸다. git은 branch의 성능을 최대한 끌어올렸다. 편리해지고 최적화됐다.
 
+$ git commit -am 
+-a : 자동으로 add를 해주지만, 한번도 add가 되지 않은(버전관리가 되지 않은) 파일은 적용이 안된다.
+
+1.쓸모없는 기능을 달아달라고 할때(나중에 지워야 할 것 같은 기능) branch로 나눈다.
+2.지금까지 작업한 것들을 서버에 저장할때, main의 되는 작업과 test를할 작업을 나눌 경우 branch를 쓸수있다.
+
+$ git branch
+master가 뜨는데 master가 되는 branch를 쓰고있다는 뜻(기본 branch)
+$ git branch exp
+exp
+master
+
+$git checkout exp
+exp로 바뀜
+
+branch를 하게되면 .현재 master branch의 상태를 그대로 복사한다.
+exp에서 파일을 수정하면 master는 영향을 받지 않는다.
+
+$ git log --branches --decorate
+현재 자신의 위치와 모든 branch를 가르쳐준다.
+
+(master)의 최신 커밋이 2
+(HEAD-> exp)현재 checkout된 branch는 exp이다. 최신커밋이 4
+
+$ git log --branches --decorate --graph
+서로 커밋상태가 각자의 길을 걷고있을때 효율적이다.
+
+$ git log --branches --decorate --graph --oneline
+간결하게 보여준다.
