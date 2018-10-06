@@ -164,3 +164,87 @@ $ git log --branches --decorate --graph
 
 $ git log --branches --decorate --graph --oneline
 간결하게 보여준다.
+
+
+$ git log master..exp // master에는 없고 exp에는 있는 것을 보여준다.
+commit 34c44e897ca07f7cfb0f4f604859903db0dce637 (exp)
+Author: SooJae <mynameisleesujae@gmail.com>
+Date:   Sat Oct 6 18:48:38 2018 +0900
+
+    4
+
+commit 0f75c795642a87183f19b89729f86eb175f9b206
+Author: SooJae <mynameisleesujae@gmail.com>
+Date:   Sat Oct 6 18:46:46 2018 +0900
+
+    3
+// exp에는 있는 것들
+$ git log exp..master //exp에는 없고 master에는 있는 것을 보여준다. 
+
+git log -p master..exp //소스코드까지 보여준다. 
+
+$ git log -p master..exp
+commit 34c44e897ca07f7cfb0f4f604859903db0dce637 (exp)
+Author: SooJae <mynameisleesujae@gmail.com>
+Date:   Sat Oct 6 18:48:38 2018 +0900
+
+    4
+
+diff --git a/f2.txt b/f2.txt
+new file mode 100644
+index 0000000..7898192
+--- /dev/null
++++ b/f2.txt
+@@ -0,0 +1 @@
++a
+
+commit 0f75c795642a87183f19b89729f86eb175f9b206
+Author: SooJae <mynameisleesujae@gmail.com>
+Date:   Sat Oct 6 18:46:46 2018 +0900
+
+    3
+
+diff --git a/f1.txt b/f1.txt
+index 422c2b7..de98044 100644
+--- a/f1.txt
++++ b/f1.txt
+@@ -1,2 +1,3 @@
+ a
+ b
++c
+
+master에는 없지만 exp에는 있는 커밋이 4, 3이라는 것과
+master에는 파일이 없는데 exp는 있는 파일이 f2.txt라는 것과, 그 안에 내용이 a가 추가되었다는 것을 알수 있다.
+
+git diff master..exp
+master와 exp의 차이를 보여준다.
+(마스터에만 있는것은 -로 나타난다.)
+
+병합(merge)
+exp를 master에 옮기는 방법.
+master로 checkout하고 merge를 한다.
+
+$ git merge exp
+
+2개의 부모커밋을 갖는다.
+원래의 master가 가지고있었던 5번 커밋, 동시에 exp가 작업한 3번과 4번을 부모로 갖는다.
+exp도 merge로 master를 가지면 더이상 branch가 필요없기때문에 삭제해준다.
+
+$ git branch -d exp
+
+
+
+
+$ git checkout -b abc
+ abc라는 branch를 생성하고 자동으로 checkout을 한다.
+
+master -> branch abc생성 -> branch hotfix생성 ->branch hotfix merge
+
+master가 hotfix를 병합하면, master 가리키는 branch를 hotfix가 가리키는 branch로 fast-forward(빨리감기)한다.
+따라서 별도의 commit을 생성하지 않고, master가 가리키는 commit이 누구인지를 hotfix가 가리키는 commit으로 바꾸기만 하면된다.
+
+abc가 master로부터 독립한 이후에 master의 변화가 생기면, fast forward를 할수 없다. master와 iss53의 공통적인 조상을 찾는다.
+recursive
+
+
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
