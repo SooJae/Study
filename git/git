@@ -97,3 +97,26 @@ commit은 중요한 것이 2개있다.
 버전에 담겨있는 트리를 통해서 버전이 만들어진 시점의 프로젝트 폴더에 대한 상태를 얻어 낼수 있다. = snapshot
 각각의 버전은 만들어질 시점의 스냅샷을 가지고 있다.
 
+objects안에 들어가는 파일은 object이고 object는 크게 3가지중 하나이다.
+1. blob
+2. blob에대한 정보를 담고있는 tree
+3. commit
+
+git status는 어떻게 commit할게 있는지 없는지 알수 있을까?
+index와 최신 commit의 차이를 비교하면 commit할게 있는지 알수 있다. 
+
+git은 index에 있는 f2.txt의 (해쉬id)값과, f2.txt파일의 내용이 만들어낸 (해쉬id)값(폴더안에 있는)이 다르다면, 
+f2.txt가 수정되었다고 알려줄 수 있다.
+
+git add f2.txt
+git add와 git commit의 차이는 무엇인가.
+index가 가리키고 있는 f2.txt와 우리가 수정한 f2.txt값이 같으니까 (폴더 안에 있는)
+f2.txt라는 파일이 commit대기 상태라는 것을 알 수있다.
+또한
+git은 index의 내용과 (04ec로 시작하는) f2.txt의 내용이 다르다고 생각하면 
+현재 f2.txt의 인덱스의 내용과 commit의 트리가 가리키고 있는 f2.txt의 내용이 다르다면
+f2.txt는 add가 되어서 commit 대기상태라는 것을 알수 있다.
+
+commit을 하면 인덱스도 04ec이고, 저장소와, 인덱스와, 프로젝트 폴더(working copy)가 정확하게 일치하기 때문에
+git status를 할때 더이상 commit할게 없다고 한다.
+
