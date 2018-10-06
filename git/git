@@ -45,7 +45,42 @@ $git diff
 방금 내가 한 작업의 변화를 보여줌 (내가 작업한 내용이 문제가 있는지 없는지를 마지막으로 리뷰해주는 기능.
 git diff는 add 하기전에 수정된 파일을 전의 commit한 시점의 파일과의 차이를 보여준다.
 
-$git reset 63aa5b67ded2b29e22c8588e15e922f1e9bfc116 --hard
+$ git reset 63aa5b67ded2b29e22c8588e15e922f1e9bfc116 --hard
 
 3번째의 주소값을 입력하면 3번째빼고 다 없어진다.
 reset은 공유하는 데이터에는 절대 쓰면 안된다. (협업)
+
+$ git revert 는 취소하고 새로운 버젼을 생성한다.
+
+윈도우7 입니다. 제 나름대로의 설치방법
+-> 왠만하면 gistory설치와 실행까지 cmd창에서 진행하고 GitBash로 git을 동작시키면서
+웹브라우저로 실시간 확인을 하니 괜찮더군요.. (cmd창은 계속 gistory 실행중, CTRL+C 종료)
+
+1. 관리자 권한으로 설치파일 실행
+2. Add Python 3.6 to PATH 옵션체크
+3. Customize installation으로 들어감 (원하는 경로를 위해)
+4. Install for All User 선택 (경로가 바뀜)
+5. 설치버튼 클릭 (시스템변수 PATH확인 : C:\Program Files\Python36\Scripts\; C:\ProgramFiles\Python36\; )
+6. 설치완료 후 cmd창에서 python -V로 확인
+7. cmd창에서 pip -V로 확인 (pip3 -V도 됨)
+8. 관리자 권한으로 Git Bash 실행 (cmd에서는 다됨)
+9. pip3 install gistory 입력 (gistory 설치)
+10. .git폴더가 있는 저장소 경로로 이동
+11. gistory 입력 (cmd에서 .git폴더가 있는 저장소 에서)
+12. 0.0.0.0:xxxx (뒤에나오는 xxxx를 기억)
+13. 웹브라우저(크롬)에 localhost:xxxx를 입력 (예 : localhost:8805)
+
+출처 https://opentutorials.org/course/2708/15213 제로스님
+
+$gistory 를 치고 ctrl+c를 눌러서 포트번호 기억
+
+파일을 생성하고 add를 사용하면 객체와 인덱스가 생성된다.
+git의 파일을 저장할 때, 파일의 이름이 달라도 같은 내용이면 같은 오브젝트 파일을 가리킨다.
+심지어 내용을 a로 작성한 파일은 내가 작성한 것이든 전세계 어떤사람이 작성한 것이든 78981922613b2afb6025042ff6bd878ac1994e85로 표시된다.
+
+
+깃은 sha1이라는 해쉬 알고리즘을 이용해 앞의 두글자를 떼서 object에 aa라는 디렉토리를 만들어서 그 뒤의 파일이 저장된다.
+git add를 하면 add를 한 파일을 a라고 하는 정보와 부가적인 정보를 추가해서 압축한다.
+그리고 그 압축한 결과를 sha-1이라는 방법으로 해쉬를 통과시켜서 나온값에 해당되는 디렉토리와 파일을 objects라는 디렉토리 안에 만들고, 그 안에 a라는 정보를 저장. 
+그리고 index라는 파일에 f1.txt의 내용은 이것이다라는 것을 적어주면 작업이 끝나다.
+
