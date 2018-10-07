@@ -94,7 +94,34 @@ function c(){
 
 $ git reset --hard c7081fa5659e1d4430c578493bb6ca2f45cc1bc1
 
-ref
+refs/heads/master 
+어떤 커밋을 최신커밋을 가지고 있나
+
+reset을 한다는 것을 head가 가리키고있는 커밋을 바꾸는 행위(간단)
+git은 왠만하면 파일을 정리하지 않는다 
+reset을 한다고해서 실제로 지워진게 아니라 눈에만 안보일 뿐이다.
+ORIG_HEAD를 눌러보면 우리가 지운 4번이 있다.
+logs/refs/heads/master 파일을 보면 제일 끝에 행에 f3ea~ 가 93c~가 되었다고 나온다.
+최신 커밋인 3으로 교체했다는 뜻이다.
+현재 branch의 헤드가 가리키고 있는 COMMIt을 ORIG_HEAD에 기록한 후에 RESET을 실행한다.
+
+$ git reset --hard ORIG_HEAD
+하면 RESET을 취소할수 있다.
+
+$ git reflog
+95a7277 (HEAD -> master) HEAD@{0}: reset: moving to ORIG_HEAD
+c7081fa HEAD@{1}: reset: moving to c7081fa5659e1d4430c578493bb6ca2f45cc1bc1
+95a7277 (HEAD -> master) HEAD@{2}: commit: 4
+c7081fa HEAD@{3}: commit: 3
+38e292c HEAD@{4}: commit: 2
+15e18dd HEAD@{5}: commit (initial): 1
+
+각각의 commit이 담겨있다.
+git reset 95a7277이라고 쓰면 복구된다.
+또한 취소할때 reset HEAD@{0}이라고 해도된다.
+
+git 로그에 있는 c7081fa5659e1d4430c578493bb6ca2f45cc1bc1
+을 git checkout c7081fa5659e1d4430c578493bb6ca2f45cc1bc1 라고 하면
 
 
 
