@@ -24,7 +24,7 @@ $ rm .git/refs/heads/exp
 $ vim .git/refs/heads/exp를 한 후에
 최신 커밋의 ID값 6fff3fda34fe3ccaa04d266b626fa3a6378f3b57 를 추가해주면
 다시 exp라는 branch가 생성된다.
-git에서 branch라는 것은 중요하고 강력하지만, 단지 파일 하나일 뿐이다.
+git에서 branch라는 것은 중요하고 강력하지만, g단지 파일 하나일 뿐이다.
  심지어 binary도 아니고 일반 텍스트 파일이다.
 
 $ git checkout exp를 하면
@@ -123,6 +123,4 @@ git reset 95a7277이라고 쓰면 복구된다.
 git 로그에 있는 c7081fa5659e1d4430c578493bb6ca2f45cc1bc1
 을 git checkout c7081fa5659e1d4430c578493bb6ca2f45cc1bc1 라고 하면
 
-
-
-
+source tree ddd
