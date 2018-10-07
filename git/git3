@@ -135,11 +135,11 @@ feature가 파생된 master branch에 최신 commit을 feature base로 바꾸겠
 $ git checkout feature
 $ git rebase master
 
-라고 하면 임시저장소(temp) 에 feature를 만들어준 commit 2개를 담는다.
-그 후에 feature는 master의 최신 commit으로 checkout이 된다.
-그다음 feature는 사라진다.
+라고 하면 임시저장소(temp) 에 feature를 만들어준 commit 2개를 담는다. (patch)
+그 후에 patch는 master의 최신 commit으로 checkout이 된다.
+그다음 patch는 사라진다.
 - base -0 -0 (f, m)
-temp에 있는 feature는 master의 앞에 commit이 된다.그리고 2개 있던 commit중 하나가 temp에서 지워진다. 그리고 또 앞에 commit이 생기고 
+temp에 있는 patch는 master의 앞에 commit이 된다.그리고 2개 있던 commit중 하나가 temp에서 지워진다. 그리고 또 앞에 commit이 생기고 
 temp안에 있던 commit이 하나 더 사라진다.
 
 차이점은 
@@ -149,3 +149,31 @@ rebase는 일렬로 되어있어 역사를 파악하기 쉽다
 
 git pull을 하고 git push를 하면 git push된 파일은 건들지 않는게 좋다.
 
+
+git을 잘 사용하는 법.
+git flow를 보면 된다.
+master와 develop가 중요하다.
+master에서부터 파생된 develop에서 계속 개발해 나가다가
+기능을 만들때는 feature branch를 만든다.
+기능의 작업이 끝나면 develop branch로 병합한다.
+애매한 변경사항들 ( 버그 처리 )은 develop을 해준다.
+다 만들고 사용자에게 배포할 때는 (서버에다가 반영하는 순간.)
+release branch를 만든다.
+release이후에 버그나 업데이트는 release에 한다.
+해결이 되면 틈틈이 develop에 merge 한다. (충돌방지)
+실제로 서버에 release 하기전 master branch에 merge한다.
+그 후에 master에서 tag 1.0을 해준다. 그 후에 서버에 업로드!
+
+결국 master branch는 release와 관련된, 사용자에게 제공되었던 버젼만 모아두는 branch가 되는 것이다.
+
+그리고 release는 개발을 해야 하기때문에 develop을 한다.
+hotfix는 긴급하게 버그가 생긴경우 hotfix라는 branch를 생성후 hotfix에서 master branch로 보내고 tag를 달고 사용자에게 제공 그 후에 develop에 merge
+
+
+git clone 은 git remote add + git pull 과 거의 같다.
+git pull 은 git fetch + git merge 와 (거의) 같다.
+
+
+$ git tag -a 1.0 -m "first release" master
+
+현재 master branch가 가리키고 있는 commit을 태그로 생성
