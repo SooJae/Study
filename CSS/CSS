@@ -284,6 +284,61 @@ cascading 우선순위 규칙:
 
     tag selector <class selector < id selector < style attribute
 
-    그러나 
-    li{color:red !important;}
-    !important를 써주면 우선순위가 제일 높아진다.
+그러나 
+li{color:red !important;}
+!important를 써주면 우선순위가 제일 높아진다. 하지만 좋은 방법은 아니다.
+
+
+inline vs block level element
+자기 글자만 표현하는 것이 inline
+전체를 이용하는 것이 block
+그러나 inline에서 block으로 그 반대로도 가능하다.
+
+h1{display : inline;} //h1은 원래 block이지만 inline으로 바꿔준다.
+a{display:block;}
+
+
+ border:10px solid red;
+ 을써서 박스의 사이즈를 보면서 개발하는 것이 좋다
+
+
+ padding : 텍스트와 테두리 사이의 간격.
+ margin : 테두리와 다른요소들 사이의 간격.
+ p태그는 블록단위라 width,height값에 영향을 받지만
+ a는 inline단위 이므로 width,height 값에 영향을 받지 않는다. 
+
+ div{
+        margin:10px;
+        width:150px;
+    }
+    #small{
+        border:10px solid black;
+    }
+    #large{
+        border:30px solid black;
+    }
+
+하면 두개의 사이즈가 달라보인다.
+그 이유는 css의 초창기에는 padding과 border가 없이 width값으로만 지정했기 때문에
+content영역 크기만 같다. 하지만 border값이 생기면서 까다로워 졌다. 그래서 box-sizing이 나왔다.
+
+box-sizing:border-box;
+하는 순간 두개의 크기가 border값을 포함해서 같게된다. 그래서 보통*{}을 사용해서 모든 element가 border의 크기를 width와 height값으로 사용할 수 있게 해서 코딩을 수월하게 해준다.
+
+마진겹침 : 두개의 마진 중에 더 큰값이 두개의 태그사이의 간격이된다.
+
+마진겹침 2 :부모 element아래에 자식 element가 있고 부모와 자식 모두 margin값이 있을때 생기는 경우 
+즉 부모태그가 시각적으로 아무런 효과가 없는 상태가 되면, 자식태그와 부모태그의 마진값이 합쳐지는 결과를 낳는다.
+부모 엘리멘트의 마진값과 자식 엘리멘트의 마진값의 큰쪽의 마진값이 자식 엘리먼트의 마진값으로 사용된다. 즉 부모가 투명하고 부모와 자식의 마진값중 큰것을 마진값으로 이용한다.
+
+시각적인 요소: border건 글자건 눈에 보이면 시각적인 요소가 있는 것이다.
+
+마진겹침3: 만약 태그에 시각적인 요소가 없다면
+margin-top이 80이면 margin-bottom이 
+
+tip: 
+#parent>#child + tab키를 누르면
+=>
+<div id="parent">
+        <div id="child"></div>
+    </div>
