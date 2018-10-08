@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        a:link{
+            color:black;
+        }
+        a:visited{
+            color:red;
+        }
+        a:active{
+            /* pseudo class
+            class인척하면서 element 상태에 따라서 선택되고 안되고 한다. */
+            color:green;
+        }
+        a:hover{
+            color:yellow;
+        }
+        a:focus{
+            color:white;
+        }
+        input:focus{
+            background-color:black;
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://opentutorials.org">방문함</a>
+    <a href="https://a.a">방문안함</a>
+    <input type="text">
+</body>
+
+</html>
