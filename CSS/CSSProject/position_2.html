@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <style>
+    
+    #parent, #other{
+        border: 5px solid red;
+        }
+        #parent{
+            position: relative;
+        }
+        #me{
+            background-color:black;
+            color:white; /*폰트 칼라*/
+            position: absolute;
+            left:0px;
+            top:0px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="other">other</div>
+    <div id="parent">
+        parent
+        <div id="me">me</div>
+    </div>
+
+</body>
+</html>
