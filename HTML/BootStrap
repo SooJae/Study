@@ -22,3 +22,11 @@ form = 서버로 요청할수 있는 태그
 a:hover{} a태그에 마우스가 올라갔을때.
 
 navbar-brand 네비게이션의 대표제목
+
+
+twitter boot strap을 사용할때, 요소검사의 network를 통해 bootstrap이 잘 작동하는지 확인 해야한다.
+bootstrap은 12개의 column을 제공한다.(grid)
+
+같은 행에 위치해야 할 것들은  <class = "row">로 묶어준다.
+
+웹페이지의 개발자도구를 잘 활용하자!(padding 적용하기전에 요소검사로 들어가서 한번 해보기)
