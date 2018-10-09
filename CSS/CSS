@@ -442,3 +442,115 @@ https://www.youtube.com/watch?v=8DJBCHro-3Q&list=PLuHgQVnccGMDaVaBmkX0qfB45R_bYr
 flex의 여러 속성들 연습(강추)
 https://opentutorials.org/module/2367/13526
 
+row는 queue모양
+column는 stack모양
+
+ALIGN-items
+flex는 default가 stretch이다. (끝까지 펴져있는 상태)
+flex-start로 하면 inline 상태로 된다.
+
+body에 flex 사용할때 주의할점!
+<!Doctype >로 해야한다 (!Doctype이라고 하면 알아서 최신버젼인 html5로 인식하는듯)
+
+align items는 
+row일 때 row의 반대쪽에 있는 축에 정렬방식
+justify-content는
+direction이 row일때 행 방향의 정렬상태를 지정한다.
+
+justify-content는 align-item 만 썼을때 오른쪽에 공간이 남아도 가운데로 정렬이안되는 상황에서 써주면 가운데로 정렬이 된다.
+
+align-items는 container 밑에있는 전체를 정렬
+align-content는 같은 행을 그룹으로 묶어서 정렬?
+
+align-self는 align-items로 지정된 상태에서 어떤 특정한 것만 예외적으로 다르게 값을 주고 싶을때 쓴다.
+
+중요!!!
+.item {flex: flex-grow [flex-shrink][flex-basis];}
+
+검색엔진이 위쪽에 오는게 중요하다고 생각할때
+
+
+    nav{
+        order:1;
+    }
+    main{
+        order:0;
+    }
+    aside{
+        order:2;
+    }
+
+이렇게 하면 main이 nav자리로 오게된다.
+하지만 더 쉬운방법이 있는데
+    main{
+      order:-1;
+    }
+만 해주면 다른 값들보다 작기때문에 무조건 앞으로온다. 즉 다른값을 일일이 order를 써가면서 바꿀필요가 없다.
+flex는 점점 더 중요해지고 있다.
+
+
+multi-column
+뉴스기사 같이 column을 나눠서 읽기 편하게.
+
+column-count:2;
+column 숫자를 2개로 고정
+
+text-align:justify;
+텍스트 좌우로 정렬
+
+column-width:200px;
+200px;에 맞춰서 단(column의 수)을 줄여준다.
+
+column-width:200px;
+column-count:4; 
+최소 200px을 유지한채 최대 4개의 column을 갖게한다.
+유지가 힘들어지면, column의 갯수를 줄인다.
+둘다 써도 되고, 둘중에 하나만 써도 된다.
+
+column-gap: 100px;
+column에 gap을 준다.
+
+column-rule-style: solid / dotted / dashed;
+column-rule-width: 5px;
+column-rule-color: red;
+//column 사이를 구분하는 선을 config한다. 
+
+h1{
+column-span:all;
+}
+column에 h1을 한줄을 다 차지할 수 있게해준다.
+
+핀터레스트 스타일 레이아웃 만들기
+https://opentutorials.org/module/2398/13712
+
+media query는 화면의 종류와 크기에 따라서 디자인을 달리 줄 수 있는 CSS기능이다.
+
+@media(max-width:500px){
+            body{
+                background-color: red;
+            }
+        }
+
+최대 500px까지.(즉 0~500)
+
+ @media(max-width:500px){
+            body{
+                background-color: red;
+            }
+        }
+ @media(max-width:600px){
+            body{
+                background-color: green;
+            }
+        }
+
+나머지 모든 cascading이 같다면 나중에 나오는게 우선순위가 높아진다.
+즉 ~500은 무시해버리고 ~600이 실행된다.
+그래서 ~600이 위로 가야하고 ~500이 밑으로 와야한다.
+
+그러나 태블릿이나 스마트폰에서 크기에따라 색깔이 변하지 않는다. 이때
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+을 해주면 스마트폰에서도 색깔이 변한다.
+
+mediaquery는 적용헸던 content의 밑에 써주는 것이 좋다.
+(cascading 적용순서 때문에)
