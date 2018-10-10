@@ -812,3 +812,11 @@ before = pseudo 선택자
 fontello.css파일을 보면
 .icon-chrome:before { content: '\e841'; }
 이 있어서 클래스 값이 icon-chrome인 태그를 생성하면 태그 앞에 문자모양이 생긴다. 
+
+! https://thenounproject.com/
+에 들어가서 자신이 마음에 드는 그림을 다운 받은 뒤에 
+fontello 사이트에 들어가서 custom Icons에 드래그 하면 아이콘에 해당되는 이미지를 만들어 준다! 그걸 쓰면 된다.
+
+fontello 사이트는 회원가입을 할수없다. 
+그래서 다른 컴퓨터나 다른 웹 브라우저에서 fontello를 사용할 시, 내가 선택했던 이미지들이 체크해제가 되어있는걸 볼 수 있다.
+연장을 누른후에 import버튼을 누르고 config.json을 import해주면 내가 선택했던 이미지들이 선택되어있다.
