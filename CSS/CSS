@@ -768,8 +768,47 @@ css중에 css 앞에 min이 붙어있으면 minify가 됐다는 것을 알 수 �
 
 
 CSS뛰어넘기 preprocessor
+CSS는 뛰어난 언어입니다. 하지만 CSS가 모든 면에서 좋을수는 없습니다.  그래서 어떤 이들은 CSS에 편리한 기능을 더한 새로운 언어를 만들고 이 언어에 따라서 작성한 코드를 어떤 프로그램으로 실행시키면 결과적으로 CSS를 만들어주는 도구들을 개발했는데요. 이런 도구를 preprocessor이라고 합니다. 여기서는 이런 도구들의 개념과 간단한 사용법을 알아봅니다. 
+
+아래는 대표적인 preprocessor들입니다. 
+
+http://lesscss.org/  (온라인 변환기)
+http://sass-lang.com/
+http://stylus-lang.com/ (온라인 변환기)
 
 
 
 
  fontello.com
+ 앞의 0을 없애고 &#로 하면 된다.
+ ex)0xe841 => &#xe841
+
+
+  font-family: "fontello";
+  color : red;
+  font-size: 100px;
+
+  이미지처럼 생겼지만 폰트로 취급한다.
+
+<style>
+font-family: "fontello";
+</style>
+&#xe841
+=> <i class="icon-chrome"></i>
+한줄로 가능하다.
+
+ #test:before{
+           content:"s"
+           // 해당 id 글자 앞에 s가 생긴다. (단지 시각적으로만, 검색엔진들은 이걸 신경쓰지 않는다.)
+           font-size:30px;
+       }
+
+before = pseudo 선택자
+
+
+<i class="icon-chrome"></i>
+는 이 before가 생성해준다.
+
+fontello.css파일을 보면
+.icon-chrome:before { content: '\e841'; }
+이 있어서 클래스 값이 icon-chrome인 태그를 생성하면 태그 앞에 문자모양이 생긴다. 
