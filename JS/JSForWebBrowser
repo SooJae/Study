@@ -84,3 +84,51 @@ head태그에 자바스크립트 태그를 넣으면 브라우저가 head에 있
 onload라는 것은 현재 웹페이지의 모든 코드가 다 읽히고, 웹브라우저는 window객체의 onload 함수가 실행 된다. 
 즉 body태그 마지막에 놓으면 window.onload를 쓸 필요가 없다.
 또 body태그가 head태그보다 빠르다.
+
+
+BOM
+BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상화해서 프로그래밍적으로 제어할 수 있도록 제공하는 수단이다. BOM은 전역객체인 Window의 프로퍼티와 메소드들을 통해서 제어할 수 있다. 따라서 BOM에 대한 수업은 Window 객체의 프로퍼티와 메소드의 사용법을 배우는 것이라고 해도 과언이 아닐 것이다. 본 토픽의 하위 수업에서는 Window 객체의 사용법을 알아볼 것이다.
+
+모든 것은 window 객체 밑에 있다. window - DOM, BOM, JS
+document도 window 객체에 소속이 되어있다. window.document
+변수도 마찬가지이다. window.a == a
+
+alert : 경고창
+경고창의 확인을 누르기 전까지 그 다음 동작이 진행되지 않는다.
+
+confirm : 확인, 취소 창 (true false값 반환))
+confirm 창의 확인을 누르면 true값을 반환. 취소를 누르면 false값을 반환.
+if를 이용해 분기시킬 수 있다.
+
+prompt : 텍스트 값과 같이 뜨며 사용자의 입력을 받아 그 값을 반환한다.
+
+
+Location 객체 : 현재 브라우저의 주소값을 알아 낼 수 있다.
+자바스크립트가 브라우저를 제어하기 위해서는 모든 것이 객체여야 한다.
+
+<script> alert(location.toString(), location.href);</script>
+
+두 인자 전부 똑같다. 정확하게는 location.href를 쓰는게 선호된다.
+console.log(location)이면 location에 관한 많은 정보가 나온다.
+
+
+console.log(location.protocol, location.host, location.port, location.pathname, location.search, location.hash);
+필요한 프로퍼티를 뽑아 낼 수 있다.
+
+https://opentutorials.org/course/1375/6634?id=10#bookmark
+
+protocol: https
+host : opentutorials.org // 컴퓨터를 식별하는 정보
+port: 서버컴퓨터의 여러가지 어플리케이션을 식별하는 정보.
+pathname : course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보
+search : ?id=10 쿼리정보
+hash : #bookmark
+
+URL 변경하기.
+location.href = 'http://egoing.net';
+아래와 같은 방법도 같은 효과를 낸다. 하지만 위에 방식이 더 명시적
+location = 'http://egoing.net';
+
+
+아래는 현재 문서를 리로드하는 간편한 방법을 제공한다.
+location.reload();
