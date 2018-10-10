@@ -234,3 +234,5 @@ console.log(Object.getOwnPropertyDescriptor(Array, 'isArray').writable); // true
 
 1
 console.log(Object.getOwnPropertyDescriptor(Number, 'MAX_SAFE_INTEGER').writable); // false
+
+각각의 웹 페이지는 자신의 문서(document) 객체를 갖는다. Document 인터페이스는 웹 페이지의 컨텐츠(DOM 트리, 즉 <body> 또는 <table>와 같은 요소(Element) 등)에 대한 진입점으로서의 역할을 하며, 또한 해당 문서에 대한 전역 기능(페이지의 URL 가져오기, 문서 내에 새 요소 생성하기 등)을 제공한다.

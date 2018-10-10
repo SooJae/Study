@@ -681,3 +681,95 @@ element와 element의 배경으로 존재하는 다른 이미지들 간의 여�
 
 background-blend-mode
 background들 끼리의 blend(이미지와 색상)
+
+inline-block
+block과 inline의 중간 형태라고 볼 수 있는데, 줄 바꿈이 되지 않지만 크기를 지정 할 수 있다.
+
+Transform
+코드를 통해서 이미지 또는 텍스트를 변형시킬 수 있다.
+
+ transform:scaleX(0.5);
+ transform:scaleY(0.5);
+ 은 cascading때문에 밑에것만 실행된다.
+ 그래서
+ transfrom : scale(0.5,0.5);로 써준다.
+
+ transform 더 알아보기 
+ https://opentutorials.org/module/2367/13684
+ 
+ h1:hover{
+   transform:
+   scale(1.5);
+ 
+ transform-origin: left bottom; (왼쪽 밑을 기준으로 커지게 한다.) 
+ X축 Y축 순이므로 0% 100%으로 해도 똑같다.
+ transition: all 1s;
+ }
+
+ CSS transform library라는 검색어로 적극적으로 알아보자!
+
+
+
+ transition
+
+ transition-property: all;
+ (특정 태그에 대해서 모든 효과에 대해서 변화가 일어났을때 전환이 일어난다.)
+ transition-property: transform;
+ 트랜스 폼 효과에 대해서만 장면 전환을 하겠다.
+ transition-duration: 1s;
+ 전환이 1초동안 진행된다.
+
+
+ transition-property: all;
+ transition-duration: 1s;
+ 와
+ transition: all 1s;
+ 는 같은표현(축약형)
+ 
+ 복수의 장면효과는 
+ transition: font-size 2s, transform 1s;
+ 이렇게 해준다.
+
+ transition-delay:1s;
+ delay는 시간을 지연시키는 효과를 가지고 있다. (계속 누르고 있어야 된다.)
+
+
+ 각종 transition
+ https://opentutorials.org/module/2367/13691
+ 그래프에 이용하면 좋을 것 같다.
+
+<body onload="document.querySelector('body').style.backgroundColor='white';">
+ 이 페이지가 화면에 표시되는 것이 끝났을때 화면을 하얗게 바꾸자.
+
+ codepen을 가까이 하자.
+ 
+ 중복을 제거하는게 제일 중요하다!
+ 코드가 반복되면 사용자는 웹페이지에 들어갈때마다 데이터를 더 받게된다.
+
+ <link rel="stylesheet" href="style.css">
+ link를 만나면 링크의 href에 해당되는 style.css파일을 다운로드 받고, stylesheet(css의 문법)에 따라서 디자인을 해준다.
+
+웹브라우저는 캐시가 있기때문에 한번 받은 CSS는 웹브라우저는 그것을 임시저장 폴더에 저장해놓았다가, 똑같은 CSS를 사용하려할때 이미 저장되어있는 임시 디렉토리의 CSS를 사용한다.즉 경량화가 된다.
+또한 같은 링크를 하는 페이지는 같은 의도를 가진 페이지라는 것을 알 수 있다.
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url("style.css");
+    </style>
+</head>
+
+두개는 같은 의미가 있다.
+link라는 태그는 html태그를 이용해서 css를 이용할때 사용하고,  @import는 css안에서 또 css를 가져올때 사용한다.
+
+minify
+css중에 css 앞에 min이 붙어있으면 minify가 됐다는 것을 알 수 있다.
+(ex:minify.min.css)
+
+
+CSS뛰어넘기 preprocessor
+
+
+
+
+ fontello.com
