@@ -1,8 +1,6 @@
-
-.center {
-  display: block;
-  margin: auto;
-}
+<head>
+<link href="CSS/markdown.css" rel="stylesheet">
+</head>
 
 # 자바스크립트
 
