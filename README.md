@@ -9,6 +9,8 @@
 - [x] **HTML**  &nbsp;&nbsp;&nbsp;생활코딩 강의
 - [x] **CSS**   &nbsp;&nbsp;&nbsp;생활코딩 강의
 - [x] **JavaScript** &nbsp;&nbsp;&nbsp;생활코딩 강의,&nbsp; Running JavaScript
-- [ ] **JSP&Servlet**
+- [x] **BootStrap** 
+- [ ] **JSP&Servlet** 
 - [ ] **Springwork**
+- [ ] **node.js (중단)** &nbsp;&nbsp;&nbsp;생활코딩 강의
 
