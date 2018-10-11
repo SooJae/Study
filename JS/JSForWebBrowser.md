@@ -321,7 +321,40 @@ js도 있다!
 DOM을 이용해서 문서를 조회할 수 있지만, jQuery를 통해 더 쉽게 조회 할 수 있다.
 DOM과 jQuery를 같이 병행하면서 공부하는게 좋다.
 
-##라이브러리 : DOM, BOM, JScore을 통해 만드는 것이기때문에, 저것들이 못하는 일은 라이브러리도 할 수 없다. 코딩할 때 쓰는 효율적인 도구이다.
+##라이브러리 
+DOM, BOM, JScore을 통해 만드는 것이기때문에, 저것들이 못하는 일은 라이브러리도 할 수 없다. 코딩할 때 쓰는 효율적인 도구이다.
+
+CDN : content delivery network
+파일을 다운받을 필요없이 코드만 copy하면 된다.
+
+```javascript
+// 항상 써줘야 하는것
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script>
+    jQuery(document).ready(function($){
+        //
+    
+    //  내가 작성할 코드를 담는곳 
+        $('body').prepend('<h1>hello world</h1>');
+    //
+
+    });
+</script>
+```
+##jQuery의 기본문법
+`$('li').css('color','red');`
+
+`$()` : 함수라는 것을 의미한다. jQuery function
+li : css 선택자가 들어온다. (조회하려고) li 태그를 가지고있는 element들
+
+`$('li').` : jquery함수가 리턴한 jquery객체
+css라고 하는 메소드를 호출하면 이 메소드는 jqeury객체를 만든 jquery함수의 인자에 해당되는 element들, 리스트 전체에 대해서 css라는 메소드를 실행하는 결과를 가져온다.
+
+`css('color','red');`
+각각의 element의 color를 red를 바꿔준다.
+
+
+
 
 
 [2페이지](JSForWebBrowser.md)
