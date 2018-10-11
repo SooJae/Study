@@ -347,8 +347,11 @@ CDN : content delivery network
 `$()` : 함수라는 것을 의미한다. jQuery function
 li : css 선택자가 들어온다. (조회하려고) li 태그를 가지고있는 element들
 
-`$('li').` : jquery함수가 리턴한 jquery객체
-css라고 하는 메소드를 호출하면 이 메소드는 jqeury객체를 만든 jquery함수의 인자에 해당되는 element들, 리스트 전체에 대해서 css라는 메소드를 실행하는 결과를 가져온다.
+`$('li').css` : jquery함수가 리턴한 jquery객체
+css라고 하는 메소드를 호출하면 이 메소드는 jqeury객체를 만든 jquery함수의 인자에 해당되는 element들, 리스트 전체에 대해서 css라는 메소드를 실행하는 결과를 가져온다. 
+
+`.` chaining
+(chain처럼 연결되어서 연속적으로 메소드를 호출해서 작업 할 수 있다.)
 
 `css('color','red');`
 $('li')통해 조회한 각각의 element의 color를 red를 바꿔준다.
@@ -365,6 +368,35 @@ for(var i=0; i < lis.length; i++){
 $('.active').css('color', 'red')
 ```
 jQuery가 훨씬 쉽다. document.getElementsByClassName 메소드를 사용할 필요가 없고, 반복문을 사용할 필요도 없다.
+
+```javascript
+var li = document.getElementById('active');
+li.style.color='red';
+li.style.textDecoration='underline';</pre>
+        <pre>
+$('$active').css('color', 'red').css('textDecoration', 'underline');
+```
+
+웹브라우저를 제어하기 위해서는 제어해야할 태그의 객체를 찾아야 한다.
+그 객체의 property를 이용해서 조작할 수 있다.
+
+```html
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="active">JavaScript</li>
+</ul>
+<script>
+    var li = document.getElementById('active');
+    console.log(li.constructor.name);
+    //HTMLElement 카테고리(단수 리턴)
+    var lis = document.getElementsByTagName('li'); //HTMLCollection 카테고리 (복수 리턴, 유사배열)
+    console.log(lis.constructor.name);
+</script>
+```
+li.constructor.name
+li 객체의 이름을 할 수 있다. 
+
 
 [2페이지](JSForWebBrowser.md)
 

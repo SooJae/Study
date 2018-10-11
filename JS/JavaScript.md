@@ -234,3 +234,63 @@ console.log(Object.getOwnPropertyDescriptor(Array, 'isArray').writable); // true
 console.log(Object.getOwnPropertyDescriptor(Number, 'MAX_SAFE_INTEGER').writable); // false
 
 각각의 웹 페이지는 자신의 문서(document) 객체를 갖는다. Document 인터페이스는 웹 페이지의 컨텐츠(DOM 트리, 즉 <body> 또는 <table>와 같은 요소(Element) 등)에 대한 진입점으로서의 역할을 하며, 또한 해당 문서에 대한 전역 기능(페이지의 URL 가져오기, 문서 내에 새 요소 생성하기 등)을 제공한다.
+
+자바스크립트의 객체는 자바의 맵과 같다. 인덱스를 first, lee 등 자기 마음대로 정할 수 있다. (key)
+grades.lee === grades['lee'] 
+
+서로 연관되어 있는 값과, 처리를 하나에 그릇안에 담아서 그룹핑 하는것이 객체지향 프로그래밍이다.
+
+
+모듈(module)
+수 많은 로직을 재사용할 수 있는 단위로 나누어,
+별도의 모듈이 라는 형태로 떼어내 다른 프로그램에 부품으로 사용하는 기법.
+그 기법을 모듈화(Modularization), 결과물을 모듈이라 한다.
+
+- 호스트 환경
+javascript가 구동되는 환경.
+웹브라우저를 위한 언어로 시작했지만(클라이언트), 서버측에서 실행되는 javascript도 있다(서버사이드).
+또한 구글의 App위에서도 돌아가는 것이 있으므로, 호스트 환경에 따라 모듈화 하는 방법을 알아야 한다.
+
+- 모듈과 라이브러리의 차이 
+모듈이 프로그램의 작은 부품이라 하면,
+라이브러리는 자주 사용되는 부품을 재사용하기 편하게 잘 정리한 코드의 집합.
+특히 라이브러리는 많은사람들의 노력과 돈, 노우하우를 집중해 만들어 놓아 아주 완성도가 높다.
+
+- 라이브러리를 쓰는 이유
+자기혼자서 만드는 것이 여러가지 이유로 필연적이지 않으면,
+다른사람이 이미 만들어 놓은것을 부품으로 조립해서 만들어 가는것이 소프트웨어를 만드는 '기본중의 기본'이다.
+
+정규표현식
+JS뿐만 아니라, JAVA, Perl에 쓰인다.
+
+let pattern = /a/;
+let pattern = new RegExp('a');
+두개가 같은 뜻이다.
+
+THIS
+함수에서의 this
+
+```javascript
+function func(){
+    if(window === this){
+        document.write("window === this");
+    }
+}
+func(); 
+```
+
+this가 의미하는 것은 window이다.
+
+메소드와 this
+
+객체의 소속인 메소드의 this는 그 객체를 가르킨다. 
+
+
+var o = {
+    func : function(){
+        if(o === this){
+            document.write("o === this");
+        }
+    }
+}
+o.func();   
