@@ -351,11 +351,20 @@ li : css 선택자가 들어온다. (조회하려고) li 태그를 가지고있�
 css라고 하는 메소드를 호출하면 이 메소드는 jqeury객체를 만든 jquery함수의 인자에 해당되는 element들, 리스트 전체에 대해서 css라는 메소드를 실행하는 결과를 가져온다.
 
 `css('color','red');`
-각각의 element의 color를 red를 바꿔준다.
+$('li')통해 조회한 각각의 element의 color를 red를 바꿔준다.
 
-
-
-
+##DOM과 jQeury의 코드 차이
+```javascript
+var lis = document.getElementsByClassName('active');
+for(var i=0; i < lis.length; i++){
+    lis[i].style.color='red';   
+}
+```
+위와 아래 코드는 같은 뜻이다.
+```javascript
+$('.active').css('color', 'red')
+```
+jQuery가 훨씬 쉽다. document.getElementsByClassName 메소드를 사용할 필요가 없고, 반복문을 사용할 필요도 없다.
 
 [2페이지](JSForWebBrowser.md)
 
