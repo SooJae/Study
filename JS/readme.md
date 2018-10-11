@@ -1,3 +1,9 @@
+
+.center {
+  display: block;
+  margin: auto;
+}
+
 # 자바스크립트
 
 - HTML : 정보
@@ -97,8 +103,8 @@ BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상
 
 <br>
 
-
-<img src="window-dom-bom-js.png" align= "center">
+![alt window](window-dom-bom-js.png ){: .center}
+<!-- <img src="window-dom-bom-js.png" style= "align: center"> -->
 
 
 ##  window
@@ -248,3 +254,4 @@ window.open 메소드는 새 창을 생성한다. 현대의 브라우저는 대�
 script를 통해(즉 웹페이지를 만든사람이 의도한 것이면)팝업이 열리지 않는다.
 
 [2페이지](JSForWebBrowser.md)
+
