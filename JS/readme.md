@@ -140,34 +140,33 @@ course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보
 
 ---
 ## URL 변경하기.
-location.href = 'http://egoing.net';
-아래와 같은 방법도 같은 효과를 낸다. 하지만 위에 방식이 더 명시적
-location = 'http://egoing.net';
-
-아래는 현재 문서를 리로드하는 간편한 방법을 제공한다.
-location.reload();
+`location.href = 'http://egoing.net';`          
+`location = 'http://egoing.net';`           
+아래와 같은 방법도 같은 효과를 낸다. 하지만 위에 방식이 더 명시적/
+아래는 현재 문서를 리로드하는 간편한 방법을 제공한다.           
+`location.reload();` :
 새로고침!
 
 ---
 ## Navigator
 브라우저의 정보를 제공하는 객체다. 주로 호환성 문제등을 위해서 사용한다.
 
-console.dir(navigator);
+`console.dir(navigator)` : 
 navigator객체의 모든 프로퍼티를 볼 수 있다.
 
-### appName
+`appName` : 
 웹브라우저의 이름이다. IE는 Microsoft Internet Explorer, 파이어폭스, 크롬등은 Nescape로 표시한다.
 
-### appVersion
+`appVersion` : 
 브라우저의 버전을 의미한다. 
 
-### userAgent
+`userAgent` : 
 브라우저가 서버측으로 전송하는 USER-AGENT HTTP 헤더의 내용이다. appVersion과 비슷하다. 
 
-### platform
+`platform` : 
 브라우저가 동작하고 있는 운영체제에 대한 정보다.
 
-
+---
 ## 기능테스트
 Navigator 객체는 브라우저 호환성을 위해서 주로 사용하지만 모든 브라우저에 대응하는 것은 쉬운 일&nb이 아니므로 아래와 같이 기능 테스트를 사용하는 것이 더 선호되는 방법이다. 
 
