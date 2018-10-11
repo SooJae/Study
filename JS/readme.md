@@ -138,6 +138,7 @@ course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보
 ### hash
 #bookmark
 
+---
 ## URL 변경하기.
 location.href = 'http://egoing.net';
 아래와 같은 방법도 같은 효과를 낸다. 하지만 위에 방식이 더 명시적
@@ -146,8 +147,8 @@ location = 'http://egoing.net';
 아래는 현재 문서를 리로드하는 간편한 방법을 제공한다.
 location.reload();
 새로고침!
-<br>
 
+---
 ## Navigator
 브라우저의 정보를 제공하는 객체다. 주로 호환성 문제등을 위해서 사용한다.
 
