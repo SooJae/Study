@@ -98,7 +98,9 @@ BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상
 
 <br>
 
-<img align="right" src="window-dom-bom-js.png">
+<p align="center">
+<img src="window-dom-bom-js.png">
+</p>
 
 <!-- <img src="window-dom-bom-js.png" style= "align: center"> -->
 
