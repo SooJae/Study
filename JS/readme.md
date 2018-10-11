@@ -144,7 +144,7 @@ https
 opentutorials.org // 컴퓨터를 식별하는 정보         
 `port` : 서버컴퓨터의 여러가지 어플리케이션을 식별하는 정보.            
 `pathname ` :
-course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보
+course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보   
 `search` : ?id=10 쿼리정보       
 `hash` : 
 #bookmark
