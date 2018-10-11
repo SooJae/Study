@@ -6,15 +6,15 @@
 ---
 <br>
 
-# JS 사용방식 (4가지)
- ## inline방식 : 태그에 HTML과 JS가 혼합되어 있다. 좋은방식 X
+## JS 사용방식 (4가지)
+ ### inline방식 : 태그에 HTML과 JS가 혼합되어 있다. 좋은방식 X
 ```html
 <input type="button" onclick="alert('Hello world')" value="Hello World">
 
 onclick자체는 html인데 속성을 자바스크립트(alert)로 쓴다고 정의 되어있다.
 ```
 
-## script 태그방식 
+### script 태그방식 
 ```html
 <script type="text/javascript">에서 type부분은 이제 없어도 된다.
 
@@ -26,7 +26,7 @@ onclick자체는 html인데 속성을 자바스크립트(alert)로 쓴다고 정
     </script> // 이것 자체는 HTML이다.
 ```
 
-## 외부파일 로드
+### 외부파일 로드
 ```html
 <body>
     <input type="button" id="hw" value="Hello World">
