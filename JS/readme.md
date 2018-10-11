@@ -96,11 +96,12 @@ onload라는 것은 현재 웹페이지의 모든 코드가 다 읽히고, 웹�
 BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상화해서 프로그래밍적으로 제어할 수 있도록 제공하는 수단이다. BOM은 전역객체인 Window의 프로퍼티와 메소드들을 통해서 제어할 수 있다. 따라서 BOM에 대한 수업은 Window 객체의 프로퍼티와 메소드의 사용법을 배우는 것이라고 해도 과언이 아닐 것이다. 
 
 <br>
-<div style=width:500px;>
+<div text-align=center;>
 
 ![window](./window-dom-bom-js.png )
 
 <div>
+
 ##  window
 모든 것은 window 객체 밑에 있다. window - DOM, BOM, JS
 document도 window 객체에 소속이 되어있다. window.document
