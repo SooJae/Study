@@ -114,28 +114,29 @@ if를 이용해 분기시킬 수 있다.
 현재 브라우저의 주소값을 알아 낼 수 있다.
 자바스크립트가 브라우저를 제어하기 위해서는 모든 것이 객체여야 한다.
 
-```javascript
+```html
 <script> alert(location.toString(), location.href);</script>
 ```
 두 인자 전부 똑같다. 정확하게는 **location.href를 쓰는게 선호된다.**
 console.log(location)이면 location에 관한 많은 정보가 나온다.
-
-
+```javascript
 console.log(location.protocol, location.host, location.port, location.pathname, location.search, location.hash);
-필요한 프로퍼티를 뽑아 낼 수 있다.
+```
+를 통해 필요한 프로퍼티를 뽑아 낼 수 있다.
 
+```html
 https://opentutorials.org/course/1375/6634?id=10#bookmark
+```
 
-### protocol
-https
-### host
-opentutorials.org // 컴퓨터를 식별하는 정보
-port: 서버컴퓨터의 여러가지 어플리케이션을 식별하는 정보.
-### pathname 
+`protocol` : 
+https           
+`host` : 
+opentutorials.org // 컴퓨터를 식별하는 정보         
+`port` : 서버컴퓨터의 여러가지 어플리케이션을 식별하는 정보.            
+`pathname ` :
 course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보
-### search 
-?id=10 쿼리정보
-### hash
+`search` : ?id=10 쿼리정보       
+`hash` : 
 #bookmark
 
 ---
@@ -216,17 +217,18 @@ if (!Object.keys) {
 }
 ```
 
-
+---
 ## 창 제어
-window.open 메소드는 새 창을 생성한다. 현대의 브라우저는 대부분 탭을 지원하기 때문에 window.open은 새 창을 만든다. 
-### _self
-현재 창 열기
-### _blank
-새로운 창 열기
-### ot 
+window.open 메소드는 새 창을 생성한다. 현대의 브라우저는 대부분 탭을 지원하기 때문에 window.open은 새 창을 만든다.          
+
+`_self` : 
+현재 창 열기            
+`_blank` : 
+새로운 창 열기          
+`ot` : 
 동일한 이름의 창이 있으면 새로운 창이 열리지 않는다.
 
-**window.open == \<a target="_blank">\</a>와 똑같다.**
+`window.open == \<a target="_blank">\</a>` 똑같다.
 
 ### 보안
 내가 클릭하면 팝업이 열리고,
