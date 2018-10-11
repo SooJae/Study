@@ -1,4 +1,4 @@
-git = 버전관리
+git = 버전관리<br>
 git hub 백업해주는 서비스
 
 push 원격저장소로 문서를 업로드
@@ -15,9 +15,6 @@ stage :커밋이 될 파일들이 가는 곳
 
 git log -p : 작업 사이사이의 변화를 알려줌
 
-
-
-    3
 
 diff --git a/f2.txt b/f2.txt
 new file mode 100644

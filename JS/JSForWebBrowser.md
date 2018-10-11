@@ -1,19 +1,17 @@
-HTML : 정보
-CSS : 디자인
-JavaScript : 웹브라우저, HTML을 프로그래밍적으로 제어
+- HTML : 정보
+- CSS : 디자인
+- JavaScript : 웹브라우저, HTML을 프로그래밍적으로 제어
 
-JS 사용방식
-
-1. inline방식 : 태그에 HTML과 JS가 혼합되어 있다. 좋은방식 X
-
+# JS 사용방식 (4가지)
+ ## inline방식 : 태그에 HTML과 JS가 혼합되어 있다. 좋은방식 X
+```html
 <input type="button" onclick="alert('Hello world')" value="Hello World">
 
 onclick자체는 html인데 속성을 자바스크립트(alert)로 쓴다고 정의 되어있다.
+```
 
-
-
-2. script 태그방식 
-
+## script 태그방식 
+```html
 <script type="text/javascript">에서 type부분은 이제 없어도 된다.
 
 <script>
@@ -21,17 +19,17 @@ onclick자체는 html인데 속성을 자바스크립트(alert)로 쓴다고 정
         hw.addEventListener('click', function(){
             alert('Hello World');
         })
-    </script> // 이거 자체는 HTML이다.
+    </script> // 이것 자체는 HTML이다.
+```
 
-
-3. 외부파일 로드
-
-
+## 외부파일 로드
+```html
 <body>
     <input type="button" id="hw" value="Hello World">
     <script src="ex_load.js"></script>
 </body>
 //HTML만 있다!
+
 
 ex_load.js를 열어보면,
         var hw = document.getElementById('hw')
@@ -42,16 +40,16 @@ ex_load.js를 열어보면,
 
 외부파일을 로드하면 실행시 .js파일을 다운로드 한다.
 캐시를 가지고 있어 한번만 받으면 된다!
-
-4. 온 로드
-
+```
+## 온 로드
+```html
 스크립트 태그를 body태그가 아닌 head태그에 위치 시킨다.하지만 body태그 밑으로 해주는게 좋다.
 <head>
     <script src="ex_load.js"></script>
 </head>
-
+```
 head태그에 자바스크립트 태그를 넣으면 브라우저가 head에 있는 자바스크립트 태그를 보자마자 다운로드를 시작한다. 그리고 이 자바 스크립트가 끝난 다음 나머지 를 실행한다.
-
+```html
 <head>
     <script>
     var hw = document.getElementById('hw')
@@ -64,10 +62,11 @@ head태그에 자바스크립트 태그를 넣으면 브라우저가 head에 있
 <body>
     <input type="button" id="hw" value="Hello World">
 </body>
-
-위의 코드와 완벽히 똑같다. 브라우저에서는 아직 id가 "hw"라는 것을 알 수 없다.( 아직 body 부분을 내려오기 전이므로 그래서 hw값은 null이 된다. ) 
+```
+**위의 코드와 완벽히 똑같다**. 브라우저에서는 아직 id가 "hw"라는 것을 알 수 없다.( 아직 body 부분을 내려오기 전이므로 그래서 hw값은 null이 된다. ) 
 그래서 오류가 난다.
 
+```html
 이것을 해결하려면
 
 <head>
@@ -80,7 +79,7 @@ head태그에 자바스크립트 태그를 넣으면 브라우저가 head에 있
         }
     </script>
 </head>
-
+```
 onload라는 것은 현재 웹페이지의 모든 코드가 다 읽히고, 웹브라우저는 window객체의 onload 함수가 실행 된다. 
 즉 body태그 마지막에 놓으면 window.onload를 쓸 필요가 없다.
 또 body태그가 head태그보다 빠르다.
@@ -207,4 +206,9 @@ window.open 메소드는 새 창을 생성한다. 현대의 브라우저는 대�
 _self : 현재 창 열기
 _blank: 새로운 창 열기
 ot : 동일한 이름의 창이 있으면 새로운 창이 열리지 않는다.
-window.open == 
+window.open == <a target></a>와 똑같다.
+
+
+보안
+내가 클릭하면 팝업이 열리고,
+script를 통해(즉 웹페이지를 만든사람이 의도한 것이면)팝업이 열리지 않는다.

@@ -1,16 +1,14 @@
-1. 자바스크립트는 사용자와 상호작용을 하는 언어이다.
+1. 빨강 자바스크립트는 사용자와 상호작용을 하는 언어이다.
 2. 웹브라우저는 한번 화면에 출력되면 자기자신을 바꿀수 없다.
-
 BUT 자바스크립트를 이용하면 body 태그를 바꿔줄수 있다.
-
 즉 JS가 HTML을 제어하는 언어이다. 
-
+```html
 <input type="button" value="hi" onclick="alert('hi')">
     <input type="text" onchange="alert('changed')">
     <input type="text" onkeydown="alert('key down!')">
-    
-    on~ 이벤트 약 20개정도 있다.
+```
 
+ on~ 이벤트 약 20개정도 있다.
 
 
 1=="1" 
@@ -21,8 +19,8 @@ BUT 자바스크립트를 이용하면 body 태그를 바꿔줄수 있다.
 
 위의 예를 보면 알 수 있듯이 ===은 데이터타입까지 완전히 같다는 의미이다. ===의 사용이 강력히 권장.
 
-
-
+---
+```javascript
 coworkers.showAll=function(){
         for(var key in coworkers){
           document.write(key+':'+coworksers[key]+'<br>');
@@ -30,15 +28,15 @@ coworkers.showAll=function(){
       }
 
       coworkers.showAll();
+```
+coworkers가 바뀌면 동작을 안할테니 coworkers = this로 바꿔준다.
       
-      coworkers가 바뀌면 동작을 안할테니 coworkers = this로 바꿔준다.
       
-      
-      의존성 (dependency): 프로젝트에 설치하고 사용하는 모듈
+의존성 (dependency): 프로젝트에 설치하고 사용하는 모듈
      
-      --save , --save-dev 옵션 : 패키지 설치 + package.json에 등록을 해준다.
-      
-      --save-dev is used to save the package for development purpose. Example: unit tests, minification..
+--save , --save-dev 옵션 : 패키지 설치 + package.json에 등록을 해준다.
+
+--save-dev is used to save the package for development purpose. Example: unit tests, minification..
 --save is used to save the package required for the application to run
 
 package.json을 쓰는 이유
