@@ -95,8 +95,8 @@ BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상
 document도 window 객체에 소속이 되어있다. window.document
 변수도 마찬가지이다. window.a == a
 
-### alert
-`경고창의 확인을 누르기 전까지 그 다음 동작이 진행되지 않는다`.
+`alert`         
+경고창의 확인을 누르기 전까지 그 다음 동작이 진행되지 않는다.
 
 ### confirm : 확인, 취소 창 (true false값 반환))
 confirm 창의 확인을 누르면 true값을 반환. 취소를 누르면 false값을 반환.
