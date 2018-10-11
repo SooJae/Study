@@ -1,6 +1,6 @@
 
 # ☑️ TODO
-## :pencil2: STUDY
+### :pencil2: STUDY
 - [x] JAVA
 - [x] HTML
 - [x] CSS
