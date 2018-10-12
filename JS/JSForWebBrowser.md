@@ -99,7 +99,7 @@ BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상
 <br>
 
 <p align="center">
-<img src="window-dom-bom-js.png">
+<img src="images/window-dom-bom-js.png">
 </p>
 
 <!-- <img src="window-dom-bom-js.png" style= "align: center"> -->
@@ -396,6 +396,41 @@ $('$active').css('color', 'red').css('textDecoration', 'underline');
 ```
 li.constructor.name
 li 객체의 이름을 할 수 있다. 
+
+```html
+<a id="anchor" href="http://opentutorials.org">opentutorials</a>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="list">JavaScript</li>
+</ul>
+<input type="button" id="button" value="button" />
+<script>
+    var target = document.getElementById('list');
+    console.log(target.constructor.name); //HTMLLIelement
+ 
+    var target = document.getElementById('anchor');
+    console.log(target.constructor.name); //HTMLAnchorElement
+ 
+    var target = document.getElementById('button');
+    console.log(target.constructor.name); //HTMLInputElement
+ 
+</script>
+```
+
+interface HTMLAnchorElement : HTMLElement{}
+           //자식 객체       //상속받은 부모객체
+
+상속받으려면 : 을 쓴다?
+
+<p align="center">
+<img src="images/dom_tree.png">
+</p>
+
+[출처](https://web.stanford.edu/class/cs98si/slides/the-document-object-model.html "dom_tree")
+
+
+
 
 
 [2페이지](JSForWebBrowser.md)

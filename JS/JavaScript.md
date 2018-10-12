@@ -138,7 +138,7 @@ function logCitySkyline (){
   
 }
 
-초ㅛ
+
 function greeting (name = 'stranger') {
   console.log(`Hello, ${name}!`)
 }
@@ -147,23 +147,7 @@ greeting('Nick') // Output: Hello, Nick!
 greeting() // Output: Hello, stranger!
 
 
-자바스크립트를 선언(?)하는 방법은 
-제가 알고 있기로는 3가지가 있습니다. 
-<script type="text/javascript"> 
-<script language="javascript"> 
-<script> 
-이렇게요. 
 
-저는 그냥 짧은 <script>로 써서 사용합니다. 
-저 3가지의 차이점이 있을까요? 그리고 셋중 무엇을 쓰는게 옳은 표현인가요? 
-셋다 작동은 하는거 같은데 굳이 가려 쓸 필요도 있을까요?
-script 선언은 브라우저의 기본 설정에 맞추어갑니다. 혹시나 script 내부의 내용이 vb가 기본인 브라우저가있다면 그 안의 내용을 vb에 맞추어 파싱하려들겁니다. 안써도, 혹은 대충 써도 동작하는 이유는 대부분의 브라우저의 script 선언의 기본이 자스로 파싱하라고되어있기 때문입니다. 명시적으로 써준다고 했을때 올바른 구문은 맨 위에꺼입니다.
-
-<script type="text/javascript" language="javascript"> 하위 브라우저와 호완성등 생각하면 위와같이 써야 하지만 보통은 <script type="text/javascript"> 이렇게 쓰는게 맞고 지금 이렇게쓰고있고 js 원래 mine type 이 text/javascript 라고 어디서 보았던듯.
-
-html 5 부터는 디폴트로 script 는 js로 쓰기때문에 <script> 로만 사용하셔도 무방합니다. 아니라면 <script type="text/javascript"> 이렇게 써주시는게 맞겠죠. style 태그의 경우에도 type="text/css" 이렇게 명시해줘야 합니다만 html 5 부터는 디폴트로 <style> 을 적으면 css를 의미하죠.
-
-현재 표준은 <script type="text/javascript"> 라고 만든 개발자가 이야기 했어요.ㅋ
 
 
 push :배열 마지막에 넣기
@@ -276,16 +260,14 @@ function func(){
         document.write("window === this");
     }
 }
-func(); 
+func(); //window.func()와 같은뜻
 ```
 
 this가 의미하는 것은 window이다.
 
-메소드와 this
 
-객체의 소속인 메소드의 this는 그 객체를 가르킨다. 
-
-
+### 메소드와 this
+```javascript
 var o = {
     func : function(){
         if(o === this){
@@ -293,4 +275,60 @@ var o = {
         }
     }
 }
-o.func();   
+o.func();  //o 
+
+```
+ 객체의 소속인 메소드의 this는 그 객체를 가르킨다. 사실 같은 뜻이다. this가 포함된 o거나 this가 포함된 window거나 그게그거.
+
+생성자와 this
+```javascript
+var funcThis = null; 
+ 
+function Func(){
+    funcThis = this; // window
+}
+var o1 = Func();
+if(funcThis === window){ //window
+    document.write('window <br />');
+}
+ 
+var o2 = new Func(); //객체가 o2 만들어졌기 때문에 o2의 this가 된다.
+if(funcThis === o2){
+    document.write('o2 <br />');
+}
+```
+
+생성자는 빈 객체를 만든다. 그리고 이 객체내에서 this는 만들어진 객체를 가르킨다. 이것은 매우 중요한 사실이다. 생성자가 실행되기 전까지는 객체는 변수에도 할당될 수 없기 때문에 this가 아니면 객체에 대한 어떠한 작업을 할 수 없기 때문이다. 
+
+```javascript
+function Func(){
+    document.write(o);
+}
+var o = new Func();
+```
+결과는 아래와 같다.
+>undefined
+
+o1 = {val : 1}
+var this=o1;
+console.log(sum.apply())
+
+객제안에 담겨있는 변수를 프로퍼티
+프로퍼티에 담겨있는 것이 함수라면 메소드라고 한다.
+
+prototype
+```javascript
+function func(){};
+func.prototype.name='lee';
+var o= new func(); //상속 받기
+console.log(o); //prototype에 저장되어있는 특정한 객체가 들어간다.
+```
+>func {name: "lee"}
+
+Object표현 방식
+1. var grade = {'lee' : 10, 'su':5, 'jae':11}
+2. {'name' : leesujae 'introduce':func(name){~~~}}
+
+모든 객체는 Object를 상속받고있다. 그래서 모든 객체에 포함시키고 싶은것이 있을때 Object를 건들면 된다.
+
+hasOwnProperty : Object.prototype.~~를 무시할수 있게 해준다. (중요!))

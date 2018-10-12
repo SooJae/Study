@@ -18,5 +18,5 @@
 <br>
 <br>
 
-- [ ] **node.js (중단)** &nbsp;&nbsp;&nbsp;생활코딩 강의
+- [ ] **node.js (중단)** &nbsp;&nbsp;&nbsp;
 
