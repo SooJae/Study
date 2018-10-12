@@ -423,11 +423,326 @@ interface HTMLAnchorElement : HTMLElement{}
 
 상속받으려면 : 을 쓴다?
 
+## Dom tree
+
 <p align="center">
 <img src="images/dom_tree.png">
 </p>
 
 [출처](https://web.stanford.edu/class/cs98si/slides/the-document-object-model.html "dom_tree")
+
+Dom을 이해하는 것이 웹페이지를 이용하는 것의 중추이다. 아주 중요!!!!!!!
+
+## HTML COllECTION
+
+```html
+<html>
+<body>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="active">JavaScript</li>
+</ul>
+<script>
+console.group('before');// 그룹핑 시작
+var lis = document.getElementsByTagName('li');
+//HTMLCollection 유사배열이다.
+
+for(var i = 0; i < lis.length; i++){
+    console.log(lis[i]);
+}
+console.groupEnd();// 그룹핑 끝
+console.group('after');//그룹핑 시작
+lis[1].parentNode.removeChild(lis[1]); //<li>CSS</li> 삭제
+for(var i = 0; i < lis.length; i++){
+    console.log(lis[i]);
+}
+console.groupEnd(); //그룹핑 끝
+</script>
+</body>
+</html>
+```
+
+결과.
+```
+- before //group('before') 
+    - li
+    - li
+    - li#active
+//groupEnd()
+- after
+    - li
+    - li#active
+```
+그룹별로 볼 수 있어서 보기 편하다.
+
+HTMLCollection은 실시간으로 반영이 되어서 재 조회 할 필요가 없다.
+
+```javascript
+    var li      =    $('li');  
+//jQeury 객체        jQuery함수
+```         
+`li.css('text-decoration','underline');` 
+설정.
+내부적으로 반복문을 수행하기 때문에 코드가 짧아진다.
+
+`li.css('text-decoration');`
+
+text-decoration의 설정값 가져오기
+(첫번째 element만 가져옴)
+
+## jQuery 룰
+2개의 인자를 사용하면 설정하기.
+1개의 인자를 사용하면 가져오기.
+
+`.` : chaining 연속적으로 작업을 실행.
+
+`var li =  $('li');`
+배열처럼 되어있다.   
+li[0], li.length 등 사용가능
+그러나 li[i]는 jquery의 객체가 아니고 DOM의 객체이기 때문에 `li[i].css()`은 에러가 발생한다.
+그래서 이것을 한번 더 jQuery객체로 감싸준다.
+
+`$(li[i]).css()`;
+
+
+jQuery함수 사용방법
+1. $('li')
+
+> n.fn.init(3) [li, li, li, prevObject: n.fn.init(1), context: document, selector: "li"]
+
+2. var t= document.getElementsByTagName('li');
+t.constructor
+>ƒ HTMLCollection() { [native code] }
+해보면 Dom객체라는 것을 알 수 있다.
+var li = $(t); // jQuery객체로 감싸줌
+>n.fn.init(3) [li, li, li]
+
+3. jQuery의 marp을 이용하는 방법(추천!)
+
+li.map(function(index, elem){
+    console.log(index,elem);
+    $(elem).css(`color`,`red`);
+})
+map은 jQuery 객체의 method이다. function을 호출하는데 index에는 index값, elem은 객체 값(여기서는 DOM객체의 HTMLLiElement)이 들어간다. 위에서 언급했듯이 내부적으로 반복문이 실행된다.
+
+elem이 DOM 객체값이기 때문에 jQeury 객체로 감싸줘야한다. $(elem)
+
+# HTMLElement
+모든 HTML 태그들을 대표하는, 공통적으로 가지고 있는 속성을 가지고 있는 객체
+대표적인 특성은 style이라고 하는 element를 가지고 있다. style은 해당되는 element의 css를 제어하는 역할을 가지고 있다.
+
+ HTMLElement는 Element라는 부모객체가 있다.
+ HTMLElement 도 있는데 왜 ELement를 쓸까? 그 이유는 DOM이 꼭 HTML만을 프로그래밍적으로 제어하기위한 규격이 아니기 때문이다.
+ markup language(
+     
+예) 
+ ```html 
+ <html></html>
+ ```
+ )를 제어하기 위한 규격이 DOM이기 때문에 DOM라는 규격 표준은 HTML 뿐만 아니라 XML, SVG, XUL등등 많은 markup langauge를 제어하기 위한 표준이기 때문에 HTML, XML, SVG, XUL 을 전부 제어하기 위한 객체가 Element이다.
+
+DOM을 공부하면 HTML, XML, SVG, XUL 등 다양한 언어들을 제어하기 쉽다.
+
+
+
+## 식별자
+문서내에서 특정한 엘리먼트를 식별하기 위한 용도로 사용되는 API 
+     
+`Element.classList`     
+`Element.className`     
+`Element.id`        
+`Element.tagName`       
+
+## 조회
+엘리먼트의 하위 엘리먼트를 조회하는 API
+
+`Element.getElementsByClassName`        
+`Element.getElementsByTagName`        
+`Element.querySelector`     
+`Element.querySelectorAll`
+
+##속성
+엘리먼트의 속성을 알아내고 변경하는 API
+
+`Element.getAttribute(name)`        
+`Element.setAttribute(name, value)`     
+`Element.hasAttribute(name);`       
+`Element.removeAttribute(name);`        
+
+```html
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li id="active" class="important current">JavaScript</li>
+</ul>
+<script>
+console.log(document.getElementById('active').tagName)
+</script>
+```
+
+### Element.tagName
+
+document.getElementById('active')
+이부분은 HTMLLIElement라는 객체를 갖게되는데, HTMLElement의 속성을 상속받고, 이것은 Element의 속성중 tagName을 상속받는다. 
+
+  *tagName은 읽기 전용이라 `document.getElementById('active').tagName = 'a'` 등 임의로 바꾸지 못한다.
+
+  ### Element.id
+
+  문서에서 id는 단 하나만 등장할 수 있는 식별자이다.
+
+```javascript
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li id="active">JavaScript</li>
+</ul>
+<script>
+var active = document.getElementById('active');
+console.log(active.id);
+active.id = 'deactive'; 
+//변경가능
+console.log(active.id);
+</script>
+```
+
+### Element.className
+클래스는 여러개의 엘리먼트를 그룹핑할 때 사용한다.
+```html
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li id="active">JavaScript</li>
+</ul>
+<script>
+var active = document.getElementById('active');
+// class 값을 변경할 때는 프로퍼티의 이름으로 className을 사용한다.
+active.className = "important current";
+console.log(active.className);
+// 클래스를 추가할 때는 아래와 같이 문자열의 더한다.
+active.className += " readed"
+</script>
+```
+
+그러나 classList가 더 편리하다.
+
+### Element.classList
+classList에 저장되어있는 객체는 DOMTokenList이다.
+DOMTokenList는 
+class ="a b c d"등 클래스 4개가 있을때 이것들이 담겨있는 것이 DOMTokenList이다.
+
+DOMTokenList는 유사배열이다.
+
+즉 조회할때
+
+```js
+function loop(){
+    for(var i=0; i<active.classList.length; i++){
+        console.log(i, active.classList[i]);
+    }
+```
+추가할때 : 
+`
+active.classList.add('abc');
+`
+
+제거할때 : 
+`
+active.classList.remove('abc');
+`
+
+토글 (실행할때 사라졌다 없어졌다 하는 것.) : 
+`
+active.classList.toggle('abc');
+`
+
+
+# 조회 API
+지금까지 document.getElementBy* 메소드를 통해서 엘리먼트를 조회했다. 이것은 문서 전체에서 찾을 때 쓰고, 어떤 객체의 하위 element를 대상으로 조회할때 (즉 조회 범위를 좁힐때) element객체가 갖고있는 getElementBy*를 쓰면 된다.
+
+
+```html
+<ul>
+    <li class="marked">html</li>
+    <li>css</li>
+    <li id="active">JavaScript
+        <ul>
+            <li>JavaScript Core</li>
+            <li class="marked">DOM</li>
+            <li class="marked">BOM</li>
+        </ul>
+    </li>
+</ul>
+<script>
+    var list = document.getElementsByClassName('marked');
+    console.group('document');
+    for(var i=0; i<list.length; i++){
+        console.log(list[i].textContent);
+    }
+    console.groupEnd();
+     
+    console.group('active');
+    var active = document.getElementById('active');     
+    var list = active.getElementsByClassName('marked');
+    for(var i=0; i<list.length; i++){
+        console.log(list[i].textContent);
+        //textContent 메소드는 태그에 속한 text를 리턴해준다.
+    }
+    console.groupEnd();
+</script>
+```
+
+# 속성 제어 API
+태그의 이름만으로 정보를 전부 표현하기 힘들때, 정보의 부가적인 정보를 표현하는 것을 속성이라고 한다.
+
+`Element.getAttribute(name)`        
+`Element.setAttribute(name, value)`     
+`Element.hasAttribute(name);`       
+`Element.removeAttribute(name);`        
+
+```html
+<a id="target" href="http://opentutorials.org">opentutorials</a>
+<script>
+var t = document.getElementById('target');
+console.log(t.getAttribute('href')); //http://opentutorials.org
+t.setAttribute('href', 'http://www.naver.com');// href 값을 수정한다.
+t.setAttribute('title', 'opentutorials.org'); // title이라는 속성이 없을 시 title 속성의 값을 설정한다.
+console.log(t.hasAttribute('title')); // true, title 속성의 존재여부를 확인한다.
+t.removeAttribute('title'); // title 속성을 제거한다.
+console.log(t.hasAttribute('title')); // false, title 속성의 존재여부를 확인한다.
+</script>
+```
+
+`t.id == t.getAttribute('id');`
+
+속성과 프로퍼티
+```html
+<p id="target">
+    Hello world
+</p>
+<script>
+    var target = document.getElementById('target');
+
+    // attribute 방식
+    target.setAttribute('class', 'important');
+    // property 방식 (className을 직접 지정)
+    target.className = 'important';
+</script>
+```
+
+
+| Attribute    | Property    |
+| ----------- | ----------- |
+| class       | className   |
+| readonly    | readOnly    |
+| rowspan     | rowSpan     |
+| colspan     | colSpan     |
+| usemap      | userMap     |
+| frameborder | frameBorder |
+| for         | htmlFor     |
+| maxlength   | maxLength   |
+
 
 
 
