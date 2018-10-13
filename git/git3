@@ -177,3 +177,7 @@ git pull 은 git fetch + git merge 와 (거의) 같다.
 $ git tag -a 1.0 -m "first release" master
 
 현재 master branch가 가리키고 있는 commit을 태그로 생성
+
+```html
+<div class="page__footer-copyright">&copy; 2018 SooJae. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+```

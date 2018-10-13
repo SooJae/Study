@@ -744,6 +744,19 @@ console.log(t.hasAttribute('title')); // false, title 속성의 존재여부를 
 | maxlength   | maxLength   |
 
 
+심지어 속성과 프로퍼티는 값이 다를수도 있다. 아래 코드를 실행한 결과는 속성과 프로퍼티의 값이 꼭 같은 것은 아니라는 것을 보여준다
+
+```html
+<a id="target" href="./demo1.html">ot</a>
+<script>
+//현재 웹페이지가 http://localhost/webjs/Element/attribute_api/demo3.html 일 때 
+var target = document.getElementById('target');
+// http://localhost/webjs/Element/attribute_api/demo1.html 
+console.log('target.href', target.href);
+// ./demo1.html 
+console.log('target.getAttribute("href")', target.getAttribute("href"));
+</script>
+```
 
 
 
