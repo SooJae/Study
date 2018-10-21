@@ -5,3 +5,8 @@ Travis란?
 먼저, 수정한 내용을 Github에 Push하면, 미리 설정한 연결에 의해 Github는 Travis CI에게 Trigger를 준다. Travis CI는 Trigger에 의해 빌드 Job을 자동으로 시작하게 되고, 최종적으로 (그리고 선택적으로) Heroku Deploy나 Slack 알림을 주게 된다. (그리고 Github에게도 그 정보가 전달된다.)
 
 Pull Request에 대해서도 기본적으로 동일한 동작을 하게 되는데, Trigger에 의해 빌드가 끝나면 그 정보가 Github에게 전달되게 된다.
+
+
+
+travis.com과 org의 차이점
+https://devops.stackexchange.com/questions/1201/whats-the-difference-between-travis-ci-org-and-travis-ci-com

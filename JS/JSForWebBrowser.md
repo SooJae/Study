@@ -518,7 +518,7 @@ t.constructor
 var li = $(t); // jQuery객체로 감싸줌
 >n.fn.init(3) [li, li, li]
 
-3. jQuery의 marp을 이용하는 방법(추천!)
+3. jQuery의 map을 이용하는 방법(추천!)
 
 li.map(function(index, elem){
     console.log(index,elem);
@@ -530,7 +530,7 @@ elem이 DOM 객체값이기 때문에 jQeury 객체로 감싸줘야한다. $(ele
 
 # HTMLElement
 모든 HTML 태그들을 대표하는, 공통적으로 가지고 있는 속성을 가지고 있는 객체
-대표적인 특성은 style이라고 하는 element를 가지고 있다. style은 해당되는 element의 css를 제어하는 역할을 가지고 있다.
+대표적인 특성은 style이라고 하는 property가 있다.  style은 해당되는 element의 css를 제어하는 역할을 가지고 있다.
 
  HTMLElement는 Element라는 부모객체가 있다.
  HTMLElement 도 있는데 왜 ELement를 쓸까? 그 이유는 DOM이 꼭 HTML만을 프로그래밍적으로 제어하기위한 규격이 아니기 때문이다.
@@ -637,6 +637,7 @@ DOMTokenList는 유사배열이다.
 즉 조회할때
 
 ```js
+let active = document.getElementById('active');
 function loop(){
     for(var i=0; i<active.classList.length; i++){
         console.log(i, active.classList[i]);
@@ -758,8 +759,80 @@ console.log('target.getAttribute("href")', target.getAttribute("href"));
 </script>
 ```
 
+Query 객체의 메소드 중 setAttribute, getAttribute에 대응되는 메소드는 attr이다. 또한 removeAttribute에 대응되는 메소드로는 removeAttr이 있다. 
+
+```html
+<a id="target" href="http://opentutorials.org">opentutorials</a>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+var t = $('#target');
+console.log(t.attr('href')); //http://opentutorials.org
+t.attr('title', 'opentutorials.org'); // title 속성의 값을 설정한다.
+t.removeAttr('title'); // title 속성을 제거한다.
+</script>
+```
+
+DOM과 마찬가지로 jQuery도 속성(attribute)과 프로퍼티를 구분한다. 속성은 attr, 프로퍼티는 prop 메소드를 사용한다.
+
+```html
+<a id="t1" href="./demo.html">opentutorials</a>
+<input id="t2" type="checkbox" checked="checked" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+// 현재 문서의 URL이 아래와 같다고 했을 때
+// http://localhost/jQuery_attribute_api/demo2.html
+var t1 = $('#t1');
+console.log(t1.attr('href')); // ./demo.html 
+console.log(t1.prop('href')); // http://localhost/jQuery_attribute_api/demo.html 
+ 
+var t2 = $('#t2');
+console.log(t2.attr('checked')); // checked
+console.log(t2.prop('checked')); // true
+</script>
+```
+
+attr => attribute 방식
+prop => property 방식
+
+원래는 property에서는 className이라고 써야하지만 (class는 예약어이기 때문에), jQuery에서 내부적으로 처리해주기때문에 class라고만 써도 된다.
+
+```html
+<div id="t1">opentutorials</div>
+<div id="t2">opentutorials</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+$('#t1').prop('className', 'important'); 
+$('#t2').prop('class', 'current');  
+</script>
+```
 
 
 
-[2페이지](JSForWebBrowser.md)
 
+find를 쓰는 이유는 체인을 끊지 않고 작업의 대상을 변경하고 싶을 때 사용한다. 
+```html
+<ul>
+    <li class="marked">html</li>
+    <li>css</li>
+    <li id="active">JavaScript
+        <ul>
+            <li>JavaScript Core</li>
+            <li class="marked">DOM</li>
+            <li class="marked">BOM</li>
+        </ul>
+    </li>
+</ul>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    // $( ".marked", "#active").css( "background-color", "red" ); //selector context를 이용
+    $(#active .marked).css( "background-color", "red" ); //css 선택자를 이용
+    $(`#active`).find(`.marked`).css("background-color","red");
+    //위에것들과 같은 뜻.
+    $(`#active`).css(`color`,`blue`).find(`.marked`).css(`background-color`,`red`);
+    //active밑에는 color를 blue로 acitve밑의 marked 클래스의 backround-color를 red로
+</script>
+```
+
+Node객체는 DOM에서 시조와 같은 역할을 한다. 다시말해서 모든 DOM객체는 Node객체를 상속 받는다.
+
+![node-image](images/node.png)
