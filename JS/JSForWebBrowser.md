@@ -836,3 +836,551 @@ find를 쓰는 이유는 체인을 끊지 않고 작업의 대상을 변경하�
 Node객체는 DOM에서 시조와 같은 역할을 한다. 다시말해서 모든 DOM객체는 Node객체를 상속 받는다.
 
 ![node-image](images/node.png)
+
+```html
+<ul>
+    <li>js</li>
+    <li>html</li>
+
+</ul>
+```
+```
+Node.childNodes     : js,html
+Node.firstChild     :   js 
+Node.lastChild      :   html   
+Node.nextSibling    :   html
+Node.previousSibling:   js
+Node.contains()     :   자식이 있는지 없는지 확인
+Node.hasChildNodes():   자식이 있는지 없는지 확인
+```
+
+각각의 구성요소가 어떤 카테고리에 속하는 것인지를 알려주는 식별자를 제공한다. 
+
+`Node.nodeType`
+`Node.nodeName`
+
+
+Node 객체의 값을 제공하는 API
+
+`Node.nodeValue`
+`Node.textContent`
+
+Node 객체의 자식을 추가하는 방법에 대한 API
+
+`Node.appendChild()`
+`Node.removeChild()`
+
+```html
+<body id="start">[공백, 줄바꿈도 자식 노드.]
+<ul>
+    <li><a href="./532">html</a></li> 
+    <li><a href="./533">css</a></li>
+    <li><a href="./534">JavaScript</a>
+        <ul>
+            <li><a href="./535">JavaScript Core</a></li>
+            <li><a href="./536">DOM</a></li>
+            <li><a href="./537">BOM</a></li>
+        </ul>
+    </li>
+</ul>
+<script>
+var s = document.getElementById('start');
+console.log(1, s.firstChild); // #text (공백문자, 문자열이기때문에 #text로 되어있다.)
+var ul = s.firstChild.nextSibling
+console.log(2, ul); // ul
+console.log(3, ul.nextSibling); // #text
+console.log(4, ul.nextSibling.nextSibling); // script
+console.log(5, ul.childNodes); //text, li, text, li, text, li, text
+console.log(6, ul.childNodes[1]); // li(html)
+console.log(7, ul.parentNode); // body
+</script>
+</body>
+```
+
+노드 작업을 하게 되면 현재 선택된 노드가 어떤 타입인지를 판단해야 하는 경우가 있다. 이런 경우에 사용할 수 있는 API가 nodeType, nodeName이다. 
+
+Node.nodeType
+node의 타입을 의미한다. 
+Node.nodeName
+node의 이름 (태그명을 의미한다.)
+
+노드의 종류에 따라서 정해진 상수가 존재한다. 아래는 모든 노드의 종류와 종류에 따른 값을 출력하는 예제다.
+
+```js
+for(var name in Node){
+   console.log(name, Node[name]);
+}
+```
+
+ELEMENT_NODE 1          
+ATTRIBUTE_NODE 2            
+TEXT_NODE 3             
+CDATA_SECTION_NODE 4            
+ENTITY_REFERENCE_NODE 5             
+ENTITY_NODE 6           
+PROCESSING_INSTRUCTION_NODE 7           
+COMMENT_NODE 8          
+DOCUMENT_NODE 9             
+DOCUMENT_TYPE_NODE 10           
+DOCUMENT_FRAGMENT_NODE 11           
+NOTATION_NODE 12            
+DOCUMENT_POSITION_DISCONNECTED 1            
+DOCUMENT_POSITION_PRECEDING 2           
+DOCUMENT_POSITION_FOLLOWING 4           
+DOCUMENT_POSITION_CONTAINS 8            
+DOCUMENT_POSITION_CONTAINED_BY 16           
+DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC 32        
+
+
+body.firstChild.nodeType === 3
+body.firstChild.nodeType === TEXT_NODE
+위의 두개는 같은뜻이다.
+
+
+```html
+<!DOCTYPE html>
+<html>
+<body id="start">
+<ul>
+    <li><a href="./532">html</a></li> 
+    <li><a href="./533">css</a></li>
+    <li><a href="./534">JavaScript</a>
+        <ul>
+            <li><a href="./535">JavaScript Core</a></li>
+            <li><a href="./536">DOM</a></li>
+            <li><a href="./537">BOM</a></li>
+        </ul>
+    </li>
+</ul>
+<script>
+function traverse(target, callba   ck){
+    if(target.nodeType === 1){
+        //if(target.nodeName === 'A')
+        callback(target);
+        var c = target.childNodes;
+        for(var i=0; i<c.length; i++){
+            traverse(c[i], callback);       
+        }   
+    }
+}
+traverse(document.getElementById('start'), function(elem){
+    console.log(elem);
+});
+</script>
+</body>
+</html>
+```
+
+노드의 추가와 관련된 API들은 아래와 같다.
+
+`appendChild(child)`
+노드의 마지막 자식으로 주어진 엘리먼트 추가
+`insertBefore(newElement, referenceElement)`
+appendChild와 동작방법은 같으나 두번째 인자로 엘리먼트를 전달 했을 때 이것 앞에 엘리먼트가 추가된다.
+노드를 추가하기 위해서는 추가할 엘리먼트를 생성해야 하는데 이것은 document 객체의 기능이다. 아래 API는 노드를 생성하는 API이다.
+
+`document.createElement(tagname)`
+엘리먼트 노드를 추가한다.
+`document.createTextNode(data)`
+텍스트 노드를 추가한다. 
+```html
+<ul id="target">
+    <li>HTML</li>
+    <li>CSS</li>
+</ul>
+<input type="button" onclick="callAppendChild();" value="appendChild()" />
+<input type="button" onclick="callInsertBefore();" value="insertBefore()" />
+<script>
+    function callAppendChild(){
+        var target = document.getElementById('target');
+        var li = document.createElement('li');
+        var text = document.createTextNode('JavaScript');
+        li.appendChild(text);
+        target.appendChild(li);
+    }
+ 
+    function callInsertBefore(){
+        var target = document.getElementById('target');
+        var li = document.createElement('li');
+        var text = document.createTextNode('jQuery');
+        li.appendChild(text);
+        target.insertBefore(li, target.firstChild);
+    }
+</script>
+```
+
+노드 제거
+
+```html
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="target">JavaScript</li>
+</ul>
+<input type="button" onclick="callRemoveChild();" value="removeChild()" />
+<script>
+    function callRemoveChild(){
+        var target = document.getElementById('target');
+        target.parentNode.removeChild(target);
+    }
+</script>
+```
+
+```html
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="target">JavaScript</li>
+</ul>
+<input type="button" onclick="callReplaceChild();" value="replaceChild()" />
+<script>
+    function callReplaceChild(){
+        var a = document.createElement('a');
+        a.setAttribute('href', 'http://opentutorials.org/module/904/6701');
+        a.appendChild(document.createTextNode('Web browser JavaScript'));
+ 
+        var target = document.getElementById('target');
+        target.replaceChild(a,target.firstChild);
+    }
+</script>
+```
+
+jQuery를 이용해서 노드를 제어하는 방법을 알아보자. jQuery에서 노드를 제어하는 기능은 주로 Manipulation 카테고리에 속해 있다. 
+
+
+```html
+<!-- before -->
+<div class="target">
+    <!-- prepend -->
+    content1
+    <!-- append -->
+</div>
+<!-- after -->
+ <!-- before -->
+<div class="target">
+    <!-- prepend -->
+    content2
+    <!-- append -->
+</div>
+ <!-- after -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    $('.target').before('<div>before</div>');
+    $('.target').after('<div>after</div>');
+    $('.target').prepend('<div>prepend</div>');
+    $('.target').append('<div>append</div>');
+</script>
+```
+
+제거와 관련된 API는 remove와 empty가 있다. remove는 선택된 엘리먼트를 제거하는 것이고 empty는 선택된 엘리먼트의 텍스트 노드를 제거하는 것이다.
+
+
+
+```html
+<div class="target" id="target1">
+    target 1
+</div>
+ 
+<!-- remove시 위에가 전부 사라짐 -->
+
+<div class="target" id="target2">
+    target 2    
+    <!-- empty시 target2텍스트만 사라짐 -->
+</div>
+ 
+<input type="button" value="remove target 1" id="btn1" />
+<input type="button" value="empty target 2" id="btn2" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    $('#btn1').click(function(){
+        $('#target1').remove();
+    })
+    $('#btn2').click(function(){
+        $('#target2').empty();
+    })
+</script>
+
+```
+
+
+
+replaceAll과 replaceWith는 모두 노드의 내용을 교체하는 API이다. replaceWith가 제어 대상을 먼저 지정하는 것에 반해서 replaceAll은 제어 대상을 인자로 전달한다. 
+```html
+<div class="target" id="target1">
+    target 1
+</div>
+ 
+<div class="target" id="target2">
+    target 2
+</div>
+ 
+<input type="button" value="replaceAll target 1" id="btn1" />
+<input type="button" value="replaceWith target 2" id="btn2" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    $('#btn1').click(function(){
+        $('<div>replaceAll</div>').replaceAll('#target1');
+    })
+    $('#btn2').click(function(){
+        $('#target2').replaceWith('<div>replaceWith</div>');
+    })
+</script>
+```
+두개가 완전히 같다고 보면되는데
+제어의 대상이 뒤에 오는 것이 replaceAll
+제어의 대상이 앞에 오는 것이 replaceWith
+
+보통 쓸떼 익숙한게 replaceWith인듯
+---
+
+노드를 복사하는 방법을 알아보자. 
+```html
+<div class="target" id="target1">
+    target 1
+</div>
+ 
+<div class="target" id="target2">
+    target 2
+</div>
+ 
+<div id="source">source</div>
+ 
+<input type="button" value="clone replaceAll target 1" id="btn1" />
+<input type="button" value="clone replaceWith target 2" id="btn2" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    $('#btn1').click(function(){
+        $('#source').clone().replaceAll('#target1');
+    })
+    $('#btn2').click(function(){
+        $('#target2').replaceWith($('#source').clone());
+    })
+</script>
+```
+
+dom manipulation API의 인자로 특정 노드를 선택하면 이동의 효과가 난다.
+```html
+<div class="target" id="target1">
+    target 1
+</div>
+ 
+<div id="source">source</div>
+ 
+<input type="button" value="append source to target 1" id="btn1" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    $('#btn1').click(function(){
+        $('#target1').append($('#source'));
+    })
+</script>
+```
+
+innerHTML는 문자열로 자식 노드를 만들 수 있는 기능을 제공한다. 또한 자식 노드의 값을 읽어올 수도 있다. 
+```html
+<ul id="target">
+    <li>HTML</li>
+    <li>CSS</li>
+</ul>
+<input type="button" onclick="get();" value="get" />
+<input type="button" onclick="set();" value="set" />
+<script>
+    function get(){
+        var target = document.getElementById('target');
+        alert(target.innerHTML);
+    }
+    function set(){
+        var target = document.getElementById('target');
+        target.innerHTML = "<li>JavaScript Core</li><li>BOM</li><li>DOM</li>";
+    }
+</script>
+```
+
+outerHTML은 선택한 엘리먼트를 포함해서 처리된다.
+```html
+<ul id="target">
+    <li>HTML</li>
+    <li>CSS</li>
+</ul>
+<input type="button" onclick="get();" value="get" />
+<input type="button" onclick="set();" value="set" />
+<script>
+    function get(){
+        var target = document.getElementById('target');
+        alert(target.outerHTML);
+    }
+    function set(){
+        var target = document.getElementById('target');
+        target.outerHTML = "<ol><li>JavaScript Core</li><li>BOM</li><li>DOM</li></ol>";
+    }
+</script>
+```
+
+innerHtml, outerHTML과 다르게 이 API들은 값을 읽을 때는 HTML 코드를 제외한 문자열을 리턴하고, 값을 변경할 때는 HTML의 코드를 그대로 추가한다.
+
+```html
+<ul id="target">
+    <li>HTML</li>
+    <li>CSS</li>
+</ul>
+<input type="button" onclick="get();" value="get" />
+<input type="button" onclick="set();" value="set" />
+<script>
+    function get(){
+        var target = document.getElementById('target');
+        alert(target.innerText);
+    }
+    function set(){
+        var target = document.getElementById('target');
+        target.innerText = "<li>JavaScript Core</li><li>BOM</li><li>DOM</li>";
+    }
+</script>
+```
+
+insertAdjacentHTML()            
+좀 더 정교하게 문자열을 이용해서 노드를 변경하고 싶을 때 사용한다.
+```html
+<!-- before begin -->
+<ul id="target">
+    <!-- after begin -->
+    <li>CSS</li>
+    <!-- before end -->
+</ul>
+<!-- after end -->
+<input type="button" onclick="beforebegin();" value="beforebegin" />
+<input type="button" onclick="afterbegin();" value="afterbegin" />
+<input type="button" onclick="beforeend();" value="beforeend" />
+<input type="button" onclick="afterend();" value="afterend" />
+<script>
+    function beforebegin(){
+        var target = document.getElementById('target');
+        target.insertAdjacentHTML('beforebegin','<h1>Client Side</h1>');
+    }
+    function afterbegin(){
+        var target = document.getElementById('target');
+        target.insertAdjacentHTML('afterbegin','<li>HTML</li>');
+    }
+    function beforeend(){
+        var target = document.getElementById('target');
+        target.insertAdjacentHTML('beforeend','<li>JavaScript</li>');
+    }
+    function afterend(){
+        var target = document.getElementById('target');
+        target.insertAdjacentHTML('afterend','<h1>Server Side</h1>');
+    }
+</script>
+
+```
+
+Document 객체는 DOM의 스팩이고 이것이 웹브라우저에서는 HTMLDocument 객체로 사용된다. HTMLDocument 객체는 문서 전체를 대표하는 객체라고 할 수 있다. 아래 코드는 이를 보여준다.
+```html
+<script>
+//document 객체는 window 객체의 소속이다.
+console.log(window.document);
+//document 객체의 자식으로는 Doctype과 html이 있다. 
+console.log(window.document.childNodes[0]);
+console.log(window.document.childNodes[1]);
+</script>
+```
+
+document객체는 window 객체의 프로퍼티이다.
+document === window.document
+
+document객체는 문서에서 사용 될 노드를 만들어 주는 역할이다.
+element = tag로 보면된다.
+
+
+텍스트 객체는 텍스트 노드에 대한 DOM 객체로 CharcterData를 상속 받는다. 
+
+아래는 텍스트 노드를 찾는 예제다. 주목할 것은 DOM에서는 **공백이나 줄바꿈**도 텍스트 노드라는 점이다.
+
+```html
+<p id="target1"><span>Hello world</span></p>
+<p id="target2">
+    <span>Hello world</span>
+</p>
+<script>
+var t1 = document.getElementById('target1').firstChild;
+var t2 = document.getElementById('target2').firstChild;
+ 
+console.log(t1.firstChild.nodeValue);
+try{
+    console.log(t2.firstChild.nodeValue);   
+} catch(e){
+    console.log(e);
+}
+console.log(t2.nextSibling.firstChild.nodeValue);
+ 
+</script>
+```
+
+실행결과
+Hello world
+TypeError {stack: (...), message: "Cannot read property 'nodeValue' of null"}
+Hello world
+
+
+```html
+<ul>
+    <li id="target">html(firstChild가 가리킴)</li> 
+    <li>css</li>
+    <li>JavaScript</li>
+</ul>
+<script>
+    var t = document.getElementById('target').firstChild;
+    console.log(t.nodeValue);
+    console.log(t.data);
+</script>
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    #target{
+        font-size:77px;
+        font-family: georgia;
+        border-bottom:1px solid black;
+        padding-bottom:10px;
+    }
+    p{
+        margin:5px;
+    }
+    </style>
+</head>
+<body>
+<p id="target">Cording everybody!</p>
+<p> data : <input type="text" id="datasource" value="JavaScript" /></p>
+<p>   start :<input type="text" id="start" value="5" /></p>
+<p> end : <input type="text" id="end" value="5" /></p>
+<p><input type="button" value="appendData(data)" onclick="callAppendData()" />
+<input type="button" value="deleteData(start,end)" onclick="callDeleteData()" />
+<input type="button" value="insertData(start,data)" onclick="callInsertData()" />
+<input type="button" value="replaceData(start,end,data)" onclick="callReplaceData()" />
+<input type="button" value="substringData(start,end)" onclick="callSubstringData()" /></p>
+<script>
+    var target = document.getElementById('target').firstChild;
+    var data = document.getElementById('datasource');
+    var start = document.getElementById('start');
+    var end = document.getElementById('end');
+    function callAppendData(){
+        target.appendData(data.value);
+    }
+    function callDeleteData(){
+        target.deleteData(start.value, end.value);
+    }
+    function callInsertData(){
+        target.insertData(start.value, data.value); 
+    }
+    function callReplaceData(){
+        target.replaceData(start.value, end.value, data.value);
+    }
+    function callSubstringData(){
+        alert(target.substringData(start.value, end.value));
+    }
+</script>
+</body>
+</html>
+
+
+```
