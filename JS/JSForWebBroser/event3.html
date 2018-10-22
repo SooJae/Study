@@ -1,0 +1,11 @@
+<p id="result">
+
+
+</p>
+<input id="target" type="name" />
+<script>
+var t = document.getElementById('target');
+t.addEventListener('change', function(event){
+    document.getElementById('result').innerText=event.target.value;
+});
+</script>
