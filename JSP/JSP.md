@@ -41,3 +41,7 @@ DOM이건 BOM이건 JS이건 모든 객체가 WINDOW의 자식 객체들이다.
 
 우리가 alert이라고 적어주는 내장함수는 사실은 앞에 window가 붙은 alert이다. alert만 적어도 내부적으로 window.alert로 변환해준다. 우리가 적어주는 모든 메소드,변수는 window라는 객체의 메소드,변수다.
 window.a == a
+
+
+forward : 완전 넘김
+include : 갔다가 다시 옴
