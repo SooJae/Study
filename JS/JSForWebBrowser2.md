@@ -390,8 +390,10 @@ t.addEventListener('change', function(event){
 blur, focus
 focus는 엘리먼트에 포커스가 생겼을 때, blur은 포커스가 사라졌을 때 발생하는 이벤트다. 
 
-다음 태그를 제외한 모든 태그에서 발생한다. <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, <title>
-
+다음 태그를 제외한 모든 태그에서 발생한다. 
+```
+<base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, <title>
+```
 ```html
 <input id="target" type="name" />
 <script>

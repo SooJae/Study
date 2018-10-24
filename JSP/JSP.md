@@ -1,7 +1,7 @@
-서블릿이란? 
-http://mangkyu.tistory.com/14
 
-스크립트릿 코드 : <% 자바코드 %> 사이에 실행할 자바코드가 위치
+[서블릿이란?](http://mangkyu.tistory.com/14)
+
+스크립트릿 코드 : `<% 자바코드 %>` 사이에 실행할 자바코드가 위치
 표현식 : <%= sum %>  어떤값을 출력 결과에 포함시키고자 할때 사용
 선언부 : <%! %> JSP 페이지의 스크립트릿이나 표현식에서 사용할 수 있는 함수를 작성할 때 사용.
 
@@ -38,12 +38,116 @@ while(enumeration.hasMoreElements()){
 }
 ```
 
+
+값 set 비교
+
+Cookie
+
+```jsp
+Cookie cookie = new Cookie("id", id);		
+			//앞의 요소는 getName()으로 가져올수 있고 뒤의 인자는 getValue()로 가져올 수 있다.		
+cookie.setMaxAge(60);	//1분				
+response.addCookie(cookie);
+```
+Session
+```java
+session.setAttribute("id", id);	
+```
+
+값 get 비교   
+Cookie
+```java
+<%
+	Cookie[] cookies = request.getCookies();
+	
+	for(int i=0; i<cookies.length; i++) {
+		String id = cookies[i].getValue();
+		if(id.equals("abcde")) out.println(id + "님 안녕하세요." +"<br />");
+	}
+%>
+```
+	
+Session
+```java
+<%
+	
+	Enumeration enumeration = session.getAttributeNames();
+	while(enumeration.hasMoreElements()){
+		String sName = enumeration.nextElement().toString();
+		String sValue = (String)session.getAttribute(sName);
+		
+		if(sValue.equals("abcde")) out.println(sValue + "님 안녕하세요." + "<br />");
+	}
+%>
+```
+
+
+특정한 값 삭제 비교  
+Cookie
+```java
+
+<%
+	Cookie[] cookies = request.getCookies();
+	for(int i=0; i<cookies.length; i++) {
+		String str = cookies[i].getName();
+		if(str.equals("cookieN")) {//해당하는 값 삭제
+			out.println("name : " + cookies[i].getName() + "<br />");
+			cookies[i].setMaxAge(0);
+			response.addCookie(cookies[i]);
+		}
+	}
+%>
+	
+```
+Session
+```java
 session.removeAttribute("mySessionName");
+```
 
 
+로그아웃 비교
+```java
+<%
+	Cookie[] cookies = request.getCookies();
+	
+	if(cookies != null) {
+		for(int i=0; i<cookies.length; i++) {
+			if(cookies[i].getValue().equals("abcde")){
+				cookies[i].setMaxAge(0);
+				response.addCookie(cookies[i]);
+			}
+		}
+	}
+	//response.sendRedirect("login.html");
+	response.sendRedirect("cookietest.jsp");
+%>
+```
+
+```java
+<%
+	Enumeration enumeration = session.getAttributeNames();
+
+	while(enumeration.hasMoreElements()) {
+		String sName = enumeration.nextElement().toString();
+		String sValue = (String)session.getAttribute(sName);
+		
+		if(sValue.equals("abcde")) session.removeAttribute(sName);
+	}
+		
+%>
+
+```
+모든 id의 세션을 로그아웃 시키는 메소드
 session.invalidate();
 
 
+예외처리
+```jsp
+<%@ page errorPage = "errorPage.jsp"%> 
+// 오류 발생시 errorPage.jsp로 감
+<%@ page isErrorPage="true"%>
+<% response.setStatus(200); %> // 정상적으로 완료된 페이지
+```
 외우기!
 
 DTO : 데이터베이스에서 가져온 DATA를 객체 데이터로 바꿔주는 클래스 ( DATABASE transfer Object)
@@ -57,6 +161,13 @@ window.a == a
 
 forward : 완전 넘김
 include : 갔다가 다시 옴
+
+
+Build의 3요소
+Compile : 소스를 바이너리 코드로 바꿔줌.
+package : 그것을 라이브러리로 묶어줌.
+deploy : 그것을 서버나 서비스되는 위치로 운반해줌.
+
 
 
 https://www.youtube.com/watch?v=5dN1WTj222Y
