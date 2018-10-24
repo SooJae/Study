@@ -144,14 +144,38 @@ session.invalidate();
 
 
 예외처리
-```html
+```jsp
 <%@ page errorPage = "errorPage.jsp"%> 
 // 오류 발생시 errorPage.jsp로 감
+//에러페이지에는 밑과같이 적어줘야 한다.
 <%@ page isErrorPage="true"%>
 <% response.setStatus(200); %> // 정상적으로 완료된 페이지
 ```
-외우기!
+web.xml 파일을 이용한 예외처리
+```xml
+<error-page>
+	<error-code>404</error-code>
+	<location>/error404.jsp</location>
+</error-page>
 
+<error-page>
+	<error-code>500</error-code>
+	<location>/error500.jsp</location>
+</error-page>
+```
+xml또한 에러페이지에는 밑과같이 적어줘야한다.
+```jsp
+<%@ page isErrorPage="true" %>
+<% response.setStatus(200); %>
+```
+
+빈이란?
+반복적인 작업을 효율적으로 하기위해 빈을 사용한다.
+빈이란 JAVA언어의 데이터(속성)와 기능(메소드)으로 이루어진 클래스이다.
+jsp페이지를 만들고, 액션태그를 이용하여 빈을 사용합니다. 그리고 빈의 내부 데이터를 처리합니다.
+
+
+외우기!
 DTO : 데이터베이스에서 가져온 DATA를 객체 데이터로 바꿔주는 클래스 ( DATABASE transfer Object)
 DAO : 데이터를 직접 접속을 해서 데이터를 관리, 수정하는 클래스
 
