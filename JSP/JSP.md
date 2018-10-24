@@ -5,6 +5,8 @@
 표현식 : <%= sum %>  어떤값을 출력 결과에 포함시키고자 할때 사용
 선언부 : <%! %> JSP 페이지의 스크립트릿이나 표현식에서 사용할 수 있는 함수를 작성할 때 사용.
 
+forward : 완전 넘김
+include : 갔다가 다시 옴
 
 http 특징 : 클라이언트에서 서버로 request을하면 서버측에서는 알맞는 로직을 수행한후 그 데이터를 웹브라우저에 response합니다. 그리고 서버는 클라이언트와의 연결을 종료합니다. 즉 값들을 일일이 기억하지 않습니다. 이것을 무상태 서버 라고 합니다.
 
@@ -16,9 +18,9 @@ Cookie
 ```java
 Cookie cookie = new Cookie("변수명","값");
 cookie.setMaxAge(60); 
-<!-- 60초라는 뜻 -->
+//  60초라는 뜻 
 response.addCookie(cookie);
-<!-- 주는것이므로 response이다. -->
+//  주는것이므로 response이다.
 ```
 
 
@@ -50,13 +52,13 @@ cookie.setMaxAge(60);	//1분
 response.addCookie(cookie);
 ```
 Session
-```java
+```jsp
 session.setAttribute("id", id);	
 ```
 
 값 get 비교   
 Cookie
-```java
+```jsp
 <%
 	Cookie[] cookies = request.getCookies();
 	
@@ -142,7 +144,7 @@ session.invalidate();
 
 
 예외처리
-```jsp
+```html
 <%@ page errorPage = "errorPage.jsp"%> 
 // 오류 발생시 errorPage.jsp로 감
 <%@ page isErrorPage="true"%>
@@ -159,8 +161,7 @@ DOM이건 BOM이건 JS이건 모든 객체가 WINDOW의 자식 객체들이다.
 window.a == a
 
 
-forward : 완전 넘김
-include : 갔다가 다시 옴
+
 
 
 Build의 3요소
