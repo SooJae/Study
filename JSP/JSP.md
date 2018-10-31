@@ -436,6 +436,294 @@ window.a == a
 
 
 
+joinOk.jsp
+```js
+<jsp:setProperty name="dto" property="*" />
+```
+property를 *로 둬서 인자가 자동으로 세팅되게 하려면
+
+MemberDto.java
+```java
+public class MemberDto {
+
+	private String id;
+	private String pw;
+	private String name;
+	private String eMail;
+	private Timestamp rDate;
+	private String address;
+...}
+```
+MemberDto.java에서의 변수값과
+
+join.jsp
+```html
+<form action="joinOk.jsp" method="post" name="reg_frm">
+		아이디 : <input type="text" name="id" size="20"><br />
+		비밀번호 : <input type="password" name="pw" size="20"><br />
+		비밀번호 확인 : <input type="password" name="pw_check" size="20"><br />
+		이름 : <input type="text" name="name" size="20"><br />
+		메일 : <input type="text" name="eMail" size="20"><br />
+		주소 : <input type="text" name="address" size="50"><br />
+		<input type="button" value="회원가입" onclick="infoConfirm()">
+```
+join.jsp의 name값이 같아야 한다.
+
+그렇지 않을경우 joinOk.jsp에서 일일이 하나씩 집어 넣어야한다.
+
+
+
+
+
+싱글톤패턴
+
+```js
+public class MemberDao {
+
+	public static final int MEMBER_NONEXISTENT  = 0;
+	public static final int MEMBER_EXISTENT = 1;
+	public static final int MEMBER_JOIN_FAIL = 0;
+	public static final int MEMBER_JOIN_SUCCESS = 1;
+	public static final int MEMBER_LOGIN_PW_NO_GOOD = 0;
+	public static final int MEMBER_LOGIN_SUCCESS = 1;
+	public static final int MEMBER_LOGIN_IS_NOT = -1;
+	
+	private static MemberDao instance = new MemberDao();
+	
+	private MemberDao() {
+	}
+
+	public static MemberDao getInstance(){
+		return instance;
+	}
+```
+
+자세히보면 MemberDao.java의 생성자가 싱글톤인 것을 알수 있다.
+
+싱글톤 패턴 특징 : 클래스로부터 바로 객체를 get할 수 있다.
+이 객체는 유일하게 하나만 만들어짐. 그래서 모든 곳에서 공유하면서 사용할 수 있다.
+
+
+파일 업로드 라이브러리 설치
+
+http://www.servlets.com 접속후 com.oreilly.servlet 클릭
+다운받은 후에 cos.jar라이브러리를 프로젝트 안의 lib폴더에 삽입
+
+fileForm.jsp
+```html 
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="fileFormOk.jsp" method="post" enctype="multipart/form-data">
+		파일 : <input type="file" name="file"><br />
+		<input type="submit" value="File Upload">
+	</form>
+
+</body>
+</html>
+```
+
+fileFormOk.jsp
+
+```html
+<%@page import="java.util.Enumeration"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%
+	String path = request.getRealPath("fileFolder");
+
+	int size = 1024 * 1024 * 10; //10M
+	String file = ""; //똑같은 이름의 파일을 올릴때 변경되는 파일 이름
+	String oriFile = ""; // 똑같은 이름의 파일을 올릴때 원래의 파일이름
+	
+	try{
+		MultipartRequest multi = new MultipartRequest(request, path, size, "EUC-KR", new DefaultFileRenamePolicy());
+		
+		Enumeration files = multi.getFileNames();
+		String str = (String)files.nextElement();
+		
+		file = multi.getFilesystemName(str);
+		oriFile = multi.getOriginalFileName(str);
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+ 	file upload success!
+</body>
+</html>
+```
+
+
+# EL이란?
+Expression Language로 표현식 또는 액션 태그를 대신해서 값을 표현하는 언어이다.
+
+<%= value %> => ${value}
+  표현식			EL
+
+모든 연산자를 이용 할수 있다.
+<%= (1>2) ? 1 : 2 %>  => { (1>2) ? 1 : 2 }
+
+액션태그로 사용되는 EL
+
+<jsp:getProperty name="member" property="name"/> => ${member.name}
+
+내장객체로 사용
+pageScope, requestScope, sessionScope, applicationScope
+
+param: 요청 파라미터를 참조하는 객체
+paramValue: 요청 파라미터(배열)을 참조하는 객체
+initParam : 초기화 파라미터를 참조하는 객체
+cookie : cookie객체를 참조하는 객체
+
+contextParam 전 서블릿에서 사용할 수 있는 param	
+
+
+web.xml
+```xml
+<context-param>
+  	<param-name>id</param-name>
+  	<param-value>abcd</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>pw</param-name>
+  	<param-value>adsw</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>path</param-name>
+  	<param-value>C:\javalec\workspace</param-value>
+  </context-param>
+```
+
+원래 초기화 파라미터를 불러오려면
+String id = getServletContext().getParameter("id");
+String pw = getServletContext().getParameter("pw");
+String path = getServletContext().getParameter("path");
+<%=id >
+<%=pw >
+<%=path >
+
+=>EL 표기법
+${ initParam.id }
+${ initParam.pw } 
+${ initParam.path } 
+
+
+JSTL(JSP standard Tag Library)
+Sevlet은 순수 자바코드로 이루어져있어 가독성이 좋지만
+JSP의 경우 HTML 태그와 같이 사용되어 전체적인 코드의 가독성이 떨어진다.
+그래서 JSTL로 이러한 단점을 보안한다.
+JSTL의 경우 우리가 사용하는 Tomcat컨테이너에 포함되어 있지 않으므로 설치를 하고 사용 합니다.
+
+jstl에서는 다섯가지의 라이브러리를 제공
+1. Core
+core 라이브러리는 기본적인 라이브러리로 출력, 제어문, 반복문 같은 기능이 있다.
+```
+<%@ taglib uri =http://java.sun.com/jsp/jstl/core prefix="c"%>
+```
+```jstl
+출력태그
+<c:out value="출력값", default="기본값" escapeXml="true or false">
+변수설정 태그
+<c:set var="변수명" value="설정값" target="객체" property="값" scope="범위">
+변수를 제거하는 태그
+<c:remove var="변수명" scope="범위">
+예외처리 태그
+<c:catch var="변수명">
+제어문 태그 (if)
+<c:if test="조건" var="조건처리변수명" scope="범위">
+제어문 태그2 (switch)
+<c:choose>
+<c:when test="조건"> 처리내용 </c:when>
+<c:otherwise> 처리내용 </c:otherwise>
+</c:choose>
+반복문 태그
+<c:forEach items="객체명" begin="시작 인덱스" end="끝 인덱스" step="증감식" var="변수명" varStatus="상태변수">
+페이지 이동 태그
+<c:redirect url="url">
+파라미터 전달 태그
+<c:param name="파라미터명" value="값">
+```
+jstlcore.jsp
+```jsp
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<c:set var="vatName" value="varValue"/>
+	vatName : <c:out value="${vatName}"/>
+	<br />
+	<c:remove var="vatName"/>
+	vatName : <c:out value="${vatName}"/></h3>
+	
+	<hr />
+	
+	<c:catch var="error">
+		<%=2/0%>
+	</c:catch>
+	<br />
+	<c:out value="${error}"/>
+	
+	<hr />
+
+	<c:if test="${1+2==3}">
+		1 + 2 = 3
+	</c:if>
+	
+	<c:if test="${1+2!=3}">
+		1 + 2 != 3
+	</c:if>
+	
+	<hr />
+
+	<c:forEach var="fEach" begin="0" end="30" step="3">
+		${fEach}
+	</c:forEach>
+
+</body>
+</html>
+```
+FrontController 패턴, Command 패턴
+
+# url-pattern
+## 디렉터리 패턴
+디렉터리 형태로 서버의 해당 컴포넌트를 찾아서 실행하는 구조
+http://localhost:8181/jsp_21_1_ex1/Hello	/Hello 서블릿
+http://localhost:8181/jsp_21_1_ex2/World	/World 서블릿
+
+## 확장자패턴
+확장자 형태로 서버의 해당 컴포넌트를 찾아서 실행하는 구조
+http://localhost:8181/jsp_21_1_ex1/hello*do
+http://localhost:8181/jsp_21_1_ex2/world*do
+*.do 서블릿
+
+
+
+
+
 
 Build의 3요소
 Compile : 소스를 바이너리 코드로 바꿔줌.
@@ -444,6 +732,12 @@ deploy : 그것을 서버나 서비스되는 위치로 운반해줌.
 
 
 
+
 https://www.youtube.com/watch?v=5dN1WTj222Y
 
-https://www.youtube.com/watch?v=p7-U1_E_j3w
+https://www.youtube.com/watch?v=p7-U1_E_j3w  
+
+
+cos.jar
+jstl.jar
+standard.jar 라이브러리 설치하기
