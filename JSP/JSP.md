@@ -1,18 +1,180 @@
 
 [서블릿이란?](http://mangkyu.tistory.com/14)
 
+# URL 맵핑
+1. 어노테이션을 이용한 서블릿 맵핑
+@WebServlet("/Hworld")
+public class HelloWorld extends HttpServlet {
+	...
+}
+...
+
+# web.xml에 서블릿 맵핑
+```xml
+<servlet>
+	<servlet-name>helloworld</servlet-name> //임의의 이름을 만듬
+	<servlet-class>com.javalec.ex.HelloWorld</servlet-class> //맵핑할 클래스 파일명을 패키지명을 포함하여 입력
+</servlet>
+<servlet-mapping>
+	<servlet-name>helloworld</servlet-name>
+	<url-pattern>/hw</url-pattern> //servlet-class의 클래스를 매핑할 임의의 이름을 입력. "/"로 시작해야 한다.
+</servlet-mapping>
+```
+Servlet 작동순서
+웹브라우저 - > 웹서버 -> 웹어플리케이션 서버 ->Servlet 컨테이너 (스레드생성, 서블릿 객체생성)
+
+Servlet 라이프사이클
+Servlet 객체생성(최초한번) ->(선처리:@PostConstruct)-> Init()호출(최초한번) ->service(), doGet(), doPost()호출(요청시 매번) -> destory() 호출(마지막한번) ->(후처리:@PreDestroy) (자원해제: servlet수정, 서버 재가동등)
+
+
+
+
+
+
 스크립트릿 코드 : `<% 자바코드 %>` 사이에 실행할 자바코드가 위치
 표현식 : <%= sum %>  어떤값을 출력 결과에 포함시키고자 할때 사용
 선언부 : <%! %> JSP 페이지의 스크립트릿이나 표현식에서 사용할 수 있는 함수를 작성할 때 사용.
 
-forward : 완전 넘김
+
+# 서블릿 초기화 파라미터
+특정 servlet이 생성 될 때 초기에 필요한 데이터들이 있다. 예를들어 특정 경로 및 아이디 정보등.
+이러한 데이터들을 초기화 파라미터라고 하며, web.xml에 기술하고 servlet파일에서는 ServletConfig 클래스를 이용해서 접근 한다.
+또한 초기화 파라미터를 web.xml이 아닌 Servlet파일에 직접 기술하는 방법도 있다.
+
+web.xml
+
+```xml
+<init-param>
+	<param-name>id</param-name>
+	<param-value>abcdef</param-value>
+</init-param>
+<init-param>
+	<param-name>pw</param-name>
+	<param-value>a123def</param-value>
+</init-param>
+```
+서블릿 초기화 파라미터 기술
+@WebServlet(urlPatterns={"/ServletInitParam"}, initParams={@WebInitParam(name="id", value="abcdef")})
+
+
+ServletConfig 메소드를 이용해서 데이터 불러오기
+String id=getInitParameter("id");
+String pw=getInitParameter("pw");
+String path=getInitParameter("path");
+
+데이터공유: ServletContext
+여러 서블릿에서 특정 데이터를 공유할 경우 context 파라미터를 이용한다.
+
+web.xml
+```xml
+<context-param>
+  	<param-name>id</param-name>
+  	<param-value>abcd</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>pw</param-name>
+  	<param-value>adsw</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>path</param-name>
+  	<param-value>C:\javalec\workspace</param-value>
+  </context-param>
+```
+String id=getServletContext().getInitParameter("id");
+String pw=getServletContext().getInitParameter("pw");
+String path=getServletContext().getInitParameter("path");
+
+
+웹어플리케이션 감시:
+웹 어플리케이션의 생명주기를 감시하는 리스너가 있다.
+ServletContextListener이다.
+
+리스너 클래스 제작
+```java
+public class ContextListenerEx implements ServletContextListener{
+public void contextDestoryed(ServletContextEvent arg0){
+	System.out.println("contextDestroyed");
+}
+public void contextInitialized(ServletContextEvent arg0){
+	System.out.println("contextInitialized");
+}
+
+}
+```
+web.xml 파일에 리스너 클래스 기술
+```xml
+<listener>
+	<listener-class>com.javalec.ex.ContextListenerEx</listener-class>
+</listener>
+
+리스너 클래스에 기술(@WebListener)
+리스너 클래스 제작->
+
+@WebListener 추가
+```java
+@WebListener
+public class ContextListenerEx implements ServletContextListner{}
+```
+
+
+JSP 동작원리
+클라이언트가 웹브라우저로 helloWorld.jsp를 요청하게되면 JSP 컨테이너가 JSP 파일을 Servlet파일(.java)로 변환한다.
+그리고 Servlet파일(.java)은 컴파일 된 후 클래스 파일 (.class)로 변환되고, 요청한 클라이언트한테 html파일 형태로 응답합니다.
+웹브라우저 요청 (http://...)-> Jsp >> Servlet(helloWorld.jsp >> helloWorld_jsp.java) -> Servlet>> class(helloWorld_jsp.java>>helloWorld_jsp.class) -> 웹브라우저 응답(HTML 형태로 응답)
+
+
+JSP 내부 객체
+개발자가 객체를 생성하지 않고 바로 사용할 수 있는 객체가 내부객체이다. JSP에서 제공되는 내부 객체는 JSP 컨테이너에 의해 Servlet으로 변화될 때 자동으로 객체가 생성 된다.
+
+내부 객체 종류
+입출력 객체 : request, response, out
+서블릿 객체 : page, config
+세션 객체 : session
+예외 객체 : exception
+
+
+지시자
+page : 해당 페이지의 전체적인 속성 지정
+include : 별도의 페이지를 현재 페이지에 삽입
+taglib : 태그라이브러리의 태그 사용
+
+page 지시자
+페이지의 속성을 지정할 때 사용 합니다. 주로 사용되는 **언어 지정** 및 **import** 문을 많이 사용
+
+include 지시자
+현재 페이지내의 다른 페이지를 삽입할 때 사용된다. file속성을 이용
+```jsp
+<%@ include file ="include01.jsp"%>
+```
+
+```xml
+<jsp:forward page="forward_param.jsp">
+	<jsp:param name="id" value="abcdef" />
+	<jsp:param name="pw" value="1234" />
+</jsp:forward>
+```
+
 include : 갔다가 다시 옴
+forward : 완전 넘김
+
+taglib 지시자. 
+JSTL에서 사용한다.
+
 
 http 특징 : 클라이언트에서 서버로 request을하면 서버측에서는 알맞는 로직을 수행한후 그 데이터를 웹브라우저에 response합니다. 그리고 서버는 클라이언트와의 연결을 종료합니다. 즉 값들을 일일이 기억하지 않습니다. 이것을 무상태 서버 라고 합니다.
 
  1. 4kb로 용량이 제한적이며, 
  2. 300개까지 데이터정보를 가질 수 있습니다.
  3. 웹브라우저를 닫아도 정해진 시간만큼 쿠키가 살아있다.
+
+
+쿠키
+쿠키는 서버에서 생성되어 클라이언트 측에 전송되어 저장된다.
+쿠키생성 -> 속성 설정 -> respose 객체에 쿠키 탑재
+
+세션
+클라이언트 요청 -> 세션 자동생성 ->Session 속성 설정
+
 
 Cookie
 ```java
@@ -22,7 +184,6 @@ cookie.setMaxAge(60);
 response.addCookie(cookie);
 //  주는것이므로 response이다.
 ```
-
 
 
 Session
@@ -231,7 +392,7 @@ executeUpdate(query);
 몇개의 값이 수정됐는지 리턴한다.
 
 
-Tomcat은 사실 서버가 아니라 컨테이너이다.
+Tomcat은 사실 **서버**가 아니라 **컨테이너**이다.
 
 # 커넥션 풀
 
@@ -718,7 +879,336 @@ http://localhost:8181/jsp_21_1_ex2/World	/World 서블릿
 확장자 형태로 서버의 해당 컴포넌트를 찾아서 실행하는 구조
 http://localhost:8181/jsp_21_1_ex1/hello*do
 http://localhost:8181/jsp_21_1_ex2/world*do
-*.do 서블릿
+=> *.do 서블릿
+확장자가 do로 같아서 동일한(하나의) do로 맵핑되어 있는 서블릿으로 간다.
+서버에서 hello로 요청했는지 world로 요청했는지 서블릿에서 구분을 한다.
+
+디렉토리는 각 디렉토리 맵핑명을 가지고 별개의 서블릿을 찾아간다.
+확장자 패턴은 동일한 서블릿을 찾아간 뒤 그 안에서 구분을 한다(많이 사용한다.)
+
+## FrontController 패턴
+클라이언트의 다양한 요청을 한곳으로 집중 시켜 개발 빛 유지보수에 효율성을 극대화 한다.
+
+frontController.jsp
+'''jsp
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<a href="insert.do">insert</a>
+	<hr />
+	<a href="http://localhost:8181<%=request.getContextPath()%>/update.do">update</a>
+	<hr />
+	<a href="http://localhost:8181/jsp_25_2_ex1_frontex/select.do">select</a>
+	<hr />
+	<a href="<%=request.getContextPath()%>/delete.do">delete</a>
+
+</body>
+</html>
+```
+
+FrontCon.java
+```java
+package com.javalec.ex;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class FrontCon
+ */
+@WebServlet("*.do")
+public class FrontCon extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FrontCon() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("doGet");
+		actionDo(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("doPost");
+		actionDo(request, response);
+	}
+	
+	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("actionDo");
+		
+		String uri = request.getRequestURI();
+		System.out.println("uri : " + uri);
+		String conPath = request.getContextPath();
+		System.out.println("conPath : " + conPath);
+		String command = uri.substring(conPath.length());
+		System.out.println("command : " + command);
+
+		if(command.equals("/insert.do")){
+			System.out.println("insert");
+			System.out.println("----------------");
+		}else if(command.equals("/update.do")){
+			System.out.println("update");
+			System.out.println("----------------");
+		}else if(command.equals("/select.do")){
+			System.out.println("select");
+			System.out.println("----------------");
+		}else if(command.equals("/delete.do")){
+			System.out.println("delete");
+			System.out.println("----------------");
+		}
+	}
+
+}
+
+```
+
+
+request.getRequestURI()는 프로젝트와 파일 경로까지 얻어온다.
+
+ex) http://localhost:9090/lsj/insert.do 경우
+
+→ /lsj/insert.do
+
+request.getContextPath()는 프로젝트 path만 얻어온다.
+
+ex) http://localhost:9090/lsj/insert.do 경우
+
+→ /lsj
+
+콤보
+```java
+String uri = request.getRequestURI(); // /lsj/insert.do
+String conPath = request.getContextPath(); // /lsj
+String command = uri.substring(conPath.length());
+```
+이렇게 하면 /insert.do만 남는다.
+
+
+## Command 패턴
+클라이언트로부터 받은 요청들에 대해서, 서블릿이 작업을 직접 처리하지 않고, 해당 클래스가 처리하도록 한다.
+
+요청 1,2,3,... => 모든 요청을 직접 처리하는 서블릿 -> DAO
+
+요청 1,2,3,... => 모든 요청을 직접 처리하지 않는 서블릿 -> interface(요청1,2,3 처리클래스) => DAO
+
+
+
+# 포워딩(Forwarding)
+RequestDispatcher 클래스
+서블릿 또는 JSP에서 요청을 받은 후 다른 콤포넌트로 요청을 위임할 수 있다. 이러한 위임 방법에는 2개의 클래스를 이용한다. 하나는 RequestDispatcher 클래스고, 또 하나는 HttpServletResponse클래스이다.
+## RequestDispatcher 클래스
+클라이언트(웹 브라우저) ->요청(doGet이나 doPost등) -> 요청받은 컴포넌트 -> 요청위임 -> 위임받은 컴포넌트
+
+RequestObj.java
+```java
+private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("actionDo");
+		
+		request.setAttribute("id", "abcde");
+		request.setAttribute("pw", "12345");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/dispacherJsp.jsp");
+		dispatcher.forward(request, response);
+		
+	}
+```
+jsp에서또한 dispatcher를 사용할 수 있다.
+
+## HttpServletResponse 클래스
+RequestDispatcher 클래스와 동일하게 요청을 위임하는 클래스이다.
+차이점은 요청 받은 요청 객체를 위임 받은 컴포넌트에 전달하는 것이 아닌, 새로운 요청객체를 생성 한다.
+  요청받은 컴포넌트 (요청위임)<=> 요청,응답<=> **클라이언트** <=>요청, 응답 <=> 위임받은 컴포넌트
+
+요청은 다른 Request 객체이다. 
+
+
+MVC패턴
+MVC란 Model, View, Controller를 뜻하는 용어로 개발 형태의 일종이다.
+Model은 데이터베이스와의 관계를 담당한다. 클라이언트의 요청에서 필요한 자료를 데이터베이스로부터 추출하거나, 수정하여 Controller로 전달한다.
+View는 사용자에게 보여지는 UI화면이다. 주로 .jsp파일로 작성하며, Controller에서 어떤 View 컴포넌트를 보여줄지 결정한다.
+Controller는 클라이언트의 요청을 받고, 적절한 Model에 지시를 내리며, Model에서 전달된 데이터를 적절한 View에 전달한다.
+Model1
+MVC에서 View와 Controller가 같이 있는 형태.
+
+클라이언트 <=> JSP(View+Controller)<=>DAO<=>DB
+
+Model2
+MVC에서 Model, View그리고 Controller가 모두 모듈화(부품화) 되어 있는 형태이다.
+
+클라이언트 -> Controller(Servlet) <=>Model(Command, DAO)<=>DB
+
+
+MVC패턴으로 게시판 만들기
+```db
+create table mvc_board(
+    bId Number(4) PRIMARY KEY,
+    bName VARCHAR2(20),
+    bTitle VARCHAR2(100),
+    bContent VARCHAR2(300),
+    bDate date default sysdate,
+    bhit number(4) default 0,
+   
+   //답변글에 대한 로직처리
+    bGroup Number(4),
+    bstep Number(4),
+    bIndent Number(4)
+    );
+```
+
+1씩 증가하게 하기위한 시퀀스 만들기
+```
+	create sequence mvc_board_seq;
+```
+
+테스트를 위한 Dummy Data 입력
+insert into mvc_board (bId, bName, bTitle, bContent, bhit, bGroup, bstep, bIndent) values(mvc_board_seq.nextval, 'abcd', 'is title', 'is content', 0, mvc_board_seq.currval, 0, 0);
+
+
+
+BFrontController.java
+
+```java
+package com.javalec.ex.frontcontroller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.javalec.ex.command.BCommand;
+import com.javalec.ex.command.BContentCommand;
+import com.javalec.ex.command.BDeleteCommand;
+import com.javalec.ex.command.BListCommand;
+import com.javalec.ex.command.BModifyCommand;
+import com.javalec.ex.command.BReplyCommand;
+import com.javalec.ex.command.BReplyViewCommand;
+import com.javalec.ex.command.BWriteCommand;
+
+/**
+ * Servlet implementation class BoardFrontController
+ */
+@WebServlet("*.do")
+public class BFrontController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public BFrontController() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("doGet");
+		actionDo(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("doPost");
+		actionDo(request, response);
+	}
+	
+	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("actionDo");
+		
+		request.setCharacterEncoding("EUC-KR");
+		
+		String viewPage = null;
+		BCommand command = null;
+		
+		String uri = request.getRequestURI();
+		String conPath = request.getContextPath();
+		String com = uri.substring(conPath.length());
+		
+		if(com.equals("/write_view.do")) {
+			viewPage = "write_view.jsp";
+		} else if(com.equals("/write.do")) {
+			command = new BWriteCommand();
+			command.execute(request, response);
+			viewPage = "list.do";
+		} else if(com.equals("/list.do")) {
+			command = new BListCommand();
+			command.execute(request, response);
+			viewPage = "list.jsp";
+		} else if(com.equals("/content_view.do")){
+			command = new BContentCommand();
+			command.execute(request, response);
+			viewPage = "content_view.jsp";
+		} else if(com.equals("/modify.do")) {
+			command = new BModifyCommand();
+			command.execute(request, response);
+			viewPage = "list.do";
+		} else if(com.equals("/delete.do")) {
+			command = new BDeleteCommand();
+			command.execute(request, response);
+			viewPage = "list.do";
+		} else if(com.equals("/reply_view.do")) {
+			command = new BReplyViewCommand();
+			command.execute(request, response);
+			viewPage = "reply_view.jsp";
+		} else if(com.equals("/reply.do")) {
+			command = new BReplyCommand();
+			command.execute(request, response);
+			viewPage = "list.do";
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage); //viewPage에 해당하는 페이지로 포워딩한다.
+		dispatcher.forward(request, response);
+		
+	}
+
+}
+
+```
+
+
+게시판 만들기
+
+
+
+
+
 
 
 
@@ -730,7 +1220,12 @@ Compile : 소스를 바이너리 코드로 바꿔줌.
 package : 그것을 라이브러리로 묶어줌.
 deploy : 그것을 서버나 서비스되는 위치로 운반해줌.
 
+Maven
+1. 코딩 다음의 모든 과정(빌드) 자동화.
 
+2. jar 파일 관리
+
+3. 다양한 플러그인
 
 
 https://www.youtube.com/watch?v=5dN1WTj222Y
@@ -741,3 +1236,34 @@ https://www.youtube.com/watch?v=p7-U1_E_j3w
 cos.jar
 jstl.jar
 standard.jar 라이브러리 설치하기
+
+
+.col-xs-$   Extra Small     Phones Less than 768px 
+.col-sm-$   Small Devices   Tablets 768px and Up 
+.col-md-$   Medium Devices  Desktops 992px and Up 
+.col-lg-$   Large Devices   Large Desktops 1200px and Up 
+
+
+```database
+CREATE TABLE USER (
+    userID VARCHAR(20),
+    userPassword VARCHAR(20),
+    userName VARCHAR(20),
+    userGender VARCHAR(20),
+    userEmail VARCHAR(50),
+    PRIMARY KEY (userID)
+);
+```
+
+
+```db
+CREATE TABLE BBS(
+    -> bbsID INT,
+    -> bbsTitle VARCHAR(50),
+    -> userID VARCHAR(20),
+    -> bbsDate DATETIME,
+    -> bbsContent VARCHAR(2048),
+    -> bbsAvailable INT, // 삭제된 게시물도 DB에는 저장되어야 하므로 bbsAvailable로 게시물의 상태를 알려준다.
+    -> PRIMARY KEY(bbsID)
+    -> );
+```
