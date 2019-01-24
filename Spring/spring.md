@@ -756,3 +756,29 @@ DAO, SERVICE의 인터페이스를 구현하는 클래스에 @Component를 기�
 #JUnit
 코드를 테스트 하려면 (DB에 접근등) 웹을 만들어서 테스트 해야한다.
 하지만 JUnit을 사용하면 그냥 할 수 있다. 
+
+
+
+
+
+msg값을 넘기는 2가지 방법
+```java
+public String registerPOST(BoardVO board, Model model, RedirectAttributes ra) throws Exception{
+...
+
+ra.addFlashAttribute("msg","SUCCESS"); // url에 표시되지 않음
+}
+```
+
+```java
+public String registerPOST(BoardVO board, Model model, HTTPservletRequest re, HttpServletResponse rs){
+...
+model.addAttribute("msg","SUCCESS"); //url에 ?msg=succes 표시됨
+}
+```
+```java
+model.addAttribute("list",service.listAll()); // list라는 파라미터 값에 service.listAll값을 담아 넘겨준다.
+
+model.addAttribute(service.read(bno)); 
+//앞에 ,를 안적으면 boardMapper.xml에  ResultType이 BoardVO이므로 boardVO로 넘긴다.
+```
