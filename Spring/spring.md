@@ -782,3 +782,168 @@ model.addAttribute("list",service.listAll()); // list라는 파라미터 값에 
 model.addAttribute(service.read(bno)); 
 //앞에 ,를 안적으면 boardMapper.xml에  ResultType이 BoardVO이므로 boardVO로 넘긴다.
 ```
+
+IOC 컨테이너(ApplicationContext)
+IOC 컨테이너에서 OwnerController의 객체를 만들어 준다. Repository도 만들어 준다.
+IOC 컨테이너는 BEAN들(컨테이너 내부에 만든 객체)의 의존성을 관리해준다.
+applicationContext.getBean()
+
+#빈
+스프링 IOC 객체가 관리하는 객체
+
+등록하는 방법
+1. Component Scanning을 통해  @Component가 붙어 있는 것들을 빈으로 등록한다.(@Repository, @Service, @Controller)
+2. 일일히 XML이나 자바 설정 파일에 등록 (@Bean, <bean>)
+   
+
+@Autowired로 ApplicationContext 안의 빈을 꺼내 쓸 수 있다.
+
+Spring 5 기준으로
+생성자가 오로지 하나만 있고, 매개변수 타입이 Bean으로 등록되어 있다면, Autowired가 없더라도 자동적으로 주입을 해준다.
+
+생성자를 이용해서 주입하면 Autowired가 필요 없다.
+1) 생성자를 통한 의존성 주입
+2) setter가 있다면 setter에 어노테이션 사용
+3) setter가 없다면 굳이 setter에 어노테이션을 사용하지 말고 필드에 Autowired를 하자.(setter가 필요없음에도 setter를 만드는건 setter 때문에 의존성이 바뀔 위험이 있다.)
+
+AOP : 흩어진 코드를 한곳으로 모아라
+class A{
+	method a() {
+		AAAA
+		오늘은 1월 28일
+		BBBB
+	}
+	method b(){
+		AAAA
+		저는 운동을 합니다.
+		BBBB
+	}
+}
+class B {
+	method c(){
+		AAAA
+		저녁에는 라면먹어야지
+		BBBB
+	}
+}
+
+AOP를 하면 
+
+class A{
+	method a() {
+		오늘은 1월 28일
+	}
+	method b(){
+		저는 운동을 합니다.
+	}
+}
+class B {
+	method c(){
+		저녁에는 라면먹어야지
+	}
+}
+
+class AAAABBBB{
+	method aaaabbb(JoinPoint point){
+		AAAA
+		point.execute()
+		BBBB
+	}
+}
+
+이 기법을 쓰는 방법
+.class 파일을 조작하는 방법 : 이미 컴파일된 코드안에 끼워넣는다. 
+프록시 패턴을 사용하는 방법: A클래스라는 객체를 상속받아 class AProxy 클래스를 내부적으로 만들고 호출한다.(Spring이 쓰는 기법)
+
+실행해보면 
+```java
+Class AProxy extends A{
+	println("AAAA");
+	println("오늘은 1월 28일");
+	println("BBBB");
+}
+
+....
+Class BProxy extends B{
+	...
+}
+
+```
+
+이를 통해 각 클래스는 자신이 정말로 해야할 기능들만 하도록(오늘은 1월 28일, 저는 운동을 합니다., 저녁에는 라면먹어야지)
+해준다. 즉 응집도를 높힌다. single responsibility priciple (단일 책임 원칙)
+
+AOP는 Transactional에서 사용된다.
+
+PSA(Potable Service Abstraction)
+잘 만든 인터페이스라는 뜻
+
+JpaTransactionManager를 쓰다가 Datasource TransactionManager를 쓰더라도 Transactional을 처리하는 코드가 바뀌진 않는다. 이게 Abstraction이고 추상화의 장점이다.
+
+
+Controller의 메서드가 사용할 수 있는 리턴 타입.
+
+String : jsp를 이용하는 경우에는 jsp 파일의 경로와 파일 이름을 나타내기 위해서 사용
+void : 호출하는 URL과 동일한 이름의 jsp를 의미한다.
+VO, DTO 타입: 주로 JSON 타입의 데이터를 만들어서 반환
+ResponseEntity 타입 : response할 때 Http 헤더 정보와 내용을 가공하는 용도로 사용.
+HttpHeaders : 응답에 내용없이 Http 헤더 메시지만 전달하는 용도로 사용.
+
+
+
+DAO vs Service
+
+DAO와 Service는 그 역할이 분명히 다릅니다.
+DAO는 **단일 데이터 접근/갱신**만 처리합니다.
+Service는 여러 DAO를 호출하여 **여러번의 데이터 접근/갱신**을 하며 그렇게 읽은 데이터에 대한 비즈니스 로직을 수행하고, 그것을 **하나의(혹은 여러개의) 트랜잭션**으로 묶습니다.
+
+즉, **Service가 트랜잭션 단위**입니다. 
+
+위와 같이 DAO와 Service가 완전히 동일해지는 경우도 분명히 발생합니다. 하지만 그것은 해당 비즈니스 로직이 "단일 DB 접근"으로 끝나기 때문에 발생하는 것입니다.
+
+만약 DAO의 메소드 하나에 다중 DB접근 로직이 들어갔고, 서비스는 단순히 그 DAO메소드를 호출하는 통로 역할만 한다면 DAO측 모듈화가 제대로 안된 접근 방식일 가능성이 높습니다(항상 그렇다는 뜻은 아닙니다)
+
+뭔가 데이터를 직접 읽고 쓰는 코드가 들어간 부분을 DAO로 보시면 될듯..
+그게 DB가 됐든 파일이 됐든..
+서비스단에서 데이터 입출력을 추상화 하려고 만든게 DAO니까요.
+만약 서비스단에 데이터 입출력 코드가 들어가 있다면 잘못된 설계라고 봅니다.
+
+
+setter를 이용해서 주입 or 생성자로 주입
+
+
+@Autowired는 객체 타입을 기준으로 비교를 해서 있으면 주입시켜주고, 없으면 NullPointException을 발생시킨다.
+
+AppCtx.java
+@Bean
+@Qualifier("chgPwdSvc")
+
+Bean에 chgPwdSvc라는 이름을 정해준다.
+
+ChangePasswordService.java
+@Autowired
+@Qualifier("chgPwdSvc")
+@private MemberDao memberDao;
+
+chgPwdSvc인 Bean을 memberDao에 주입시켜라
+
+
+## NullPointException이 발생하지 않게 하는법
+
+1.
+@Autowired(required=false) 
+null값을 허용해준다.
+2.
+private Optional<MemberDao> memberDao;
+Optional을 이용해서 null을 허용해준다.
+3.
+@Nullable
+어노테이션을 이용해서 Null을 허용해준다.
+
+
+@Bean
+	public MemberDao memberDao() {
+		return new MemberDao();
+	}
+
+=> 해당 클래스로 가서 @Configurationd을 써주면 생략가능
