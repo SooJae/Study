@@ -1,4 +1,90 @@
-# workspace UTF-8 설정
+#Spring 설정
+
+## workspace UTF-8 설정
 
 1. Window > Preferences > General > Workspace에서 UTF-8 변경
-2. HTML, CSS, JSP 파일도 'Web' 메뉴를 통해 UTF-8 로 변경
+2. HTML, CSS, JSP 파일도  Window > Preferences > Web 메뉴를 통해 각각 UTF-8 로 변경
+
+## Eclipse에 STS 설치
+1. Spring 사이트에서 Eclipse용 플러그인 주소 복사 (https://spring.io/tools3/sts/all)
+2. Help > install Software...
+3. Add... > 이름 STS
+
+※ 설치도중 다음과 같은 에러 발생시
+```
+An error occurred while collecting items to be installed session context was:(profile=C__Users_leesujae_eclipse_jee-2018-09_eclipse, phase=org.eclipse.equinox.internal.p2.engine.phases.Collect, operand=, action=). No repository found containing: osgi.bundle,oracle.eclipse.tools.rest.lib
+```
+
+ “Contact all update sites during install to find required software” 체크해제
+##Tomcat 서버 설정
+
+## spring 생성
+※오류시 .m2밑에 'repository'폴더의 내용물을 삭제
+
+# 프로젝트 생성 후
+- web.xml 파일 삭제
+- 스프링 관련 파일 삭제
+- pom.xml의 수정 및 스프링 버전 변경
+- 자바 설정 관련 패키지 설정
+
+## pom 설정
+spring 버전 체크, java 버전 체크
+
+## lombok 라이브러리 설치
+
+## XML 파일 삭제
+'root-context.xml', 'servlet-context.xml' 삭제 => spring 폴더 삭제
+'web.xml' 삭제
+web.xml을 삭제하면 pom.xml에서 에러 발생 
+(과거의 웹프로젝트들이 기본적으로 web.xml을 사용하는 것을 기본으로 설정했기 때문에) => 아래의 설정을 추가한다.
+```xml
+	<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+    </plugin>
+```
+
+web.xml 대신 WebConfig 작성
+```java
+@Override
+		protected Class<?>[] getRootConfigClasses() {
+		    return new Class[] {RootConfig.class}; //root-context.xml을 대신하는 클래스
+		}
+```
+
+##lombok 설치후 pom.xml에 lombok 추가.
+
+## pom.xml에 JUnit, spring-test 추가
+
+@Setter(onMethod_ = @Autowired) == setChef()에 Autowired 어노테이션 추가
+
+## pom.xml에 HikariCP 추가및 DB 설정
+
+```java
+@Bean
+	public DataSource dataSource() {
+		HikariConfig hikariConfig = new HikariConfig();
+		hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
+		hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3307/study");
+		hikariConfig.setUsername("root");
+		hikariConfig.setPassword("root");
+		
+		HikariDataSource dataSource = new HikariDataSource(hikariConfig);
+		
+		return dataSource;
+	}
+```
+
+## pom.xml에 db 적용
+- spring-jdbc, spring-tx (데이터베이스 처리와 트랙잭션 처리)
+- mybatis, mybatis-spring (MyBatis와 스프링 연동용 라이브러리) 
+
+## mybatis 설정
+
+## pom.xml에 log4jdbc-log4j2 적용, 설정
+
+## test 패키지 밑의 log4j.xml 설정 변경

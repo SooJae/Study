@@ -938,9 +938,9 @@ private Optional<MemberDao> memberDao;
 Optional을 이용해서 null을 허용해준다.
 3.
 @Nullable
+
+
 어노테이션을 이용해서 Null을 허용해준다.
-
-
 @Bean
 	public MemberDao memberDao() {
 		return new MemberDao();
