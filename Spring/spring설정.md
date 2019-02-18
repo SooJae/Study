@@ -88,3 +88,11 @@ web.xml 대신 WebConfig 작성
 ## pom.xml에 log4jdbc-log4j2 적용, 설정
 
 ## test 패키지 밑의 log4j.xml 설정 변경
+
+# 경로 변경
+Tomcat의 'Modules'메뉴로 이동해서 '/'경로로 프로젝트가 실행될 수 있도록 처리. ( 혹은 해당 프로젝트 Properties 의 'Web Project Settings' 속성을 '/'로 지정)
+
+# ServletConfig 설정
+1. @EnableWebMvc 어노테이션과 WebMvcConfigurer 인터페이스를 구현하는 방식(과거에는 WebMvcConfigurerAdapter 추상클래스를 사용했으나, 스프링 5부터 Deprecated 되었다.)
+
+2. @Configuration과 WebMvcConfigurationSupport클래스를 상속하는 방식 - 일반 @Configuration 우선순위가 구분되지 않는 경우에 사용
