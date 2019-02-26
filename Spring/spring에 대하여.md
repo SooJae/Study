@@ -57,7 +57,7 @@ log.info()메서드를 이용해서 로그를 찍을 수 있다.
 @AllArgsConstructor는 변수로 선언된 모든것을 파라미터로 받는 생성자를 작성한다.
 @RequiredArgsConstructor는 @NonNull이다 final이 붙은 인스턴스 변수에 대한 생성자를 생성
 
-#@Component와 @Bean의 차이
+# @Component와 @Bean의 차이
 
 @Component는 클래스 상단에 적으며 그 default로 **클래스 이름이 bean**의 이름이 된다. 또한 spring에서 자동으로 찾고 관리해주는 bean이다.
 
@@ -123,3 +123,520 @@ public void ex03(Dto dto){
     log.info("dto" + dto)
 }
 ```
+
+또는 다음과 같은 방식으로 쉽게 할 수 있다.
+DTO.java
+```java
+@DateTimeFormat(pattern = "yyyy/MM/dd")
+private Date dueDate;
+```
+
+# Model
+Model 객체는 JSP에 컨트롤러에 생성된 데이터를 담아서 전달하는 역할.
+이를 이용해서 **JSP와 같은 뷰(View)로 전달해야 하는 데이터**를 담아서 보낸다.
+
+**Model == request.setAttribute()**
+
+## Servlet에서 모델 2 방식으로 데이터를 전달하는 방식
+```java
+    request.setAttribute("serverTime", new java.util.Date());
+
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+    dispatcher.forward(request, response);
+```
+스프링 MVC에서 Model을 이용한 데이터 전달
+```java
+    public String home(Model model){
+        model.addAttribute("serverTime", new java.util.Date());
+        return "home";
+    }
+
+    Model을 사용하는 경우는 주로 **Controller에 전달된 데이터를 이용해서 추가적인 데이터를 가져와야 할때** 이다.
+```
+ex)
+- 리스트 페이지 번호를 파라미터로 전달받고, 실제 데이터를 View로 전달해야 하는 경우
+- 파라미터들에 대한 처리 후 결과를 전달해야 하는 경우
+
+웹페이지의 구조로 Request에 전달된 데이터를 가지고 필요하다면, 추가적인 데이터를 생성해서 화면으로 전달하는 방식으로 동작한다.
+Model의 경우는 파라미터로 전달된 데이터는 존재하지 않지만 화면에서 필요한 데이터를 전달하기 위해서 사용한다.
+
+스프링 MVC의 Controller는 기본적으로 **Java Beans 규칙에 맞는 객체는 다시 화면으로 객체를 전달한다.**
+좁은 의미에서 Java Beans의 규칙은
+
+1. 단순히 생성자가 없거나 빈 생성자를 가져와야 한다.
+2. getter/setter를 가진 클래스의 객체들을 의미한다.
+   
+전달될 때에는 클래스명의 앞글자는 **소문자**로 처리된다.
+
+# @ModelAttribute
+@ModelAttribute는 강제로 전달받은 파라미터를 Model에 담아서 전달하도록 할 때 필요한 어노테이션.
+@ModelAttribute가 걸린 파라미터는 타입에 관계없이 무조건 Model에 담아서 전달되므로, 파라미터로 전달된 데이터를 다시 화면에서 사용해야할 경우에 사용된다.
+
+```java
+@GetMapping("/ex04")
+public String ex04(SampleDTO dto, @ModelAttribute("page") int page){
+    log.info("dto:" +dto);
+    log.info("page:" +page);
+
+    return "sample/ex04";
+    
+}
+```
+
+
+## @ModelAttribute VS @RequestParam
+@ModelAttribute : 요청 파라미터를 컨트롤러에서 도메인 오브젝트(DTO, VO)에 바인딩해서 한번에 받는다.
+- 하나의 오브젝트에 클라이언트 요청 정보를 담아서 한번에 전달되는 것이기 때문에 이를 커맨드 패턴에서 말하는 커맨드 오브젝트라고도 한다.
+@RequestParam : 요청 파라미터를 컨트롤러에서 1:1로 받는다.
+
+@ModelAttribute는 요청 파라미터를 컨트롤러에서 받고 그 데이터를 자동으로 해당 View에 전송한다.
+
+# RedirectAttribute
+
+redirect는 일회성으로 데이터를 전달하는 용도로 사용된다.
+
+Servlet에서 redirect 방식
+```java
+response.sendRedirect("/home?name=aaa&age=10");
+```
+
+스프링MVC를 이용하는 redirect 처리
+```java
+rttr.addFlashAttribute("name","AAA");
+rttr.addFlashAttribute("age",10);
+
+return "redirect:/";
+```
+
+Controller의 리턴 타입
+스프링 MVC의 구조가 기존의 상속과 인터페이스에서 어노테이션을 사용하는 방식으로 변한 이후에
+**리턴타입이 자유로워졌다.**
+
+String : jsp를 이용하는 경우에는 jsp파일의 경로와 파일이름을 나타내기 위해서 사용한다.
+void : 호출하는 **URL과 동일한 이름의 jsp를 의미한다.**
+VO, DTO 타입: 주로 JSON타입의 데이터를 만들어서 반환하는 용도.
+ResponseEntity 타입 : response할 때 Http 헤더정보와 내용을 가공하는 용도로 사용.
+Model, ModelAndView : Model로 데이터를 반환하거나 화면까지 같이 지정하는 경우에 사용한다.(최근에는 사용 X)
+HttpHeaders : 응답에 내용 없이 Http 헤더 메시지만 전달하는 용도로 사용.
+
+String 타입에는 다음과 같은 키워드를 넣을수 있다.
+redirect, forward
+
+### 객체타입
+리턴타입을 VO(Value Object)나 DTO(Data Transfer Object)타입 등 복합적인 데이터가 들어간 객체타입으로 지정할 수 있는데, 주로 JSON 데이터를 만들어내는 용도로 사용한다.
+이를 위해서는 **jackson-databind라이브러리를 pom.xml에 추가한다.**
+
+### ResponseEntity 타입
+스프링 MVC의 사상은 HttpServletRequest나 HttpServletResponse를 직접 핸들링하지 않아도 이런 작업이 가능하도록 작성되었기 때문에, 이러한 처리를 위해 ResponseEntity를 통해서 **원하는 헤더정보나 데이터를 전달**할 수 있다.
+
+```java
+@GetMapping("/ex07")
+public ResponseEntity<String> ex07(){
+    log.info("/ex07.....");
+
+    String msg = "{\"name\":\"홍길동\"}";
+
+    HttpHeaders header = new HttpHeaders();
+    header.add("Content-Type","application/json;charset=UTF-8");
+
+    return new ResponseEntity<>(msg, header, HttpStatus.OK);
+}
+```
+# Controller의 Exception 처리
+- @ExceptionHandler와 @ControllerAdvice를 이용한 처리
+- @ResponseEntity를 이용하는 예외 메시지 구성
+
+# @ControllerAdvice
+@ControllerAdvice는 AOP를 이용한 방식이다. 
+
+```java
+@ControllerAdvice // 이 부분
+@Log4j
+public class CommonExceptionAdvice {
+
+	@ExceptionHandler(Exception.class) //이 부분
+	public String except(Exception ex, Model model) {
+
+		log.error("Exception ......." + ex.getMessage());
+		model.addAttribute("exception", ex);
+		log.error(model);
+		return "error_page";
+	}
+
+	
+``` 
+
+@ControllerAdvice는 해당 객체가 스프링의 **컨트롤러에서 발생하는 예외를 처리하는 존재임을 명시하는 용도**로 사용
+@ExceptionHandler는 해당 메서드가 () 들어가는 예외타입을 처리한다. 위와같은 경우 **Exception.class**를 지정했으므로
+**모든 예외에 대한 처리가 except()**만을 이용해서 처리할 수 있다.
+
+500메세지는 'Internal Server Error' 이므로 @ExceptionHandler를 이용해서 처리되지만, 잘못된 URL을 호출할 때 보이는 404에러 메시지의 경우는 조금 다르게 처리하는 것이 좋다.
+
+```java
+@ExceptionHandler(NoHandlerFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public String handle404(NoHandlerFoundException ex) {
+
+		return "custom404";
+	}
+```
+
+# 3-tier 방식
+Presentation Tier = 화면을 보여주는 기술을 사용하는 영역
+Servlet/JSP나 스프링 MVC가 담당. MVC와 JSP를 이용한 화면 구성
+
+Business Tier = 순수한 로직을 담고 있는 계층. 고객의 요구 사항을 반영.
+주로 'xxxService'와 같은 이름을 구성하고, 메서드의 이름 역시 고객들이 사용하는 용어를 그대로 사용한다.
+
+Persistence Tier = 데이터를 어떤 방식으로 보관하고, 사용하는가에 대한 설계가 들어가는 계층.
+경우에 따라서 네트워크 호출이나 원격 호출 들의 기술이 접목된다.
+이 영역은 MyBatis와 mybatis-spring을 이용해서 구성했던 파트 1을 이용한다.
+
+스프링 MVC 영역은 Presentation Tier를 구성하게 되는데, 각 영역은 사실 별도의 설정을 가지는 단위.
+RootConfig, ServletConfig 등의 설정 파일이 해당 영역의 설정을 담당.
+스프링 Core영역은 POJO의 영역이다. 스프링의 의존성 주입을 이용해서 객체 간의 연관구조를 완성해서 사용.
+
+프로젝트를 3-tier로 구성하는 가장 일반적인 설명은 '유지 보수'에 대한 필요성 때문이다.
+
+네이밍 규칙-
+xxxController : 스프링 MVC에서 동작하는 Controller 클래스를 설계할 때 사용한다.
+xxxService, xxxServiceImpl : 비즈니스 영역을 담당하는 인터페이스는 'xxxService' 라는 방식을 사용하고, 인터페이스를 구현한 클래스는 Impl 이라는 이름을 사용한다.
+xxxDAO, xxxRepository : DAO(Data-Access-Object) 나 Repository라는 이름으로 영역을 따로 구성하는 것이 보편적.
+MyBatis의 Mapper 인터페이스를 활용.
+
+VO, DTO : VO와 DTO는 일반적으로 유사한 의미로 사용하는 용어로, 데이터를 담고있는 객체를 immutable하게 설계하는것이 정석.
+**DTO는 주로 데이터 수집의 용도가 좀더 강하다.**
+ex) 웹화면에서 로그인 하는 정보를 DTO로 처리, 테이블과 관련된 데이터는 VO로 처리
+
+
+com.sujae.config : 설정 클래스들
+com.sujae.controller : 스프링 MVC의 Controller들의 보관 패키지
+com.sujae.service : 스프링의 service 인터페이스와 구현 클래스 패키지
+com.sujae.domain: VO, DTO 클래스들의 패키지
+com.sujae.persistence: MyBatis Mapper 인터페이스 패키지
+com.sujae.exception : 웹관련 예외처리 패키지
+com.sujae.aop : 스프링 AOP 관련 패키지
+com.sujae.security : 스프링 Security 관련 패키지
+com.sujae.util : 각종 유틸리티 클래스 관련 패키지
+
+
+테이블을 생성할 때는 tbl_로 시작하거나 t_와 같이 구분 가능한 단어를 앞에 붙여라.
+
+
+@Log4j는 end of life라 @Slf4j 를 쓰던가 @Log 를 써라
+@Log (severe) @Slf4j(error)
+
+기본형(primitive type) 변수도 때로는 객체로 다루어져야 하는 경우가 있다.
+
+1. 매개변수로 객체가 요구 될때.
+
+2. 기본형 값이 아닌 객체로 저장해야 할 때.
+
+3. 객체간의 비교가 필요할 때. 등등
+
+이 때 사용되는 것이 wrapper class 이다.
+
+int (Primitive 자료형 (long, float, double,. ....)
+
+자료형
+산술 연산이 가능.
+null 로 초기화 불가능, 0으로 초기화
+Integer (Wrapper 클래스(객체)
+
+클래스
+Unboxing 을 하지 않으면 산술 연산이 불가능하지만, null값은 처리할 수 있음.
+null값 처리가 용이해서 SQL 과 연동할 경우 처리가 용이. 직접적인 산술연산은 불가능
+
+
+
+Primitive Type -> Wrapper class : Boxing
+
+ex) Integer a = new Integer(10);
+
+Wrapper class -> Primitive Type : Unboxing
+
+ex) int b = a.intValue();
+
+
+
+
+
+# Model, ModelMap 및 ModelAndView의 차이점
+
+Model : 인터페이스입니다. 모델 속성에 대한 홀더를 정의하며 주로 **모델에 속성을 추가**하기 위해 설계되었습니다.
+
+예:
+```java
+@RequestMapping(method = RequestMethod.GET)
+    public String printHello(Model model) {
+          model.addAttribute("message", "Hello World!!");
+          return "hello";
+       }
+```
+ModelMap : UI 도구와 함께 사용할 모델 데이터를 작성할 때 사용할지도 구현 . 체인 된 호출 및 모델 특성 이름 생성을 지원합니다.
+
+예:
+```java
+@RequestMapping("/helloworld")
+public String hello(ModelMap map) {
+    String helloWorldMessage = "Hello world!";
+    String welcomeMessage = "Welcome!";
+    map.addAttribute("helloMessage", helloWorldMessage);
+    map.addAttribute("welcomeMessage", welcomeMessage);
+    return "hello";
+}
+```
+ModelAndView : 이 클래스는 컨트롤러가 단일 반환 값으로 **모델과 뷰를 모두 반환** 할 수 있도록하기 위해 둘 다만 보유합니다.
+
+예:
+```java
+@RequestMapping("/welcome")
+public ModelAndView helloWorld() {
+        String message = "Hello World!";
+        return new ModelAndView("welcome", "message", message);
+    }
+```
+
+## @Autowired를 하면 Autowired에 있는 객체 이름과 같은 클래스를 찾는다.
+
+
+
+텍스트 파일을 읽고 가장 많이 사용된 단어를 찾은 후 그 단어와 빈도를 정렬된 리스트로 출력하는 예제입니다
+
+```java
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Words {
+  private Set<String> NON_WORDS = new HashSet<String>() {{
+    add("the"); add("and"); add("of"); add("to"); add("a");
+    add("i"); add("it"); add("in"); add("or"); add("is");
+    add("d"); add("s"); add("as"); add("so"); add("but");
+    add("be");
+  }};
+
+  public Map wordFreq(String words) {
+    TreeMap<String, Integer> wordMap = new TreeMap<>();
+    Matcher m = Pattern.compile("\\w+").matcher(words);
+    while (m.find()) {
+      String word = m.group().toLowerCase();
+      if (!NON_WORDS.contains(word)) {
+        if (wordMap.get(word) == null) {
+          wordMap.put(word, 1);
+        } else {
+          wordMap.put(word, wordMap.get(word) + 1);
+        }
+      }
+    }
+    return wordMap;
+  }
+}
+```
+
+```java
+
+public class Words {
+  private Set<String> NON_WORDS = new HashSet<String>() {{
+    add("the"); add("and"); add("of"); add("to"); add("a");
+    add("i"); add("it"); add("in"); add("or"); add("is");
+    add("d"); add("s"); add("as"); add("so"); add("but");
+    add("be");
+  }};
+
+public Map wordFreq(String words) {
+  TreeMap<String, Integer> wordMap = new TreeMap<>();
+  regexToList(words, "\\w+").stream()
+    .map(String::toLowerCase)
+    .filter(w -> !NON_WORDS.contains(w))
+    .forEach(w -> wordMap.put(w, wordMap.getOrDefault(w, 0) + 1));
+  return wordMap;
+}
+
+private List<String> regexToList(String words, String regex) {
+  List wordList = new ArrayList();
+  Matcher m = Pattern.compile(regex).matcher(words);
+  while (m.find())
+    wordList.add(m.group());
+  return wordList;
+}
+```
+
+이번 예제는 주어진 배열 내에서 해당 문자가 처음 발견되는 위치를 리턴하는 예제입니다. 소스는 Apache Commons 의 StringUtils의 indexOfAny 라는 메소드입니다.
+```java
+public static int indexOfAny(final CharSequence cs, final char... searchChars) {
+  if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {
+    return INDEX_NOT_FOUND;
+  }
+  final int csLen = cs.length();
+  final int csLast = csLen - 1;
+  final int searchLen = searchChars.length;
+  final int searchLast = searchLen - 1;
+  for (int i = 0; i < csLen; i++) {
+    final char ch = cs.charAt(i);
+    for (int j = 0; j < searchLen; j++) {
+      if (searchChars[j] == ch) {
+        if (i < csLast && j < searchLast && Character.isHighSurrogate(ch)) {
+          // ch is a supplementary character
+          if (searchChars[j + 1] == cs.charAt(i + 1)) {
+            return i;
+          }
+        } else {
+          return i;
+        }
+      }
+    }
+  }
+  return INDEX_NOT_FOUND;
+}
+```
+```Scala
+def firstIndexOfAny(input: String, searchChars: Seq[Char]) : Option[Int] = {
+  def indexedInput = (0 until input.length).zip(input)
+  val result = for (pair <- indexedInput;
+                    char <- searchChars;
+                    if char == pair._2) yield pair._1
+
+  if (result.isEmpty)
+    None
+  else
+    Some(result.head)
+}
+```
+
+## MapperXML 작성 사항
+XML을 작성할때 반드시 
+**<mapper>의 namespace 속성 값을 Mapper 인터페이스와 동일**한 이름을 줘야한다.
+** \<select\> 태그의 id 속성값은 메서드의 이름과 동일**하게 작성.
+**resultType속성의 값은 select 쿼리의 결과를 특정 클래스의 객체**로 만들기 위해 설정
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.BoardMapper">
+
+<select id ="getList" resultType = "org.zerock.domain.BoardVO">
+SELECT * FROM tbl_board2 WHERE bno &gt; 0
+</select>
+```
+
+웹 프로젝트에서 마지막 영역이 영속영역이지만, **실제로 구현을 가장 먼저 할 수 있는 영역도 영속 영역**이다.
+영속영역은 기본적으로 CRUD 작업을 하기 때문에 테이블과 VO(DTO)등 약간의 준비만으로도 비즈니스 로직과 무관하게 CRUD 작업을 작성 할 수 있다. MyBatis는 내부적으로 JDBC의 PreparedStatement를 활용하고, **? 는 #{속성}**과 같다.
+
+#CREATE(INSERT) 처리.
+자동으로 PK 값이 정해지는 경우에는 다음과 같은 방식으로 처리할 수 있다.
+- insert만 처리되고 생성된 PK값을 알 필요가 없는 경우
+- insert문이 실행되고 생성된 PK 값을 알아야 하는 경우
+
+```xml
+<insert id="insert">
+	insert into tbl_board (title,content,writer)
+	values (#{title}, #{content}, #{writer})
+</insert>
+
+<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into tbl_board (bno,title,content, writer)
+		values (#{bno},
+		#{title}, #{content}, #{writer})
+</insert>
+```
+**insert()는** 단순히 시퀀스의 다음 값을 구해서 insert할 때 사용.
+insert문은 몇건의 데이터가 변경되었는지만을 알려주기 때문에 추가된 데이터의 PK값을 알 수는 없지만, 1번의 SQL 처리만으로 작업이 완료되는 장점.
+
+**insertSelectKey()는** @SelectKey라는 Mybatis의 어노테이션을 이용.
+@SelectKey는 주로 PK값을 미리(before) SQL을 통해서 처리해 두고 특정한 이름으로 결과를 보관.
+@Insert 할 때 SQL문을 보면 #{bno}와 같이 이미 처리된 결과를 이용하는 것을 볼 수있다.
+
+@SelectKey를 이용하는 방식은 SQL을 한 번 더 실행하는 부담이 있기는 하지만, **자동으로 추가되는 PK값을 확인해야 하는 상황**에서는 유용하게 사용될 수 있습니다. 
+
+목록 받기 : List<BoardVO>
+Create : void
+Read : void
+Update : int
+Delete : int
+
+
+비즈니스 계층은 고객의 요구사항을 반영하는 계층으로 **프레젠테이션 계층과 영속계층의 중간 다리 역할**을 한다.
+
+#@Service
+@Service는 계층 구조상 **주로 비즈니스 영역을 담당하는 객체임을 표시**하기 위해 사용한다.
+
+스프링 MVC의 Controller는 하나의 클래스네에서 여러 메서드를 작성하고 , **@RequestMapping등을 이용해서 URL을 분기**하는 구조로 작성할 수 있기 때문에 나의 클래스에서 필요한 만큼 메서드의 분기를 이용하는 구조로 작성한다.
+
+
+
+| Task  |       URL       | Method | Parameter |  From   | URL이동 |
+| :---: | :-------------: | :----: | :-------: | :-----: | :---: |
+| 전체목록  |   /board/list   |  GET   |
+| 등록 처리 | /board/register |  POST  |   모든항목    | 입력화면 필요 |  이동   |
+|  조회   |   /board/read   |  GET   |  bno=123  |
+| 삭제 처리 |  /board/modify  |  POST  |    bno    | 입력화면 필요 |  이동   |
+| 수정 처리 |  /board/remove  |  POST  |   모든 항목   | 입력화면 필요 |  이동   |
+
+```java
+@GetMapping("/list")
+	public void list(Model model) {
+		log.info("list");
+		model.addAttribute("list", service.getList());
+	}
+```
+
+list는 **나중에 게시물의 목록을 전달해야 하므로 Model을 파라미터로 지정하고** 이를 통해서 BoardServiceImpl객체의 getList()결과를 담아 전달한다.
+
+mockMVC
+
+
+```java
+@WebAppConfiguration
+...
+
+public class BoardControllerTests {
+	@Autowired
+	private WebApplicationContext ctx;
+
+	private MockMvc mockMvc;
+	
+	@Before
+	public void setup() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
+	}
+	
+	@Test
+	public void testList() throws Exception{
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
+				.andReturn()
+				.getModelAndView()
+				.getModelMap());
+	}
+}
+```
+@WebApplication은 Servlet의 ServletContext를 이용하기 위해서인데, 스프링에서는 WebApplicationContext라는 존재를 이용하기 위해서이다. **@before 어노테이션이 적용된 setUp()에서는 import할 때 JUnit을 이용**해야 한다.
+**@Before가 적용된 메서드는 모든 테스트 전에 매번 실행되는 메서드가 된다.**
+
+MockMvc는 말 그대로 가짜MVC이다. testList()는 MockMvcRequestBuilders라는 존재를 이용해 GET방식을 호출한다. 이후에 Model에 어떤 데이터들이 담겨있는지 확인한다.
+
+```java
+@Test
+	public void testRegister() throws Exception{
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/register")
+				.param("title", "테스트 새글 제목")
+				.param("content", "테스트 새글 내용")
+				.param("writer", "user00")
+				).andReturn().getModelAndView().getViewName();
+		
+		log.info(resultPage);
+	}
+```
+```
+param = <input> 이라고 생각하면 된다.
+```
+수정을 시작하는 화면의 경우에는 GET방식으로 접근하지만, 실제 작업은 POST 방식으로 동작한다.

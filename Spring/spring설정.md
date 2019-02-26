@@ -96,3 +96,16 @@ Tomcat의 'Modules'메뉴로 이동해서 '/'경로로 프로젝트가 실행될
 1. @EnableWebMvc 어노테이션과 WebMvcConfigurer 인터페이스를 구현하는 방식(과거에는 WebMvcConfigurerAdapter 추상클래스를 사용했으나, 스프링 5부터 Deprecated 되었다.)
 
 2. @Configuration과 WebMvcConfigurationSupport클래스를 상속하는 방식 - 일반 @Configuration 우선순위가 구분되지 않는 경우에 사용
+
+#영속 계층 구성
+
+1. 테이블의 칼럼 구조를 반영하는 VO(Value Object) 클래스의 생성
+2. MyBatis의 Mapper 인터페이스의 작성 / XML 처리
+3. 작성한 Mapper 인터페이스의 테스트
+
+## Mapper.xml 작성시 주의할 점
+XML을 작성할때 반드시 
+**<mapper>의 namespace 속성 값을 Mapper 인터페이스와 동일**한 이름을 줘야한다.
+**<select> 태그의 id 속성값은 메서드의 이름과 동일**하게 작성.
+**resultType속성의 값은 select 쿼리의 결과를 특정 클래스의 객체**로 만들기 위해 설정
+
