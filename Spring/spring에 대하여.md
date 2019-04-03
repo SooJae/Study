@@ -639,4 +639,317 @@ MockMvc는 말 그대로 가짜MVC이다. testList()는 MockMvcRequestBuilders�
 ```
 param = <input> 이라고 생각하면 된다.
 ```
+
 수정을 시작하는 화면의 경우에는 GET방식으로 접근하지만, 실제 작업은 POST 방식으로 동작한다.
+
+#CSS 적용시
+org.zerock.config.WebConfig 클래스에는 CSS나 JS 파일과 같이 정적인 (Static) 자원들의 경로를 'resources'라는 경로로 지정하고 있다.
+
+```java
+@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+```
+
+
+```js
+<script>
+	$(function(){
+		var operForm = $("#operForm");
+		
+		$("button[data-oper='list']").on("click", function(e){
+			operForm.find("#bno").remove();
+			operForm.attr("action","/board/list");
+			operForm.submit();
+		});
+	});
+</script>
+```
+
+
+```js
+	$(function(){
+		var formObj = $("form");
+		
+		$("button").on("click", function(e){
+			e.preventDefault();
+			
+			var operation = $(this).data("oper");
+			console.log(operation);
+			
+			if(operation === "remove"){
+				formObj.attr("action", "/board/remove");
+			} else if(operation === "list"){
+				/* 	self.location = "/board/list";
+				return; */
+				formObj.attr("action", "/board/list").attr("method","get");
+				formObj.empty();
+			}
+			formObj.submit();
+			
+		});
+    });
+```
+
+```java
+//재귀 복사
+INSERT INTO tbl_board(title,content,writer) (SELECT title,content,writer FROM tbl_board)
+```
+
+페이징 처리를 위해서 필요한 파라미터는 1) 페이지 번호(pageNum), 2) 한 페이지당 몇개의 데이터(amount) 를 보여줄 것인지가 결정되어야 한다.
+
+이 데이터들을 하나로 묶는 것이 좋다.
+
+페이징 화면 처리
+
+1. 브라우저 주소창에서 페이지 번호를 전달해서 결과를 확인
+2. JSP에서 페이지 번호를 출력하는 단계
+3. 각 페이지 번호에 클릭 이벤트 처리
+4. 전체 데이터 개수를 반영해서 페이지 번호 조절
+
+페이징 처리할 때 필요한 정보들
+- 현재 페이지 번호(page)
+- 이전과 다음으로 이동 가능한 링크의 표시여부 (prev, next)
+- 화면에서 보여지는 페이지의 시작번호와 끝번호 (startPage, endPage)
+
+1. 끝번호를 먼저 계산한다
+
+``` java
+this.endpage = (int)(Math.ceil(페이지번호/10.0))*10;
+```
+
+1페이지의 경우: Math.ceil(0.1)* 10 = 10
+10페이지의 경우: Math.ceil(1)* 10 = 10
+11페이지의 경우: Math.ceil(1.1)*10 = 20
+
+만약 전체 데이터 수가 적다면, 10페이지로 끝나면 안될 상황이 생길 수도 있다.
+그럼에도 끝번호를 먼저 계산하는 ㅣㅇ유는 시작번호를 계산하기 수월하기 때문이다.
+```java
+this.startPage = this.endPage - 9;
+```
+끝 번호는 전체 데이터 수에 의해서 영향을 받는다. 예를 들어, 10개씩 보여주는 경우
+전체 데이터수가 80개라고 가정하면 끝번호는 10이 아닌 8이 되어야만 한다.
+
+만일 끝번호(endPage)와 한 페이지당 출력되는 데이터 수(amount)의 곱이 전체데이터 수(total)보다 크다면 끝번호는 다시 total을 이용해서 다시 계산되어야 한다.
+```java
+realEnd = (int)(Math.ceil((total*10)/amount));
+
+if(realEnd < this.endPage){
+  this.endPage = realEnd;
+}
+```
+
+이전(prev)는 시작번호(startPage)가 1보다 큰 경우
+```java
+this.prev = this.startPage>1;
+```
+다음으로 가는 링크의 경우 realEnd가 endPage보다 큰 경우
+```java
+this.next = this.endPage < realEnd;
+```
+
+클래스를 구성하면 Controller 계층에서 JSP 화면에 전달할때에도 **객체를 생성해서 Model에 담아 보내는 과정이 단순**해지는 장점이 있다.
+
+```java
+public void get(@RequestParam("bno") Integer bno, @ModelAttribute("cri") Criteria cri ,Model model) {
+		log.info("/get or modify");
+		model.addAttribute("board",service.get(bno));
+	}
+```
+@ModelAttribute는 자동으로 Model에 데이터를 지정한 이름으로 담아준다. @ModelAttribute를 사용하지 않아도 Controller에서 화면으로 파라미터가 된 객체는 전달이 되지만 좀더 명시적인 이름을 지정하기 위해 사용한다.
+```
+select bno, title, content, writer, regdate, updatedate from tbl_board2 where ( title like 
+CONCAT('%', '안', '%') OR content like CONCAT('%', '안', '%') ) limit 0, 10 
+```
+
+
+/*getTypeArr은 검색 조건이 각 글자(T, W, C)로 구성되어 있으므로 검색조건을 배열로
+	 만들어서 한번에 처리 MyBatis의 동적 태그를 활용할 수 있다.*/
+   ```java
+	public String[] getTypeArr() {
+		return type == null? new String[] {}: type.split("");
+	}
+	```
+
+
+UriComponentBuilder를 이용하면, 여러개의 파라미터를 번거롭지 않게 할 수 있다.
+
+
+
+  ```java
+	public String getListLink() {
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("page", this.perPageNum)
+				.queryParam("perPageNum", this.getPerPageNum())
+				.queryParam("type", this.getType())
+				.queryParam("keywortd", this.getKeyword());
+		
+		return builder.toUriString();
+	}
+  ```
+
+  ```java
+  @PostMapping("/modify")
+	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
+		log.info("modify :"+ board);
+		
+		if(service.modify(board)) {
+			rttr.addFlashAttribute("result", "수정이 완료되었습니다.");
+		}
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/board/list";
+	}
+	
+	@PostMapping("remove")
+	public String remove(@RequestParam("bno") Integer bno, @ModelAttribute("cri") Criteria cri ,RedirectAttributes rttr) {
+		
+		log.info("remove..."+bno);
+		
+		if(service.remove(bno)) {
+			rttr.addFlashAttribute("result","삭제가 완료되었습니다.");
+		}
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		return "redirect:/board/list";
+	}
+  ```
+
+  ```java
+  @PostMapping("/modify")
+	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
+		log.info("modify :"+ board);
+		
+		if(service.modify(board)) {
+			rttr.addFlashAttribute("result", "수정이 완료되었습니다.");
+		}
+		
+		// rttr.addAttribute("page", cri.getPage());
+		// rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		// rttr.addAttribute("type", cri.getType());
+		// rttr.addAttribute("keyword", cri.getKeyword());
+		
+		return "redirect:/board/list" + cri.getListLink();
+	}
+	
+	@PostMapping("remove")
+	public String remove(@RequestParam("bno") Integer bno, @ModelAttribute("cri") Criteria cri ,RedirectAttributes rttr) {
+		
+		log.info("remove..."+bno);
+		
+		if(service.remove(bno)) {
+			rttr.addFlashAttribute("result","삭제가 완료되었습니다.");
+		}
+		// rttr.addAttribute("page", cri.getPage());
+		// rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		// rttr.addAttribute("type", cri.getType());
+		// rttr.addAttribute("keyword", cri.getKeyword());
+		return "redirect:/board/list" + cri.getListLink();
+	}
+  ```
+
+  스마트폰에서는 앱이라 불리는 고유한 애플리케이션ㅇ을 이용해서 데이터를 소비하게되고, 보이는 화면 역시 자신만의 방식으로 서비스 하게 된다. 
+  URL과 URI를 같은 의미로 사용하는 경우가 많았다. URL은 URI의 하위개념이다.
+
+  URL:**이곳에 가면 당신이 원하는 것을 찾을 수 있습니다.** 와 같은 상징적인 의미가 강함
+  URI:**당신이 원하는 곳의 주소는 여기입니다.** 와 같이 조금 현실적이고 구체적인 의미
+
+  @RestController : 컨트롤러가 REST방식을 처리하기 위한 것임을 명시
+  @ResponseBody : 일반적인 JSP와 같은 뷰로 전달되는게 아니라 데이터 자체를 전달하기 위한 용도
+  @PathVariable : URL 경로에 있는 값을 파라미터로 추출하려고 할때 사용
+  @RequestBody : JSON 데이터를 원하는 타입으로 바인딩 처리
+
+##@RestController
+REST 방식은 **서버에서 전송하는 것이 순수한 데이터**라는 것이다.
+기존의 Controller에서 **Model에 데이터를 담아서 JSP등과 같은 뷰로 전달하는 방식이 아니므로** 기존의 Controller와 다르게 동작한다.
+
+@RestController이전에는 @Controller와 메서드 선언부에 @ResponseBody를 이용해서 동일한 결과를 얻을 수 있었다.
+@RestController는 메서드의 리턴타입으로 사용자가 정의한 클래스 타입을 사용할 수 있고, 이를 **JSON이나 XML**로 자동으로 처리할 수 있다.
+
+
+```java
+@RestController
+@RequestMapping("/sample")
+@Slf4j
+public class SampleController {
+
+	@GetMapping(value = "/getText", produces ="text/plain; charset=UTF-8")
+	public String getText() {
+		log.info("MIME TYPE:"+MediaType.TEXT_PLAIN_VALUE);
+		
+		return "안녕하세요";
+	}
+}
+```
+기존의 @Controller는 **문자열을 반환하는 경우에는 JSP파일의 이름**으로 처리하지만, 
+@RestController의 경우에는 순수한 데이터가 된다.
+@GetMapping에 사용된 **produces속성은 해당 메서드가 생산하는 MIME 타입**을 의미한다.
+예제와 같이 문자열로 직접 지정할수도 있고, 메서드내의 MediaType이라는 클래스를 이용할 수도 있다.
+
+@PathVariable : REST방식에서 자주 사용한다. URL경로의 일부를 파라미터로 사용할 때 이용
+@RequestBody : JSON데이터를 원하는 타입의 객체로 변환해야 하는 경우에 사용
+
+## @PathVariable
+Rest방식에서는 URL 내에 최대한 많은 정보를 담으려고 노력한다. 예전에는 '?' 뒤에 추가되는 쿼리 스트링이라는 형태로 **파라미터를 이용**해서 전달되던 데이터들이 **REST 방식에서는 경로의 일부로 차용**된다.
+
+스프링 MVC에서는 @PathVariable 어노테이션을 이용해서 URL 상에 경로의 일부를 파라미터로 사용할 수 있다.
+
+```
+http://localhost:8080/smaple/{sno}/page/{pno}
+```
+
+URL '{}'로 처리된 부분은 컨트롤러의 메서드에서 변수로 처리가 가능하다.
+@PathVariable은 '{}'의 이름을 처리할때 사용
+
+## @RequestBody
+@RequestBody는 전달된 요청의 내용을 이용해서**해당 파라미터의 타입으로 변환**을 요구한다.
+대부분의 경우에는 JSON데이터를 서버에 보내서 원하는 타입의 객체로 변화하는 용도로 사용된다.
+
+# REST 방식의 테스트
+
+위와 같이 GET방식이 아니고, POST 등의 방식으로 지정되어 있으면서 JSON 형태의 데이터를 처리하는 것을 브라우저에서 개발하려면 많은 시간과 노력이 들어간다.
+
+@RestController를 쉽게테스트 하기 위해서는 REST 방식의 데이터를 전송하는 툴을 이용하거나, JUnit과 spring-test를 이용해서 테스트한다.
+
+
+
+Mybatis는 두 개 이상이 데이터를 파라미터로 전달하기 위해서는 
+- 별도의 객체로 구성하는 방식
+- MAP을 이용하는 방식
+- @Param을 이용해서 이름을 사용하는 방식
+  
+@Pram의 속성값은 '#{}'의 이름으로 사용이 가능하다.
+
+
+```java
+public ResponseEntity<String> modify(
+					@RequestBody ReplyVO vo,
+					@PathVariable("rno") int rno
+```
+
+### 실제 수정되는 데이터는 JSON 포맷이므로 @RequestBody를 이용해서 처리한다. @RequestBody로 처리되는 데이터는 일반 파라미터나 @PathVariable 파라미터를 처리할 수 없기 때문에 직접 처리해주어야 한다.
+
+# AOP
+코드를 작성하면서 염두에 두는 일들은 주로 다음과 같다.
+- 파라미터가 올바르게 들어왔을까?
+- 이 작업을 하는 사용자가 적절한 권한을 가진 사용자인가?
+- 이 작업에서 발생할 수 있는 모든 예외는 어떻게 처리해야 하는가?
+
+AOP가 추구하는 것은 **관심사의 분리** 입니다. AOP는 개발자가 염두에 두어야 하는 일들은 별도의 '관심사'로 분리하고, 핵심 비즈니스 로직만을 작성할 것을 권장한다.
+
+
+AOP 기능은 주로 일반적인 Java API를 이용하는 클래스(POJO- Plain Old Java Object)들에 적용한다.
+Controller에 적용이 불가능한 것은 아니지만, Controller의 경우 뒤에서 학습하게 될 인터셉터나 필터 등을 이용한다.
+예제에서는 서비스 계층에 AOP를 적용한다.
+1. 서비스 계층의 메서드 호출 시 모든 파라미터들을 로그로 기록
+2. 메서드들의 실행시간을 기록
+
+@EnableTransactionManagement 설정은 'aspect-autoproxy'에 대한 설정이되고, txManager()는 bean태그 설정을 대신하게 된다.
