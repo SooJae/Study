@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<style>
+html.open {
+  overflow: hidden;
+}
+
+.btn {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+  background-image: url("http://s1.daumcdn.net/cfs.tistory/custom/blog/204/2048858/skin/images/menu.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+/* .close {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background-image: url("http://s1.daumcdn.net/cfs.tistory/custom/blog/204/2048858/skin/images/close.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+} */
+
+#menu {
+  width: 150px;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  right: -152px;
+  z-index: 10;
+  border: 1px solid #c9c9c9;
+  background-color: white;
+  text-align: center;
+  transition: All 0.2s ease;
+  -webkit-transition: All 0.2s ease;
+  -moz-transition: All 0.2s ease;
+  -o-transition: All 0.2s ease;
+}
+
+#menu.open {
+  right: 0px;
+}
+
+.page_cover.open {
+  display: block;
+}
+
+.page_cover {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 4;
+  display: none;
+}
+</style>
+<body>
+        <div class="btn">
+            <div onclick="history.back();" class="page_cover"></div>
+            </div>
+            <div id="menu">
+                
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+                안녕하세요
+
+              <div onclick="history.back();" class="close"></div>
+            </div>
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+               
+<script>
+$(".btn").click(function() {
+  $("#menu, .page_cover, html").addClass("open");
+  window.location.hash = "#open";
+});
+
+window.onhashchange = function() {
+  if (location.hash != "#open") {
+    $("#menu,.page_cover,html").removeClass("open");
+  }
+};
+</script>
+</body>
+</html>
+
+

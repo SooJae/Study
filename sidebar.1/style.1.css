@@ -1,11 +1,6 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
-html, body {
-    height: 100%;
-    overflow: auto;
-  }
-
 body{font-family: 'Poppins', sans-serif;
      background: #fafafa;
     }
@@ -30,7 +25,6 @@ a:focus{
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    
 }
 
 .navbar-btn{
@@ -50,7 +44,6 @@ a:focus{
     display: flex;
     width:100%;
     align-items: stretch;
-    
 
 }
   
@@ -61,38 +54,30 @@ a:focus{
     background:#0945b3;
     color:#fff;
     transition: all 0.3s;
-    position: fixed;
-    left : -250px;
     z-index: 999;
-    height:100%;
-    overflow: hidden auto;
 
 }
+#sidebar.inactive{
+    margin-left: -250px;
 
-#sidebar.active{
-    left: 0;
-}
-
-.overlay {
-    position: fixed;
-    width: 100%;
+    /* width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 998;
-    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 4;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none; */
 }
-
 
 #sidebar .sidebar-header{
     padding: 20px;
     background: #083c9a;
-    
 }
 
 #sidebar ul.components{
     padding:20px 0px;
     border-bottom: 1px solid #3b5998;
-    
 }
 
 #sidebar ul p{
@@ -113,12 +98,11 @@ a:focus{
 
 }
 
-#sidebar ul li.active>a,
+#sidebar ul li.inactive>a,
 a[aria-expanded="true"]{
     color:#fff;
     /* background: #6d7fcc; */
     background: #083c9a;
-    
 }
 a[data-toggle="collapse"]{
     position:relative;
@@ -177,10 +161,7 @@ a.article:hover{
         display:none;
     }
 } */
-
-
-
-
+/* 
 @media(max-width:1024px){
     #pc-navbar{
         display:none;
@@ -191,4 +172,4 @@ a.article:hover{
     #sidebarCollapse{
         display:none;
     }
-}
+} */
