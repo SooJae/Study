@@ -32,3 +32,40 @@ square(true, 2)                               // async1
         console.log("Complete : " + number);  //complete
     });
 
+
+
+
+
+function getFirstUser() {
+    return getUsers()
+    .then(function(users) {
+        return users[0].name;
+    });
+}
+
+function getFirstUser() {
+    return getUsers()
+    .then(function(users) {
+        return users[0].name;
+    })
+    .catch(function(err) {
+        return {
+            name: 'default user'
+        };
+    });
+}
+
+async function getFirstUser() {
+    let users = await getUsers();
+    return users[0].name;
+}
+async function getFirstUser() {
+    try {
+        let users = await getUsers();
+        return users[0].name;
+    } catch (err) {
+        return {
+            name: 'default user'
+        };
+    }
+}
