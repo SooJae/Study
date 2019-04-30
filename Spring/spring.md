@@ -946,4 +946,5 @@ Optional을 이용해서 null을 허용해준다.
 		return new MemberDao();
 	}
 
-=> 해당 클래스로 가서 @Configurationd을 써주면 생략가능
+=> 해당 클래스로 가서 @Configuration을 써주면 생략가능
+
