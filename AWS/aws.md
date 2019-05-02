@@ -160,6 +160,44 @@ $ echo manual | sudo tee /etc/init/apache2.override
 10. http://52.79.141.8/ 에 들어가보면 아파치 서버가 올라가있는 것을 확인 할 수 있다.
 
 
+## 배포 자동화
+1. $ docker ps -a
+2. $ docker rm -f `docker ps -a -q` (모든 명단을 가져와 제거)
+3. $ cd /home/ubuntu/docker
+4. sudo vim Dockerfile
+다음과 같이 수정
+```
+FROM ubuntu:18.04
+MAINTAINER Soojae Lee <mynameisleesujae@gmail.com>
+
+# Avoiding user interaction with tzdata 선택문이 나오지 않게 하기 위한 환경설정
+ENV DEBIAN_FRONTEND=noninteractive
+
+
+RUN apt-get update
+RUN apt-get install -y apache2 # Install Apache Web server (Only 'yes')
+
+# php설치
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:ondrej/php # For Installing PHP 5.6
+RUN apt-get update
+RUN apt-get install -y php5.6
+
+# Open HTTP Port
+EXPOSE 80
+
+CMD ["apachectl","-D","FOREGROUND"]
+```
+
+### 사용중이지 않은 이미지 제거
+5. $ docker rm -f  "IMAGE ID" (실행 중일 경우 rm -f로 먼저 삭제)
+6. $ docker rmi -f "IMAGE ID"
+
+7. $ docker run -p 80:80 -v /home/ubuntu/docker/html:/var/www/html docker(html폴더에 파일을 넣으면 실제로 php의 기본적인 경로인 /var/www/html에 놓인 것과 같은 효과를 낸다.)
+
+8. $ docker run -p 81:80 -v /home/ubuntu/docker/html:/var/www/html docker로 하면 81번포트에서도 접속할 수 있다. 80번 81번 포트 2개가 동시에 돌아간다. (다양한 웹서버를 하나의 서버내에서 다채롭게 여러개 만들어서 구성할 수 있다. 편리하다.)
+
+
 아파치 설치
 sudo apt-get install apache2
 
