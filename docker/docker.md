@@ -225,10 +225,21 @@ $ docker build -t docker .
 $ docker run -it --rm mariadb mysql -h"호스트아이피" -u"유저아이디" -p
 
 
+#docker-compose 설치
+
+
+1. $ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+2. $ sudo chmod +x /usr/local/bin/docker-compose
+3. path 값이 /usr/bin/이라면 다음과 같이 심볼릭 링크를 달아준다.
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+
+
+
 ## PHP와 MariaDB 연결
 1. $sudo vim Dockerfile
  -p : 컨테이너 포트를 개방한 뒤, 호스트 포트와 연결한다.
-
+-v : 볼륨 마운팅
 -expose : 컨테이너 포트만 개방한다.
 -d 옵션
 docker run --name daemonized_container -d <docker_image>
@@ -245,3 +256,16 @@ mariadb > FLUSH PRIVILEGES;
 
 #docker-compose.yml을 사용하여 다중 컨테이너 애플리케이션 정의
 https://docs.microsoft.com/ko-kr/dotnet/standard/microservices-architecture/multi-container-microservice-net-applications/multi-container-applications-docker-compose
+
+docker-compose는 기본으로 .env 파일을 환경변수 파일로 인식한다. 필요한 변수를 .env에 설정해 주고, .gitignore에 추가한다. 새로 생성한 .env 파일과 변경한 docker-compose 파일은 다음과 같다.
+```yml
+environment:
+      - "DOCUMENT_ROOT=${DOCUMENT_ROOT}"
+      - "PHP_INI: ${PHP_INI}"
+      - "VHOSTS_DIR: ${VHOSTS_DIR}"
+```
+
+도커를 연동한 상태에서 깃 허브에 파일을 올리면 서버에서 도커 이미지를 제거해도 된다.
+
+의문점
+원래는 mysql, mariaDB가 깔려있지 않아서 오류가 났다고 생각했는데 php를 volume처리 해주지 않아서 오류가 난것 같다. DB가 깔려 있지 않아도 외부 rds에 접속이 된다.
