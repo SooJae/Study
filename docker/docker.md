@@ -269,3 +269,33 @@ environment:
 
 의문점
 원래는 mysql, mariaDB가 깔려있지 않아서 오류가 났다고 생각했는데 php를 volume처리 해주지 않아서 오류가 난것 같다. DB가 깔려 있지 않아도 외부 rds에 접속이 된다.
+
+
+## docker-compose.yml 관리법
+
+docker-compose.yml
+이미지만 설정되어있는 베이스 파일
+docker-compose.override.yml
+개발시 사용되는 config
+docker-compose.prod.yml
+실제 배포시 사용되는 config
+docker-compose.test.yml
+CI에서 사용되는 config
+
+
+
+# 젠킨스 설치 (Docker in Docker 방식)
+1. $ docker pull jenkins
+
+2. $ docker run -d -p 8080:8080 -v /home/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins
+(젠킨스는 8080포트를 쓴다.)
+3. AWS EC2 8080포트를 열어준다.
+4. 주소:8080을 접속하면 젠킨스의 첫화면이 나온다.
+5. $ docker logs "젠킨스 컨테이너 ID"
+6. Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+**이 부분을 접속한 웹페이지 첫 화면 비밀번호에 붙여넣는다.**
+
+7. 첫번째 것을 눌러 기본 설치를 한다.
+8. 그다음 사용자를 생성한다.
