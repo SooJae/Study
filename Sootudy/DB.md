@@ -9,6 +9,7 @@ CREATE TABLE member (
   id varchar(50) NOT NULL,
   pw varchar(100) NOT NULL,
   nm varchar(100) NOT NULL,
+  email varchar(100) NOT NULL,
   dt datetime DEFAULT current_timestamp(),
   udt_dt datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   flag char(1) DEFAULT '1',

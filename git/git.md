@@ -1,6 +1,9 @@
 git = 버전관리<br>
 git hub 백업해주는 서비스
 
+## git 캐쉬삭제
+$ git rm -r --cached.
+
 push 원격저장소로 문서를 업로드
 pull 원격저장소의 문서를 다운로드
 

@@ -1,19 +1,19 @@
 
-# [생활코딩](https://opentutorials.org "생활코딩") 강의와 관련 서적들을 보면서 공부한 흔적들.
-
-
 # ☑️ TODO
 <!-- ### :pencil2: STUDY -->
 
-- [x] [**JAVA**](#)  
-- [x] [**Git**](#) 
-- [x] [**MySQL**](#) 
 - [x] [**HTML**](#)  
 - [x] [**CSS**](#)   
+- [x] [**Git**](#) 
 - [x] [**JavaScript**](#) 
+- [x] [**MySQL&MariaDB**](#) 
 - [x] [**BootStrap**](#) 
-- [ ] **JSP&Servlet** 
-- [ ] **Springwork**
+- [x] [**AWS**](#)
+- [x] [**Jenkins**](#)
+- [x] [**Docker**](#)
+- [x] [**JAVA**](#)  (1회독)
+- [x] [**JSP&Servlet**](#) (1회독)
+- [x] [**Springwork**](#) (2회독)
 
 <br>
 <br>

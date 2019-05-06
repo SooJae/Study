@@ -3,84 +3,6 @@
 -> Administators와 SYSTEM만 사용가능하도록 한다.
 
 
-## GUI환경을 위한 주피터 설치
-1. $ sudo apt-get install python3-pip 
-2. $ sudo pip3 install notebook
-###  비밀번호 설정
-3. $ python3 
-4. >>> from notebook.auth import passwd
-5. >>> passwd() 
-6. 비밀번호 입력
-7. sha1값 복사
-8. >>> exit()
-
-## Jupyter 환경 설정
-ssh사용 없이 웹브라우저에서 서버로 접속하게 해주는 기능을 갖고있다.
-1. $ jupyter notebook --generate-config
-2. $ sudo vim /home/ubuntu/.jupyter/jupyter_notebook_config.py
-3. 맨 아래에 입력
-```
-c = get_config()
-c.NotebookApp.password = u'sha1: (복사한 sha1:의 값)'
-c.NotebookApp.ip ='아이피주소'
-c.NotebookApp.notebook_dir='/'
-```
-4. $ sudo jupyter-notebook --allow-root
-5. 내주소 : 8888포트가 출력된다.
-6. AWS 홈페이지 ->내 EC2-> 보안 -> 인바운드 태그-> 편집 -> 규칙추가 -> 8888포트 추가
-7. 주소창에 아이피:8888 입력
-## 항상 백그라운드로 실행되게 하기 (실행중인 프로세스를 유지한채 ssh 로그아웃 하기)
-8. ctrl + z 입력
-9. $ bg 숫자
-10. disown(작업의 소유권을 shell session에서 해제 전체는 -a 옵션 사용)
-11. ssh 로그아웃
-    
-하지만 현재 주피터 노트북이 ssl 인증서가 적용 안된 상태이므로 통신과정에서 위험하다. 그러므로 HTTPS 적용을 해준다.
-SSL을 사용하면 해커가 해당 패킷을 가로채더라도 우리가 서버에 어떤 명령어를 사용했는지는 알 수 없다.
-## 주피터에 HTTPS 적용 (보안적용)
-### 해당 프로세스 종료
-1. $ sudo netstat -nap | grep 포트번호
-2. $ sudo kill -9 "PID값"
-###  ssl 생성
-3. $ cd /home/ubuntu
-4. $ mkdir ssl
-5. $ cd ssl
-### 사설 인증서 생성(rsa 알고리즘 사용) (공개키 기반구조)
-6. $ sudo openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout "cert.key" -out "cert.pem" -batch
-7. $ sudo vim /home/ubuntu/.jupyter/jupyter_notebook_config.py
-8. 맨 밑에 
-c.NotebookApp.certfile = u'/home/ubuntu/ssl/cert.pem'
-c.NotebookApp.keyfile = u'/home/ubuntu/ssl/cert.key'
-추가
-
-이제 http://아이피값:8888/ 에서 https://아이피값:8888/ 으로 바뀐것을 확인 할 수 있다.
-
-## 시스템 서비스로 등록
-시스템 서비스로 등록을 하게되면, 재부팅을 하더라도 프로그램을 따로 재 실행시키지 않아도 된다.
-1. $ which jupyter-notebook (해당 프로그램 위치 확인)
-
-2. $ sudo vim /etc/systemd/system/jupyter.service
-3. 다음과 같이 작성
-```
-[Unit]
-Description=Jupyter Notebook Server
-
-[Service]
-Type=simple
-User=ubuntu
-ExecStart=/usr/bin/sudo /usr/local/bin/jupyter-notebook --allow-root --config=/home/ubuntu/.jupyter/jupyter_notebook_config.py
-
-[Install]
-WantedBy=multi-user.target
-```
-ExecStart=/usr/local/bin/sudo(이 폴더 밑에 있는 sudo 명령어 사용해서) /usr/local/bin/jupyter-notebook --allow-root
-(이 폴더 밑에 있는 jupyter-notebook --allow-root를 실행하고) --config=/home/ubuntu/.jupyter/jupyter_notebook_config.py 
-(실행할 때 jupyter_notebook_config.py 를 환경파일로 적용한다.)
-4. $ sudo systemctl daemon-reload
-5. $ sudo systemctl enable jupyter (주피터 서비스를 사용하능한 상태로 만든다.)
-6. $ sudo systemctl start jupyter
-7. $ sudo systemctl status jupyter (주피터가 잘 돌아가는지 확인)
-8. $ sudo systemctl restart jupyter
 
 #docker 설치
 1. $ df -h로 메모리 확인.(의외로 저장공간을 많이 먹음)
@@ -299,3 +221,36 @@ Please use the following password to proceed to installation:
 
 7. 첫번째 것을 눌러 기본 설치를 한다.
 8. 그다음 사용자를 생성한다.
+
+
+# 젠킨스 설치 2
+	
+1. $ docker run -d -p 8080:8080 -p 50000:50000 jenkins/jenkins
+2. AWS EC2 8080포트를 열어준다.
+3. 주소:8080을 접속하면 젠킨스의 첫화면이 나온다.
+4. $ docker logs "젠킨스 컨테이너 ID"
+5. Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+**이 부분을 접속한 웹페이지 첫 화면 비밀번호에 붙여넣는다.**
+
+깃 계정 정보를 특정한 서버내에 기록하게하면 깃 계정 정보가 유출될수도 있기때문에
+(젠킨스에 존재하기 때문에) 다음과 같이 2시간만 존재하도록 타임아웃 설정을 한다.
+git config --global credential.helper "cahce --timeout 7200"
+
+깃허브
+Personal access tokens 탭에 들어가서 
+repository와 repo:hook을 체크해놓으면 
+git pull을 할때 비밀번호 대신에 accessToken을 넣으면 된다.
+
+
+
+컨테이너가 중지되면 고정 장치 볼륨이 자동으로 제거되지 않습니다. 컨테이너를 중지 할 때 연관된 볼륨을 제거하려면 다음과 같이하십시오.
+
+docker rm -v <container id or name>
+-v 플래그가 지정되지 않으면, 볼륨은 디스크에 'dangling volume'으로 남아 있습니다. 매달려있는 모든 볼륨을 삭제하려면 다음과 같이하십시오.
+
+docker volume rm $(docker volume ls -qf dangling=true)
+docker volume ls -qf dangling=true 필터는 컨테이너에 연결되지 않은 태그가없는 볼륨을 포함하여 도커 볼륨 이름의 목록을 반환합니다.
+
+2.164.2
