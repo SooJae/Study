@@ -108,3 +108,246 @@ XML로 처리할때 cri와 bno를 모두 사용가능하다.
 select * from board WHERE bno =#{bno}
 ```
 XML에서 #{bno}가 @Param("bno")와 매칭되어서 사용된다는 것에 주의!
+
+
+
+
+xml to java
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring/root-context.xml</param-value>
+    </context-param>
+
+    <!-- Creates the Spring Container shared by all Servlets and Filters -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Processes application requests -->
+    <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+          <init-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+    </init-param>
+        <init-param>
+            <param-name>contextConfigLocatation</param-name>
+            <param-value>com.mds.test.ServetConfig</param-value>
+        </init-param>
+
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping> 
+</web-app>
+```
+```java
+@Configuration
+@ComponentScan(basePackages={"com.mds.test"})
+@EnableWebMvc
+public class ServletConfig extends WebMvcConfigurerAdapter{
+
+    @Bean
+    public ViewResolver internalResourceViewer(){
+
+        InternalResourceViewResolver irvr= new InternalResourceViewResolver();
+        irvr.setPrefix("/WEB-INF/views/");
+        irvr.setSuffix(".jsp");
+        return irvr;
+    }
+
+    @Bean(name="multipartResolver")
+    public ExtendedMultipartResolver resolver(){
+        return new ExtendedMultipartResolver();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // TODO Auto-generated method stub
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }   
+}
+```
+
+
+
+ Xml
+
+<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<beans:property name="order" value="0" />
+</beans:bean>
+
+<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+	<beans:property name="order" value="1" />
+</beans:bean>
+
+<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+	<beans:property name="definitions">
+		<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+	</beans:property>
+</beans:bean>
+
+<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<beans:property name="prefix" value="/WEB-INF/views/" />
+	<beans:property name="suffix" value=".jsp" />
+	<beans:property name="order" value="2" />
+</beans:bean>
+- Java Config
+
+/* ViewResolver*/
+@Bean
+public BeanNameViewResolver beanNameViewResolver() {
+	BeanNameViewResolver resolver = new BeanNameViewResolver();
+	resolver.setOrder(0);
+	return resolver;
+}
+	/* Tiles */
+@Bean
+public UrlBasedViewResolver urlBasedViewResolver() {
+	UrlBasedViewResolver resolver = new UrlBasedViewResolver();
+	resolver.setViewClass(TilesView.class);
+	resolver.setOrder(1);
+	return resolver;
+}
+@Bean
+public TilesConfigurer tilesConfigurer() {
+	TilesConfigurer tilesConfigurer = new TilesConfigurer();
+	tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles/tiles.xml" });
+	tilesConfigurer.setCheckRefresh(true);
+	return tilesConfigurer;
+}
+	/* Tiles */
+@Bean
+public InternalResourceViewResolver internalResourceViewResolver() {
+	InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+	resolver.setPrefix("/WEB-INF/views/");
+	resolver.setSuffix(".jsp");
+	resolver.setOrder(2);
+	return resolver;
+}
+
+
+Common Context
+
+ 서비스 로직에서는 @Controller는 스캔하지 않고 @Service와 @Repository를 스캔한다.
+
+- Xml
+```xml
+<context:component-scan base-package="spring.web.app">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+```
+- Java Config
+```java
+@Configuration
+@ComponentScan(
+	basePackages = "spring.web.app", 
+	excludeFilters = {
+		@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = Controller.class)
+	}, 
+	includeFilters = { 
+		@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = Service.class),
+		@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = Repository.class)
+	}
+)
+public class CommonConfig {
+	
+}
+```
+
+
+Scribe library용 Naver Login 구현체 추가
+```java
+ package com.naver.naverlogintutorial.oauth.model;
+ 
+ import com.github.scribejava.core.builder.api.DefaultApi20;
+
+ public class NaverLoginApi extends DefaultApi20{
+
+ 	protected NaverLoginApi(){
+ 	}
+ 
+ 	private static class InstanceHolder{
+ 		private static final NaverLoginApi INSTANCE = new NaverLoginApi();
+ 	}
+ 	
+ 	
+ 	public static NaverLoginApi instance(){
+ 		return InstanceHolder.INSTANCE;
+ 	}
+ 	
+ 	@Override
+ 	public String getAccessTokenEndpoint() {
+ 		return "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code";
+ 	}					
+ 
+ 	@Override
+ 	protected String getAuthorizationBaseUrl() {
+ 		return "https://nid.naver.com/oauth2.0/authorize";
+ 	}	
+ 
+ }
+```
+
+```java
+package com.naver.naverlogintutorial.oauth.bo;
+
+import javax.servlet.http.HttpSession;
+import com.github.scribejava.core.builder.ServiceBuilder;
+import com.github.scribejava.core.oauth.OAuth20Service;
+import com.naver.naverlogintutorial.oauth.model.NaverLoginApi;
+
+public class NaverLoginBO {
+
+	private final static String CLIENT_ID = "";
+	private final static String CLIENT_SECRET = "";
+	private final static String REDIRECT_URI = "http://127.0.0.1:8080/auth/naver/callback";
+	
+	/* 네아로 인증  URL 생성  Method */
+	public String getAuthorizationUrl(HttpSession session) {
+
+		/* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
+		OAuth20Service oauthService = new ServiceBuilder()
+				.apiKey(CLIENT_ID)
+				.apiSecret(CLIENT_SECRET)
+				.callback(REDIRECT_URI)
+				.state("RANDOM_STRING")
+				.build(NaverLoginApi.instance());
+
+		return oauthService.getAuthorizationUrl();
+	}
+}
+
+```
+```xml
+<beans:bean id="naverClientID" class="java.lang.String">
+    <beans:constructor-arg value="<naver clientId>"/>
+<beans>
+<beans:bean id="naverClientSecret" class="java.lang.String">
+    <beans:constructor-arg value="<naver clientSecret>"/>
+<beans>
+<beans:bean id="naverRedirectUrl" class="java.lang.String">
+    <beans:constructor-arg value="http://127.0.0.1:8080/auth/naver/callback"/>
+<beans>
+<beans:bean id="NaverSns" class="com.jade.swp.auth.SNS">
+    <beans:constructor-arg value="naver"/>
+    <beans:constructor-arg ref="naverClientID"/>
+    <beans:constructor-arg ref="naverClientSecret"/>
+    <beans:constructor-arg ref="naverRedirectUrl"/>
+<beans:bean>
+```

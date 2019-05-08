@@ -97,3 +97,10 @@ sudo service tomcat8 stop
     <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="^.*$" />
 </Context>
 ```
+
+
+# 포트 포워딩
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+# 확인하기 
+iptables -t nat -L

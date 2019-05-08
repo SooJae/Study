@@ -13,7 +13,7 @@ Use Tomcat installation 체크, publish module contexts to seperate XML files �
 Spring Tool Suite 플러그인 설치
 help -> Eclipse marketplace
 
-
+xml - > 자바 설정에 관한 사이트 http://wonwoo.ml/index.php/post/640
 
 DI(Dependency Injection)와 IOC 컨테이너
 

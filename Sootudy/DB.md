@@ -1,9 +1,9 @@
-CREATE TABLE MEMBER_AUTH_TB (
-  USER_ID varchar(50) NOT NULL,
-  AUTH varchar(50) NOT NULL,
-  PRIMARY KEY MEMBER_AUTH_PK (USER_ID,AUTH),
-  CONSTRAINT MEMBER_AUTH_FK FOREIGN KEY (USER_ID) REFERENCES MEMBER_TB (USER_ID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE member_auth (
+  id varchar(50) NOT NULL,
+  auth varchar(50) NOT NULL,
+  PRIMARY KEY member_auth_pk (id,auth),
+  CONSTRAINT member_auth_fk FOREIGN KEY (id) REFERENCES member (id)
+) 
 
 CREATE TABLE member (
   id varchar(50) NOT NULL,
@@ -13,6 +13,7 @@ CREATE TABLE member (
   dt datetime DEFAULT current_timestamp(),
   udt_dt datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   flag char(1) DEFAULT '1',
+  type varchar(50) NOT NULL,
   PRIMARY KEY (id)
 )
 
