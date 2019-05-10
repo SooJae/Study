@@ -31,6 +31,16 @@ CREATE TABLE board (
   PRIMARY KEY (bno)
 )
 
+CREATE TABLE board_attach(
+  uuid VARCHAR(100) not null,
+  uploadPath VARCHAR(200) not null,
+  fileName VARCHAR(100) not null,
+  filetype char(1) default 'I',
+  bno int
+)
+
+alter table board_attach add constraint pk_attach primary key (uuid);
+alter table board_attach add constraint fk_board_attach foreign key (bno) references board(bno);
 
 
 

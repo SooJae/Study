@@ -100,7 +100,42 @@ sudo service tomcat8 stop
 
 
 # 포트 포워딩
-sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 
+# iptable 영구저장
+1. sudo apt install iptables-persistent
+2. sudo netfilter-persistent save
+3. sudo netfilter-persistent reload
+
+2. service iptables save
 # 확인하기 
 iptables -t nat -L
+
+
+# EC2 swap 파일 생성(t2는 swap파일이 없다.)
+
+
+$ sudo dd if=/dev/zero of=/swapfile bs=1M count=512     # 512MB 스왑용 파일 생성
+   
+$ sudo chown root:root /swapfile    # root 소유
+   
+$ sudo chmod 600 /swapfile          # 권한설정
+   
+$ sudo mkswap /swapfile
+   
+$ sudo swapon /swapfile
+  
+$ sudo swapon -a
+  
+   
+ 
+$ sudo vi /etc/fstab        # 리부팅시 인식할 수 있도록 fstab에 등록 (실수할 경우 부팅이 안될 수 있으니 스냅샷 + 조심!)
+   
+가장 아래줄에 내용추가
+   
+/swapfile   swap   swap   defaults  0  0
+   
+ 
+$ sudo swapon -s    # sanity test  Swap 에 설정한 용량이 사용되었는지 확인
+   
+$ free -m           # sanity test  Swap 에 설정한 용량이 사용되었는지 확인
