@@ -1,8 +1,8 @@
 CREATE TABLE member_auth (
   id varchar(50) NOT NULL,
   auth varchar(50) NOT NULL,
-  PRIMARY KEY member_auth_pk (id,auth),
-  CONSTRAINT member_auth_fk FOREIGN KEY (id) REFERENCES member (id)
+  PRIMARY KEY pk_member_auth (id,auth),
+  CONSTRAINT fk_member_auth FOREIGN KEY (id) REFERENCES member (id)
 ) 
 
 CREATE TABLE member (

@@ -33,4 +33,22 @@ CSRF공격 자체가 사용자의 요청에 대한 출처를 검사하지 않아
 공격자의 입장에서는 CSRF공격을 하려면 변경되는 CSRF 토큰값을 알아야만 하기 때문에 고정된 내용의 \<form>태그나 \<img>태그 등을 이용할 수 없다.
 
 CSRF 동작방식
-CSRF토큰은 세션을 통해서 보관, 브라우저에서 전송된 CSRF 토큰 값을 검사하는 방식으로 처리
+일반적으로 CSRF토큰은 세션을 통해서 보관, 브라우저에서 전송된 CSRF 토큰 값을 검사하는 방식으로 처리한다.
+스프링 시큐리티에서 CSRF 토큰 생성을 비활성화 하거나 CSRF 토큰을 쿠키를 이용해서 처리하는 등의 설정을 지원한다.
+
+AuthenticationSuccessHandler 인터페이스 : 로그인 한 사용자에 부여된 권한 Authentication객체를 객체를 이용해서 사용자가 가진 모든 권한을 문자열로 체크한다.
+
+스프링 시큐리티에서는 사용자를 확인하는 인증(Authentication)과 권한 등을 부여하는 인가 과정(Authorization)으로 나누어 볼 수 있다.
+
+인증과 권한에 대한 처리는 **Authentication Manager**를 통해서 이루어지는데, 이때 인증이나 권한 정보를 제공하는 존재(Provider)가 필요하고, 다시 이를 위해서 UserDetailsService라는 인터페이스를 구현한 존재를 활용한다.
+
+UserDetailsService는 스프링 시큐리티 API 내에 이미 CachingUserDetailsService, InMemoryUserDetailsManager(문자열로 고정한 방식),JdbcDaoImpl, JdbcUserDetailsManager등 구현클래스들을 제공하고 있다.
+
+JDBC를 이용해서 인증/권한을 체크하는 방식은 
+1. 지정된 형식으로 테이블을 생성해서 사용하는 방식
+2. 기존에 작성된 데이터베이스를 이용하는 방식
+
+UserDetailsService 인터페이스는 loadUserByUsername() 이라는 메서드의 반환 타입인 UserDetails 역시 인터페이스로 사용자의 정보와 권한정보등을 담는 타입.
+UserDetails 타입은 getAuthorities(), getPassword(), getUserName() 등의 여러 추상 메서드를 가지고 있어서 개발전에 직접구현할 것인지 UserDetails 인터페이스를 구현해둔 스프링 시큐리티의 여러 하위 클래스를 이용할 것인지 판단해야 한다.
+
+UserDetailsService 인터페이스를 상속받은 클래스에 Mapper까지 구현해준다.
