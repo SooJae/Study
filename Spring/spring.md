@@ -1,6 +1,7 @@
-프레임 워크란, 특정한 목적에 맞게 프로그래밍을 쉽게하기 위한 약속.
+# 프레임 워크 
+특정한 목적에 맞게 프로그래밍을 쉽게하기 위한 약속.
 
-스프링
+# 스프링
 자바언어를 기반으로 다양한 어플리케이션을 제작하기 위한 약속된 프로그래밍 툴.
 
 예전 EJB의 경우 고가의 장비(WAS등)이 필요되어지고, 개발환경 및 설정 그리고 테스트환경에 많은 애로사항들이 존재.
@@ -15,10 +16,11 @@ help -> Eclipse marketplace
 
 xml - > 자바 설정에 관한 사이트 http://wonwoo.ml/index.php/post/640
 
-DI(Dependency Injection)와 IOC 컨테이너
+# DI(Dependency Injection)와 IOC 컨테이너
 
-A객체는 B,C,D객체에 의존한다.
+## A객체는 B,C,D객체에 의존한다.
 방법 1: A객체가 B,C,D객체를 직접 생성 한다. (new B, C, D)
+
 방법 2: A객체에 setter() 또는 construct() 생성자에서 B라는 객체와 C라는 객체가 필요할때 b또는 c라는 객체를 만들고, setter또는 construct에서 this.b, this.c 로 생성자를 받는다. 
 B,C 객체 외부에 생성하여 A객체에 넣어 준다.
 스프링은 방법 2를 사용한다.
