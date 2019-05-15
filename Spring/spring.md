@@ -1,6 +1,316 @@
-프레임 워크란, 특정한 목적에 맞게 프로그래밍을 쉽게하기 위한 약속.
+# POJO(Plain Old Java Object) 평범한 구식 자바 객체
 
-스프링
+**마틴 파울러**가 EJB(Enterprise JavaBean) 보다는 단순한 자바 오브젝트에 도메인 로직을 넣어 사용하는 것이 여러가지 장점이 있는데도 왜 사람들이 그 EJB가 아닌 '평범한 자바 오브젝트'를 사용하기 꺼려하는지에 의문을 가졌다. EJB와 같은 그럴듯한 이름이 없다고 판단. POJO라는 단어를 만들었다.
+POJO에 대해 알려면 EJB에 대해 잘 알아야 한다.
+## EJB와 엔터프라이즈 서비스
+서버기반의 자바기술인 J2EE 가 등장했지만, Servlet, JSP 레벨의 최소한의 서버 프로그래밍 인터페이스만 가지고는 복잡한 엔터프라이즈 애플리케이션을 제작하는데 부담이 적지 않았다.
+엔터프라이즈 시스템의 복잡도는 두가지 다른 영역에서 증대되었다. 하나는 기업 업무처리의 IT 시스템에 대한 의존도가 높아지면서, 시스템이 다뤄야 하는 비즈니스 로직 자체가 점차로 복잡해졌다.
+또 다른 하나는 많은 사용자의 처리요구를 빠르고 안정적이면서 확장 가능한 형태로 유지하기 위해 필요한 로우 레벨의 기술적인 처리 요구들이다. 단순히 DB와 연동하는 수준의 C/S 기반의 standalone 애플리케이션과는 달리 서버에서 동작하는, 그것도 **웹 기반으로 많은 처리 요구를 받는 시스템에는 감당해야 할 중요한 기술적인 요구들이 많다. 대표적으로 트랜잭션 처리, 상태 관리, 멀티 스레딩, 리소스 풀링, 보안 등이 있다.**
+애플리케이션 로직의 복잡도와 상세 기술의 복잡함을 개발자들이 한 번에 다룬다는 것은 쉬운 일이 아니었다. 한 개발자가 보험업무와 관련된 계산 로직을 자바로 어떻게 구현해야 하는지에 집중하면서 동시에 **시스템 레벨에서 멀티 DB로 확장가능한 트랜잭션 처리와 보안기능을 멀티스레드 세이프하게 만드는것에 신경을 써야 한다면 여간 부담되는게 아닐 것이다.**
+EJB는 이런 문제를 다루기 위하 등장했다. EJB 1.0의 스펙이 제시한 EJB의 비전은 'EJB는 애플리케이션 개발을 쉽게 만들어 준다. 애플리케이션 개발자는 로우레벨의 기술들에 관심을 가질 필요도 없다.' 였다.
+
+애플리케이션 개발자들은 다뤄야 하는 **해당 도메인**과 **비즈니스 로직**에만 집중하면 된다는 것이었다. 게다가 EJB는 독립적으로 개발한 컴포넌트들을 서버에 자유롭게 배포하고 서로 연동해 사용하게 하는 컴포넌트 기반의 개발 모델을 제시할 뿐더러, 여러 대의 서버에 분산되어 있는 모듈간의 리모팅 처리도 개발자들이 거의 신경쓰지 않고 개발할 수 있게 했다. 더 나아가 자바의 서버 기술을 일관성 있게 구현하게 지원하므로 특정 서버에 종속되지 않고 서버간의 이동성을 보장해준다고 약속했다.
+
+하지만, EJB는 불필요할 만큼 과도한 엔지니어링으로 실패한 대표적인 케이스였다. 
+## EJB단점 
+1. 1%미만의 애플리케이션에서만 필요한 멀티DB를 위한 분산 트랜잭션을 위해 나머지 99%의 애플리케이션도 무거운 JTA기반의 글로벌 트랜잭션 관리기능을 사용해야 했다.
+2. EJB의 혜택을 얻기위해 모든 기능이 필요하지 않은 고가의 WAS를 구입해야 했고, 고급 IDE의 도움 없이는 손쉽게 다룰 수 없는 복잡한 설정 파일 속에서 허우적 대야 했다. 
+3. EJB컴포넌트는 컨테이너 밖에서는 정상적으로 동작할 수 없으므로, 개발자들을 끝도 없이 반복되는 수정-빌드-배포-테스트의 지루한 과정으로 많은 시간을 낭비해야 했고, 간단한 기능에 대해서조차 자동화된 테스트를 만드는것은 거의 불가능해졌다.
+4. 테스트는 서버에 배치후에 대부분 수동으로 했고, 느린 배포작업탓에 그나마 자주 반복되기 힘들게 만들었다. 특별한 경우가 아니라면 그다지 장점이 없는 EJB의 원격분산 모델은 성능을 떨어뜨리고 서버의 복잡도만 증가시켰다. 가장 최악의 문제는 EJB스펙을 따르는 비즈니스 오브젝트들을 **객체지향적인 특징과 장점을 포기해야 했다는 것**이다.
+EJB빈은 **상속과 다형성 등의 혜택을 제대로 누릴 수 없었다.** 간단한 기능 하나를 위해서도 **많은 인터페이스와 EJB 의존적인 상속등을 사용해야 했다.**
+
+그럼에도 EJB가 사용되었던 이유는 엔터프라이즈 애플리케이션에서 반드시 필요로하는 주요한 엔터프라이즈 서비스들을 애플리케이션 코드와 분리해서 독립적인 서비스로 사용할 수 있게 만들어줬다는 점이다.
+**선언적인 트랜잭션 관리(Declarative Transaction Management)나 역할 기반의 보안 기능(Role based Security)들을 제공**했다. 
+1. 비즈니스 오브젝트를 배포하고 관리하는 컨테이너를 제공
+2. 기본적인 스레드 관리
+3. 인스턴스/리소스 풀링을 제공
+
+한편으로는 '개발자들이 로우레벨의 기술적인 문제에 신경쓰지 않고, 비즈니스 로직에 충실히 개발하게 함으로써 애플리케이션 개발을 손쉽게 만들어준다.'는 약속을 지켰다고 볼 수 있다. 하지만 EJB의 문제는 앞서 지적한 것처럼 한편으로는 애플리케이션 개발의 복잡도를 제거하면서 다른 한편으로는 더 많은 문제와 복잡성을 가지고 왔다.
+
+결국 EJB는 형편없는 생산성과 느린 성능, 불필요한 기술적인 복잡도, 벤더사이의 과도하게 높아진 스펙 등으로 인해 자바 엔터프라이즈 개발에 대한 불신을 가중시켰다. 
+마침내 마틴 파울러를 비롯한 많은 오피니언 리더들은 EJB와 같은 잘못 설계된 과도한 기술을 피하고, 객체지향 원리에 따라 만들어진 **자바 언어의 기본에 충실하게 비즈니스 로직을 구현하는 일명 POJO 방식**으로 돌아서야 한다고 지적하고 나섰다. POJO 방식의 개발은 EJB가 잃어버린 소중한 가치인 **객체지향적인 설계와 자동화된 테스트의 편의성 개발 생산성등을 회복시켜 줄 수 있는 길**이기 때문이다.
+
+EJB를 사용하지 않고 POJO를 쓰자는 것이 EJB이전의 방식으로 돌아가는 것을 의미한다면 또 다른 문제가 발생할 수밖에 없다.
+여전히 복잡한 로우레벨의 API를 이용해 코드를 작성해야하고, 많은 기술적인 문제를 애플리케이션 코드에 그대로 노출시켜 개발해야 한다면 기껏 POJO로의 복귀 덕분에 얻은 많은 장점들을 놓칠 수밖에 없다.
+
+그래서 등장한 것이 바로 **POJO 기반의 프레임워크이다.** POJO 프레임워크는 POJO를 이용한 애플리케이션 개발이 가진 특징과 장점을 그대로 살리면서 EJB에서 제공하는 엔터프라이즈 서비스와 기술을 그대로 사용할 수 있도록 도와주는 프레임워크이다. 가장 대표적인 것을 꼽으라면 하이버네이트와 스프링이다.
+
+## 하이버네이트
+는 EJB의 엔티티빈이 제시했던 컨테이너가 관리하는 퍼시스턴스 기술과 오브젝트-관계형 DB매핑 기술을 순수한 POJO를 이용해 사용할 수 있게 하는 POJO 기반의 퍼시스턴스 프레임워크이다.
+1. 컨테이너위에서 동작시킬 필요가 없다.
+2. 이상적인 매핑을 위해 포기했던 많은 기능과 성능을 객체지향 DB에 적합하게 최적화한 기능을 통해 JDBC API를 직접 사용해 개발하는 것 못지않은 성능과 복잡한 퍼시스턴스 로직을 개발 가능하게 해줬다.
+3. 하이버네이트가 사용하는 POJO 엔티티들은 EJB의 엔티티빈과 달리 **객체지향적인 다양한 설계와 구현이 가능**하다. 엔티티의 상속, 다형성, 밸류 오브젝트, 사용자정의 타입 등을 어떠한 기술적인 손해 없이도 그대로 퍼시스턴스 매핑용 오브젝트로 사용할 수 있게 한다.
+
+## 스프링
+은 세션빈이 제공하던 중요한 엔터프라이즈 서비스들을 POJO 기반으로 만든 비즈니스 오브젝트에서 사용할 수 있게한다.**대표적인 것이 선언적인 트랜잭션 서비스와 보안이다.** 또한 EJB와 마찬가지로 오브젝트 컨테이너를 제공해서 인스턴스의 라이프사이클을 관리하고 필요에 따라 스레딩, 풀링 및 서비스 인젝션 등의 기능을 제공한다. 또한 OOP를 더 OOP답게 사용할 수 있게 하는 AOP기술을 적용해서 POJO 개발을 더 쉽게 만든다.
+
+## POJO vs 짝퉁 POJO
+### POJO 프로그래밍의 진정한 가치는 자바의 객체지향적인 특징을 살려 비즈니스 로직에 충실한 개발이 가능하도록 하는 것이다.
+그러면서 복잡한 요구조건을 가진 엔터프라이즈 개발의 필요조건을 충족시킬 있도록 POJO기반의 프레임워크를 적절히 사용하는 것이 요구된다. 문제는 단지 POJO 프레임워크로 잘 알려진 제품을 사용하기만 하면 자동으로 POJO 개발을 하고있다고 생각하는 경우가 많다는 것이다.
+
+### 잘못된 POJO 기반 코드의 예
+```java
+class MyService {
+   private MyDAO myDAO;
+   private XXDao xxDAO;
+   … 
+     public MyVo foo(UrVO urVo) throws MyException
+    {
+        Connection con = null; 
+        try {
+            con = DBUtil.getConnection();
+       con.setAutoCommit(false);
+
+       if (xxDAO.check(urVo))
+            return myDAO.foo(con, urVo);
+       
+      else
+        return myDAO.boo(con, urVo);
+      }
+ catch (MyException e) {
+   con.rollback();
+     throw e;
+  }
+   catch (Exception e) {
+     throw new MyException(e, "XXX00001");
+      con.rollback();
+         }
+          finally {
+           con.commit();
+             DBUtil.close(con);
+         }
+     }
+…
+}
+
+
+class MyDAO { 
+public void foo(Connection con, UrVO urVO) throws MyException {
+
+           PreparedStatement pstmt = null;
+           try {
+              pstmt = new LoggablePreparedStatement(con, QueryFactory.getInstance().getQuery("FOO"));
+          pstmt.setInt(1, urVO.getSeq());
+          if (pstmt.executeUpdate() != 1) {
+                throw new MyException("SVM00009");
+}
+} catch (MyException e) {
+       throw kble;
+} catch (Exception e) {
+       throw new MyException(e);
+} finally {
+       DBUtil.close(pstmt);
+}
+}
+…
+}
+```
+
+
+## POJO로의 변환
+
+<리스트 1>의 코드를 스프링의 POJO 프로그래밍 모델에 따라 수정해 보자. DAO 코드의 가장 큰 문제점은 JDBC의 오래된 코드 스타일을 그대로 사용하고 있다는 것이다. 따라서 try/catch/ finally의 전형적인 템플릿 코드가 실제 DAO 로직보다 더 많은 라인을 차지하고 있다. 또 Query를 불러오는 부분이 싱글톤을 사용하고 있다. 그나마 JDBC 코드를 간략하게 작성하도록 돕는 유틸리티 클래스를 사용했지만 정적 메소드를 이용했다. 싱글톤과 정적메소드는 테스트 코드를 만드는 데 가장 큰 장애물이다. 테스트를 쉽게 하기 위해 모의객체(mock object)로 변환하는 것이 불가능하기 때문이다. 객체지향적인 설계방식을 따른다면 Query를 가져오는 기능을 인터페이스로 만들어 사용하게 하고 이를 구현한 오브젝트를 DAO에서 참조할 수 있도록 하는 것이 바람직하다. 또한 템플릿 스타일의 과도한 코드를 제거하고 반복적인 JDBC 워크플로우를 제거하려면 콜백 방식으로 구현하는 게 좋다. 그러면 DAO의 데이터액세스 로직과 JDBC 처리 워크플로우를 구분할 수 있다. <리스트 2>는 이렇게 스프링을 이용한 POJO 스타일로 수정된 코드이다.#
+
+수정된 DAO
+```java
+public class MyDAO {
+              private DataSource dataSource;
+              private SimpleJdbcTemplate jdbcTemplate;
+              private QueryFactory queryFactory; 
+              // setter methods
+              public void foo(UrlVo urlVo) {
+
+jdbcTemplate.update(queryFactory.getQuery("FOO"), urlVo.getSeq());
+}
+}
+```
+
+MyDAO는 DataSource, QuereyFactory라는 협력객체를 인터페이스를 통해 액세스하므로 해당 오브젝트의 구현에 상관없이 동작할 수 있다. **DataSource가 개발용에서 테스트용으로 또 실제 운영서버로 바뀐다고 하더라도 DAO는 그 부분에 신경 쓰지 않고 클래스의 목적인 데이터로직을 구현하는 데만 충실하게 만들어져 동작할 수 있게 되었다.** 테스트를 위해 실제 DB가 아닌 Fake DB나 Embedded DB를 적용한다면 그 DB 설정을 돌려주는 적절한 DataSource를 MyDAO가 사용하도록 스프링을 통해 설정하면 그만이다.
+
+ 
+또 **JdbcTemplate이라는 JDBC 워크플로우를 제공하는 템플릿 기반의 Helper 클래스를 사용해서 반복적으로 등장하는 JDBC의 try/catch/finally 작업을 DAO에서 제외하고 순수하게 데이터 처리와 관련된 핵심 로직만 사용하도록 정리했다.** 
+결과적으로 코드는 깔끔해지고 여러 클래스에 거쳐 나타나는 지저분한 중복은 제거되었다. 또한 DAO 오브젝트의 역할을 넘어선 것들은 의존하는 오브젝트로 분리하고 그 구현에 종속되지 않도록 인터페이스를 사용하게 했으므로 객체지향적인 설계에 충실한 오브젝트의 설계와 구현에 가깝도록 만들어졌다. 
+
+
+이번에는 MyService를 살펴보자. MyService의 가장 큰 문제는 무엇인가? 그것은 MyService는 비즈니스 로직을 구현한 클래스임에도 불구하고, 실제로 코드 안에는 그와 상관없는 데이터액세스와 관련된 코드들이 덕지덕지 붙어 있다. MyService에 나타난 커넥션과 트랜잭션 처리 코드들은 어찌 보면 어쩔 수 없는 선택으로 생각할 수도 있다. DAO를 분리해 놓은 상태로, MyService에서 여러 개의 DAO를 호출해 처리하는 결과를 하나의 커넥션과 트랜잭션으로 묶으려면 MyService 레벨에서 처리해야 하기 때문이다. 그렇지 않고 DAO 메소드 단위로 커넥션과 트랜잭션을 다루면 더 심각한 결과를 가져온다. 하지만 결과적으로 MyService는 DB 처리 코드와 로직 코드가 짬뽕되어 있는 지저분한 코드가 되었고, DB 관련 코드와 구현에 종속이 되었으므로 MyService는 객체지향적인 장점을 살려 재활용되거나 발전하는 데 극히 제한을 받게 된다. 만일 트랜잭션 처리가 JDBC 방식에서 JTA로 바뀌었다면?
+
+
+
+MyService처럼 구현한 모든 서비스/비즈니스 로직 코드를 일일이 수정해야 하는 중노동에 시달려야 한다. 하나의 클래스에 여러 가지 레이어의 기술이 짬뽕되고 책임이 중복되어 나타나며 한 가지 기능을 수정하기 위해 수많은 클래스를 수정해야 한다면 이것이 과연 POJO를 지지하는 사람들이 기대했던 바로 그 POJO 프로그래밍의 장점이라고 할 수 있을까?
+
+### 수정된 MyService
+```java
+class MyService {
+     private MyDAO myDAO;
+     private XxDAO xxDAO;
+// setter methods
+public void foo(UrVo urVo) {
+    if (xxDAO.check(urVo))
+       return myDAO.foo(con, urVo);
+else
+      return myDAO.boo(con, urVo);
+ }
+…
+}
+```
+
+MyService를 순수한 비즈니스 로직에 충실한 POJO 기반으로 변경하려면 스프링과 같은 POJO 프레임워크의 도움이 절실히 필요하다. **겉으로 드러나는 DB 커넥션, 예외처리, 트랜잭션과 관련된 부분을 비즈니스 로직을 구현한 MyService에서 분리하기 위해서는 AOP 기술의 도움이 필요하기 때문이다.** '수정된 MyService'는 스프링의 AOP로 선언적 트랜잭션 관리 기능을 적용해 변경한 MyService 코드이다.
+MyService의 모든 지저분한 DB와 트랜잭션 처리 블록이 모두 제거되었다. 남은 것은 MyService의 비즈니스 로직에 충실한 코드들뿐이다. 필요에 따라 적절한 DAO를 호출해서 퍼시스턴스 관련된 기능을 DAO를 통해 처리하는 것만 있다. 이는 객체지향적인 설계 모델에 충실하게 만들어져 있다.
+
+
+한 가지 남은 문제는 **테스트 유용성**인데, MyService의 메소드를 테스트하기 위해서는 MyDAO, XxDAO가 필요하다. DAO는 DB를 역시 필요로 하므로 MyService를 테스트하기 위해 그 메소드를 호출하면 2개의 DAO 코드와 DB까지 동작이 필요하기 때문이다. DB까지 연동하는 테스트는 그 데이터 준비도 만만치 않거니와 시간도 많이 걸린다. 따라서 테스트를 만들고 자주 수행하는 데 어려움을 준다.
+
+이를 위해 MyDAO를 다시 생각해 볼 필요가 있다. MyService 입장에서 MyDAO는 오브젝트를 장기간 보존하고 그것을 다시 조회하도록 돕는 퍼시스턴스 기능의 필요에 따라 사용하는 대상이다. 그 구현이 어떻게 되는지는 중요하지 않을 뿐더러 퍼시스턴스 구현이 필요하면 바뀔 수도 있다고 가정하면 지금과 같은 **MyDAO의 클래스를 직접 액세스하는 구조는 바람직하지 않다.** 전략패턴(Strategy Pattern)의 개념을 적용해서 **MyDAO를 인터페이스와 구현으로 분리하고 MyService는 MyDAO 인터페이스를 사용하도록 수정하면 이 문제를 모두 해결할 수 있다.** 먼저 MyDAO 인터페이스를 정의한다.
+
+```java
+interface MyDAO {
+void foo(UrVo);
+}
+그리고 이를 구현하는 클래스를 만든다.
+class MyJdbcDAO implements MyDAO {
+…
+}
+```
+
+이제 MyService는 MyDAO라는 인터페이스에 대해 프로그래밍하는 구조로 바뀌었다. 이것의 장점은 MyDAO의 구현이 언제든지 교체 가능하다는 것이다. 구현한 알고리즘을 통째로 교환해 사용할 수 있게 하는 것이 전략패턴의 특징이다. DAO 구현이 필요에 따라 JDBC가 아닌 하이버네이트나 다른 종류의 퍼시스턴스여야 한다면 언제든지 MyDAO 인터페이스를 구현해 만들면 된다. MyService는 구현이 바뀌는 것에 전혀 영향 받지 않는다.
+
+MyService의 로직이 복잡해 구현하면서 **자주 테스트가 필요하다면 MyDAO 인터페이스를 구현한 간단한 테스트용 DAO 클래스를 만들어 MyService가 그것을 사용하도록 만든다.** 이는 MyService와 MyDAO의 관계를 느슨하게 만들어 주었기 때문에 모두 가능한 것이다. 여기서 나온 MyService와 MyDAO는 아직 개선의 여지가 남아 있다. 하지만 일단 여기까지만 살펴보자. 
+
+여기서 사용한 기법들은 모두 객체지향의 기본 설계원리와 패턴에 등장하는 것들이지 어떤 최신 기법들이 아니다. 물론 AOP라는 새로운 기술을 사용하지만, 그것이 추구하는 것은 또 다른 프로그래밍 모델이 아닌 OOP에 더 충실한 자바 코드를 만드는 데 도움을 주는 것일 뿐이다. 
+
+앞에서 살펴본 것처럼 POJO 기반의 프레임워크를 가져다 사용하기만 했다고 해서 POJO 프로그래밍이 되고 그 유익을 누리는 것은 결코 아니다. POJO가 지향하는 자바의 객체지향적인 설계의 기본에 충실하도록 POJO 프레임워크의 도움을 받아 구현하는 것이 진정한 POJO 프로그래밍이다. 결과적으로 이렇게 만들어진 POJO 기반의 코드는 EJB나 그 이전의 자바개발 방법을 따라 만든 어떤 코드보다 더 간결하고 깔끔해진다. 이것이 객체지향 언어인 자바를 사용하면서 누려야 하는 진정한 혜택이 아닐까.
+ 
+
+풍성한 도메인 모델
+
+이제는 POJO 개발의 조금 다른 영역을 생각해 보자. **POJO의 자바 오브젝트가 지닌 기본 특징은 하나의 오브젝트 안에 상태(State)와 행위(Behavior)를 모두 가지고 있는 것**이다. 쉽게 말해 인스턴스 변수와 로직을 가진 메소드를 가지고 있다는 의미이다. 문제는 자바의 그런 특성이 EJB에 와서 이상한 오브젝트 형태로 왜곡된 것이다. 빈약한 오브젝트(anemic object)라고 불리는 것이 바로 그것으로, **로직이 없고 상태만 가진 오브젝트들이 다수 사용되었다.** 그러면 그 로직에 해당하는 행위는 어디로 갔을까? 그것은 절차적인(procedural) 스타일로 작성된 서비스 레이어의 메소드로 들어갔다. 결과적으로 서비스 오브젝트는 과도한 로직이 트랜잭션 스크립트 형태로 반복되어 길게 등장하면서 갈수록 비대해졌고, 도메인 모델을 구현한 오브젝트는 빈약한 오브젝트로 오로지 상태 인스턴스 변수만 가진 전혀 객체지향 언어 답지 않은 결과만 남게 되었다.
+
+ 
+이러한 스타일은 EJB뿐만 아니라 그 이후에 등장한 POJO 기반의 프로그래밍에서도 쉽게 찾아볼 수 있다. `계좌이체 서비스 클래스`와 `Account 도메인 클래스`는 각각 은행의 계좌를 이체하는 서비스의 메소드와 계좌를 구현한 도메인 모델이다.
+계좌이체 서비스 클래스
+```java
+public class MoneyTransferServiceProceduralImpl implements MoneyTransferService {
+     private AccountDAO accountDAO;
+     private BankingTransactionDAO bankingTransactionDAO;
+
+public BankingTransaction transfer(String fromAccountId, String toAccountId, double amount) {
+      Account fromAccount = accountDAO.findAccount(fromAccountId);
+      Account toAccount = accountDAO.findAccount(toAccountId);
+              assert amount > 0;
+             double newBalance = fromAccount.getBalance() - amount;
+             switch (fromAccount.getOverdraftPolicy()) {
+             case Account.NEVER:
+               if (newBalance < 0)
+                 throw new MoneyTransferException("In sufficient funds");
+     break;
+     case Account.ALLOWED:
+       Calendar then = Calendar.getInstance();
+       then.setTime(fromAccount.getDateOpened());
+       Calendar now = Calendar.getInstance();
+       double yearsOpened = now.get(Calendar.YEAR) - then.get(Calendar.YEAR);
+         int monthsOpened = now.get(Calendar.MONTH) - then.get(Calendar.MONTH);
+         if (monthsOpened < 0) {
+         yearsOpened--;
+         monthsOpened += 12;
+      }
+      yearsOpened = yearsOpened + (monthsOpened / 12.0);
+      if (yearsOpened < fromAccount.getRequiredYearsOpen() ||        newBalance < fromAccount.getLimit())
+throw new MoneyTransferException("Limit exceeded");
+break;
+default:
+        throw new MoneyTransferException("Unknown overdraft type: " + fromAccount.getOverdraftPolicy());
+}
+     fromAccount.setBalance(newBalance);
+     toAccount.setBalance(toAccount.getBalance() + amount);
+     TransferTransaction txn = new TransferTransaction(fromAccount, toAccount, amount, new Date());
+      bankingTransactionDAO.addTransaction(txn);
+      return txn;
+    }
+}
+```
+Account 도메인 클래스
+```java
+ public class Account {
+      public static final int NEVER = 1;
+      public static final int ALLOWED = 2;
+
+      private int id;
+      private double balance;
+      private int overdraftPoicy;
+      private String accountId;
+      private Date dateOpened;
+      private double requiredYearsOpen;
+      private double limit;
+      // getters/setters
+}
+```
+
+MoneyTransferServiceProceduralImpl의 transfer 메소드는 길고 복잡하다. 자세히 살펴보면 사실 Account라는 오브젝트에 속해야 하는 로직들이 이체서비스의 서비스 로직에 빠져나와 있음을 알 수 있다. 반면에 Account 오브젝트에는 행위(메소드)는 없고 상태(필드)만 남아 있다. 만일 여기서 사용된 Account에 마땅히 들어가야 할 내용이 다른 곳에서 또 필요하다면? 그때는 복잡한 로직 코드가 여기저기 중복될 수밖에 없다. 
+그럼 객체지향 기술의 장점을 충분히 누릴 수 있도록 이 코드를 POJO답게 수정해 보자. 가장 간단한 방법은 **Account 오브젝트가 가지고 있어야 하는 행위를 Account로 옮기는 것**이다. `수정된 계좌이체 서비스 클래스`과 `수정된 Account 오브젝트`은 각각의 코드를 수정한 것이다.
+
+수정된 계좌이체 서비스 클래스
+```java
+public class MoneyTransferServiceProceduralImpl implements MoneyTransferService {
+    …
+     public BankingTransaction transfer(String fromAccountId, String toAccountId, double amount) {
+       Account fromAccount = accountDAO.findAccount(fromAccountId);
+       Account toAccount = accountDAO.findAccount(toAccountId);
+assert amount > 0;
+
+        fromAccount.debit(amount);
+        toAccount.credit(amount);
+
+        TransferTransaction txn = new TransferTransaction(fromAccount, toAccount, amount, new Date());
+         bankingTransactionDAO.addTransaction(txn);
+         return txn;
+}
+}
+```
+
+수정된 Account 오브젝트
+```java
+class Account {
+      // fields
+     // getters/setters
+     …
+public void debit(Account fromAccount, double amount) {
+     double newBalance = getBalance() ? amount;
+     switch (getOverdraftPolicy()) {
+         ... 
+    }
+     setBalance(newBalance);
+}
+
+public void credit(Account toAccount, double amount) { 
+    setBalance(getBalance() + amount);
+  }
+}
+```
+
+
+이체서비스 오브젝트 안의 한 메소드에 지저분하게 들어 있던 이체 로직은 그 로직이 있어야 할 Account 안에 절절한 메소드 형태로 옮겨졌다. 서비스 메소드에서는 그 오브젝트의 메소드를 호출해 서비스 로직을 수행하는 간단하고 명확한 코드로 역시 변경되었다. 이제 Account 오브젝트는 여러 로직과 계층에서 자신의 로직을 분산해 복사할 것 없이, 오브젝트 그대로 재활용되어 사용되는 객체지향의 혜택을 누릴 것이다. 또한 POJO이므로 Account와 MoneyTransferServiceProceduralImpl 모두 쉽게 테스트할 수 있다. 이렇게 객체지향 원리에 충실하게 도메인 모델을 만드는 것을 풍성한 도메인 모델(Rich Domain Model)이라고 한다.
+
+ 
+
+진정한 POJO 프로그래밍 추구하기
+
+POJO를 잘 사용하면 군더더기 없는 최소한의 코드로 이전과 동일한 결과를 낼 수 있지만, 더 중요한 의미는 더 건강한 코드를 만드는 데 있다.
+단지 어느 순간에 상태가 좋다고 해서 건강하다고 할 수는 없다. 건강이란 외부의 스트레스와 변화에도 흔들리지 않고 견고하게 버틸 수 있는 힘인데, 이렇게 건강한 코드를 만들기 위해서는 반드시 자동화된 테스트 코드를 개발해야 한다. 잘 만들어진 테스트 코드는 지속적인 변화에 유연하게 대응할 수 있도록 도와준다. 변화를 두려워하지 않게 만들고 코드의 구조를 개선하기 위한 리팩토링도 안심하고 진행할 수 있게 지원한다. 또한 POJO로 잘 설계된 코드는 테스트 코드를 쉽게 만들 수 있도록 해준다. 이런 선순환이 지속되면 POJO 프로그래밍은 더 성숙된 결과로 나아가게 될 것이다. 그래서 필자는 POJO 프로그래밍의 꽃은 테스트 코드 작성이라고 생각한다. 
+
+
+【 2005년에 프랑스의 온라인 세무시스템은 큰 변화를 겪었다. 기존에 EJB와 J2EE 기반으로 구현된 기존 시스템을 스프링과 하이버네이트를 사용하는 POJO 방식으로 전환한 것이다. 단 3개월 만에 시스템의 구조를 변환하면서 동시에 50개의 새로운 유즈케이스와 100개의 새로운 화면, 150개의 기존 화면을 전환시켰다. 
+그 결과는 매우 성공적이었다. 손쉽게 작성할 수 있는 테스트와 간단한 패키징, 배포작업이 용이해졌고 지저분한 템플릿 코드를 제거하면서 생산성이 극대화되었다. 또한 기술적인 리스크가 줄고 일관성 유지가 쉬워졌으며 풍성한 도메인 모델을 적용하고 모든 레이어에 걸처 테스트를 작성하게 되어 큰 폭의 품질 향상이 이뤄졌다. 】
+
+
+ EJB나 무거운 기존 기술의 굴레에서 벗어나 객체지향 기술의 혜택을 가득 누릴 수 있는 즐거운 POJO 프로그래밍에 한번 도전해 보자. 혹시 지금 POJO 프레임워크를 사용해 개발하고 있다면 과연 자신이 만든 코드가 POJO의 원칙에 맞게 작성되었는지 살펴보자. 그리고 마지막에는 반드시 테스트를 작성하라. 그것이 POJO를 POJO답게 쓰게 하고 그 가치를 누리도록 도와줄 것이다.
+
+
+ 출처: https://itewbm.tistory.com/entry/POJOPlain-Old-Java-Object
+
+### 프레임 워크
+특정한 목적에 맞게 프로그래밍을 쉽게하기 위한 약속.
+
+### 스프링
 자바언어를 기반으로 다양한 어플리케이션을 제작하기 위한 약속된 프로그래밍 툴.
 
 예전 EJB의 경우 고가의 장비(WAS등)이 필요되어지고, 개발환경 및 설정 그리고 테스트환경에 많은 애로사항들이 존재.
