@@ -47,4 +47,5 @@ Iteration (반복) : Iterator it = numbers.iterator(); Iterator는 인터페이�
 ## Doubly linked list
 ## 장점 : 양방향에서 접근이 가능하다
 ## 단점 : previous 필드 때문에 메모리를 더 많이 사용한다. 좀 더 복잡하다.
+## 하지만 이중연결 리스트를 가장 많이 사용한다
 
