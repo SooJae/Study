@@ -286,7 +286,7 @@ The key's randomart image is:
 |++.  +..         |
 |o+..             |
 |B..o.=.          |
-|o.o +.o          |
+|o.o +.o .        |
 |   . .           |
 |      .o         |
 +----[SHA256]-----+

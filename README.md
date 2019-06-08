@@ -27,5 +27,5 @@
 
 <br>
 
-- [ ] **node.js (중단)** &nbsp;&nbsp;&nbsp;
+- [ ] **node.js** &nbsp;&nbsp;&nbsp;
 
