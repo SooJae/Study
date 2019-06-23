@@ -1,4 +1,4 @@
-#스프링 프레임워크 실행과정
+# 스프링 프레임워크 실행과정
 1. 스프링 프레임 워크 실행
 2. 스프링이 사용하는 메모리 영역을 만듬 (Context)
 3. 스프링이 자신이 객체를 생성하고 관리해야 하는 객체들에 대한 설정 (RootConfig.java)
@@ -17,51 +17,50 @@ test패키지에서 해당 테스트 파일을 만듬.
 ```
 를 달아둠.
 
-@ContextConfiguration은 자동으로 만들어줄 애플리케이션의 컨텍스트의 설정파일 위치를 지정해준다. classes 속성으로 @Configuration이 적용된 클래스를 지정 해줄 수도 있다.
+@ContextConfiguration은 자동으로 만들어줄 애플리케이션의 컨텍스트의 설정파일 위치를 지정해줍니다. classes 속성으로 @Configuration이 적용된 클래스를 지정 해줄 수도 있다.
 
 
 
 ```java
-assertNotNull(restaurant); //restaurant의 변수가 null이 아니어야만 테스트가 성공한다
+assertNotNull(restaurant); //restaurant의 변수가 null이 아니어야만 테스트가 성공합니다
 		
-		log.info(restaurant); 
-		log.info("---------------");
-		log.info(restaurant.getChef());
+	log.info(restaurant); 
+	log.info("---------------");
+	log.info(restaurant.getChef());
 ```
 
 
 ## 테스트 주목할 점
 new Restaurant()와 같이 Restaurant 클래스에서 객체를 생성한 적이 없는데도 객체가 만들어 졌다 
-=>
+=>  
 스프링은 관리가 필요한 객체(Bean)를 어노테이션을 이용해서 객체를 생성하고 관리하는 일종의 컨테이너, 팩토리의 기능을 갖고있다.
 
 ## @Setter
 ### value
 접근 제한 속성을 의미
 
-###onMethod
+### onMethod
 setter메서드 생성시 메서드에 추가할 어노테이션을 지정.
 
-###onParam
+### onParam
 setter메서드의 파라미터에 어노테이션을 사용하는 경우.
 
-##@Log4j
+## @Log4j
 log.info()메서드를 이용해서 로그를 찍을 수 있다.
 
 @Log와 같다.
 클래스쪽에 붙여주면 내부적으로 static final로 Logger 객체가 생성.
 
 # 묵시적 생성자 주입
-4.3이후에는 @Autowired이 없어도 생성자 주입이 된다.
+4.3이후에는 @Autowired이 없어도 생성자 주입이 됩니다.
 
-@AllArgsConstructor는 변수로 선언된 모든것을 파라미터로 받는 생성자를 작성한다.
+@AllArgsConstructor는 변수로 선언된 모든것을 파라미터로 받는 생성자를 작성합니다.
 @RequiredArgsConstructor는 @NonNull이다 final이 붙은 인스턴스 변수에 대한 생성자를 생성
 
 # @Component와 @Bean의 차이
+@Component는 클래스 상단에 적으며 그 default로 **클래스 이름이 bean**의 이름이 됩니다. 또한 spring에서 자동으로 찾고 관리해주는 bean이다.
 
-@Component는 클래스 상단에 적으며 그 default로 **클래스 이름이 bean**의 이름이 된다. 또한 spring에서 자동으로 찾고 관리해주는 bean이다.
-
-@Bean은 @Configuration으로 선언된 클래스 내에 있는 메소드를 정의할 때 사용한다. **이 메소드가 반환하는 객체**가 bean이 되며 default로 **메소드 이름이 bean**의 이름이 된다.
+@Bean은 @Configuration으로 선언된 클래스 내에 있는 메소드를 정의할 때 사용합니다. **이 메소드가 반환하는 객체**가 bean이 되며 default로 **메소드 이름이 bean**의 이름이 됩니다.
 
 # SQLSessionFactory
 
@@ -69,19 +68,19 @@ SQLSessionFactory는 내부적으로 SQLSession이라는 것을 만들어 낸다
 SQL을 통해서 Connection을 생성하거나 원하는 SQL을 전달하고, 결과를 리턴받는 구조
 
 
-timeMapper.getClass().getName()은 실제 동작하는 클래스의 이름을 확인해준다.
+timeMapper.getClass().getName()은 실제 동작하는 클래스의 이름을 확인해줍니다.
 
 # log4jdbc-log4j2 
-MyBatis는 내부적으로 PreparedStatement를 이용해서 SQL을 처리한다.
-복잡한 SQL의 경우 ?로 나오는 값이 제대로 되었는지 확인하기가 쉽지 않고, 실행된 SQL의 내용을 정확히 확인하기 어렵다.
-이를 해결하기 위해 **log4jdbc-log4j2** 라이브러리를 사용한다. 
+MyBatis는 내부적으로 PreparedStatement를 이용해서 SQL을 처리합니다.   
+복잡한 SQL의 경우 ?로 나오는 값이 제대로 되었는지 확인하기가 쉽지 않고, 실행된 SQL의 내용을 정확히 확인하기 어렵다.   
+이를 해결하기 위해 **log4jdbc-log4j2** 라이브러리를 사용합니다. 
 
 # 프로젝트의 로딩구조
 
 프로젝트 구동시 관여하는 XML은 web.xml, root-context.xml, servlet-context.xml.
-이 파일중 web.xml은 Tomcat과 관련된 설정이고, 나머지 두 파일은 스프링과 과련된 설정입니다.
-프로젝트의 구동은 web.xml에서 시작한다. web.xml 상단에는 가장 먼저 구동되는 Context Listener가 등록되어 있다.
-root-context.xml이 처리되면 파일에 있는 빈(Bean)설정들이 동작한다. 그 후에 서블릿과 관련된 설정이 동작한다.
+이 파일중 web.xml은 Tomcat과 관련된 설정이고, 나머지 두 파일은 스프링과 관련된 설정입니다.   
+프로젝트의 구동은 web.xml에서 시작합니다. web.xml 상단에는 가장 먼저 구동되는 Context Listener가 등록되어 있습니다.
+root-context.xml이 처리되면 파일에 있는 빈(Bean)설정들이 동작합니다. 그 후에 서블릿과 관련된 설정이 동작합니다.
 
 # log4j 에러...
 1.2.15를 1.2.17로 바꾸고 log4j에 <exclusions>로 추가된 부분을 모두 주석처리(혹은 제거)해주면 됨.
@@ -89,17 +88,17 @@ root-context.xml이 처리되면 파일에 있는 빈(Bean)설정들이 동작�
 # @Controller
 Controller를 작성할때 가장 편리한 기능은 파라미터가 자동으로 수집되는 기능.
 이 기능을 이용하면 매번 request.getParameter()를 이용하는 불편함을 없앨 수 있다.
-Controller가 파라미터를 수집하는 방식은 파라미터 타입에 따라 자동으로 변환하는 방식을 이용한다.
+Controller가 파라미터를 수집하는 방식은 파라미터 타입에 따라 자동으로 변환하는 방식을 이용합니다.
 예를 들어, **int 타입으로 선언된 age가 자동으로 숫자로 변환되는 것**을 확인 할 수 있다.
 
 # @RequestParam
 
-@RequestParam은 파라미터로 사용된 **변수의 이름과 전달되는 파라미터의 이름이 다른 경우**에 유용하게 사용된다.
+@RequestParam은 파라미터로 사용된 **변수의 이름과 전달되는 파라미터의 이름이 다른 경우**에 유용하게 사용됩니다.
 동일한 이름의 파라미터가 전달되는 경우에 @RequestParam("e") ArrayList<String> d 등으로 처리 가능하다
 
 # @InitBinder
-파라미터의 수집을 다른 용어로 binding이라고 한다.
-변환이 가능한 데이터는 자동으로 변환되지만, 파라미터를 변환해서 처리해야하는 경우도 존재한다.
+파라미터의 수집을 다른 용어로 binding이라고 합니다.
+변환이 가능한 데이터는 자동으로 변환되지만, 파라미터를 변환해서 처리해야하는 경우도 존재합니다.
 2019-01-01 과 같이 문자열로 전달된 데이터를 java.util.Date 타입으로 변환하는 작업이 그러하다.
 스프링 Controller에서는 파라미터를 바인딩할 때 자동으로 호출되는 @InitBinder를 이용해서 이러한 변환을 처리할 수 있다.
 
@@ -157,20 +156,20 @@ ex)
 - 리스트 페이지 번호를 파라미터로 전달받고, 실제 데이터를 View로 전달해야 하는 경우
 - 파라미터들에 대한 처리 후 결과를 전달해야 하는 경우
 
-웹페이지의 구조로 Request에 전달된 데이터를 가지고 필요하다면, 추가적인 데이터를 생성해서 화면으로 전달하는 방식으로 동작한다.
-Model의 경우는 파라미터로 전달된 데이터는 존재하지 않지만 화면에서 필요한 데이터를 전달하기 위해서 사용한다.
+웹페이지의 구조로 Request에 전달된 데이터를 가지고 필요하다면, 추가적인 데이터를 생성해서 화면으로 전달하는 방식으로 동작합니다.
+Model의 경우는 파라미터로 전달된 데이터는 존재하지 않지만 화면에서 필요한 데이터를 전달하기 위해서 사용합니다.
 
-스프링 MVC의 Controller는 기본적으로 **Java Beans 규칙에 맞는 객체는 다시 화면으로 객체를 전달한다.**
+스프링 MVC의 Controller는 기본적으로 **Java Beans 규칙에 맞는 객체는 다시 화면으로 객체를 전달합니다.**
 좁은 의미에서 Java Beans의 규칙은
 
-1. 단순히 생성자가 없거나 빈 생성자를 가져와야 한다.
-2. getter/setter를 가진 클래스의 객체들을 의미한다.
+1. 단순히 생성자가 없거나 빈 생성자를 가져와야 합니다.
+2. getter/setter를 가진 클래스의 객체들을 의미합니다.
    
-전달될 때에는 클래스명의 앞글자는 **소문자**로 처리된다.
+전달될 때에는 클래스명의 앞글자는 **소문자**로 처리됩니다.
 
 # @ModelAttribute
 @ModelAttribute는 강제로 전달받은 파라미터를 Model에 담아서 전달하도록 할 때 필요한 어노테이션.
-@ModelAttribute가 걸린 파라미터는 타입에 관계없이 무조건 Model에 담아서 전달되므로, 파라미터로 전달된 데이터를 다시 화면에서 사용해야할 경우에 사용된다.
+@ModelAttribute가 걸린 파라미터는 타입에 관계없이 무조건 Model에 담아서 전달되므로, 파라미터로 전달된 데이터를 다시 화면에서 사용해야할 경우에 사용됩니다.
 
 ```java
 @GetMapping("/ex04")
@@ -186,14 +185,14 @@ public String ex04(SampleDTO dto, @ModelAttribute("page") int page){
 
 ## @ModelAttribute VS @RequestParam
 @ModelAttribute : 요청 파라미터를 컨트롤러에서 도메인 오브젝트(DTO, VO)에 바인딩해서 한번에 받는다.
-- 하나의 오브젝트에 클라이언트 요청 정보를 담아서 한번에 전달되는 것이기 때문에 이를 커맨드 패턴에서 말하는 커맨드 오브젝트라고도 한다.
+- 하나의 오브젝트에 클라이언트 요청 정보를 담아서 한번에 전달되는 것이기 때문에 이를 커맨드 패턴에서 말하는 커맨드 오브젝트라고도 합니다.
 @RequestParam : 요청 파라미터를 컨트롤러에서 1:1로 받는다.
 
-@ModelAttribute는 요청 파라미터를 컨트롤러에서 받고 그 데이터를 자동으로 해당 View에 전송한다.
+@ModelAttribute는 요청 파라미터를 컨트롤러에서 받고 그 데이터를 자동으로 해당 View에 전송합니다.
 
 # RedirectAttribute
 
-redirect는 일회성으로 데이터를 전달하는 용도로 사용된다.
+redirect는 일회성으로 데이터를 전달하는 용도로 사용됩니다.
 
 Servlet에서 redirect 방식
 ```java
@@ -212,19 +211,19 @@ Controller의 리턴 타입
 스프링 MVC의 구조가 기존의 상속과 인터페이스에서 어노테이션을 사용하는 방식으로 변한 이후에
 **리턴타입이 자유로워졌다.**
 
-String : jsp를 이용하는 경우에는 jsp파일의 경로와 파일이름을 나타내기 위해서 사용한다.
-void : 호출하는 **URL과 동일한 이름의 jsp를 의미한다.**
+String : jsp를 이용하는 경우에는 jsp파일의 경로와 파일이름을 나타내기 위해서 사용합니다.
+void : 호출하는 **URL과 동일한 이름의 jsp를 의미합니다.**
 VO, DTO 타입: 주로 JSON타입의 데이터를 만들어서 반환하는 용도.
 ResponseEntity 타입 : response할 때 Http 헤더정보와 내용을 가공하는 용도로 사용.
-Model, ModelAndView : Model로 데이터를 반환하거나 화면까지 같이 지정하는 경우에 사용한다.(최근에는 사용 X)
+Model, ModelAndView : Model로 데이터를 반환하거나 화면까지 같이 지정하는 경우에 사용합니다.(최근에는 사용 X)
 HttpHeaders : 응답에 내용 없이 Http 헤더 메시지만 전달하는 용도로 사용.
 
 String 타입에는 다음과 같은 키워드를 넣을수 있다.
 redirect, forward
 
 ### 객체타입
-리턴타입을 VO(Value Object)나 DTO(Data Transfer Object)타입 등 복합적인 데이터가 들어간 객체타입으로 지정할 수 있는데, 주로 JSON 데이터를 만들어내는 용도로 사용한다.
-이를 위해서는 **jackson-databind라이브러리를 pom.xml에 추가한다.**
+리턴타입을 VO(Value Object)나 DTO(Data Transfer Object)타입 등 복합적인 데이터가 들어간 객체타입으로 지정할 수 있는데, 주로 JSON 데이터를 만들어내는 용도로 사용합니다.
+이를 위해서는 **jackson-databind라이브러리를 pom.xml에 추가합니다.**
 
 ### ResponseEntity 타입
 스프링 MVC의 사상은 HttpServletRequest나 HttpServletResponse를 직접 핸들링하지 않아도 이런 작업이 가능하도록 작성되었기 때문에, 이러한 처리를 위해 ResponseEntity를 통해서 **원하는 헤더정보나 데이터를 전달**할 수 있다.
@@ -267,7 +266,7 @@ public class CommonExceptionAdvice {
 ``` 
 
 @ControllerAdvice는 해당 객체가 스프링의 **컨트롤러에서 발생하는 예외를 처리하는 존재임을 명시하는 용도**로 사용
-@ExceptionHandler는 해당 메서드가 () 들어가는 예외타입을 처리한다. 위와같은 경우 **Exception.class**를 지정했으므로
+@ExceptionHandler는 해당 메서드가 () 들어가는 예외타입을 처리합니다. 위와같은 경우 **Exception.class**를 지정했으므로
 **모든 예외에 대한 처리가 except()**만을 이용해서 처리할 수 있다.
 
 500메세지는 'Internal Server Error' 이므로 @ExceptionHandler를 이용해서 처리되지만, 잘못된 URL을 호출할 때 보이는 404에러 메시지의 경우는 조금 다르게 처리하는 것이 좋다.
@@ -286,11 +285,11 @@ Presentation Tier = 화면을 보여주는 기술을 사용하는 영역
 Servlet/JSP나 스프링 MVC가 담당. MVC와 JSP를 이용한 화면 구성
 
 Business Tier = 순수한 로직을 담고 있는 계층. 고객의 요구 사항을 반영.
-주로 'xxxService'와 같은 이름을 구성하고, 메서드의 이름 역시 고객들이 사용하는 용어를 그대로 사용한다.
+주로 'xxxService'와 같은 이름을 구성하고, 메서드의 이름 역시 고객들이 사용하는 용어를 그대로 사용합니다.
 
 Persistence Tier = 데이터를 어떤 방식으로 보관하고, 사용하는가에 대한 설계가 들어가는 계층.
-경우에 따라서 네트워크 호출이나 원격 호출 들의 기술이 접목된다.
-이 영역은 MyBatis와 mybatis-spring을 이용해서 구성했던 파트 1을 이용한다.
+경우에 따라서 네트워크 호출이나 원격 호출 들의 기술이 접목됩니다.
+이 영역은 MyBatis와 mybatis-spring을 이용해서 구성했던 파트 1을 이용합니다.
 
 스프링 MVC 영역은 Presentation Tier를 구성하게 되는데, 각 영역은 사실 별도의 설정을 가지는 단위.
 RootConfig, ServletConfig 등의 설정 파일이 해당 영역의 설정을 담당.
@@ -299,8 +298,8 @@ RootConfig, ServletConfig 등의 설정 파일이 해당 영역의 설정을 담
 프로젝트를 3-tier로 구성하는 가장 일반적인 설명은 '유지 보수'에 대한 필요성 때문이다.
 
 네이밍 규칙-
-xxxController : 스프링 MVC에서 동작하는 Controller 클래스를 설계할 때 사용한다.
-xxxService, xxxServiceImpl : 비즈니스 영역을 담당하는 인터페이스는 'xxxService' 라는 방식을 사용하고, 인터페이스를 구현한 클래스는 Impl 이라는 이름을 사용한다.
+xxxController : 스프링 MVC에서 동작하는 Controller 클래스를 설계할 때 사용합니다.
+xxxService, xxxServiceImpl : 비즈니스 영역을 담당하는 인터페이스는 'xxxService' 라는 방식을 사용하고, 인터페이스를 구현한 클래스는 Impl 이라는 이름을 사용합니다.
 xxxDAO, xxxRepository : DAO(Data-Access-Object) 나 Repository라는 이름으로 영역을 따로 구성하는 것이 보편적.
 MyBatis의 Mapper 인터페이스를 활용.
 
@@ -344,7 +343,7 @@ null 로 초기화 불가능, 0으로 초기화
 Integer (Wrapper 클래스(객체)
 
 클래스
-Unboxing 을 하지 않으면 산술 연산이 불가능하지만, null값은 처리할 수 있음.
+Unboxing 을 하지 않으면 산술 연산이 불가능하지만, null값은 처리할 수 있습니다.
 null값 처리가 용이해서 SQL 과 연동할 경우 처리가 용이. 직접적인 산술연산은 불가능
 
 
@@ -509,7 +508,7 @@ def firstIndexOfAny(input: String, searchChars: Seq[Char]) : Option[Int] = {
 
 ## MapperXML 작성 사항
 XML을 작성할때 반드시 
-**<mapper>의 namespace 속성 값을 Mapper 인터페이스와 동일**한 이름을 줘야한다.
+**<mapper>의 namespace 속성 값을 Mapper 인터페이스와 동일**한 이름을 줘야합니다.
 ** \<select\> 태그의 id 속성값은 메서드의 이름과 동일**하게 작성.
 **resultType속성의 값은 select 쿼리의 결과를 특정 클래스의 객체**로 만들기 위해 설정
 
@@ -565,12 +564,12 @@ Update : int
 Delete : int
 
 
-비즈니스 계층은 고객의 요구사항을 반영하는 계층으로 **프레젠테이션 계층과 영속계층의 중간 다리 역할**을 한다.
+비즈니스 계층은 고객의 요구사항을 반영하는 계층으로 **프레젠테이션 계층과 영속계층의 중간 다리 역할**을 합니다.
 
 #@Service
-@Service는 계층 구조상 **주로 비즈니스 영역을 담당하는 객체임을 표시**하기 위해 사용한다.
+@Service는 계층 구조상 **주로 비즈니스 영역을 담당하는 객체임을 표시**하기 위해 사용합니다.
 
-스프링 MVC의 Controller는 하나의 클래스네에서 여러 메서드를 작성하고 , **@RequestMapping등을 이용해서 URL을 분기**하는 구조로 작성할 수 있기 때문에 나의 클래스에서 필요한 만큼 메서드의 분기를 이용하는 구조로 작성한다.
+스프링 MVC의 Controller는 하나의 클래스네에서 여러 메서드를 작성하고 , **@RequestMapping등을 이용해서 URL을 분기**하는 구조로 작성할 수 있기 때문에 나의 클래스에서 필요한 만큼 메서드의 분기를 이용하는 구조로 작성합니다.
 
 
 
@@ -590,7 +589,7 @@ Delete : int
 	}
 ```
 
-list는 **나중에 게시물의 목록을 전달해야 하므로 Model을 파라미터로 지정하고** 이를 통해서 BoardServiceImpl객체의 getList()결과를 담아 전달한다.
+list는 **나중에 게시물의 목록을 전달해야 하므로 Model을 파라미터로 지정하고** 이를 통해서 BoardServiceImpl객체의 getList()결과를 담아 전달합니다.
 
 mockMVC
 
@@ -619,10 +618,10 @@ public class BoardControllerTests {
 	}
 }
 ```
-@WebApplication은 Servlet의 ServletContext를 이용하기 위해서인데, 스프링에서는 WebApplicationContext라는 존재를 이용하기 위해서이다. **@before 어노테이션이 적용된 setUp()에서는 import할 때 JUnit을 이용**해야 한다.
-**@Before가 적용된 메서드는 모든 테스트 전에 매번 실행되는 메서드가 된다.**
+@WebApplication은 Servlet의 ServletContext를 이용하기 위해서인데, 스프링에서는 WebApplicationContext라는 존재를 이용하기 위해서이다. **@before 어노테이션이 적용된 setUp()에서는 import할 때 JUnit을 이용**해야 합니다.
+**@Before가 적용된 메서드는 모든 테스트 전에 매번 실행되는 메서드가 됩니다.**
 
-MockMvc는 말 그대로 가짜MVC이다. testList()는 MockMvcRequestBuilders라는 존재를 이용해 GET방식을 호출한다. 이후에 Model에 어떤 데이터들이 담겨있는지 확인한다.
+MockMvc는 말 그대로 가짜MVC이다. testList()는 MockMvcRequestBuilders라는 존재를 이용해 GET방식을 호출합니다. 이후에 Model에 어떤 데이터들이 담겨있는지 확인합니다.
 
 ```java
 @Test
@@ -637,10 +636,10 @@ MockMvc는 말 그대로 가짜MVC이다. testList()는 MockMvcRequestBuilders�
 	}
 ```
 ```
-param = <input> 이라고 생각하면 된다.
+param = <input> 이라고 생각하면 됩니다.
 ```
 
-수정을 시작하는 화면의 경우에는 GET방식으로 접근하지만, 실제 작업은 POST 방식으로 동작한다.
+수정을 시작하는 화면의 경우에는 GET방식으로 접근하지만, 실제 작업은 POST 방식으로 동작합니다.
 
 #CSS 적용시
 org.zerock.config.WebConfig 클래스에는 CSS나 JS 파일과 같이 정적인 (Static) 자원들의 경로를 'resources'라는 경로로 지정하고 있다.
@@ -698,7 +697,7 @@ org.zerock.config.WebConfig 클래스에는 CSS나 JS 파일과 같이 정적인
 INSERT INTO tbl_board(title,content,writer) (SELECT title,content,writer FROM tbl_board)
 ```
 
-페이징 처리를 위해서 필요한 파라미터는 1) 페이지 번호(pageNum), 2) 한 페이지당 몇개의 데이터(amount) 를 보여줄 것인지가 결정되어야 한다.
+페이징 처리를 위해서 필요한 파라미터는 1) 페이지 번호(pageNum), 2) 한 페이지당 몇개의 데이터(amount) 를 보여줄 것인지가 결정되어야 합니다.
 
 이 데이터들을 하나로 묶는 것이 좋다.
 
@@ -714,7 +713,7 @@ INSERT INTO tbl_board(title,content,writer) (SELECT title,content,writer FROM tb
 - 이전과 다음으로 이동 가능한 링크의 표시여부 (prev, next)
 - 화면에서 보여지는 페이지의 시작번호와 끝번호 (startPage, endPage)
 
-1. 끝번호를 먼저 계산한다
+1. 끝번호를 먼저 계산합니다
 
 ``` java
 this.endpage = (int)(Math.ceil(페이지번호/10.0))*10;
@@ -730,9 +729,9 @@ this.endpage = (int)(Math.ceil(페이지번호/10.0))*10;
 this.startPage = this.endPage - 9;
 ```
 끝 번호는 전체 데이터 수에 의해서 영향을 받는다. 예를 들어, 10개씩 보여주는 경우
-전체 데이터수가 80개라고 가정하면 끝번호는 10이 아닌 8이 되어야만 한다.
+전체 데이터수가 80개라고 가정하면 끝번호는 10이 아닌 8이 되어야만 합니다.
 
-만일 끝번호(endPage)와 한 페이지당 출력되는 데이터 수(amount)의 곱이 전체데이터 수(total)보다 크다면 끝번호는 다시 total을 이용해서 다시 계산되어야 한다.
+만일 끝번호(endPage)와 한 페이지당 출력되는 데이터 수(amount)의 곱이 전체데이터 수(total)보다 크다면 끝번호는 다시 total을 이용해서 다시 계산되어야 합니다.
 ```java
 realEnd = (int)(Math.ceil((total*10)/amount));
 
@@ -758,7 +757,7 @@ public void get(@RequestParam("bno") Integer bno, @ModelAttribute("cri") Criteri
 		model.addAttribute("board",service.get(bno));
 	}
 ```
-@ModelAttribute는 자동으로 Model에 데이터를 지정한 이름으로 담아준다. @ModelAttribute를 사용하지 않아도 Controller에서 화면으로 파라미터가 된 객체는 전달이 되지만 좀더 명시적인 이름을 지정하기 위해 사용한다.
+@ModelAttribute는 자동으로 Model에 데이터를 지정한 이름으로 담아줍니다. @ModelAttribute를 사용하지 않아도 Controller에서 화면으로 파라미터가 된 객체는 전달이 되지만 좀더 명시적인 이름을 지정하기 위해 사용합니다.
 ```
 select bno, title, content, writer, regdate, updatedate from tbl_board2 where ( title like 
 CONCAT('%', '안', '%') OR content like CONCAT('%', '안', '%') ) limit 0, 10 
@@ -856,7 +855,7 @@ UriComponentBuilder를 이용하면, 여러개의 파라미터를 번거롭지 �
 	}
   ```
 
-  스마트폰에서는 앱이라 불리는 고유한 애플리케이션ㅇ을 이용해서 데이터를 소비하게되고, 보이는 화면 역시 자신만의 방식으로 서비스 하게 된다. 
+  스마트폰에서는 앱이라 불리는 고유한 애플리케이션ㅇ을 이용해서 데이터를 소비하게되고, 보이는 화면 역시 자신만의 방식으로 서비스 하게 됩니다. 
   URL과 URI를 같은 의미로 사용하는 경우가 많았다. URL은 URI의 하위개념이다.
 
   URL:**이곳에 가면 당신이 원하는 것을 찾을 수 있습니다.** 와 같은 상징적인 의미가 강함
@@ -868,8 +867,8 @@ UriComponentBuilder를 이용하면, 여러개의 파라미터를 번거롭지 �
   @RequestBody : JSON 데이터를 원하는 타입으로 바인딩 처리
 
 ##@RestController
-REST 방식은 **서버에서 전송하는 것이 순수한 데이터**라는 것이다.
-기존의 Controller에서 **Model에 데이터를 담아서 JSP등과 같은 뷰로 전달하는 방식이 아니므로** 기존의 Controller와 다르게 동작한다.
+REST 방식은 **서버에서 전송하는 것이 순수한 데이터**라는 것 입니다.
+기존의 Controller에서 **Model에 데이터를 담아서 JSP등과 같은 뷰로 전달하는 방식이 아니므로** 기존의 Controller와 다르게 동작합니다.
 
 @RestController이전에는 @Controller와 메서드 선언부에 @ResponseBody를 이용해서 동일한 결과를 얻을 수 있었다.
 @RestController는 메서드의 리턴타입으로 사용자가 정의한 클래스 타입을 사용할 수 있고, 이를 **JSON이나 XML**로 자동으로 처리할 수 있다.
@@ -890,15 +889,15 @@ public class SampleController {
 }
 ```
 기존의 @Controller는 **문자열을 반환하는 경우에는 JSP파일의 이름**으로 처리하지만, 
-@RestController의 경우에는 순수한 데이터가 된다.
-@GetMapping에 사용된 **produces속성은 해당 메서드가 생산하는 MIME 타입**을 의미한다.
+@RestController의 경우에는 순수한 데이터가 됩니다.
+@GetMapping에 사용된 **produces속성은 해당 메서드가 생산하는 MIME 타입**을 의미합니다.
 예제와 같이 문자열로 직접 지정할수도 있고, 메서드내의 MediaType이라는 클래스를 이용할 수도 있다.
 
-@PathVariable : REST방식에서 자주 사용한다. URL경로의 일부를 파라미터로 사용할 때 이용
+@PathVariable : REST방식에서 자주 사용합니다. URL경로의 일부를 파라미터로 사용할 때 이용
 @RequestBody : JSON데이터를 원하는 타입의 객체로 변환해야 하는 경우에 사용
 
 ## @PathVariable
-Rest방식에서는 URL 내에 최대한 많은 정보를 담으려고 노력한다. 예전에는 '?' 뒤에 추가되는 쿼리 스트링이라는 형태로 **파라미터를 이용**해서 전달되던 데이터들이 **REST 방식에서는 경로의 일부로 차용**된다.
+Rest방식에서는 URL 내에 최대한 많은 정보를 담으려고 노력합니다. 예전에는 '?' 뒤에 추가되는 쿼리 스트링이라는 형태로 **파라미터를 이용**해서 전달되던 데이터들이 **REST 방식에서는 경로의 일부로 차용**됩니다.
 
 스프링 MVC에서는 @PathVariable 어노테이션을 이용해서 URL 상에 경로의 일부를 파라미터로 사용할 수 있다.
 
@@ -910,14 +909,14 @@ URL '{}'로 처리된 부분은 컨트롤러의 메서드에서 변수로 처리
 @PathVariable은 '{}'의 이름을 처리할때 사용
 
 ## @RequestBody
-@RequestBody는 전달된 요청의 내용을 이용해서**해당 파라미터의 타입으로 변환**을 요구한다.
-대부분의 경우에는 JSON데이터를 서버에 보내서 원하는 타입의 객체로 변화하는 용도로 사용된다.
+@RequestBody는 전달된 요청의 내용을 이용해서**해당 파라미터의 타입으로 변환**을 요구합니다.
+대부분의 경우에는 JSON데이터를 서버에 보내서 원하는 타입의 객체로 변화하는 용도로 사용됩니다.
 
 # REST 방식의 테스트
 
-위와 같이 GET방식이 아니고, POST 등의 방식으로 지정되어 있으면서 JSON 형태의 데이터를 처리하는 것을 브라우저에서 개발하려면 많은 시간과 노력이 들어간다.
+위와 같이 GET방식이 아니고, POST 등의 방식으로 지정되어 있으면서 JSON 형태의 데이터를 처리하는 것을 브라우저에서 개발하려면 많은 시간과 노력이 들어갑니다.
 
-@RestController를 쉽게테스트 하기 위해서는 REST 방식의 데이터를 전송하는 툴을 이용하거나, JUnit과 spring-test를 이용해서 테스트한다.
+@RestController를 쉽게테스트 하기 위해서는 REST 방식의 데이터를 전송하는 툴을 이용하거나, JUnit과 spring-test를 이용해서 테스트합니다.
 
 
 
@@ -935,7 +934,7 @@ public ResponseEntity<String> modify(
 					@PathVariable("rno") int rno
 ```
 
-### 실제 수정되는 데이터는 JSON 포맷이므로 @RequestBody를 이용해서 처리한다. @RequestBody로 처리되는 데이터는 일반 파라미터나 @PathVariable 파라미터를 처리할 수 없기 때문에 직접 처리해주어야 한다.
+### 실제 수정되는 데이터는 JSON 포맷이므로 @RequestBody를 이용해서 처리합니다. @RequestBody로 처리되는 데이터는 일반 파라미터나 @PathVariable 파라미터를 처리할 수 없기 때문에 직접 처리해주어야 합니다.
 
 # AOP
 코드를 작성하면서 염두에 두는 일들은 주로 다음과 같다.
@@ -943,13 +942,13 @@ public ResponseEntity<String> modify(
 - 이 작업을 하는 사용자가 적절한 권한을 가진 사용자인가?
 - 이 작업에서 발생할 수 있는 모든 예외는 어떻게 처리해야 하는가?
 
-AOP가 추구하는 것은 **관심사의 분리** 입니다. AOP는 개발자가 염두에 두어야 하는 일들은 별도의 '관심사'로 분리하고, 핵심 비즈니스 로직만을 작성할 것을 권장한다.
+AOP가 추구하는 것은 **관심사의 분리** 입니다. AOP는 개발자가 염두에 두어야 하는 일들은 별도의 '관심사'로 분리하고, 핵심 비즈니스 로직만을 작성할 것을 권장합니다.
 
 
-AOP 기능은 주로 일반적인 Java API를 이용하는 클래스(POJO- Plain Old Java Object)들에 적용한다.
-Controller에 적용이 불가능한 것은 아니지만, Controller의 경우 뒤에서 학습하게 될 인터셉터나 필터 등을 이용한다.
-예제에서는 서비스 계층에 AOP를 적용한다.
+AOP 기능은 주로 일반적인 Java API를 이용하는 클래스(POJO- Plain Old Java Object)들에 적용합니다.
+Controller에 적용이 불가능한 것은 아니지만, Controller의 경우 뒤에서 학습하게 될 인터셉터나 필터 등을 이용합니다.
+예제에서는 서비스 계층에 AOP를 적용합니다.
 1. 서비스 계층의 메서드 호출 시 모든 파라미터들을 로그로 기록
 2. 메서드들의 실행시간을 기록
 
-@EnableTransactionManagement 설정은 'aspect-autoproxy'에 대한 설정이되고, txManager()는 bean태그 설정을 대신하게 된다.
+@EnableTransactionManagement 설정은 'aspect-autoproxy'에 대한 설정이되고, txManager()는 bean태그 설정을 대신하게 됩니다.

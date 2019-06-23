@@ -15,7 +15,7 @@
 script 선언은 브라우저의 기본 설정에 맞추어갑니다.     
 혹시나 script 내부의 내용이 vb가 기본인 브라우저가있다면 그 안의 내용을 vb에 맞추어 파싱하려들겁니다.       
 안써도, 혹은 대충 써도 동작하는 이유는 대부분의 브라우저의 script 선언의 기본이 자스로 파싱하라고되어있기 때문입니다.       
- 명시적으로 써준다고 했을때 올바른 구문은 맨 위에꺼입니다.
+ 명시적으로 써줍니다고 했을때 올바른 구문은 맨 위에꺼입니다.
 
 ```javascript
  <script type="text/javascript" language="javascript"> 하위 브라우저와 호완성등 생각하면 위와같이 써야 하지만 보통은 <script type="text/javascript"> 이렇게 쓰는게 맞고 지금 이렇게쓰고있고 js 원래 mine type 이 text/javascript 라고 어디서 보았던듯.

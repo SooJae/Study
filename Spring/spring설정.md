@@ -36,7 +36,7 @@ spring 버전 체크, java 버전 체크
 'root-context.xml', 'servlet-context.xml' 삭제 => spring 폴더 삭제
 'web.xml' 삭제
 web.xml을 삭제하면 pom.xml에서 에러 발생 
-(과거의 웹프로젝트들이 기본적으로 web.xml을 사용하는 것을 기본으로 설정했기 때문에) => 아래의 설정을 추가한다.
+(과거의 웹프로젝트들이 기본적으로 web.xml을 사용하는 것을 기본으로 설정했기 때문에) => 아래의 설정을 추가합니다.
 ```xml
 	<plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -105,32 +105,32 @@ Tomcat의 'Modules'메뉴로 이동해서 '/'경로로 프로젝트가 실행될
 
 ## Mapper.xml 작성시 주의할 점
 XML을 작성할때 반드시 
-**<mapper>의 namespace 속성 값을 Mapper 인터페이스와 동일**한 이름을 줘야한다.
-**<select> 태그의 id 속성값은 메서드의 이름과 동일**하게 작성.
+**<mapper>의 namespace 속성 값을 Mapper 인터페이스와 동일**한 이름을 줘야합니다.   
+**\<select> 태그의 id 속성값은 메서드의 이름과 동일**하게 작성.   
 **resultType속성의 값은 select 쿼리의 결과를 특정 클래스의 객체**로 만들기 위해 설정
 
 
 
-생성순서1 totalCount 게시판 글 전체 개수.
-생성순서2 tempEndPage: 게시판의 실제 마지막 페이지 번호.
-생성순서3 endPage: 게시판을 화면에 보여질 마지막 페이지 번호.
-생성순서4 startPage: 게시판을 화면에 보여질 첫번째 페이지 번호.
-생성순서5 prev: 이전 페이지 버튼 활성화 여부.
-생성순서6 next: 다음 페이지 버튼 활성화 여부.
+생성순서1 totalCount 게시판 글 전체 개수.   
+생성순서2 tempEndPage: 게시판의 실제 마지막 페이지 번호.   
+생성순서3 endPage: 게시판을 화면에 보여질 마지막 페이지 번호.   
+생성순서4 startPage: 게시판을 화면에 보여질 첫번째 페이지 번호.   
+생성순서5 prev: 이전 페이지 버튼 활성화 여부.   
+생성순서6 next: 다음 페이지 버튼 활성화 여부.   
 
 생성순서는 중요하다. 뒤 순서 데이터는 앞 순서 데이터를 참조하기 때문이다.
 데이터 생성 공식은 다음과 같다.
 
-totlaCount 공식: 조회 쿼리 count(*)를 이용해서 전체 게시글 개수를 구한다.
+totlaCount 공식: 조회 쿼리 count(*)를 이용해서 전체 게시글 개수를 구합니다.
 
 tempEndPage 공식: (int)(Math.ceil(totalCount / (double)Criteria의 한페이지 당 게시글 개수))
 
 endPage 공식: (int)(Math.ceil(현재 페이지번호 / (double)한번에 보여질 페이지 번호개수) * 한번에 보여질 페이지번호 개수).
-하지만 여기서 endPage의 값은 tempEndPage보다 클수 없어야 한다.
+하지만 여기서 endPage의 값은 tempEndPage보다 클수 없어야 합니다.
 
 startPage 공식: (endPage - 한번에 보여질 페이지 번호 개수) + 1
 
 prev 공식: startPage가 1이 아니면 활성화, 1이 면 비활성화
 
-next 공식: (endPage * Criteria의 한페이지 당 게시글 개수) 가 totlaCount보다 크거나 같으면 비활성화, 아니면 활성화이다.
-next공식은 책에서 나온 것인데, 그냥 endPage가 tempEndPage보다 작으면 활성화 아니면 비활성화 하는것이 더 간단해 보인다.
+next 공식: (endPage * Criteria의 한페이지 당 게시글 개수) 가 totlaCount보다 크거나 같으면 비활성화, 아니면 활성화이다.   
+next공식은 책에서 나온 것인데, 그냥 endPage가 tempEndPage보다 작으면 활성화 아니면 비활성화 하는것이 더 간단해 보입니다.

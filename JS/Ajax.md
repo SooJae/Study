@@ -28,7 +28,7 @@ fetch('html').then(function(response){
     ">
     
     
-    를 해주면 동적으로 변환한다.
+    를 해주면 동적으로 변환합니다.
     
     동작원리 
     https://www.youtube.com/watch?v=qy3M0Cp0ios&index=7&list=PLuHgQVnccGMA9-1PvblBehoGg7Pu1lg6q
@@ -78,7 +78,7 @@ function callbackme(){
     fetch('html').then(function(response){
     }))
     
-    response : 서버에 요청했을 때 서버가 응답한 결과를 담고있는 객체(여러가지 속성이 있다. 서버와 통신하는 귀중한 단서있음)
+    response : 서버에 요청했을 때 서버가 응답한 결과를 담고있는 객체(여러가지 속성이 있다. 서버와 통신하는 귀중한 단서있습니다)
     
     
     
@@ -87,8 +87,8 @@ function callbackme(){
     
     # hash ! bang 
    href="#!html"
-   !는 관습적으로 붙여준다.
+   !는 관습적으로 붙여줍니다.
    
-   jax는 다시 공부할것...
+   jax는 다시 공부할 것...
     
     

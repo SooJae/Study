@@ -1,6 +1,6 @@
 키페어(.pem) 파일 설정
 우클릭 -> 속성 -> 보안 -> 고급 -> 상속사용안함
--> Administators와 SYSTEM만 사용가능하도록 한다.
+-> Administators와 SYSTEM만 사용가능하도록 합니다.
 
 
 
@@ -16,12 +16,12 @@
 9. $ sudo apt update
 10. $ apt-cache policy docker-ce
 11. $ sudo apt install docker-ce
-12. $ sudo systemctl status docker (시스템에 자동으로 등록되어 돌아가는 것을 알 수 있다.= 재부팅 해도 자동 실행된다.)
+12. $ sudo systemctl status docker (시스템에 자동으로 등록되어 돌아가는 것을 알 수 있다.= 재부팅 해도 자동 실행됩니다.)
 
 # docker 실행    
-1. $ docker pull hello-world (pull은 특정한 서버파일을 이미지형태로 받을 수 있도록 해준다.)
+1. $ docker pull hello-world (pull은 특정한 서버파일을 이미지형태로 받을 수 있도록 해줍니다.)
 2. $ docker images ( 다운받은 도커 이미지 확인  )
-3. $ docker run hello-world (입력하자마자 바로 우리의 서버위에 하나의 서버가 생성된다.)
+3. $ docker run hello-world (입력하자마자 바로 우리의 서버위에 하나의 서버가 생성됩니다.)
 4. $ docker ps -a (어떤 컨테이너가 동작했는지 확인 가능)
 5. $ docker rm bebf27d8afab(ps -a 로 확인한 컨테이너 삭제)
 6. $ docker images ( 하지만 도커 이미지는 살아있다. )
@@ -47,7 +47,7 @@ CMD ["apachectl","-D","FOREGROUND"]
 6. $ docker build -t docker .
 7. $ docker images 로 확인
 8. $ docker run -p 80:80 docker(80번 포트와 EC2서버의 포트를 연결)(호스트 즉, 우리 서버의 포트 : 컨테이너의 포트)
-실제로 호스트서버의 80번 포트에 접속하게 되면 이 컨테이너의 80번 포트에 접속한다.
+실제로 호스트서버의 80번 포트에 접속하게 되면 이 컨테이너의 80번 포트에 접속합니다.
 9. AWS 웹페이지 -> 보안그룹 -> 인바운드 규칙-> HTTP 80번 포트를 연다.
 
 다음과 같은 에러가 날 경우
@@ -95,7 +95,7 @@ CMD ["apachectl","-D","FOREGROUND"]
 
 7. $ docker run -p 80:80 -v /home/ubuntu/docker/html:/var/www/html docker(html폴더에 파일을 넣으면 실제로 php의 기본적인 경로인 /var/www/html에 놓인 것과 같은 효과를 낸다.)
 
-8. $ docker run -p 81:80 -v /home/ubuntu/docker/html:/var/www/html docker로 하면 81번포트에서도 접속할 수 있다. 80번 81번 포트 2개가 동시에 돌아간다. (다양한 웹서버를 하나의 서버내에서 다채롭게 여러개 만들어서 구성할 수 있다. 편리하다.)
+8. $ docker run -p 81:80 -v /home/ubuntu/docker/html:/var/www/html docker로 하면 81번포트에서도 접속할 수 있다. 80번 81번 포트 2개가 동시에 돌아갑니다. (다양한 웹서버를 하나의 서버내에서 다채롭게 여러개 만들어서 구성할 수 있다. 편리하다.)
 
 
 $ docker rm -f `docker ps -a -q`  # 실행중인 docker 전체 삭제
@@ -152,7 +152,7 @@ $ docker run -it --rm mariadb mysql -h"호스트아이피" -u"유저아이디" -
 
 1. $ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 2. $ sudo chmod +x /usr/local/bin/docker-compose
-3. path 값이 /usr/bin/이라면 다음과 같이 심볼릭 링크를 달아준다.
+3. path 값이 /usr/bin/이라면 다음과 같이 심볼릭 링크를 달아줍니다.
 $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 
@@ -160,12 +160,12 @@ $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 ## PHP와 MariaDB 연결
 1. $sudo vim Dockerfile
- -p : 컨테이너 포트를 개방한 뒤, 호스트 포트와 연결한다.
+ -p : 컨테이너 포트를 개방한 뒤, 호스트 포트와 연결합니다.
 -v : 볼륨 마운팅
--expose : 컨테이너 포트만 개방한다.
+-expose : 컨테이너 포트만 개방합니다.
 -d 옵션
 docker run --name daemonized_container -d <docker_image>
-Production 환경에서 실행될 docker container는 대부분 daemonized 된 상태로 실행될것이다.
+Production 환경에서 실행될 docker container는 대부분 daemonized 된 상태로 실행될것 입니다.
 
 ## 사용자 할당
 mariadb > CREATE USER 'test'@'%' IDENTIFIED BY 'password';
@@ -179,7 +179,7 @@ mariadb > FLUSH PRIVILEGES;
 #docker-compose.yml을 사용하여 다중 컨테이너 애플리케이션 정의
 https://docs.microsoft.com/ko-kr/dotnet/standard/microservices-architecture/multi-container-microservice-net-applications/multi-container-applications-docker-compose
 
-docker-compose는 기본으로 .env 파일을 환경변수 파일로 인식한다. 필요한 변수를 .env에 설정해 주고, .gitignore에 추가한다. 새로 생성한 .env 파일과 변경한 docker-compose 파일은 다음과 같다.
+docker-compose는 기본으로 .env 파일을 환경변수 파일로 인식합니다. 필요한 변수를 .env에 설정해 주고, .gitignore에 추가합니다. 새로 생성한 .env 파일과 변경한 docker-compose 파일은 다음과 같다.
 ```yml
 environment:
       - "DOCUMENT_ROOT=${DOCUMENT_ROOT}"
@@ -187,10 +187,10 @@ environment:
       - "VHOSTS_DIR: ${VHOSTS_DIR}"
 ```
 
-도커를 연동한 상태에서 깃 허브에 파일을 올리면 서버에서 도커 이미지를 제거해도 된다.
+도커를 연동한 상태에서 깃 허브에 파일을 올리면 서버에서 도커 이미지를 제거해도 됩니다.
 
 의문점
-원래는 mysql, mariaDB가 깔려있지 않아서 오류가 났다고 생각했는데 php를 volume처리 해주지 않아서 오류가 난것 같다. DB가 깔려 있지 않아도 외부 rds에 접속이 된다.
+원래는 mysql, mariaDB가 깔려있지 않아서 오류가 났다고 생각했는데 php를 volume처리 해주지 않아서 오류가 난것 같다. DB가 깔려 있지 않아도 외부 rds에 접속이 됩니다.
 
 
 ## docker-compose.yml 관리법
@@ -210,8 +210,8 @@ CI에서 사용되는 config
 1. $ docker pull jenkins
 
 2. $ docker run -d -p 8080:8080 -v /home/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins
-(젠킨스는 8080포트를 쓴다.)
-3. AWS EC2 8080포트를 열어준다.
+(젠킨스는 8080포트를 씁니다.)
+3. AWS EC2 8080포트를 열어줍니다.
 4. 주소:8080을 접속하면 젠킨스의 첫화면이 나온다.
 5. $ docker logs "젠킨스 컨테이너 ID"
 6. Jenkins initial setup is required. An admin user has been created and a password generated.
@@ -219,14 +219,14 @@ Please use the following password to proceed to installation:
 
 **이 부분을 접속한 웹페이지 첫 화면 비밀번호에 붙여넣는다.**
 
-7. 첫번째 것을 눌러 기본 설치를 한다.
-8. 그다음 사용자를 생성한다.
+7. 첫번째 것을 눌러 기본 설치를 합니다.
+8. 그다음 사용자를 생성합니다.
 
 
 # 젠킨스 설치 2
 	
 1. $ docker run -d -p 8080:8080 -p 50000:50000 jenkins/jenkins
-2. AWS EC2 8080포트를 열어준다.
+2. AWS EC2 8080포트를 열어줍니다.
 3. 주소:8080을 접속하면 젠킨스의 첫화면이 나온다.
 4. $ docker logs "젠킨스 컨테이너 ID"
 5. Jenkins initial setup is required. An admin user has been created and a password generated.
@@ -235,13 +235,13 @@ Please use the following password to proceed to installation:
 **이 부분을 접속한 웹페이지 첫 화면 비밀번호에 붙여넣는다.**
 
 깃 계정 정보를 특정한 서버내에 기록하게하면 깃 계정 정보가 유출될수도 있기때문에
-(젠킨스에 존재하기 때문에) 다음과 같이 2시간만 존재하도록 타임아웃 설정을 한다.
+(젠킨스에 존재하기 때문에) 다음과 같이 2시간만 존재하도록 타임아웃 설정을 합니다.
 git config --global credential.helper "cahce --timeout 7200"
 
 깃허브
 Personal access tokens 탭에 들어가서 
 repository와 repo:hook을 체크해놓으면 
-git pull을 할때 비밀번호 대신에 accessToken을 넣으면 된다.
+git pull을 할때 비밀번호 대신에 accessToken을 넣으면 됩니다.
 
 
 

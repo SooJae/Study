@@ -5,7 +5,7 @@ f1.txt파일을 생성하고 add하면
 refs\heads\master라는 파일이 생긴다.
 방금 내가 commit한 아이디가 뜬다.
 초기화하면 .git/HEAD가 생성되는데 텍스트 파일이다.
-refs/heads/master는 커밋을 처음 한 시점부터 생성된다.
+refs/heads/master는 커밋을 처음 한 시점부터 생성됩니다.
 f2.txt가 생성하면
 refs/heads/master는 f2.txt를 가리킨다.
 
@@ -16,14 +16,14 @@ HEAD는 refs/heads/master라는 파일을 가리키고 있고,
 git log를 하면 헤드파일을 보고 헤드파일에 있는 마스터파일을 보고 
 마스터 파일에 적혀있는 커밋 오브젝트 id값을 통해서 현재 commit된 가장 최신 commit이 무엇인가를 
 알아낼 수 있다. 그리고 그 이전 commit은 parent라는 것을 통해서 탐색해 나갈 수 있다.
-이것을 통해서 알수 있는 것은 git에서 branch라고 하는 것은 단지 refs라는 디렉토리 안에 있는 파일을 의미한다.
+이것을 통해서 알수 있는 것은 git에서 branch라고 하는 것은 단지 refs라는 디렉토리 안에 있는 파일을 의미합니다.
 
 $ rm .git/refs/heads/exp
 로 exp를 삭제 했을때 git branch를 보면 exp는 사라져있다.
 
 $ vim .git/refs/heads/exp를 한 후에
 최신 커밋의 ID값 6fff3fda34fe3ccaa04d266b626fa3a6378f3b57 를 추가해주면
-다시 exp라는 branch가 생성된다.
+다시 exp라는 branch가 생성됩니다.
 git에서 branch라는 것은 중요하고 강력하지만, g단지 파일 하나일 뿐이다.
  심지어 binary도 아니고 일반 텍스트 파일이다.
 
@@ -31,17 +31,17 @@ $ git checkout exp를 하면
 HEAD는 exp를 가리킨다.
 
 현재 사용하고있는 branch 무엇인가를 가리키는 약속된 기호가 head인데 head는 어떤 특정한 파일이다.
-HEAD가 하는 역할은 현재 checkout된 가장 최신 commit이 무엇인가를 나타내준다..
+HEAD가 하는 역할은 현재 checkout된 가장 최신 commit이 무엇인가를 나타내줍니다..
 
 master branch와 exp branch의 같은 이름의 파일을 만들어보자
 exp branch로 가서 common.txt파일을 만든 후, master branch로 와서
-exp branch와 병합을 해준다. 그 이후에 master branch에서 common.txt파일을 수정한다.
-다시 exp로 가서 common.txt파일을 수정한다.
+exp branch와 병합을 해줍니다. 그 이후에 master branch에서 common.txt파일을 수정합니다.
+다시 exp로 가서 common.txt파일을 수정합니다.
 즉, common.txt인 파일을 서로 다르게 수정했다.
 
 $ git merge exp
 를 하면 내용의 위치가 다를경우, master에서 작성된 내용과 exp에서 작성한 내용이 합쳐진다.
-(common.txt 내용이 b이고 , master에서 a b이고, exp 에서 b c이면 a b c 가 출력된다.)
+(common.txt 내용이 b이고 , master에서 a b이고, exp 에서 b c이면 a b c 가 출력됩니다.)
 BUT!!! 같은 부분을 수정하면(master에서 a를 a(master)라고 하고 exp에서는 a(exp)라고 할때)
 
 $ git merge exp
@@ -88,7 +88,7 @@ function a(master,exp){
 function c(){
 }
 
-로 바꿔준다.
+로 바꿔줍니다.
 
 다 하고 commit을 해보면 충돌이 났었다고 써져있다.
 
@@ -97,13 +97,13 @@ $ git reset --hard c7081fa5659e1d4430c578493bb6ca2f45cc1bc1
 refs/heads/master 
 어떤 커밋을 최신커밋을 가지고 있나
 
-reset을 한다는 것을 head가 가리키고있는 커밋을 바꾸는 행위(간단)
+reset을 합니다는 것을 head가 가리키고있는 커밋을 바꾸는 행위(간단)
 git은 왠만하면 파일을 정리하지 않는다 
-reset을 한다고해서 실제로 지워진게 아니라 눈에만 안보일 뿐이다.
+reset을 합니다고해서 실제로 지워진게 아니라 눈에만 안보일 뿐이다.
 ORIG_HEAD를 눌러보면 우리가 지운 4번이 있다.
 logs/refs/heads/master 파일을 보면 제일 끝에 행에 f3ea~ 가 93c~가 되었다고 나온다.
 최신 커밋인 3으로 교체했다는 뜻이다.
-현재 branch의 헤드가 가리키고 있는 COMMIt을 ORIG_HEAD에 기록한 후에 RESET을 실행한다.
+현재 branch의 헤드가 가리키고 있는 COMMIt을 ORIG_HEAD에 기록한 후에 RESET을 실행합니다.
 
 $ git reset --hard ORIG_HEAD
 하면 RESET을 취소할수 있다.
@@ -117,8 +117,8 @@ c7081fa HEAD@{3}: commit: 3
 15e18dd HEAD@{5}: commit (initial): 1
 
 각각의 commit이 담겨있다.
-git reset 95a7277이라고 쓰면 복구된다.
-또한 취소할때 reset HEAD@{0}이라고 해도된다.
+git reset 95a7277이라고 쓰면 복구됩니다.
+또한 취소할때 reset HEAD@{0}이라고 해도됩니다.
 
 git 로그에 있는 c7081fa5659e1d4430c578493bb6ca2f45cc1bc1
 을 git checkout c7081fa5659e1d4430c578493bb6ca2f45cc1bc1 라고 하면
@@ -137,9 +137,9 @@ index = staging area = cache
 repository = history = tree
 
 
-git reset --hard :  working directory, index, repository 전부 삭제가 된다.
-git reset --soft : repository 만 삭제한다.
-git reset --mixed : repository, index만 삭제한다.
+git reset --hard :  working directory, index, repository 전부 삭제가 됩니다.
+git reset --soft : repository 만 삭제합니다.
+git reset --mixed : repository, index만 삭제합니다.
 
 생활코딩 30강 보기.
 
@@ -153,7 +153,7 @@ MERGE_HEAD MERGE가 될 대상의 최신 commit을 가리킨다
 $ git config --global merge.tool kdiff3
 병합을 전문적으로 하는 툴 kdiff3
 
-$ git merge tool이라고 하면 tool을 이용해 conflict 일어난 파일을 병합한다.
+$ git merge tool이라고 하면 tool을 이용해 conflict 일어난 파일을 병합합니다.
 
 A B C 를 차례로 눌러 수정해보자.
 
@@ -177,11 +177,11 @@ local 저장소가 생긴다.
 $ git init --bare remote
 bare는 작업을 할 수 없고, 저장소의 기능만 있는 저장소
 bare라고 하는 것은 .git의 디렉토리의 내용만 존재하는 저장소
-원격저장소는 원격저장소를 순수하게 유지하기 위해서 BARE옵션으로 작업을 할수없게한다.
+원격저장소는 원격저장소를 순수하게 유지하기 위해서 BARE옵션으로 작업을 할수없게합니다.
 
 원격저장소에 로컬 저장소를 잇는다.
 $ git remote add origin /c/git/remote
-origin이라는것이 뒤의 경로의 별명같은 것이 된다.
+origin이라는것이 뒤의 경로의 별명같은 것이 됩니다.
 
 $ git remote -v
 origin(별명)  C:/git/remote (fetch)
@@ -231,12 +231,12 @@ friend 저장소로 보낼수도 있다.
 origin이 저장소 디폴트값
 
 $ git remote remove friend
-로 삭제해준다.
+로 삭제해줍니다.
 
 $ git push -u origin master
 현재 checkout된 로컬저장소의 branch를 origin에 해당되는 master branch로 동기화 시킨다.
--u는 로컬저장소의 branch와 원격저장소의 master branch를 연결시켜 한번만 세팅하면(연결해준다는 뜻)
-그 이후에 git push만 하면 된다.
+-u는 로컬저장소의 branch와 원격저장소의 master branch를 연결시켜 한번만 세팅하면(연결해줍니다는 뜻)
+그 이후에 git push만 하면 됩니다.
 
 프로젝트 복사 : clone 
 
@@ -249,8 +249,8 @@ $ git clone https://github.com/SooJae/gitfth.git git_office
 두개를 만든다.
 
 --집--
-파일을 수정하고 push를 한다.
-$ git commit --amend // 마지막에 했던 commit 메세지를 바꿀수 있다.(원격 저장소에 올리기 전에 해야한다.) push를 한 이후의 내용은 수정하면 안된다.
+파일을 수정하고 push를 합니다.
+$ git commit --amend // 마지막에 했던 commit 메세지를 바꿀수 있다.(원격 저장소에 올리기 전에 해야합니다.) push를 한 이후의 내용은 수정하면 안됩니다.
 
 --회사--
 $ git pull
@@ -300,7 +300,7 @@ The key's randomart image is:
 -rw-r--r-- 1 leesujae 197121  396 10월  7 18:25 id_rsa.pub
 두개가 생긴다
 
-if_rsa : private key // 내 컴퓨터에 저장 , 절대 노출되면 안된다.
+if_rsa : private key // 내 컴퓨터에 저장 , 절대 노출되면 안됩니다.
 id_rsa.pub : public key // 내 컴퓨터에 저장+ 내가 접속하려는 컴퓨터에 저장
 
 id_rsa.pub라는 파일이 저장된 컴퓨터에 접속할때, 비밀번호를 입력할 필요가 없다.
@@ -310,13 +310,13 @@ github가 제공하는 기능을 이용하여 손 쉽게 id_rsa.pub를 github에
 $ cat id_rsa.pub
 후에 전부 카피
 그리고 github setting에 들어가서 ssh에 붙여넣고 저장.
-하면 우리의 public key가 저장된다.
+하면 우리의 public key가 저장됩니다.
 
 다시 repository를 생성후 SSH로 만든다.
 그리고 지역저장소가 없었던 상태에서 원격저장소를 하고싶을때??
 
 $ git clone git@github.com:SooJae/gitfth_ssh.git gitfth_ssh
-그 후에 질문에 yes를 하고 clone성공한다.
+그 후에 질문에 yes를 하고 clone성공합니다.
 
 
 

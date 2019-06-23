@@ -17,7 +17,7 @@ public class HelloWorld extends HttpServlet {
 </servlet>
 <servlet-mapping>
 	<servlet-name>helloworld</servlet-name>
-	<url-pattern>/hw</url-pattern> //servlet-class의 클래스를 매핑할 임의의 이름을 입력. "/"로 시작해야 한다.
+	<url-pattern>/hw</url-pattern> //servlet-class의 클래스를 매핑할 임의의 이름을 입력. "/"로 시작해야 합니다.
 </servlet-mapping>
 ```
 Servlet 작동순서
@@ -38,7 +38,7 @@ Servlet 객체생성(최초한번) ->(선처리:@PostConstruct)-> Init()호출(�
 
 # 서블릿 초기화 파라미터
 특정 servlet이 생성 될 때 초기에 필요한 데이터들이 있다. 예를들어 특정 경로 및 아이디 정보등.
-이러한 데이터들을 초기화 파라미터라고 하며, web.xml에 기술하고 servlet파일에서는 ServletConfig 클래스를 이용해서 접근 한다.
+이러한 데이터들을 초기화 파라미터라고 하며, web.xml에 기술하고 servlet파일에서는 ServletConfig 클래스를 이용해서 접근 합니다.
 또한 초기화 파라미터를 web.xml이 아닌 Servlet파일에 직접 기술하는 방법도 있다.
 
 web.xml
@@ -63,7 +63,7 @@ String pw=getInitParameter("pw");
 String path=getInitParameter("path");
 
 데이터공유: ServletContext
-여러 서블릿에서 특정 데이터를 공유할 경우 context 파라미터를 이용한다.
+여러 서블릿에서 특정 데이터를 공유할 경우 context 파라미터를 이용합니다.
 
 web.xml
 ```xml
@@ -118,13 +118,13 @@ public class ContextListenerEx implements ServletContextListner{}
 
 
 JSP 동작원리
-클라이언트가 웹브라우저로 helloWorld.jsp를 요청하게되면 JSP 컨테이너가 JSP 파일을 Servlet파일(.java)로 변환한다.
+클라이언트가 웹브라우저로 helloWorld.jsp를 요청하게되면 JSP 컨테이너가 JSP 파일을 Servlet파일(.java)로 변환합니다.
 그리고 Servlet파일(.java)은 컴파일 된 후 클래스 파일 (.class)로 변환되고, 요청한 클라이언트한테 html파일 형태로 응답합니다.
 웹브라우저 요청 (http://...)-> Jsp >> Servlet(helloWorld.jsp >> helloWorld_jsp.java) -> Servlet>> class(helloWorld_jsp.java>>helloWorld_jsp.class) -> 웹브라우저 응답(HTML 형태로 응답)
 
 
 JSP 내부 객체
-개발자가 객체를 생성하지 않고 바로 사용할 수 있는 객체가 내부객체이다. JSP에서 제공되는 내부 객체는 JSP 컨테이너에 의해 Servlet으로 변화될 때 자동으로 객체가 생성 된다.
+개발자가 객체를 생성하지 않고 바로 사용할 수 있는 객체가 내부객체이다. JSP에서 제공되는 내부 객체는 JSP 컨테이너에 의해 Servlet으로 변화될 때 자동으로 객체가 생성 됩니다.
 
 내부 객체 종류
 입출력 객체 : request, response, out
@@ -142,7 +142,7 @@ page 지시자
 페이지의 속성을 지정할 때 사용 합니다. 주로 사용되는 **언어 지정** 및 **import** 문을 많이 사용
 
 include 지시자
-현재 페이지내의 다른 페이지를 삽입할 때 사용된다. file속성을 이용
+현재 페이지내의 다른 페이지를 삽입할 때 사용됩니다. file속성을 이용
 ```jsp
 <%@ include file ="include01.jsp"%>
 ```
@@ -158,7 +158,7 @@ include : 갔다가 다시 옴
 forward : 완전 넘김
 
 taglib 지시자. 
-JSTL에서 사용한다.
+JSTL에서 사용합니다.
 
 
 http 특징 : 클라이언트에서 서버로 request을하면 서버측에서는 알맞는 로직을 수행한후 그 데이터를 웹브라우저에 response합니다. 그리고 서버는 클라이언트와의 연결을 종료합니다. 즉 값들을 일일이 기억하지 않습니다. 이것을 무상태 서버 라고 합니다.
@@ -169,7 +169,7 @@ http 특징 : 클라이언트에서 서버로 request을하면 서버측에서�
 
 
 쿠키
-쿠키는 서버에서 생성되어 클라이언트 측에 전송되어 저장된다.
+쿠키는 서버에서 생성되어 클라이언트 측에 전송되어 저장됩니다.
 쿠키생성 -> 속성 설정 -> respose 객체에 쿠키 탑재
 
 세션
@@ -308,7 +308,7 @@ session.invalidate();
 ```jsp
 <%@ page errorPage = "errorPage.jsp"%> 
 // 오류 발생시 errorPage.jsp로 감
-//에러페이지에는 밑과같이 적어줘야 한다.
+//에러페이지에는 밑과같이 적어줘야 합니다.
 <%@ page isErrorPage="true"%>
 <% response.setStatus(200); %> // 정상적으로 완료된 페이지
 ```
@@ -324,14 +324,14 @@ web.xml 파일을 이용한 예외처리
 	<location>/error500.jsp</location>
 </error-page>
 ```
-xml또한 에러페이지에는 밑과같이 적어줘야한다.
+xml또한 에러페이지에는 밑과같이 적어줘야합니다.
 ```jsp
 <%@ page isErrorPage="true" %>
 <% response.setStatus(200); %>
 ```
 
 빈이란?
-반복적인 작업을 효율적으로 하기위해 빈을 사용한다.
+반복적인 작업을 효율적으로 하기위해 빈을 사용합니다.
 빈이란 JAVA언어의 데이터(속성)와 기능(메소드)으로 이루어진 클래스이다.
 jsp페이지를 만들고, 액션태그를 이용하여 빈을 사용합니다. 그리고 빈의 내부 데이터를 처리합니다.
 Student.java파일
@@ -386,19 +386,19 @@ statement.executeQuery, statement.executeUpdate()
 :SQL문의 결과값을 ResultSet객체로 받습니다.
 
 
-DB는 에러가 은근 잘 발생하기 때문에, try catch문을 사용한다.
+DB는 에러가 은근 잘 발생하기 때문에, try catch문을 사용합니다.
 
 executeUpdate(query);  
-몇개의 값이 수정됐는지 리턴한다.
+몇개의 값이 수정됐는지 리턴합니다.
 
 
 Tomcat은 사실 **서버**가 아니라 **컨테이너**이다.
 
 # 커넥션 풀
 
-DAO(Data Access Object) : WAS가 DB로 접근해서 데이터를 받아올때, 관련된 일을 하는 것이 DAO. 데이터를 직접 접속을 해서 로직을 수행한다. 데이터 베이스에 접속해서 데이터 추가, 삭제, 수정등의 작업을 하는 클래스이다. JSP 혹은 Servlet 페이지 내에 함께 기술할 수도 있지만 유지보수 및 코드의 모듈화를 위해 별도의 DAO 클래스를 만들어 사용한다.
+DAO(Data Access Object) : WAS가 DB로 접근해서 데이터를 받아올때, 관련된 일을 하는 것이 DAO. 데이터를 직접 접속을 해서 로직을 수행합니다. 데이터 베이스에 접속해서 데이터 추가, 삭제, 수정등의 작업을 하는 클래스이다. JSP 혹은 Servlet 페이지 내에 함께 기술할 수도 있지만 유지보수 및 코드의 모듈화를 위해 별도의 DAO 클래스를 만들어 사용합니다.
 
-DTO(Data transfer Object) : 데이터가 다른 jsp와 서블릿에 섞여 들어간다. 데이터만 따로 모아서 하나의 오브젝트로 따로 관리하자는 것이 DTO. 데이터베이스에서 가져온 DATA를 객체 데이터로 바꿔주는 클래스 . DAO를 이용하여, 데이터베이스에서 데이터를 관리할 때 데이터를 일반적인 변수에 할당하여 작업을 할 수도 있지만, 해당 데이터의 클래스를 만들어 사용한다.
+DTO(Data transfer Object) : 데이터가 다른 jsp와 서블릿에 섞여 들어갑니다. 데이터만 따로 모아서 하나의 오브젝트로 따로 관리하자는 것이 DTO. 데이터베이스에서 가져온 DATA를 객체 데이터로 바꿔주는 클래스 . DAO를 이용하여, 데이터베이스에서 데이터를 관리할 때 데이터를 일반적인 변수에 할당하여 작업을 할 수도 있지만, 해당 데이터의 클래스를 만들어 사용합니다.
 
 웹브라우져 -> Servlet이나 JSP에서 받음 -> DAO에게 요청 -> DB에 요청 -> ResultSet을 받아서 DTO에 저장 -> DTO가 Servlet이나 JSP에 저장. -> 웹 브라우저에게 뿌림
 
@@ -513,7 +513,7 @@ Class.forName(driver);
 	connection = DriverManager.getConnection(url, uid, upw);
 	int n;
 	String query = "insert into memberforpre (id, pw, name, phone) values (?, ?, ?, ?)";
-	//Statement와 다르게 query문을 따로 먼저 선언해준다.
+	//Statement와 다르게 query문을 따로 먼저 선언해줍니다.
 	preparedStatement = connection.prepareStatement(query);
 	preparedStatement.setString(1, "abc");
 	preparedStatement.setString(2, "123");
@@ -545,7 +545,7 @@ server폴더에 있는 tomcat파일의 context.xml 에
 ```xml
 <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="50" maxWait="1000" name="jdbc/Oracle11g" username="scott" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe"/>
 ```
-을 추가해준다.
+을 추가해줍니다.
 
 MemberDAO.java
 ```java
@@ -582,7 +582,7 @@ public class MemberDAO {
 		
 		try {
 //			con = DriverManager.getConnection(url, uid, upw);
-			con = dataSource.getConnection(); //미리 만들어 놓은걸 갖다쓴다.
+			con = dataSource.getConnection(); //미리 만들어 놓은걸 갖다씁니다.
 			stmt = con.createStatement();
 			rs = stmt.executeQuery("select * from member");
 ```
@@ -591,7 +591,7 @@ public class MemberDAO {
 
 DOM이건 BOM이건 JS이건 모든 객체가 WINDOW의 자식 객체들이다.
 
-우리가 alert이라고 적어주는 내장함수는 사실은 앞에 window가 붙은 alert이다. alert만 적어도 내부적으로 window.alert로 변환해준다. 우리가 적어주는 모든 메소드,변수는 window라는 객체의 메소드,변수다.
+우리가 alert이라고 적어주는 내장함수는 사실은 앞에 window가 붙은 alert이다. alert만 적어도 내부적으로 window.alert로 변환해줍니다. 우리가 적어주는 모든 메소드,변수는 window라는 객체의 메소드,변수다.
 window.a == a
 
 
@@ -628,9 +628,9 @@ join.jsp
 		주소 : <input type="text" name="address" size="50"><br />
 		<input type="button" value="회원가입" onclick="infoConfirm()">
 ```
-join.jsp의 name값이 같아야 한다.
+join.jsp의 name값이 같아야 합니다.
 
-그렇지 않을경우 joinOk.jsp에서 일일이 하나씩 집어 넣어야한다.
+그렇지 않을경우 joinOk.jsp에서 일일이 하나씩 집어 넣어야합니다.
 
 
 
@@ -789,7 +789,7 @@ ${ initParam.path }
 JSTL(JSP standard Tag Library)
 Sevlet은 순수 자바코드로 이루어져있어 가독성이 좋지만
 JSP의 경우 HTML 태그와 같이 사용되어 전체적인 코드의 가독성이 떨어진다.
-그래서 JSTL로 이러한 단점을 보안한다.
+그래서 JSTL로 이러한 단점을 보안합니다.
 JSTL의 경우 우리가 사용하는 Tomcat컨테이너에 포함되어 있지 않으므로 설치를 하고 사용 합니다.
 
 jstl에서는 다섯가지의 라이브러리를 제공
@@ -880,14 +880,14 @@ http://localhost:8181/jsp_21_1_ex2/World	/World 서블릿
 http://localhost:8181/jsp_21_1_ex1/hello*do
 http://localhost:8181/jsp_21_1_ex2/world*do
 => *.do 서블릿
-확장자가 do로 같아서 동일한(하나의) do로 맵핑되어 있는 서블릿으로 간다.
-서버에서 hello로 요청했는지 world로 요청했는지 서블릿에서 구분을 한다.
+확장자가 do로 같아서 동일한(하나의) do로 맵핑되어 있는 서블릿으로 갑니다.
+서버에서 hello로 요청했는지 world로 요청했는지 서블릿에서 구분을 합니다.
 
-디렉토리는 각 디렉토리 맵핑명을 가지고 별개의 서블릿을 찾아간다.
-확장자 패턴은 동일한 서블릿을 찾아간 뒤 그 안에서 구분을 한다(많이 사용한다.)
+디렉토리는 각 디렉토리 맵핑명을 가지고 별개의 서블릿을 찾아갑니다.
+확장자 패턴은 동일한 서블릿을 찾아간 뒤 그 안에서 구분을 합니다(많이 사용합니다.)
 
 ## FrontController 패턴
-클라이언트의 다양한 요청을 한곳으로 집중 시켜 개발 빛 유지보수에 효율성을 극대화 한다.
+클라이언트의 다양한 요청을 한곳으로 집중 시켜 개발 빛 유지보수에 효율성을 극대화 합니다.
 
 frontController.jsp
 '''jsp
@@ -1011,7 +1011,7 @@ String command = uri.substring(conPath.length());
 
 
 ## Command 패턴
-클라이언트로부터 받은 요청들에 대해서, 서블릿이 작업을 직접 처리하지 않고, 해당 클래스가 처리하도록 한다.
+클라이언트로부터 받은 요청들에 대해서, 서블릿이 작업을 직접 처리하지 않고, 해당 클래스가 처리하도록 합니다.
 
 요청 1,2,3,... => 모든 요청을 직접 처리하는 서블릿 -> DAO
 
@@ -1021,7 +1021,7 @@ String command = uri.substring(conPath.length());
 
 # 포워딩(Forwarding)
 RequestDispatcher 클래스
-서블릿 또는 JSP에서 요청을 받은 후 다른 콤포넌트로 요청을 위임할 수 있다. 이러한 위임 방법에는 2개의 클래스를 이용한다. 하나는 RequestDispatcher 클래스고, 또 하나는 HttpServletResponse클래스이다.
+서블릿 또는 JSP에서 요청을 받은 후 다른 콤포넌트로 요청을 위임할 수 있다. 이러한 위임 방법에는 2개의 클래스를 이용합니다. 하나는 RequestDispatcher 클래스고, 또 하나는 HttpServletResponse클래스이다.
 ## RequestDispatcher 클래스
 클라이언트(웹 브라우저) ->요청(doGet이나 doPost등) -> 요청받은 컴포넌트 -> 요청위임 -> 위임받은 컴포넌트
 
@@ -1043,7 +1043,7 @@ jsp에서또한 dispatcher를 사용할 수 있다.
 
 ## HttpServletResponse 클래스
 RequestDispatcher 클래스와 동일하게 요청을 위임하는 클래스이다.
-차이점은 요청 받은 요청 객체를 위임 받은 컴포넌트에 전달하는 것이 아닌, 새로운 요청객체를 생성 한다.
+차이점은 요청 받은 요청 객체를 위임 받은 컴포넌트에 전달하는 것이 아닌, 새로운 요청객체를 생성 합니다.
   요청받은 컴포넌트 (요청위임)<=> 요청,응답<=> **클라이언트** <=>요청, 응답 <=> 위임받은 컴포넌트
 
 요청은 다른 Request 객체이다. 
@@ -1051,9 +1051,9 @@ RequestDispatcher 클래스와 동일하게 요청을 위임하는 클래스이�
 
 MVC패턴
 MVC란 Model, View, Controller를 뜻하는 용어로 개발 형태의 일종이다.
-Model은 데이터베이스와의 관계를 담당한다. 클라이언트의 요청에서 필요한 자료를 데이터베이스로부터 추출하거나, 수정하여 Controller로 전달한다.
-View는 사용자에게 보여지는 UI화면이다. 주로 .jsp파일로 작성하며, Controller에서 어떤 View 컴포넌트를 보여줄지 결정한다.
-Controller는 클라이언트의 요청을 받고, 적절한 Model에 지시를 내리며, Model에서 전달된 데이터를 적절한 View에 전달한다.
+Model은 데이터베이스와의 관계를 담당합니다. 클라이언트의 요청에서 필요한 자료를 데이터베이스로부터 추출하거나, 수정하여 Controller로 전달합니다.
+View는 사용자에게 보여지는 UI화면이다. 주로 .jsp파일로 작성하며, Controller에서 어떤 View 컴포넌트를 보여줄지 결정합니다.
+Controller는 클라이언트의 요청을 받고, 적절한 Model에 지시를 내리며, Model에서 전달된 데이터를 적절한 View에 전달합니다.
 Model1
 MVC에서 View와 Controller가 같이 있는 형태.
 
@@ -1193,7 +1193,7 @@ public class BFrontController extends HttpServlet {
 			viewPage = "list.do";
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage); //viewPage에 해당하는 페이지로 포워딩한다.
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage); //viewPage에 해당하는 페이지로 포워딩합니다.
 		dispatcher.forward(request, response);
 		
 	}
@@ -1263,7 +1263,7 @@ CREATE TABLE BBS(
     -> userID VARCHAR(20),
     -> bbsDate DATETIME,
     -> bbsContent VARCHAR(2048),
-    -> bbsAvailable INT, // 삭제된 게시물도 DB에는 저장되어야 하므로 bbsAvailable로 게시물의 상태를 알려준다.
+    -> bbsAvailable INT, // 삭제된 게시물도 DB에는 저장되어야 하므로 bbsAvailable로 게시물의 상태를 알려줍니다.
     -> PRIMARY KEY(bbsID)
     -> );
 ```

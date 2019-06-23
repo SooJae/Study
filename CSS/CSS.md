@@ -1,6 +1,6 @@
 웹페이지 안에 CSS를 삽입하는 방법
-1. style 태그를 쓴다. 
-2. style 속성을 쓴다.
+1. style 태그를 씁니다. 
+2. style 속성을 씁니다.
 
   <style>
     a {
@@ -14,7 +14,7 @@
   <h1><a href="index.html">WEB</a></h1>
   <ol>
     <li><a href="1.html">HTML</a></li>
-    <li><a href="2.html" style="color:red"(CSS속성을 쓴다는 뜻.)>CSS</a></li>
+    <li><a href="2.html" style="color:red"(CSS속성을 씁니다는 뜻.)>CSS</a></li>
     <li><a href="3.html">JavaScript</a></li>
   </ol>
   
@@ -148,7 +148,7 @@ A,B
 둘 다 선택하는 선택자
 
 plate *:only-child
-plate 밑의 포함된 태그가 하나일 경우만 해당된다.
+plate 밑의 포함된 태그가 하나일 경우만 해당됩니다.
 
 .small:last-child
 small이라는 class안에 마지막인 태그만 뽑아낸다.
@@ -160,7 +160,7 @@ bento:nth-last-child(3)
 뒤에서 3번째이고 벤또인것을 뽑아낸다.
 
 apple:first-of-type
-apple 태그가 처음 등장하는 것을 선택한다.
+apple 태그가 처음 등장하는 것을 선택합니다.
 
 plate:nth-of-type(even)
 태그가 짝수로 있는 것만 뽑아낸다.
@@ -194,7 +194,7 @@ a:visited
 a:link
 방문 안했던 곳
 a:focus
-tab키를 누르면 focus된다. (마지막에 써주는게 좋다. (input창일때 색깔바뀌게 가능)
+tab키를 누르면 focus됩니다. (마지막에 써주는게 좋다. (input창일때 색깔바뀌게 가능)
 
 
 font-size 제일 많이 사용됨.
@@ -202,12 +202,12 @@ px vs em vs rem
 rem이 최근에 추가된 단위.
 px은 크기가 고정되어있다.
 em,rem은 브라우저의 설정에 따라서 폰트의 크기가 달라진다.
-오늘날에는 rem이라는 것만 쓰면 된다.
+오늘날에는 rem이라는 것만 쓰면 됩니다.
 
 줌인, 줌아웃 말고
 설정화면에서 폰트 크기를 설정할 수 있는데, rem은 바뀌고 px는 바뀌지 않는다.
 
-폰트사이즈를 바꾼다는 것은 html의  폰트사이즈를 바꾼다는 것이고, 우리가 rem단위를 사용하면 html태그의 폰트 크기에 비례하게 된다. 
+폰트사이즈를 바꾼다는 것은 html의  폰트사이즈를 바꾼다는 것이고, 우리가 rem단위를 사용하면 html태그의 폰트 크기에 비례하게 됩니다. 
 css가 2rem이면 
 html의 폰트사이즈 * 2
 
@@ -217,7 +217,7 @@ color 속성
 3. rgb (255,255,255)
 
 text-align:justify;
-를 하게되면 왼쪽과 오른쪽이 공평하게 화면을 차지하게 된다. 텍스트와 텍스트 사이의 간격이 달라지기 때문(역효과가 일어날 수도 있다.)
+를 하게되면 왼쪽과 오른쪽이 공평하게 화면을 차지하게 됩니다. 텍스트와 텍스트 사이의 간격이 달라지기 때문(역효과가 일어날 수도 있다.)
 
 font-family:arial, verdana, "Helvetica Neue" ,serif;
 arial 폰트체가 없으면 verdana. verdana도 없으면 Helvetica Neue.
@@ -225,7 +225,7 @@ arial 폰트체가 없으면 verdana. verdana도 없으면 Helvetica Neue.
 Sans-serif : 글자에 장식이 없는 것
 Serif : 글자에 장식이 있는 것
 monospace : 고정폭. 우리가 데이터를 볼때(고딩할때)
-위의 3개중 하나는 써줘야 한다.
+위의 3개중 하나는 써줘야 합니다.
 
 font-weight : bold;
 글짜 두께
@@ -238,7 +238,7 @@ font
 
 font: font-style font-variant font-weight font-size/line-height font-family|caption|icon|menu|message-box|small-caption|status-bar|initial|inherit; 
  
- webfont는 사용자가 해당 사용자가 없을때 서버에서 다운로드해서 사용자가 사용할 수 있게 해준다.
+ webfont는 사용자가 해당 사용자가 없을때 서버에서 다운로드해서 사용자가 사용할 수 있게 해줍니다.
 한국어는 폰트는 용량이 크다. 
 
 https://fonts.google.com/ 여기가면 폰트가 공짜이다.
@@ -246,7 +246,7 @@ https://fonts.google.com/ 여기가면 폰트가 공짜이다.
 검사후에 network탭에 들어가면 구글에서 font를 받는다는 것을 알 수 있다.
 
 웹폰트를 만드는 법.
-인터넷에 없는 폰트가 내 컴퓨터에만 있으면 font generator을 검색해서 폰트를 업로드 하고 다운받아서 쓰면 된다.
+인터넷에 없는 폰트가 내 컴퓨터에만 있으면 font generator을 검색해서 폰트를 업로드 하고 다운받아서 쓰면 됩니다.
 
     li{color:red;}
     h1{color:red;}
@@ -257,16 +257,16 @@ https://fonts.google.com/ 여기가면 폰트가 공짜이다.
     html은 제일 조상이다.(object)
     li, h1 은 자식들 
     즉 자식들을 계속 쓰는 것보다.
-    조상을 한번 써주고 필요한 부분만 자식들이 변경해주는게 더 효율적이다. 이것을 상속이라 한다.
+    조상을 한번 써주고 필요한 부분만 자식들이 변경해주는게 더 효율적이다. 이것을 상속이라 합니다.
     상속 덕분에 효율적으로 이용할 수 있다.
     그러나 css마다 상속되고 안되고의 차이가 있다.
-    폰트의 컬러는 상속이 된다. 테두리는 상속이 되지 않는다.
+    폰트의 컬러는 상속이 됩니다. 테두리는 상속이 되지 않는다.
 
 
     CSS: Cascading Style Sheet
 웹브라우저, 사용자, 저자(컨텐츠 생산자)
 우선순위 : 웹브라우저 < 사용자 < 저자
-사실 사용자가 우선순위가 제일 높아야 한다고 생각한다.
+사실 사용자가 우선순위가 제일 높아야 합니다고 생각합니다.
 cascading 우선순위 규칙:
 
 <style>
@@ -294,7 +294,7 @@ inline vs block level element
 전체를 이용하는 것이 block
 그러나 inline에서 block으로 그 반대로도 가능하다.
 
-h1{display : inline;} //h1은 원래 block이지만 inline으로 바꿔준다.
+h1{display : inline;} //h1은 원래 block이지만 inline으로 바꿔줍니다.
 a{display:block;}
 
 
@@ -318,23 +318,23 @@ a{display:block;}
         border:30px solid black;
     }
 
-하면 두개의 사이즈가 달라보인다.
+하면 두개의 사이즈가 달라보입니다.
 그 이유는 css의 초창기에는 padding과 border가 없이 width값으로만 지정했기 때문에
 content영역 크기만 같다. 하지만 border값이 생기면서 까다로워 졌다. 그래서 box-sizing이 나왔다.
 
 box-sizing:border-box;
-하는 순간 두개의 크기가 border값을 포함해서 같게된다. 그래서 보통*{}을 사용해서 모든 element가 border의 크기를 width와 height값으로 사용할 수 있게 해서 코딩을 수월하게 해준다.
+하는 순간 두개의 크기가 border값을 포함해서 같게됩니다. 그래서 보통*{}을 사용해서 모든 element가 border의 크기를 width와 height값으로 사용할 수 있게 해서 코딩을 수월하게 해줍니다.
 
-마진겹침 : 두개의 마진 중에 더 큰값이 두개의 태그사이의 간격이된다.
+마진겹침 : 두개의 마진 중에 더 큰값이 두개의 태그사이의 간격이됩니다.
 
 마진겹침 2 :부모 element아래에 자식 element가 있고 부모와 자식 모두 margin값이 있을때 생기는 경우 
 즉 부모태그가 시각적으로 아무런 효과가 없는 상태가 되면, 자식태그와 부모태그의 마진값이 합쳐지는 결과를 낳는다.
-부모 엘리멘트의 마진값과 자식 엘리멘트의 마진값의 큰쪽의 마진값이 자식 엘리먼트의 마진값으로 사용된다. 즉 부모가 투명하고 부모와 자식의 마진값중 큰것을 마진값으로 이용한다.
+부모 엘리멘트의 마진값과 자식 엘리멘트의 마진값의 큰쪽의 마진값이 자식 엘리먼트의 마진값으로 사용됩니다. 즉 부모가 투명하고 부모와 자식의 마진값중 큰것을 마진값으로 이용합니다.
 
-시각적인 요소: border건 글자건 눈에 보이면 시각적인 요소가 있는 것이다.
+시각적인 요소: border건 글자건 눈에 보이면 시각적인 요소가 있는 것 입니다.
 
 마진겹침3: 만약 태그에 시각적인 요소가 없다면
-그 태그의 마진값은 위쪽에 있는 마진값과 아래쪽에 있는 마진값중에 더 큰 값이 그 태그의 마진 값이 된다. 
+그 태그의 마진값은 위쪽에 있는 마진값과 아래쪽에 있는 마진값중에 더 큰 값이 그 태그의 마진 값이 됩니다. 
 margin-top이 80이면 margin-bottom이 
 
 tip: 
@@ -349,22 +349,22 @@ POSITION
 position은 html의 태그들 element들이 화면상 어디에 위치해 있을 것인가? box model이 부피감 또 element와 element의 간격을 지정하는 것이었다면 포지션은 각각의 엘리먼트의 위치를 지정하는 정말 중요한 것.
 
 position_1.html 참고
-CSS의 element들은 포지션의 기본값을 가지고 있다. 그 값은 static이다. static이라고 지정하면 left,top,bottom,right 등 offset값을 무시하고 static하게 위치해 있는다. 자기가 있어야 할 위치를 (부모 element의 아래)기준으로 해서 상대적으로 100px만큼 왼쪽으로 가고싶다 하면 relative로 지정하면 된다.
+CSS의 element들은 포지션의 기본값을 가지고 있다. 그 값은 static이다. static이라고 지정하면 left,top,bottom,right 등 offset값을 무시하고 static하게 위치해 있는다. 자기가 있어야 할 위치를 (부모 element의 아래)기준으로 해서 상대적으로 100px만큼 왼쪽으로 가고싶다 하면 relative로 지정하면 됩니다.
 
 absolute
 html element를 기준으로 위치를 조정하고 싶을때
 relative는 부모 element를 기준으로
-그러나 absolute여도 left, top을 지우면 부모 element기준으로 한다.
-그러나 부모나 그 위의 부모의 position을 static이 아닌 값을 주면(default값은 static) 그 부모element를 기준으로 offset이나 top의 값을 적용한다.
+그러나 absolute여도 left, top을 지우면 부모 element기준으로 합니다.
+그러나 부모나 그 위의 부모의 position을 static이 아닌 값을 주면(default값은 static) 그 부모element를 기준으로 offset이나 top의 값을 적용합니다.
 
 fixed
-absolute값과 같은 것처럼 보인다.
+absolute값과 같은 것처럼 보입니다.
 하지만 스크롤로부터 완전히 독립되어서 스크롤을 내려도 항상 그자리에 있다.
-(네비게이션 바 처럼) absolute처럼 width와 height가 없애면 부모가 없어지기 때문에 자신의 content 크기가 된다.
+(네비게이션 바 처럼) absolute처럼 width와 height가 없애면 부모가 없어지기 때문에 자신의 content 크기가 됩니다.
 
 
 FLEX
-Layout을 잡을 때 쓴다.
+Layout을 잡을 때 씁니다.
 Layout의 흑역사.
 
 TABLE이 있었다.(Grid 모양)
@@ -401,11 +401,11 @@ tip: .class>.item{$}*5
  div는 block level element
  부모 div에 flex를 주면 자식 div는 달라진다. (div는 block level인데 inline으로 됨)
 
-  flex-direction:row-reverse; 속성을 주면 반대쪽으로 간다. 
-  flex-direction:column; 으로 하면 세로로 정렬이 된다.
+  flex-direction:row-reverse; 속성을 주면 반대쪽으로 갑니다. 
+  flex-direction:column; 으로 하면 세로로 정렬이 됩니다.
 
-  height 값이 들어가고 column-reverse를 하면 flex가 있고 없고의 차이가 나타난다. container 바닥으로 부터 올라간다.(없으면 맨 위에서 위치만 바뀜)
-  또한 block단위도 아니고, inline 단위도 아닌 container단위로 바뀐다.(row로 하면 아래로 쭉, column으로 하면 옆으로 쭉 차지한다.)
+  height 값이 들어가고 column-reverse를 하면 flex가 있고 없고의 차이가 나타난다. container 바닥으로 부터 올라갑니다.(없으면 맨 위에서 위치만 바뀜)
+  또한 block단위도 아니고, inline 단위도 아닌 container단위로 바뀐다.(row로 하면 아래로 쭉, column으로 하면 옆으로 쭉 차지합니다.)
 
   ||||||| row
   ------- column
@@ -414,7 +414,7 @@ tip: .class>.item{$}*5
   플렉스 방향에 따른 크기의 속성(row일 경우 옆으로 퍼지고 column일 경우 아래로 커짐)
 
   flex-grow : 1
-  각각의 아이템에게 grow를 시켜준다. (1/n로 나눠갖는다.)
+  각각의 아이템에게 grow를 시켜줍니다. (1/n로 나눠갖는다.)
 
   더 키우고 싶은 아이템에게 flex-grow:2를 주면 5개가 있을때, 다른애들은 1/6을 가져가는데 혼자 2/6만큼 가져가서 커진다.
 
@@ -422,9 +422,9 @@ cascading : 우선순위
 flex는 반응형이다! 화면이 작아졌을때 여유가 있는 아이템은 크기가 줄어든다.
 이때 이기적이게 여유가 있어도 줄어들지 않게하는 속성이 있는데 
 flex-shrink:0;
-이다. flex-shrink:1을 주면 고통분담을 한다.
-flex-shrink:2를 한다면 2/3만큼 고통을 분담해서 더 빨리 줄어든다.
-즉 flex-basis값이 있을때 줄이는 용도로 shrink을 쓴다 (세트메뉴)
+이다. flex-shrink:1을 주면 고통분담을 합니다.
+flex-shrink:2를 합니다면 2/3만큼 고통을 분담해서 더 빨리 줄어든다.
+즉 flex-basis값이 있을때 줄이는 용도로 shrink을 씁니다 (세트메뉴)
 
 
 Holy Grail Layout :성배 layout
@@ -447,22 +447,22 @@ column는 stack모양
 
 ALIGN-items
 flex는 default가 stretch이다. (끝까지 펴져있는 상태)
-flex-start로 하면 inline 상태로 된다.
+flex-start로 하면 inline 상태로 됩니다.
 
 body에 flex 사용할때 주의할점!
-<!Doctype >로 해야한다 (!Doctype이라고 하면 알아서 최신버젼인 html5로 인식하는듯)
+<!Doctype >로 해야합니다 (!Doctype이라고 하면 알아서 최신버젼인 html5로 인식하는듯)
 
 align items는 
 row일 때 row의 반대쪽에 있는 축에 정렬방식
 justify-content는
-direction이 row일때 행 방향의 정렬상태를 지정한다.
+direction이 row일때 행 방향의 정렬상태를 지정합니다.
 
-justify-content는 align-item 만 썼을때 오른쪽에 공간이 남아도 가운데로 정렬이안되는 상황에서 써주면 가운데로 정렬이 된다.
+justify-content는 align-item 만 썼을때 오른쪽에 공간이 남아도 가운데로 정렬이안되는 상황에서 써주면 가운데로 정렬이 됩니다.
 
 align-items는 container 밑에있는 전체를 정렬
 align-content는 같은 행을 그룹으로 묶어서 정렬?
 
-align-self는 align-items로 지정된 상태에서 어떤 특정한 것만 예외적으로 다르게 값을 주고 싶을때 쓴다.
+align-self는 align-items로 지정된 상태에서 어떤 특정한 것만 예외적으로 다르게 값을 주고 싶을때 씁니다.
 
 중요!!!
 .item {flex: flex-grow [flex-shrink][flex-basis];}
@@ -480,7 +480,7 @@ align-self는 align-items로 지정된 상태에서 어떤 특정한 것만 예�
         order:2;
     }
 
-이렇게 하면 main이 nav자리로 오게된다.
+이렇게 하면 main이 nav자리로 오게됩니다.
 하지만 더 쉬운방법이 있는데
     main{
       order:-1;
@@ -499,26 +499,26 @@ text-align:justify;
 텍스트 좌우로 정렬
 
 column-width:200px;
-200px;에 맞춰서 단(column의 수)을 줄여준다.
+200px;에 맞춰서 단(column의 수)을 줄여줍니다.
 
 column-width:200px;
 column-count:4; 
-최소 200px을 유지한채 최대 4개의 column을 갖게한다.
+최소 200px을 유지한채 최대 4개의 column을 갖게합니다.
 유지가 힘들어지면, column의 갯수를 줄인다.
-둘다 써도 되고, 둘중에 하나만 써도 된다.
+둘다 써도 되고, 둘중에 하나만 써도 됩니다.
 
 column-gap: 100px;
-column에 gap을 준다.
+column에 gap을 줍니다.
 
 column-rule-style: solid / dotted / dashed;
 column-rule-width: 5px;
 column-rule-color: red;
-//column 사이를 구분하는 선을 config한다. 
+//column 사이를 구분하는 선을 config합니다. 
 
 h1{
 column-span:all;
 }
-column에 h1을 한줄을 다 차지할 수 있게해준다.
+column에 h1을 한줄을 다 차지할 수 있게해줍니다.
 
 핀터레스트 스타일 레이아웃 만들기
 https://opentutorials.org/module/2398/13712
@@ -545,12 +545,12 @@ media query는 화면의 종류와 크기에 따라서 디자인을 달리 줄 �
         }
 
 나머지 모든 cascading이 같다면 나중에 나오는게 우선순위가 높아진다.
-즉 ~500은 무시해버리고 ~600이 실행된다.
-그래서 ~600이 위로 가야하고 ~500이 밑으로 와야한다.
+즉 ~500은 무시해버리고 ~600이 실행됩니다.
+그래서 ~600이 위로 가야하고 ~500이 밑으로 와야합니다.
 
 그러나 태블릿이나 스마트폰에서 크기에따라 색깔이 변하지 않는다. 이때
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-을 해주면 스마트폰에서도 색깔이 변한다.
+을 해주면 스마트폰에서도 색깔이 변합니다.
 
 mediaquery는 적용헸던 content의 밑에 써주는 것이 좋다.
 (cascading 적용순서 때문에)
@@ -560,13 +560,13 @@ flex-basis:auto;라고 하면 화면에 따라 자동적으로 크기가 달라�
  display:none;을 하면 특정 조건일 때 화면에 안나오게 할 수 있다.
 
  float
- 이미지를 자연스럽게 삽입할때 쓴다. 그리고 flex전에 float를 이용해서 layout을 많이 잡아왔다.
+ 이미지를 자연스럽게 삽입할때 씁니다. 그리고 flex전에 float를 이용해서 layout을 많이 잡아왔다.
 
- float를 사용하면 흘러가듯이 그림이 삽입된다.
+ float를 사용하면 흘러가듯이 그림이 삽입됩니다.
 
  <p style="clear:both;">라고 하면 float효과가 안 나타난다.
 
- float는 화면이 거의 고정되어있다고 보면된다.(JS를 써야함)
+ float는 화면이 거의 고정되어있다고 보면됩니다.(JS를 써야함)
 
  header 태그를 쓰면 이게 본문의 h1인지 헤더의 h1인지를 구별해줄수 있다.
 
@@ -582,11 +582,11 @@ flex-basis:auto;라고 하면 화면에 따라 자동적으로 크기가 달라�
         width:300px;
         border-left:1px solid gray;
     }
-으로하면 2줄로 보인다.
+으로하면 2줄로 보입니다.
 그래서 margin left:-1px;로 한칸 옆으로 가게 하면 딱 겹친다.
 
 box-sizing:border-box;
-border를 기준으로 sizing한다.
+border를 기준으로 sizing합니다.
 
 
 background
@@ -603,7 +603,7 @@ background
 background-color:azure;background-image:url('bonobono.jpg');
 
 둘 다 쓰면 화면이 가려서 background-color값이 안나온다.
-둘다 표시하기 위해서는 transparent 이미지를 쓰면 된다.
+둘다 표시하기 위해서는 transparent 이미지를 쓰면 됩니다.
 
  background-repeat:no-repeat;
  백그라운드 이미지 반복을 안하겠다.
@@ -616,9 +616,9 @@ background-color:azure;background-image:url('bonobono.jpg');
   background-size:cover; / contain / 200px 100px;
 
 cover vs contain
-cover는 화면 전체를 이미지가 사용하게 된다.(그래서 이미지가 살짝 짤릴 수도 있다.)
+cover는 화면 전체를 이미지가 사용하게 됩니다.(그래서 이미지가 살짝 짤릴 수도 있다.)
 
-contain은 화면에 모든 이미지가 들어 갈 수 있도록 한다.(그래서 여백이 남을 수 있다.)
+contain은 화면에 모든 이미지가 들어 갈 수 있도록 합니다.(그래서 여백이 남을 수 있다.)
 
 background-position:center center;
 background-position:left top;
@@ -660,7 +660,7 @@ transition 화면전환 부드럽게 1초안으로 바뀌게 천천히
 
 blend는
 
-filter는 하나의 이미지에 효과를 주는 것이다.
+filter는 하나의 이미지에 효과를 주는 것 입니다.
 blend는 두개의 이미지를 겹쳤을때 다른 색상차이를 여러가지 기준에 따라 혼합해서 생각치못한 EFFECT를 만들 수 있다.
 
   height:400px;
@@ -690,9 +690,9 @@ Transform
 
  transform:scaleX(0.5);
  transform:scaleY(0.5);
- 은 cascading때문에 밑에것만 실행된다.
+ 은 cascading때문에 밑에것만 실행됩니다.
  그래서
- transfrom : scale(0.5,0.5);로 써준다.
+ transfrom : scale(0.5,0.5);로 써줍니다.
 
  transform 더 알아보기 
  https://opentutorials.org/module/2367/13684
@@ -701,7 +701,7 @@ Transform
    transform:
    scale(1.5);
  
- transform-origin: left bottom; (왼쪽 밑을 기준으로 커지게 한다.) 
+ transform-origin: left bottom; (왼쪽 밑을 기준으로 커지게 합니다.) 
  X축 Y축 순이므로 0% 100%으로 해도 똑같다.
  transition: all 1s;
  }
@@ -717,7 +717,7 @@ Transform
  transition-property: transform;
  트랜스 폼 효과에 대해서만 장면 전환을 하겠다.
  transition-duration: 1s;
- 전환이 1초동안 진행된다.
+ 전환이 1초동안 진행됩니다.
 
 
  transition-property: all;
@@ -728,10 +728,10 @@ Transform
  
  복수의 장면효과는 
  transition: font-size 2s, transform 1s;
- 이렇게 해준다.
+ 이렇게 해줍니다.
 
  transition-delay:1s;
- delay는 시간을 지연시키는 효과를 가지고 있다. (계속 누르고 있어야 된다.)
+ delay는 시간을 지연시키는 효과를 가지고 있다. (계속 누르고 있어야 됩니다.)
 
 
  각종 transition
@@ -744,12 +744,12 @@ Transform
  codepen을 가까이 하자.
  
  중복을 제거하는게 제일 중요하다!
- 코드가 반복되면 사용자는 웹페이지에 들어갈때마다 데이터를 더 받게된다.
+ 코드가 반복되면 사용자는 웹페이지에 들어갈때마다 데이터를 더 받게됩니다.
 
  <link rel="stylesheet" href="style.css">
- link를 만나면 링크의 href에 해당되는 style.css파일을 다운로드 받고, stylesheet(css의 문법)에 따라서 디자인을 해준다.
+ link를 만나면 링크의 href에 해당되는 style.css파일을 다운로드 받고, stylesheet(css의 문법)에 따라서 디자인을 해줍니다.
 
-웹브라우저는 캐시가 있기때문에 한번 받은 CSS는 웹브라우저는 그것을 임시저장 폴더에 저장해놓았다가, 똑같은 CSS를 사용하려할때 이미 저장되어있는 임시 디렉토리의 CSS를 사용한다.즉 경량화가 된다.
+웹브라우저는 캐시가 있기때문에 한번 받은 CSS는 웹브라우저는 그것을 임시저장 폴더에 저장해놓았다가, 똑같은 CSS를 사용하려할때 이미 저장되어있는 임시 디렉토리의 CSS를 사용합니다.즉 경량화가 됩니다.
 또한 같은 링크를 하는 페이지는 같은 의도를 가진 페이지라는 것을 알 수 있다.
 
 <head>
@@ -760,7 +760,7 @@ Transform
 </head>
 
 두개는 같은 의미가 있다.
-link라는 태그는 html태그를 이용해서 css를 이용할때 사용하고,  @import는 css안에서 또 css를 가져올때 사용한다.
+link라는 태그는 html태그를 이용해서 css를 이용할때 사용하고,  @import는 css안에서 또 css를 가져올때 사용합니다.
 
 minify
 css중에 css 앞에 min이 붙어있으면 minify가 됐다는 것을 알 수 있다.
@@ -780,7 +780,7 @@ http://stylus-lang.com/ (온라인 변환기)
 
 
  fontello.com
- 앞의 0을 없애고 &#로 하면 된다.
+ 앞의 0을 없애고 &#로 하면 됩니다.
  ex)0xe841 => &#xe841
 
 
@@ -788,7 +788,7 @@ http://stylus-lang.com/ (온라인 변환기)
   color : red;
   font-size: 100px;
 
-  이미지처럼 생겼지만 폰트로 취급한다.
+  이미지처럼 생겼지만 폰트로 취급합니다.
 
 <style>
 font-family: "fontello";
@@ -807,7 +807,7 @@ before = pseudo 선택자
 
 
 <i class="icon-chrome"></i>
-는 이 before가 생성해준다.
+는 이 before가 생성해줍니다.
 
 fontello.css파일을 보면
 .icon-chrome:before { content: '\e841'; }
@@ -815,7 +815,7 @@ fontello.css파일을 보면
 
 ! https://thenounproject.com/
 에 들어가서 자신이 마음에 드는 그림을 다운 받은 뒤에 
-fontello 사이트에 들어가서 custom Icons에 드래그 하면 아이콘에 해당되는 이미지를 만들어 준다! 그걸 쓰면 된다.
+fontello 사이트에 들어가서 custom Icons에 드래그 하면 아이콘에 해당되는 이미지를 만들어 줍니다! 그걸 쓰면 됩니다.
 
 fontello 사이트는 회원가입을 할수없다. 
 그래서 다른 컴퓨터나 다른 웹 브라우저에서 fontello를 사용할 시, 내가 선택했던 이미지들이 체크해제가 되어있는걸 볼 수 있다.

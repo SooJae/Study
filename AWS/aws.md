@@ -2,26 +2,26 @@
 # EC2
 VPC란?
 VPC는 AWS안에서 외부로부터 안전한 네트워크를 구성
-외부에서는 VPC안의 RDS에 접근을 금지, JSP서버에서는 RDS에 접근할 수 있음.
-VPC안의 특정 어플리케이션만 RDS에 접근 하게 할 수도 있음.
+외부에서는 VPC안의 RDS에 접근을 금지, JSP서버에서는 RDS에 접근할 수 있습니다.
+VPC안의 특정 어플리케이션만 RDS에 접근 하게 할 수도 있습니다.
 
 ## 키페어(.pem) 파일 설정
 윈도우:
 우클릭 -> 속성 -> 보안 -> 고급 -> 상속사용안함
--> Administators와 SYSTEM만 사용가능하도록 한다.
+-> Administators와 SYSTEM만 사용가능하도록 합니다.
 리눅스: chmod 400
 
 ## 윈도우에서 EC2 접속하는 방법 
 
 1. 명령 프롬프트 관리자 권한으로 실행
-2. AWS 홈페이지에서 EC2탭 -> 연결버튼 클릭-> ssh ubuntu@ 'DNS주소' -i '경로+파일' 복사한다.
-3. 프롬프트에서 해당 키페어(.pem) 위치로 이동(cd)한다.
-4. 복사한 주소를 붙여넣고 접속한다.
+2. AWS 홈페이지에서 EC2탭 -> 연결버튼 클릭-> ssh ubuntu@ 'DNS주소' -i '경로+파일' 복사합니다.
+3. 프롬프트에서 해당 키페어(.pem) 위치로 이동(cd)합니다.
+4. 복사한 주소를 붙여넣고 접속합니다.
 
 ## EC2 설정
 1. sudo apt-get update; 로 업데이트 해주기
 2. sudo apt install mysql-client 로 설치
-3. EC2와 R데이터베이스를 하나의 보안그룹으로 지정해줘야한다.(접근할 수 있게)
+3. EC2와 R데이터베이스를 하나의 보안그룹으로 지정해줘야합니다.(접근할 수 있게)
 4. mysql -h'end 포인트 주소' -u'계정' -p
 5.  비밀번호 입력
 
@@ -49,7 +49,7 @@ c.NotebookApp.ip ='아이피주소'
 c.NotebookApp.notebook_dir='/'
 ```
 4. $ sudo jupyter-notebook --allow-root
-5. 내주소 : 8888포트가 출력된다.
+5. 내주소 : 8888포트가 출력됩니다.
 6. AWS 홈페이지 ->내 EC2-> 보안 -> 인바운드 태그-> 편집 -> 규칙추가 -> 8888포트 추가
 7. 주소창에 아이피:8888 입력
 ## 항상 백그라운드로 실행되게 하기 (실행중인 프로세스를 유지한채 ssh 로그아웃 하기)
@@ -58,7 +58,7 @@ c.NotebookApp.notebook_dir='/'
 10. disown(작업의 소유권을 shell session에서 해제 전체는 -a 옵션 사용)
 11. ssh 로그아웃
     
-하지만 현재 주피터 노트북이 ssl 인증서가 적용 안된 상태이므로 통신과정에서 위험하다. 그러므로 HTTPS 적용을 해준다.
+하지만 현재 주피터 노트북이 ssl 인증서가 적용 안된 상태이므로 통신과정에서 위험하다. 그러므로 HTTPS 적용을 해줍니다.
 SSL을 사용하면 해커가 해당 패킷을 가로채더라도 우리가 서버에 어떤 명령어를 사용했는지는 알 수 없다.
 ## 주피터에 HTTPS 적용 (보안적용)
 ### 해당 프로세스 종료
@@ -79,7 +79,7 @@ c.NotebookApp.keyfile = u'/home/ubuntu/ssl/cert.key'
 이제 http://아이피값:8888/ 에서 https://아이피값:8888/ 으로 바뀐것을 확인 할 수 있다.
 
 ## 시스템 서비스로 등록
-시스템 서비스로 등록을 하게되면, 재부팅을 하더라도 프로그램을 따로 재 실행시키지 않아도 된다.
+시스템 서비스로 등록을 하게되면, 재부팅을 하더라도 프로그램을 따로 재 실행시키지 않아도 됩니다.
 1. $ which jupyter-notebook (해당 프로그램 위치 확인)
 
 2. $ sudo vim /etc/systemd/system/jupyter.service
@@ -98,7 +98,7 @@ WantedBy=multi-user.target
 ```
 ExecStart=/usr/local/bin/sudo(이 폴더 밑에 있는 sudo 명령어 사용해서) /usr/local/bin/jupyter-notebook --allow-root
 (이 폴더 밑에 있는 jupyter-notebook --allow-root를 실행하고) --config=/home/ubuntu/.jupyter/jupyter_notebook_config.py 
-(실행할 때 jupyter_notebook_config.py 를 환경파일로 적용한다.)
+(실행할 때 jupyter_notebook_config.py 를 환경파일로 적용합니다.)
 4. $ sudo systemctl daemon-reload
 5. $ sudo systemctl enable jupyter (주피터 서비스를 사용하능한 상태로 만든다.)
 6. $ sudo systemctl start jupyter
@@ -111,7 +111,7 @@ Tomcat7
 
 ## jdk 설치
 1. $ sudo apt-get install jdk-default
- Java 환경변수 설정을 자동으로 해주는 것을 설치한다.
+ Java 환경변수 설정을 자동으로 해주는 것을 설치합니다.
  sudo apt-get install oracle-java8-set-default
 
 
@@ -139,7 +139,7 @@ SCALE OUT : SCALE UP으로 한계가 올때, SCALE OUT으로 여러대의 컴퓨
 ## MAVEN 환경변수 설정
 1. $ sudo vim /etc/profile.d/maven.sh    //환경 변수 파일
    (//)
-2. 파일의 끝에 아래 내용을 추가한다.
+2. 파일의 끝에 아래 내용을 추가합니다.
    export MAVEN_HOME=/tools/maven
    export PATH=${MAVEN_HOME}/bin:${PATH} 
     
@@ -168,7 +168,7 @@ $ sudo vim /etc/sysconfig/jenkins
 
 
 
-추가한다.
+추가합니다.
 
 vim /etc/profile
 

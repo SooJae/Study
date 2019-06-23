@@ -28,9 +28,9 @@ console.log(t.getBoundingClientRect());
 
 view포트의 좌표
 
-위의 그림처럼 뷰포트는 문서의 내용 중 사용자에게 보여주는 영역을 의미한다. 이에 따라서 문서의 좌표가 있고 뷰포트의 자표가 있다. 우리가 위에서 살펴본 getBoundingClientRect는 viewport의 좌표를 사용한다. 
+위의 그림처럼 뷰포트는 문서의 내용 중 사용자에게 보여주는 영역을 의미합니다. 이에 따라서 문서의 좌표가 있고 뷰포트의 자표가 있다. 우리가 위에서 살펴본 getBoundingClientRect는 viewport의 좌표를 사용합니다. 
 
-아래 예제를 실행해보면 1초에 한번씩 getBoundingClientRect의 top 속성과 window.pageYOffset의 값이 출력된다
+아래 예제를 실행해보면 1초에 한번씩 getBoundingClientRect의 top 속성과 window.pageYOffset의 값이 출력됩니다
 
 
 ```html
@@ -75,21 +75,21 @@ console.log('screen.width:', screen.width, 'screen.height:', screen.height);
 ```
 
 
-이벤트(event)는 어떤 사건을 의미한다. 브라우저에서의 사건이란 사용자가 클릭을 했을 '때', 스크롤을 했을 '때', 필드의 내용을 바꾸었을 '때'와 같은 것을 의미한다. 
+이벤트(event)는 어떤 사건을 의미합니다. 브라우저에서의 사건이란 사용자가 클릭을 했을 '때', 스크롤을 했을 '때', 필드의 내용을 바꾸었을 '때'와 같은 것을 의미합니다. 
 
 ```html
 <!DOCTYPE html>
 <html>
 <body>
     <input type="button" onclick="alert(window.location)" value="alert(window.href)" />
-    <!-- 현재 url을 보여줌 -->
+    <!-- 현재 url을 보여줍니다 -->
     <input type="button" onclick="window.open('bom.html')" value="window.open('bom.html')" />
 </body>
 </html>
 ```
 
 
-인라인(inline) 방식으로 이벤트를 등록하는 방법을 알아보자. 인라인 방식은 이벤트를 이벤트 대상의 태그 속성으로 지정하는 것이다. 다음은 버튼을 클릭했을 때 Hello world를 경고창으로 출력한다.
+인라인(inline) 방식으로 이벤트를 등록하는 방법을 알아보자. 인라인 방식은 이벤트를 이벤트 대상의 태그 속성으로 지정하는 것 입니다. 다음은 버튼을 클릭했을 때 Hello world를 경고창으로 출력합니다.
 ```html
 <!--자기 자신을 참조하는 불편한 방법-->
 <input type="button" id="target" onclick="alert('Hello world, '+document.getElementById('target').value);" value="button" />
@@ -99,7 +99,7 @@ console.log('screen.width:', screen.width, 'screen.height:', screen.height);
 
 프로퍼티 리스너
 
-프로퍼티 리스너 방식은 이벤트 대상에 해당하는 객체의 프로퍼티로 이벤트를 등록하는 방식이다. 인라인 방식에 비해서 HTML과 JavaScript를 분리할 수 있다는 점에서 선호되는 방식이지만 뒤에서 배울 addEventListener 방식을 추천한다. 
+프로퍼티 리스너 방식은 이벤트 대상에 해당하는 객체의 프로퍼티로 이벤트를 등록하는 방식이다. 인라인 방식에 비해서 HTML과 JavaScript를 분리할 수 있다는 점에서 선호되는 방식이지만 뒤에서 배울 addEventListener 방식을 추천합니다. 
 
 
 
@@ -114,7 +114,7 @@ console.log('screen.width:', screen.width, 'screen.height:', screen.height);
 ```
 
 이벤트 객체
-이벤트가 실행된 맥락의 정보가 필요할 때는 이벤트 객체를 사용한다. 이벤트 객체는 이벤트가 실행될 때 이벤트 핸들러의 인자로 전달된다. 
+이벤트가 실행된 맥락의 정보가 필요할 때는 이벤트 객체를 사용합니다. 이벤트 객체는 이벤트가 실행될 때 이벤트 핸들러의 인자로 전달됩니다. 
 
 ```html
 <body>
@@ -238,7 +238,7 @@ INPUT HTML bubbling
 
 3번째 인자의 뜻 : capturing이라는 뜻. true로 주면 capturing사용. false로 주면 bubbling사용
 
-버블링은 모든 브라우져에서 사용할 수 있지만, 캡쳐링은 옛날브라우저에서는 작동하지 않을수도 있다. 그래서 사용을 지양한다.
+버블링은 모든 브라우져에서 사용할 수 있지만, 캡쳐링은 옛날브라우저에서는 작동하지 않을수도 있다. 그래서 사용을 지양합니다.
 ```js
 phases = ['capturing', 'target', 'bubbling']
             console.log(event.target.nodeName, this.nodeName, phases[event.eventPhase-1]);
@@ -246,7 +246,7 @@ phases = ['capturing', 'target', 'bubbling']
 
 event.eventPhase
 capturing이면 1이라는 값을 갖는다. bubbling이면 3을 갖는다.
-가장 깊숙한 element에 설치된 handler라고 한다면 2를 갖는다. 모드가 무엇인지를 알기위해서 사용한 함수이다.
+가장 깊숙한 element에 설치된 handler라고 합니다면 2를 갖는다. 모드가 무엇인지를 알기위해서 사용한 함수이다.
 
 중간에 이벤트 전파가 되지 않게 하는것도 있다.
 다음과 같이 수정하자.
@@ -263,22 +263,22 @@ function stophandler(event){
 document.getElementById('target').addEventListener('click', handler, false);
 document.querySelector('fieldset').addEventListener('click', handler, false);
 document.querySelector('body').addEventListener('click', stophandler, false);
-// 여기서 이벤트가 멈추게 된다.
+// 여기서 이벤트가 멈추게 됩니다.
 document.querySelector('html').addEventListener('click', handler, false);
 ```
 
 
 웹브라우저의 구성요소들은 각각 기본적인 동작 방법을 가지고 있다.
 
-텍스트 필드에 포커스를 준 상태에서 키보드를 입력하면 텍스트가 입력된다.
-폼에서 submit 버튼을 누르면 데이터가 전송된다.
-a 태그를 클릭하면 href 속성의 URL로 이동한다.
+텍스트 필드에 포커스를 준 상태에서 키보드를 입력하면 텍스트가 입력됩니다.
+폼에서 submit 버튼을 누르면 데이터가 전송됩니다.
+a 태그를 클릭하면 href 속성의 URL로 이동합니다.
 이러한 기본적인 동작들을 기본 이벤트라고 하는데 사용자가 만든 이벤트를 이용해서 이러한 기본 동작을 취소할 수 있다.
 
 
 inline방식
 
-이벤트의 리턴값이 false이면 기본 동작이 취소된다.
+이벤트의 리턴값이 false이면 기본 동작이 취소됩니다.
 ```html
 <p>
     <label>prevent event on</label><input id="prevent" type="checkbox" name="eventprevent" value="on" />
@@ -294,7 +294,7 @@ inline방식
 ```
 
 property 방식
-리턴 값이 false이면 기본동작이 취소된다.
+리턴 값이 false이면 기본동작이 취소됩니다.
 
 ```html
 <p>
@@ -323,7 +323,7 @@ property 방식
 ```
 addEventListener 방식
 
-이 방식에서는 이벤트 객체의 preventDefault 메소드를 실행하면 기본 동작이 취소된다.
+이 방식에서는 이벤트 객체의 preventDefault 메소드를 실행하면 기본 동작이 취소됩니다.
 ```html
 <p>
     <label>prevent event on</label><input id="prevent" type="checkbox" name="eventprevent" value="on" />
@@ -352,9 +352,9 @@ addEventListener 방식
 submit
 submit은 폼의 정보를 서버로 전송하는 명령인 submit시에 일어난다.
 
-form 태그에 적용된다.
+form 태그에 적용됩니다.
 
-아래 예제는 전송 전에 텍스트 필드에 값이 입력 되었는지를 확인한다. 만약 값이 입력되지 않았다면 전송을 중단한다.
+아래 예제는 전송 전에 텍스트 필드에 값이 입력 되었는지를 확인합니다. 만약 값이 입력되지 않았다면 전송을 중단합니다.
 
 ```html
 <form id="target" action="result.html">
@@ -374,7 +374,7 @@ t.addEventListener('submit', function(event){
 
 change
 change는 폼 컨트롤의 값이 변경 되었을 때 발생하는 이벤트다.
-input(text,radio,checkbox), textarea, select 태그에 적용된다.
+input(text,radio,checkbox), textarea, select 태그에 적용됩니다.
 
 ```html
 <p id="result"></p>
@@ -390,7 +390,7 @@ t.addEventListener('change', function(event){
 blur, focus
 focus는 엘리먼트에 포커스가 생겼을 때, blur은 포커스가 사라졌을 때 발생하는 이벤트다. 
 
-다음 태그를 제외한 모든 태그에서 발생한다. 
+다음 태그를 제외한 모든 태그에서 발생합니다. 
 ```
 <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, <title>
 ```
@@ -407,7 +407,7 @@ t.addEventListener('focus', function(event){
 </script>
  ```
 문서 로딩
- 웹페이지를 프로그래밍적으로 제어하기 위해서는 웹페이지의 모든 요소에 대한 처리가 끝나야 한다. 이것을 알려주는 이벤트가 load, DOMContentLoaded이다.
+ 웹페이지를 프로그래밍적으로 제어하기 위해서는 웹페이지의 모든 요소에 대한 처리가 끝나야 합니다. 이것을 알려주는 이벤트가 load, DOMContentLoaded이다.
 
 아래 코드의 실행결과는 null이다. <p id="target">Hello</p>가 로딩되기 전에 자바스크립트가 실행되었기 때문이다.
 
@@ -415,7 +415,7 @@ t.addEventListener('focus', function(event){
 <html>
     <head>
         <script>
-        window.onload=function(){ //이걸 넣어준다.
+        window.onload=function(){ //이걸 넣어줍니다.
         var t = document.getElementById('target');
         console.log(t);
         }
@@ -485,14 +485,14 @@ contextmenu
 컨텍스트 메뉴가 실행될 때 발생
 
 ### 키보드 조합
-마우스 이벤트가 호출될 때 특수키(alt, ctrl, shift)가 눌려진 상태를 감지해야 한다면 이벤트 객체의 프로퍼티를 사용한다. 이 때 사용하는 프로퍼티는 아래와 같다.
+마우스 이벤트가 호출될 때 특수키(alt, ctrl, shift)가 눌려진 상태를 감지해야 합니다면 이벤트 객체의 프로퍼티를 사용합니다. 이 때 사용하는 프로퍼티는 아래와 같다.
 
 event.shiftKey
 event.altKey
 event.ctrlKey
 
 ### 마우스 포인터 위치
-마우스 이벤트와 관련한 작업에서는 마우스 포인터의 위치를 알아내는 것이 중요할 때가 있는데 이런 경우 이벤트 객체의 clientX와 clientY를 사용한다.
+마우스 이벤트와 관련한 작업에서는 마우스 포인터의 위치를 알아내는 것이 중요할 때가 있는데 이런 경우 이벤트 객체의 clientX와 clientY를 사용합니다.
 
 ```html
 <html>
@@ -626,7 +626,7 @@ event.ctrlKey
 </html>
 ```
 
-jQuery는 이벤트와 관련해서 편리한 기능을 제공한다.  아래 예제는 직접 이벤트 프로그래밍을 하는 것과 jQuery를 이용하는 것의 차이점을 보여준다. 
+jQuery는 이벤트와 관련해서 편리한 기능을 제공합니다.  아래 예제는 직접 이벤트 프로그래밍을 하는 것과 jQuery를 이용하는 것의 차이점을 보여줍니다. 
 ```html
 <input type="button" id="pure" value="pure" />
 <input type="button" id="jquery" value="jQuery" />
@@ -650,19 +650,19 @@ jQuery는 이벤트와 관련해서 편리한 기능을 제공한다.  아래 �
     })
 </script>
 ```
-코드 분량에 큰차이가 있다. jQuery는 크로스 브라우징을 알아서 처리해주고, 이벤트를 보다 적은 코드로 구현할 수 있도록 해준다. 이런 이유 때문에 jQuery와 같은 라이브러리를 사용하는 것이다. 
+코드 분량에 큰차이가 있다. jQuery는 크로스 브라우징을 알아서 처리해주고, 이벤트를 보다 적은 코드로 구현할 수 있도록 해줍니다. 이런 이유 때문에 jQuery와 같은 라이브러리를 사용하는 것 입니다. 
 
 on은 jQuery에서 가장 중요한 이벤트 API이다. on API를 통해서 jQuery에서 이벤트를 다루는 방법을 알아보자.
 on의 기본적인 문법은 아래와 같다.
 ```js
 .on( events [, selector ] [, data ], handler(eventObject) )
 ```
-event : 등록하고자 하는 이벤트 타입을 지정한다. (예: "click")
+event : 등록하고자 하는 이벤트 타입을 지정합니다. (예: "click")
 selector : 이벤트가 설치된 엘리먼트의 하위 엘리먼트를 이벤트 대상으로 필터링함
 data : 이벤트가 실행될 때 핸들러로 전달될 데이터를 설정함
 handler : 이벤트 핸들러 함수
 
-selector 파라미터는 이벤트 대상을 필터링한다. 아래 예제를 보자.
+selector 파라미터는 이벤트 대상을 필터링합니다. 아래 예제를 보자.
 ```html
 <ul>
     <li><a href="#">HTML</a></li>
@@ -677,10 +677,10 @@ selector 파라미터는 이벤트 대상을 필터링한다. 아래 예제를 �
 </script>
 ```
 
-위의 예제는 ul 엘리먼트의 하위 엘리먼트 중에  a, li 엘리먼트들에 대해서만 이벤트가 발생한다. 주의 할 것은 ul 엘리먼트는 이벤트가 발생하지 않는다는 점이다. 이것은 jQuery에서 이벤트 버블링을 구현하는 방법이기도 하다.
+위의 예제는 ul 엘리먼트의 하위 엘리먼트 중에  a, li 엘리먼트들에 대해서만 이벤트가 발생합니다. 주의 할 것은 ul 엘리먼트는 이벤트가 발생하지 않는다는 점이다. 이것은 jQuery에서 이벤트 버블링을 구현하는 방법이기도 하다.
 
 late binding
-jQuery는 존재하지 않는 엘리먼트에도 이벤트를 등록할 수 있는 놀라운 기능을 제공한다. 아래 코드를 보자. 
+jQuery는 존재하지 않는 엘리먼트에도 이벤트를 등록할 수 있는 놀라운 기능을 제공합니다. 아래 코드를 보자. 
 
 ```html
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -725,7 +725,7 @@ jQuery는 존재하지 않는 엘리먼트에도 이벤트를 등록할 수 있�
 
 ```
 
-한번에 여러개의 이벤트 타입을 선택했다. 만약 이벤트에 따라서 다른 핸들러를 실행하고 싶다면 아래와 같이 코드를 변경한다.
+한번에 여러개의 이벤트 타입을 선택했다. 만약 이벤트에 따라서 다른 핸들러를 실행하고 싶다면 아래와 같이 코드를 변경합니다.
 
 ```html
 
@@ -752,7 +752,7 @@ jQuery는 존재하지 않는 엘리먼트에도 이벤트를 등록할 수 있�
 ```
 
 
-이벤트를 제거할 때는 off를 사용한다. 
+이벤트를 제거할 때는 off를 사용합니다. 
 ```html
 <input type="text" id="target"></textarea>
 <input id="remove"  type="button" value="remove" />
@@ -772,7 +772,7 @@ jQuery는 존재하지 않는 엘리먼트에도 이벤트를 등록할 수 있�
     $('#target').off('focus');
     // 둘다 지울때
     $('#target').off('focus', handler);
-    // handler를 가지고 있는 이벤트만이 삭제가 된다.
+    // handler를 가지고 있는 이벤트만이 삭제가 됩니다.
     console.log(32);
   })
 </script>
@@ -780,7 +780,7 @@ jQuery는 존재하지 않는 엘리먼트에도 이벤트를 등록할 수 있�
 
 time.php
 
-아래 코드는 현재 시간을 출력한다.
+아래 코드는 현재 시간을 출력합니다.
 ```php
 <?php
 $d1 = new DateTime;
@@ -810,17 +810,17 @@ document.querySelector('input').addEventListener('click', function(event){
 코드를 분석해보자.
 
 var xhr = new XMLHttpRequest();
-XMLHttpRequest 객체를 생성한다.
+XMLHttpRequest 객체를 생성합니다.
 
 xhr.open('GET', './time.php');
-접속하려는 대상을 지정한다. 첫번째 인자는 form 태그의 method에 대응하는 것으로 GET/POST 방식을 주로 사용한다. 두번째 인자는 접속하고자 하는 서버쪽 리소스의 주소로 form 태그의 action에 해당한다.
+접속하려는 대상을 지정합니다. 첫번째 인자는 form 태그의 method에 대응하는 것으로 GET/POST 방식을 주로 사용합니다. 두번째 인자는 접속하고자 하는 서버쪽 리소스의 주소로 form 태그의 action에 해당합니다.
 
 xhr.onreadystatechange = function(){
     if(xhr.readyState === 4 && xhr.status === 200){
         document.querySelector('#time').innerHTML = xhr.responseText;
     }
 }
-onreadystatechange 이벤트는 서버와의 통신이 끝났을 때 호출되는 이벤트이다. readyState는 통신의 현재 상태를 알려준다. 4는 통신이 완료되었음을 의미한다. status는 HTTP 통신의 결과를 의미하는데 200은 통신이 성공했음을 의미한다. responseText 프로퍼티는 서버에서 전송한 데이터를 담고 있다. 이것을 id가 time 엘리먼트의 하위로 삽입한다. 이를 통해서 현재 서버에서 가져온 현재시간을 페이지 리로딩 없이 가져올 수 있다.
+onreadystatechange 이벤트는 서버와의 통신이 끝났을 때 호출되는 이벤트이다. readyState는 통신의 현재 상태를 알려줍니다. 4는 통신이 완료되었음을 의미합니다. status는 HTTP 통신의 결과를 의미하는데 200은 통신이 성공했음을 의미합니다. responseText 프로퍼티는 서버에서 전송한 데이터를 담고 있다. 이것을 id가 time 엘리먼트의 하위로 삽입합니다. 이를 통해서 현재 서버에서 가져온 현재시간을 페이지 리로딩 없이 가져올 수 있다.
 
 demo2.html
 
@@ -854,17 +854,17 @@ document.querySelector('input').addEventListener('click', function(event){
 중요한 부분을 살펴보자. 데이터 전송방법을 GET에서 POST로 변경했다. 
 xhr.open('POST', './time2.php');
 
-서버로 전송할 데이터 타입의 형식(MIME)을 지정한다. 
-서버에서는 HTML Form으로 전송한것처럼 인식하게된다.
+서버로 전송할 데이터 타입의 형식(MIME)을 지정합니다. 
+서버에서는 HTML Form으로 전송한것처럼 인식하게됩니다.
 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
 
-서버로 전송할 데이터를 형식에 맞게 만든다. 이름=값&이름=값... 의 형식을 지켜야 한다. 
+서버로 전송할 데이터를 형식에 맞게 만든다. 이름=값&이름=값... 의 형식을 지켜야 합니다. 
 
 var data = '';
 data += 'timezone='+document.getElementById('timezone').value;
 data += '&format='+document.getElementById('format').value;
-send 메소드의 인자로 전송할 데이터를 전달한다.
+send 메소드의 인자로 전송할 데이터를 전달합니다.
 
 
 xhr.send(data); 
@@ -883,7 +883,7 @@ echo $d1->format($_POST['format']);
 ```
 
 JSON이란?
-JSON(JavaScript Object Notation)의 약자로 JavaScript에서 객체를 만들 때 사용하는 표현식을 의미한다. 이 표현식은 사람도 이해하기 쉽고 기계도 이해하기 쉬우면서 데이터의 용량이 작다. 이런 이유로 최근에는 JSON이 XML을 대체해서 설정의 저장이나 데이터를 전송등에 많이 사용된다. JSON에 대한 자세한 내용은 아래 JSON의 공식홈페이지를 참조한다. 
+JSON(JavaScript Object Notation)의 약자로 JavaScript에서 객체를 만들 때 사용하는 표현식을 의미합니다. 이 표현식은 사람도 이해하기 쉽고 기계도 이해하기 쉬우면서 데이터의 용량이 작다. 이런 이유로 최근에는 JSON이 XML을 대체해서 설정의 저장이나 데이터를 전송등에 많이 사용됩니다. JSON에 대한 자세한 내용은 아래 JSON의 공식홈페이지를 참조합니다. 
 
 ```js
 var person ={"height":174, "job":"programmer"}
@@ -897,10 +897,10 @@ var members = ["egoing", "k9905", "sorialgi"];
 vscode 유저 세팅도 json으로 되어있다.
 
 JSON.parse()
-인자로 전달된 문사열을 자바스크립트의 데이터로 변환한다.
+인자로 전달된 문사열을 자바스크립트의 데이터로 변환합니다.
 
 JSON.stringify()
-인자로 전달된 자바스크립트의 데이터를 문자열로 변환한다
+인자로 전달된 자바스크립트의 데이터를 문자열로 변환합니다
 
 
 time.php
@@ -915,7 +915,7 @@ echo implode(',', $timezones);
 
 결과
 Asia/Seoul,America/New_York
-클라이언트 측에서는 이를 받아서 처리한다.
+클라이언트 측에서는 이를 받아서 처리합니다.
 
 demo2.html
 <p id="timezones"></p>
@@ -1044,15 +1044,15 @@ echo $d1->format($data['format']);
 $.ajax의 문법은 아래와 같다.
 
 jQuery.ajax( [settings ] )
-setting는 Ajax 통신을 위한 옵션을 담고 있는 객체가 들어간다. 주요한 옵션을 열거해보면 아래와 같다.
+setting는 Ajax 통신을 위한 옵션을 담고 있는 객체가 들어갑니다. 주요한 옵션을 열거해보면 아래와 같다.
 
 data
-서버로 데이터를 전송할 때 이 옵션을 사용한다. 
+서버로 데이터를 전송할 때 이 옵션을 사용합니다. 
 dataType
-서버측에서 전송한 데이터를 어떤 형식의 데이터로 해석할 것인가를 지정한다. 값으로 올 수 있는 것은 xml, json, script, html이다. 형식을 지정하지 않으면 jQuery가 알아서 판단한다.
+서버측에서 전송한 데이터를 어떤 형식의 데이터로 해석할 것인가를 지정합니다. 값으로 올 수 있는 것은 xml, json, script, html이다. 형식을 지정하지 않으면 jQuery가 알아서 판단합니다.
 success
-성공했을 때 호출할 콜백을 지정한다.
+성공했을 때 호출할 콜백을 지정합니다.
 Function( PlainObject data, String textStatus, jqXHR jqXHR )
 type
-데이터를 전송하는 방법을 지정한다. get, post를 사용할 수 있다.
-위의 내용을 바탕으로 Ajax 통신을 해보자. 다음 예제는 Ajax 수업의 예제를 JQuery화한 것이다.
+데이터를 전송하는 방법을 지정합니다. get, post를 사용할 수 있다.
+위의 내용을 바탕으로 Ajax 통신을 해보자. 다음 예제는 Ajax 수업의 예제를 JQuery화한 것 입니다.

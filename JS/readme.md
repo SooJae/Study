@@ -12,12 +12,12 @@
 ```html
 <input type="button" onclick="alert('Hello world')" value="Hello World">
 
-onclick자체는 html인데 속성을 자바스크립트(alert)로 쓴다고 정의 되어있다.
+onclick자체는 html인데 속성을 자바스크립트(alert)로 씁니다고 정의 되어있다.
 ```
 
 ### 2. script 태그방식 
 ```html
-<script type="text/javascript">에서 type부분은 이제 없어도 된다.
+<script type="text/javascript">에서 type부분은 이제 없어도 됩니다.
 
 <script>
         var hw = document.getElementById('hw')
@@ -43,8 +43,8 @@ ex_load.js를 열어보면,
         })
 가 있다.
 
-외부파일을 로드하면 실행시 .js파일을 다운로드 한다.
-캐시를 가지고 있어 한번만 받으면 된다!
+외부파일을 로드하면 실행시 .js파일을 다운로드 합니다.
+캐시를 가지고 있어 한번만 받으면 됩니다!
 ```
 ### 4. 온 로드
 ```html
@@ -53,7 +53,7 @@ ex_load.js를 열어보면,
     <script src="ex_load.js"></script>
 </head>
 ```
-head태그에 자바스크립트 태그를 넣으면 브라우저가 head에 있는 자바스크립트 태그를 보자마자 다운로드를 시작한다. 그리고 이 자바 스크립트가 끝난 다음 나머지 를 실행한다.
+head태그에 자바스크립트 태그를 넣으면 브라우저가 head에 있는 자바스크립트 태그를 보자마자 다운로드를 시작합니다. 그리고 이 자바 스크립트가 끝난 다음 나머지 를 실행합니다.
 ```html
 <head>
     <script>
@@ -68,7 +68,7 @@ head태그에 자바스크립트 태그를 넣으면 브라우저가 head에 있
     <input type="button" id="hw" value="Hello World">
 </body>
 ```
-**위의 코드와 완벽히 똑같다**. 브라우저에서는 아직 id가 "hw"라는 것을 알 수 없다.( 아직 body 부분을 내려오기 전이므로 그래서 hw값은 null이 된다. ) 
+**위의 코드와 완벽히 똑같다**. 브라우저에서는 아직 id가 "hw"라는 것을 알 수 없다.( 아직 body 부분을 내려오기 전이므로 그래서 hw값은 null이 됩니다. ) 
 그래서 오류가 난다.
 <br>
 <br>
@@ -86,7 +86,7 @@ head태그에 자바스크립트 태그를 넣으면 브라우저가 head에 있
     </script>
 </head>
 ```
-onload라는 것은 현재 웹페이지의 모든 코드가 다 읽히고, 웹브라우저는 window객체의 onload 함수가 실행 된다. 
+onload라는 것은 현재 웹페이지의 모든 코드가 다 읽히고, 웹브라우저는 window객체의 onload 함수가 실행 됩니다. 
 즉 body태그 마지막에 놓으면 window.onload를 쓸 필요가 없다.
 또 **body태그가 head태그보다 빠르다.**
 
@@ -94,7 +94,7 @@ onload라는 것은 현재 웹페이지의 모든 코드가 다 읽히고, 웹�
 <br>
 
 # BOM
-BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상화해서 프로그래밍적으로 제어할 수 있도록 제공하는 수단이다. BOM은 전역객체인 Window의 프로퍼티와 메소드들을 통해서 제어할 수 있다. 따라서 BOM에 대한 수업은 Window 객체의 프로퍼티와 메소드의 사용법을 배우는 것이라고 해도 과언이 아닐 것이다. 
+BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상화해서 프로그래밍적으로 제어할 수 있도록 제공하는 수단이다. BOM은 전역객체인 Window의 프로퍼티와 메소드들을 통해서 제어할 수 있다. 따라서 BOM에 대한 수업은 Window 객체의 프로퍼티와 메소드의 사용법을 배우는 것이라고 해도 과언이 아닐 것 입니다. 
 
 <br>
 
@@ -116,18 +116,18 @@ document도 window 객체에 소속이 되어있다. window.document
 confirm 창의 확인을 누르면 true값을 반환. 취소를 누르면 false값을 반환.
 if를 이용해 분기시킬 수 있다.
 
-`prompt` : 텍스트 값과 같이 뜨며 사용자의 입력을 받아 그 값을 반환한다.
+`prompt` : 텍스트 값과 같이 뜨며 사용자의 입력을 받아 그 값을 반환합니다.
 
 <br>
 
 ## Location 
 현재 브라우저의 주소값을 알아 낼 수 있다.
-자바스크립트가 브라우저를 제어하기 위해서는 모든 것이 객체여야 한다.
+자바스크립트가 브라우저를 제어하기 위해서는 모든 것이 객체여야 합니다.
 
 ```html
 <script> alert(location.toString(), location.href);</script>
 ```
-두 인자 전부 똑같다. 정확하게는 **location.href를 쓰는게 선호된다.**
+두 인자 전부 똑같다. 정확하게는 **location.href를 쓰는게 선호됩니다.**
 console.log(location)이면 location에 관한 많은 정보가 나온다.
 ```javascript
 console.log(location.protocol, location.host, location.port, location.pathname, location.search, location.hash);
@@ -155,7 +155,7 @@ course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보
 `location.href = 'http://egoing.net';`          
 `location = 'http://egoing.net';`           
 아래와 같은 방법도 같은 효과를 낸다. 하지만 위에 방식이 더 명시적/
-아래는 현재 문서를 리로드하는 간편한 방법을 제공한다.           
+아래는 현재 문서를 리로드하는 간편한 방법을 제공합니다.           
 `location.reload();` :
 새로고침!
 
@@ -163,16 +163,16 @@ course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보
 <br>
 
 ## Navigator
-브라우저의 정보를 제공하는 객체다. 주로 호환성 문제등을 위해서 사용한다.
+브라우저의 정보를 제공하는 객체다. 주로 호환성 문제등을 위해서 사용합니다.
 
 `console.dir(navigator)` : 
 navigator객체의 모든 프로퍼티를 볼 수 있다.
 
 `appName` : 
-웹브라우저의 이름이다. IE는 Microsoft Internet Explorer, 파이어폭스, 크롬등은 Nescape로 표시한다.
+웹브라우저의 이름이다. IE는 Microsoft Internet Explorer, 파이어폭스, 크롬등은 Nescape로 표시합니다.
 
 `appVersion` : 
-브라우저의 버전을 의미한다. 
+브라우저의 버전을 의미합니다. 
 
 `userAgent` : 
 브라우저가 서버측으로 전송하는 USER-AGENT HTTP 헤더의 내용이다. appVersion과 비슷하다. 
@@ -236,7 +236,7 @@ if (!Object.keys) {
 <br>
 
 ## 창 제어
-window.open 메소드는 새 창을 생성한다. 현대의 브라우저는 대부분 탭을 지원하기 때문에 window.open은 새 창을 만든다.          
+window.open 메소드는 새 창을 생성합니다. 현대의 브라우저는 대부분 탭을 지원하기 때문에 window.open은 새 창을 만든다.          
 
 `_self` : 
 현재 창 열기            

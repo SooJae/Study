@@ -29,12 +29,12 @@ coworkers.showAll=function(){
 
       coworkers.showAll();
 ```
-coworkers가 바뀌면 동작을 안할테니 coworkers = this로 바꿔준다.
+coworkers가 바뀌면 동작을 안할테니 coworkers = this로 바꿔줍니다.
       
       
 의존성 (dependency): 프로젝트에 설치하고 사용하는 모듈
      
---save , --save-dev 옵션 : 패키지 설치 + package.json에 등록을 해준다.
+--save , --save-dev 옵션 : 패키지 설치 + package.json에 등록을 해줍니다.
 
 --save-dev is used to save the package for development purpose. Example: unit tests, minification..
 --save is used to save the package required for the application to run
@@ -49,16 +49,16 @@ https://medium.com/beginners-guide-to-mobile-web-development/why-package-json-np
       
       JavaScript의 this는 기존 언어에서 사용하던 this와는 다릅니다. 비슷한 의미로 사용될 때도 있지만, JavaScript의 this는 여러 가지 함수가 호출되는 방식(호출 패턴)에 따라 참조(바인딩)하는 객체가 다르기 때문입니다.
 
-자바에서의 this는 인스턴스 자신을 가리키는 참조변수입니다. this가 객체 자신에 대한 참조 값을 가지고 있다는 것입니다. 주로 매개변수와 객체 자신이 가지고 있는 변수의 이름이 같을 경우 이를 구분하기 위해서 사용됩니다.
+자바에서의 this는 인스턴스 자신을 가리키는 참조변수입니다. this가 객체 자신에 대한 참조 값을 가지고 있다는 것 입니다. 주로 매개변수와 객체 자신이 가지고 있는 변수의 이름이 같을 경우 이를 구분하기 위해서 사용됩니다.
 
 javascript의 this가 해당 함수 호출 패턴에 따라 어떻게 객체를 참조(바인딩)하는지에 대한 규칙
 
-1. 기본적으로 this는 전역 객체를 참조한다.
-2. 메소드 내부의 this는 해당 메소드를 호출한 부모 객체를 참조한다.
-3. 생성자 함수 코드 내부의 this는 새로 생성된 객체를 참조한다.
-4. call()과 apply() 메소드로 함수를 호출할 때, 함수의 this는 첫 번째 인자로 넘겨받은 객체를 참조한다.
-5. 프로토타입 객체 메소드 내부의 this도 해당 메소드를 호출한 부모 객체를 참조한다.
-6. JavaScript의 this 키워드는 접근제어자 public 역할을 한다.
+1. 기본적으로 this는 전역 객체를 참조합니다.
+2. 메소드 내부의 this는 해당 메소드를 호출한 부모 객체를 참조합니다.
+3. 생성자 함수 코드 내부의 this는 새로 생성된 객체를 참조합니다.
+4. call()과 apply() 메소드로 함수를 호출할 때, 함수의 this는 첫 번째 인자로 넘겨받은 객체를 참조합니다.
+5. 프로토타입 객체 메소드 내부의 this도 해당 메소드를 호출한 부모 객체를 참조합니다.
+6. JavaScript의 this 키워드는 접근제어자 public 역할을 합니다.
 
 JavaScript에서는 내부 함수 호출 패턴을 정의해 놓지 않기 때문입니다. 내부 함수도 결국 함수이므로 이를 호출할 때는 함수 호출로 취급되어 함수 호출 패턴 규칙에 따라 내부 함수의 this는 전역 객체를 참조하게 됩니다.
 
@@ -87,7 +87,7 @@ document.queruySelector(#night_day) 라는 태그는 id="night_day" 와 의미�
 
 이 코드안에 있는 onclick 과 같이 이벤트로 실행되는 이 코드들은
 이 코드가 속해 있는 태그(ex: input) 의 인덱스 태그
-( 인덱스 태그는 해당 태그의 선택자(ex: id , class 등등) 를 의미한다.)
+( 인덱스 태그는 해당 태그의 선택자(ex: id , class 등등) 를 의미합니다.)
 를 대신할수 있는 태그는
 this 이다.
 
@@ -157,7 +157,7 @@ unshift: 배열 첫번째에 넣기
 slice(1,4) : 인덱스 1에서 3까지 substring 함 (본 배열에 변화는 안생김. 조회용.)
 groceryList.indexOf('pasta') : 해당 변수의 인덱스 번호 알려줌
 splice(1,0): 끼워넣기
-splice(1,3): 인덱스 1에서 3개를 replace한다.
+splice(1,3): 인덱스 1에서 3개를 replace합니다.
 
 console.log(secretMessage.join()); 한줄로 
 console.log(secretMessage.join(' ')); 쉼표 안쓰고 
@@ -184,7 +184,7 @@ console.log(is2p2.name);  //checkThatTwoPlusTwoEqualsFourAMillionTimes
 화살표함수에 call, apply 메서드를 사용할 수 없다.
 this키워드 에 효과적이다.
 
-함수하나당 ()하나씩 붙여주면 된다.
+함수하나당 ()하나씩 붙여주면 됩니다.
 
 '
 
@@ -207,7 +207,7 @@ else console.log('나는 배열이 아니당!');
 그리고 그 메소드는 우리가 예측한 문자열들이 아닌 Boolean 값을 반환하는 메소드다!
 따라서 우리 라이브러리를 사용해서 개발한 사용자들의 코드가 의도한 대로 작동하지 않을 가능성이 있다!
 하지만 다행히도 위 메소드는 덮어쓰기가 가능하다.
-그래도 우리 라이브러리를 쓰는 개발자가 ES6의 표준 메소드 작동 방식으로 Array.isArray를 썼다간 낭패를 볼 것이다.
+그래도 우리 라이브러리를 쓰는 개발자가 ES6의 표준 메소드 작동 방식으로 Array.isArray를 썼다간 낭패를 볼 것 입니다.
 
 1
 console.log(Object.getOwnPropertyDescriptor(Array, 'isArray').writable); // true
@@ -217,7 +217,7 @@ console.log(Object.getOwnPropertyDescriptor(Array, 'isArray').writable); // true
 1
 console.log(Object.getOwnPropertyDescriptor(Number, 'MAX_SAFE_INTEGER').writable); // false
 
-각각의 웹 페이지는 자신의 문서(document) 객체를 갖는다. Document 인터페이스는 웹 페이지의 컨텐츠(DOM 트리, 즉 <body> 또는 <table>와 같은 요소(Element) 등)에 대한 진입점으로서의 역할을 하며, 또한 해당 문서에 대한 전역 기능(페이지의 URL 가져오기, 문서 내에 새 요소 생성하기 등)을 제공한다.
+각각의 웹 페이지는 자신의 문서(document) 객체를 갖는다. Document 인터페이스는 웹 페이지의 컨텐츠(DOM 트리, 즉 <body> 또는 <table>와 같은 요소(Element) 등)에 대한 진입점으로서의 역할을 하며, 또한 해당 문서에 대한 전역 기능(페이지의 URL 가져오기, 문서 내에 새 요소 생성하기 등)을 제공합니다.
 
 자바스크립트의 객체는 자바의 맵과 같다. 인덱스를 first, lee 등 자기 마음대로 정할 수 있다. (key)
 grades.lee === grades['lee'] 
@@ -228,12 +228,12 @@ grades.lee === grades['lee']
 모듈(module)
 수 많은 로직을 재사용할 수 있는 단위로 나누어,
 별도의 모듈이 라는 형태로 떼어내 다른 프로그램에 부품으로 사용하는 기법.
-그 기법을 모듈화(Modularization), 결과물을 모듈이라 한다.
+그 기법을 모듈화(Modularization), 결과물을 모듈이라 합니다.
 
 - 호스트 환경
 javascript가 구동되는 환경.
 웹브라우저를 위한 언어로 시작했지만(클라이언트), 서버측에서 실행되는 javascript도 있다(서버사이드).
-또한 구글의 App위에서도 돌아가는 것이 있으므로, 호스트 환경에 따라 모듈화 하는 방법을 알아야 한다.
+또한 구글의 App위에서도 돌아가는 것이 있으므로, 호스트 환경에 따라 모듈화 하는 방법을 알아야 합니다.
 
 - 모듈과 라이브러리의 차이 
 모듈이 프로그램의 작은 부품이라 하면,
@@ -292,7 +292,7 @@ if(funcThis === window){ //window
     document.write('window <br />');
 }
  
-var o2 = new Func(); //객체가 o2 만들어졌기 때문에 o2의 this가 된다.
+var o2 = new Func(); //객체가 o2 만들어졌기 때문에 o2의 this가 됩니다.
 if(funcThis === o2){
     document.write('o2 <br />');
 }
@@ -314,14 +314,14 @@ var this=o1;
 console.log(sum.apply())
 
 객제안에 담겨있는 변수를 프로퍼티
-프로퍼티에 담겨있는 것이 함수라면 메소드라고 한다.
+프로퍼티에 담겨있는 것이 함수라면 메소드라고 합니다.
 
 prototype
 ```javascript
 function func(){};
 func.prototype.name='lee';
 var o= new func(); //상속 받기
-console.log(o); //prototype에 저장되어있는 특정한 객체가 들어간다.
+console.log(o); //prototype에 저장되어있는 특정한 객체가 들어갑니다.
 ```
 >func {name: "lee"}
 
@@ -329,6 +329,6 @@ Object표현 방식
 1. var grade = {'lee' : 10, 'su':5, 'jae':11}
 2. {'name' : leesujae 'introduce':func(name){~~~}}
 
-모든 객체는 Object를 상속받고있다. 그래서 모든 객체에 포함시키고 싶은것이 있을때 Object를 건들면 된다.
+모든 객체는 Object를 상속받고있다. 그래서 모든 객체에 포함시키고 싶은것이 있을때 Object를 건들면 됩니다.
 
-hasOwnProperty : Object.prototype.~~를 무시할수 있게 해준다. (중요!))
+hasOwnProperty : Object.prototype.~~를 무시할수 있게 해줍니다. (중요!))

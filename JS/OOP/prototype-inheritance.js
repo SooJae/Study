@@ -15,7 +15,7 @@ console.log('subObj.superVal =>',subObj.superVal);
 subObj.superVal = 'sub'; //객체를 바꾸는거지, 객체의 proto를 바꾸는게 아님
 console.log('superObj.superVal =>', superObj.superVal);
 
-//__proto__의 값만 바꾸면 그 객체는 다른 객체의 자식이 된다. ( 유연하다 )
+//__proto__의 값만 바꾸면 그 객체는 다른 객체의 자식이 됩니다. ( 유연하다 )
 
 
 //수작업으로 객체 만들기
