@@ -4,8 +4,8 @@
 자바언어를 기반으로 다양한 어플리케이션을 제작하기 위한 약속된 프로그래밍 툴.
 
 예전 EJB의 경우 고가의 장비(WAS등)이 필요되어지고, 개발환경 및 설정 그리고 테스트환경에 많은 애로사항들이 존재.
-하지만 스프링의 경우 톰캣을 이용할 수 있으며, EJB에 비해서 코드의 경량화 그리고 개발중에 테스트가 쉽다는 점이 특징이다.
-위에서 언급한 내용은 스프링의 전체적인 특징이다.
+하지만 스프링의 경우 톰캣을 이용할 수 있으며, EJB에 비해서 코드의 경량화 그리고 개발중에 테스트가 쉽다는 점이 특징입니다.
+위에서 언급한 내용은 스프링의 전체적인 특징입니다.
 
 설정
 Use Tomcat installation 체크, publish module contexts to seperate XML files 체크
@@ -19,7 +19,7 @@ DI(Dependency Injection)와 IOC 컨테이너
 
 A객체는 B,C,D객체에 의존합니다.
 방법 1: A객체가 B,C,D객체를 직접 생성 합니다. (new B, C, D)
-방법 2: A객체에 setter() 또는 construct() 생성자에서 B라는 객체와 C라는 객체가 필요할때 b또는 c라는 객체를 만들고, setter또는 construct에서 this.b, this.c 로 생성자를 받는다. 
+방법 2: A객체에 setter() 또는 construct() 생성자에서 B라는 객체와 C라는 객체가 필요할때 b또는 c라는 객체를 만들고, setter또는 construct에서 this.b, this.c 로 생성자를 받습니다. 
 B,C 객체 외부에 생성하여 A객체에 넣어 줍니다.
 스프링은 방법 2를 사용합니다.
 
@@ -234,7 +234,7 @@ xml 파일들
 <bean id="pencil" class="com.javalec.PencilWithEraser"/>
 ...
 ```
-이렇게 되어있을때 1번을 쓰다가 2번을 바꾸려고 하면, 자바파일의 수정 없이 바꿀수 있다. 다만 Pencil.class부분때문에 자바파일을 수정해야 하는 것 처럼 보이는데, 이것 또한 Pencil interface로 implements를 합니다면 해결이 됩니다. 즉, 자바 파일은 전혀 수정할 필요가 없다.
+이렇게 되어있을때 1번을 쓰다가 2번을 바꾸려고 하면, 자바파일의 수정 없이 바꿀수 있습니다. 다만 Pencil.class부분때문에 자바파일을 수정해야 하는 것 처럼 보이는데, 이것 또한 Pencil interface로 implements를 합니다면 해결이 됩니다. 즉, 자바 파일은 전혀 수정할 필요가 없다.
 
 [DI의 이점 설명 유튜브](https://www.youtube.com/watch?v=wqHBAmIZcvg&list=PLieE0qnqO2kTyzAlsvxzoulHVISvO8zA9&index=68)
 
@@ -275,7 +275,7 @@ XML 파일을 이용한 DI 설정 방법
 <property name="sisterName" value="홍길자"/>
 <property name="brotherName" value="홍오빠"/>
 ```
-을 아래와 같이 바꿀 수 있다.
+을 아래와 같이 바꿀 수 있습니다.
 ```xml
 <bean id="family" class="com.javalec.ex.Family" c:papaName="홍길동" p:sisterName="홍길자">
 		<property name="brotherName" value="홍오빠" />
@@ -340,8 +340,8 @@ public class MainClass {
 	
 }
 ```
-위의 코드를 보면 객체가 AnnotationConfigApplicationContext인 것을 확인 할 수 있다.
-AnnotationConfigApplicationContext는 GenericApplicationContext를 상속 받고 있다.
+위의 코드를 보면 객체가 AnnotationConfigApplicationContext인 것을 확인 할 수 있습니다.
+AnnotationConfigApplicationContext는 GenericApplicationContext를 상속 받고 있습니다.
 즉, XML로 다시 변환해서 파싱됩니다.(그럼 굳이 java를 쓸 필요가?) 그래서 잘 안씁니다.
 
 
@@ -398,7 +398,7 @@ applicationCTX.xml 파일 안에 다음과 같은 키워드를 넣어줍니다.
 ```xml
 <!-- XML파일 안에 자바파일을 넣어 사용하겠다. -->
 <context:annotation-config /> 
-<!-- ApplicationConfig 이다. -->
+<!-- ApplicationConfig 입니다. -->
 <bean class="com.javalec.ex.ApplicationConfig" />
 ```
 
@@ -526,14 +526,14 @@ destroyMethod()
 destroy()
 ```
 
-스프링 빈은 scope가 singleton으로 되어있다.
+스프링 빈은 scope가 singleton으로 되어있습니다.
 
 # Environment
 
 설정값 (ex) DB의 아이피 주소 등등) 을 자바코드 내에 갖고있는 것이 아니라, 외부에 놓고 프로그램이 필요할 때, 그 정보값을 갖고 온다.
 
 Context --ctx.getEnvironment()--> Environment --env.getPropertySources() --> PropertySources(프로퍼티 추가 및 추출)
-Environment객체 안에 바로 정보가 있는 것이 아니라, 프로퍼티소스라고 하는 애들이 위치해있다.(객체) Property source안에 정보들이 있다.
+Environment객체 안에 바로 정보가 있는 것이 아니라, 프로퍼티소스라고 하는 애들이 위치해있습니다.(객체) Property source안에 정보들이 있습니다.
 그 정보들을 계속 스캔하다가 내가 필요한 정보가 있으면, 우리에게 반환을 해줍니다. 
 
 추가 : propertySources.addLast()
@@ -595,20 +595,20 @@ public class MainClass {
 # AOP(Aspect Oriented Programing)
 OOP(Object Oriented Programing) : 객체 지향 프로그램
 AOP: 관점 지향 프로그램
-프로그램밍을 하다보면, 공통적인 기능이 많이 발생 합니다. 이러한 공통 기능을 모든 모듈에 적용하기 위한 방법으로 상속을 통한 방법이 있다.
-상속도 좋은 방법이긴 하지만 몇 가지 문제가 있다. 우선 **JAVA에서는 다중상속이 불가능** 하므로 **다양한 모듈에 상속기법을 통한 공통 기능 부여는 한계가 있다.**
+프로그램밍을 하다보면, 공통적인 기능이 많이 발생 합니다. 이러한 공통 기능을 모든 모듈에 적용하기 위한 방법으로 상속을 통한 방법이 있습니다.
+상속도 좋은 방법이긴 하지만 몇 가지 문제가 있습니다. 우선 **JAVA에서는 다중상속이 불가능** 하므로 **다양한 모듈에 상속기법을 통한 공통 기능 부여는 한계가 있습니다.**
 그리고, **기능 구현 부분에 핵심 기능 코드와 공통 기능 코드가 섞여 있어 효율성이 떨어집니다.**
 
 위의 상속을 통한 방법에 한계가 있어 AOP가 등장하게 되었습니다.
-AOP방법은 **핵심 기능**과**공통 기능**을 **분리**시켜놓고, **공통 기능을 필요로 하는 핵심 기능들**에서 **사용**하는 방식이다.
-**핵심 기능** 은 쌀을 씻고, 깨끗한 물을 적당히 넣고, 전자 밥솥에 내솥을 넣고, 취사버튼을 누르는 기능들이다.
-**공통 기능**은 수도꼭지를 열어 물을 받고, 쌀이 깨끗이 씻겼는지 눈으로 판단하고, 물이 적당한지 판단하는 기능이다.
+AOP방법은 **핵심 기능**과**공통 기능**을 **분리**시켜놓고, **공통 기능을 필요로 하는 핵심 기능들**에서 **사용**하는 방식입니다.
+**핵심 기능** 은 쌀을 씻고, 깨끗한 물을 적당히 넣고, 전자 밥솥에 내솥을 넣고, 취사버튼을 누르는 기능들입니다.
+**공통 기능**은 수도꼭지를 열어 물을 받고, 쌀이 깨끗이 씻겼는지 눈으로 판단하고, 물이 적당한지 판단하는 기능입니다.
 
 이러한 기능이 공통기능인 것은 밥을 짓는 행동이 **아닐 때도** 우리는 수도 꼭지를 열고, 눈으로 사물을 보고 **적절한 판단**을 하기 때문에 공통기능 이라고 하였습니다.
 어쨌든, 이렇게 핵심 기능과 공통기능을 분리해 놓고, 추후에 밥을 짓는 행동 말고 팥을 쑬때도 핵심기능은 변하지만, 공통 기능은 다시 적용할 수 있을 것 입니다.
 AOP 기법이 바로 이러한 것 입니다. 공통 기능을 핵심 기능과 분리해 놓고, 공통 기능 중에서 핵심 기능에 적용하고자 하는 부분에 적용하는 것 입니다.
 
-공통기능은 계속 재활용을 하고 핵심기능은 바뀔 수 있다.
+공통기능은 계속 재활용을 하고 핵심기능은 바뀔 수 있습니다.
 
 ## AOP 용어
 - Aspect : 공통 기능
@@ -619,7 +619,7 @@ AOP 기법이 바로 이러한 것 입니다. 공통 기능을 핵심 기능과 
 - Weaving : Advice를 핵심 기능에 적용하는 행위
 
 
-스프링에서는 AOP 관련된 것에서 method에만 공통기능을 사용할 수 있다.
+스프링에서는 AOP 관련된 것에서 method에만 공통기능을 사용할 수 있습니다.
 
 스프링에서 AOP 구현 방법 : proxy를 이용
 

@@ -53,17 +53,17 @@ npm install module(A) --save
 
 npm install module(A) --save-dev 
 특정 A모듈을 install 할때 --save-dev옵션을 넣으면  package.json에 devDepencies 목록에 포함. 이건 현재 npm 모듈은 A모듈과는 dependency가 없지만
-개발 환경에는 연관성이 있다는 뜻이다.
+개발 환경에는 연관성이 있습니다는 뜻입니다.
 
 package.json 파일 내의 dependencies, devDependencies의 차이를 알기 위해서 구글링을 하던 중, 보아도 잘 모르겠는 부분이 있어서 우리 drfts프로젝트인 lib-tz의 package.json파일을 보았지만.. 잘 모르겠어서 구글링의 도움을 받았습니다.
 
-결과 1 => 프로젝트를 개발/테스트하려는 것이 아니라 활용만 하려는 목적이라면 개발의존성을 설치하는 것이 불필요하므로, devDependencies의 패키지를 제외하고 설치할 수도 있다. 
+결과 1 => 프로젝트를 개발/테스트하려는 것이 아니라 활용만 하려는 목적이라면 개발의존성을 설치하는 것이 불필요하므로, devDependencies의 패키지를 제외하고 설치할 수도 있습니다. 
 
-결과 2 => dependencies, devDependencies는 해당 패키지가 다른 패키지에 의존할 경우 의존성에 대한 항목이다
+결과 2 => dependencies, devDependencies는 해당 패키지가 다른 패키지에 의존할 경우 의존성에 대한 항목입니다
 
 결과 3 => dependencies와 devDependencies의 차이는 배포용 패키지(실제 상품에서 사용할 패키지)와 개발용 패키지(목, 테스트 패키지 등)의 차이입니다.
 
-결과 4 => dependencies 는 이 패키지에 의존하는 다른 프로젝트에서 구동시키기 위한 의존성이다. 즉, 이 패키지를 활용할 때 필요한 의존성을 명시합니다. npm install --save 명령을 통해 패키지를 설치하면 이 항목에 프로젝트 정보가 저장됩니다. devDependencies 에는 이 패키지를 테스트하거나 개발할 때 필요한 패키지들을 명시합니다. npm install --save-dev 명령을 통해 패키지를 설치하면 이 항목에 프로젝트 정보가 저장됩니다.
+결과 4 => dependencies 는 이 패키지에 의존하는 다른 프로젝트에서 구동시키기 위한 의존성입니다. 즉, 이 패키지를 활용할 때 필요한 의존성을 명시합니다. npm install --save 명령을 통해 패키지를 설치하면 이 항목에 프로젝트 정보가 저장됩니다. devDependencies 에는 이 패키지를 테스트하거나 개발할 때 필요한 패키지들을 명시합니다. npm install --save-dev 명령을 통해 패키지를 설치하면 이 항목에 프로젝트 정보가 저장됩니다.
 
 용어가 어렵습니다... 그러던 중, 우리 lib-tz의 package.json 파일에서 다시 한 번 힌트를 얻고자 보았는데, devDependencies에 'Babel'이라는 애를 보았고(이건 종빈님께서 저번에 설명해주셨는데, 그 때 당시 잘 이해가 가지 않았던 걸로 기억..), 'Babel'이 무엇인가 궁금해져서 구글링을 바로 해봤죠.(이름도 귀엽고..)
 
@@ -156,11 +156,11 @@ var a = function(){
 }
 a();
 
-----> JavaScript에서는 함수가 값이다!
+----> JavaScript에서는 함수가 값입니다!
 
 pm2 -> 1.서버가 꺼지면 다시켜줌 2. 서버를 수정할때마다 알아서 껐다켜줌
 
-npm install module -g ----> 내가 설치하는 소프트웨어는 독립적이라서 내 컴퓨터 어디서든지 사용할수 있다.
+npm install module -g ----> 내가 설치하는 소프트웨어는 독립적이라서 내 컴퓨터 어디서든지 사용할수 있습니다.
 
 pm2 start main.js --watch --> 시작
 
@@ -206,15 +206,15 @@ request.on('data',function(data){
     body= body+data;      
     });
 
-//post방식에 데이터가 많을경우 컴퓨터가 꺼질수도 있다. 그래서 이걸씁니다.
-100이있으면 조각조각의 양을 서버에서 수신할때마다, 콜백함수를 호출하게 되어있다.
-호출할때 data라는 인자를 통해서 수신한 정보를 주기로 약속되어있다.
+//post방식에 데이터가 많을경우 컴퓨터가 꺼질수도 있습니다. 그래서 이걸씁니다.
+100이있으면 조각조각의 양을 서버에서 수신할때마다, 콜백함수를 호출하게 되어있습니다.
+호출할때 data라는 인자를 통해서 수신한 정보를 주기로 약속되어있습니다.
 
 request.on('end',function(){
   var post = qs.parse(body); 
   console.log(post);
     });
-//더 이상 들어올 정보가 없으면(end) qs.parse(body);로 post정보를 갖고올수 있다.
+//더 이상 들어올 정보가 없으면(end) qs.parse(body);로 post정보를 갖고올수 있습니다.
 
 { title: 'dltnwo', description: 'dltnwosla\r\ndd' }
 
@@ -240,7 +240,7 @@ post를 보내면 자동적으로 id에 해당되는 이지로 갑니다.
 input에 value값을 넣으면 자동으로 value값이 들어가게됩니다.
 
 <input type="text" name="title" placeholder="title" value="${title}"> //name에 title이 들어가있고
-사용자가 마음대로 수정할 수 있다.
+사용자가 마음대로 수정할 수 있습니다.
 <input type = "hidden" name="id" value="${title}"> //id로 바꿔주고 바꾸지 파일이름을 못하게 hidden을 써줍니다.
 또한 value에 title을 넣음으로써 나중에 이름을 교체할때 구(id)를 신(title)로 교체 해줄 것 입니다.
 

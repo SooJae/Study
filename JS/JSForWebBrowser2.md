@@ -28,7 +28,7 @@ console.log(t.getBoundingClientRect());
 
 view포트의 좌표
 
-위의 그림처럼 뷰포트는 문서의 내용 중 사용자에게 보여주는 영역을 의미합니다. 이에 따라서 문서의 좌표가 있고 뷰포트의 자표가 있다. 우리가 위에서 살펴본 getBoundingClientRect는 viewport의 좌표를 사용합니다. 
+위의 그림처럼 뷰포트는 문서의 내용 중 사용자에게 보여주는 영역을 의미합니다. 이에 따라서 문서의 좌표가 있고 뷰포트의 자표가 있습니다. 우리가 위에서 살펴본 getBoundingClientRect는 viewport의 좌표를 사용합니다. 
 
 아래 예제를 실행해보면 1초에 한번씩 getBoundingClientRect의 top 속성과 window.pageYOffset의 값이 출력됩니다
 
@@ -65,7 +65,7 @@ setInterval(function(){
 ```
 
 
-스크린의 크기는 모니터의 크기와 브라우저 뷰포트의 크기가 있다. 이를 알아내는 방법은 아래와 같다.
+스크린의 크기는 모니터의 크기와 브라우저 뷰포트의 크기가 있습니다. 이를 알아내는 방법은 아래와 같다.
 
 ```html
 <script>
@@ -93,13 +93,13 @@ console.log('screen.width:', screen.width, 'screen.height:', screen.height);
 ```html
 <!--자기 자신을 참조하는 불편한 방법-->
 <input type="button" id="target" onclick="alert('Hello world, '+document.getElementById('target').value);" value="button" />
-<!--this를 통해서 간편하게 참조할 수 있다-->
+<!--this를 통해서 간편하게 참조할 수 있습니다-->
 <input type="button" onclick="alert('Hello world, '+this.value);" value="button" />
 ```
 
 프로퍼티 리스너
 
-프로퍼티 리스너 방식은 이벤트 대상에 해당하는 객체의 프로퍼티로 이벤트를 등록하는 방식이다. 인라인 방식에 비해서 HTML과 JavaScript를 분리할 수 있다는 점에서 선호되는 방식이지만 뒤에서 배울 addEventListener 방식을 추천합니다. 
+프로퍼티 리스너 방식은 이벤트 대상에 해당하는 객체의 프로퍼티로 이벤트를 등록하는 방식입니다. 인라인 방식에 비해서 HTML과 JavaScript를 분리할 수 있습니다는 점에서 선호되는 방식이지만 뒤에서 배울 addEventListener 방식을 추천합니다. 
 
 
 
@@ -136,14 +136,14 @@ console.log('screen.width:', screen.width, 'screen.height:', screen.height);
     t.onclick = function(event){
         var event = event || window.event; //event 값이 없다면 window.event를 사용하겠다.
         var target = event.target || event.srcElement;
-        //두개가 같은 뜻이다.
+        //두개가 같은 뜻입니다.
         alert('Hello world, '+target.value)
     }
 </script>
 ```
 하지만 현업에서는 라이브러리(jQuery등)를 사용하기 때문에 큰 문제가 없다.(라이브러리에 이러한 것들이 고려되어있기 때문에)
 
-addEventListener은 이벤트를 등록하는 가장 권장되는 방식이다. 이 방식을 이용하면 여러개의 이벤트 핸들러를 등록할 수 있다.
+addEventListener은 이벤트를 등록하는 가장 권장되는 방식입니다. 이 방식을 이용하면 여러개의 이벤트 핸들러를 등록할 수 있습니다.
 ```html
 <input type="button" id="target" value="button" />
 <script>
@@ -154,10 +154,10 @@ addEventListener은 이벤트를 등록하는 가장 권장되는 방식이다. 
 </script>
 ```
 
-이 방식의 중요한 장점은 하나의 이벤트 대상에 복수의 동일 이벤트 타입 리스너를 등록할 수 있다는 점이다. 
+이 방식의 중요한 장점은 하나의 이벤트 대상에 복수의 동일 이벤트 타입 리스너를 등록할 수 있습니다는 점입니다. 
 
 
-이벤트 객체를 이용하면 복수의 엘리먼트에 하나의 리스너를 등록해서 재사용할 수 있다. 
+이벤트 객체를 이용하면 복수의 엘리먼트에 하나의 리스너를 등록해서 재사용할 수 있습니다. 
 ```html
 <input type="button" id="target1" value="button1" />
 <input type="button" id="target2" value="button2" />
@@ -179,7 +179,7 @@ addEventListener은 이벤트를 등록하는 가장 권장되는 방식이다. 
 </script>
 ```
 
-HTML 태그는 중첩되어 있다. 따라서 특정한 태그에서 발생하는 이벤트는 중첩되어 있는 태그들 모두가 대상이 될 수 있다. 이런 경우 중첩된 태그들에 이벤트가 등록 되어 있다면 어떻게 처리 될까? 
+HTML 태그는 중첩되어 있습니다. 따라서 특정한 태그에서 발생하는 이벤트는 중첩되어 있는 태그들 모두가 대상이 될 수 있습니다. 이런 경우 중첩된 태그들에 이벤트가 등록 되어 있습니다면 어떻게 처리 될까? 
 
 
 ```html
@@ -238,7 +238,7 @@ INPUT HTML bubbling
 
 3번째 인자의 뜻 : capturing이라는 뜻. true로 주면 capturing사용. false로 주면 bubbling사용
 
-버블링은 모든 브라우져에서 사용할 수 있지만, 캡쳐링은 옛날브라우저에서는 작동하지 않을수도 있다. 그래서 사용을 지양합니다.
+버블링은 모든 브라우져에서 사용할 수 있지만, 캡쳐링은 옛날브라우저에서는 작동하지 않을수도 있습니다. 그래서 사용을 지양합니다.
 ```js
 phases = ['capturing', 'target', 'bubbling']
             console.log(event.target.nodeName, this.nodeName, phases[event.eventPhase-1]);
@@ -246,9 +246,9 @@ phases = ['capturing', 'target', 'bubbling']
 
 event.eventPhase
 capturing이면 1이라는 값을 갖는다. bubbling이면 3을 갖는다.
-가장 깊숙한 element에 설치된 handler라고 합니다면 2를 갖는다. 모드가 무엇인지를 알기위해서 사용한 함수이다.
+가장 깊숙한 element에 설치된 handler라고 합니다면 2를 갖는다. 모드가 무엇인지를 알기위해서 사용한 함수입니다.
 
-중간에 이벤트 전파가 되지 않게 하는것도 있다.
+중간에 이벤트 전파가 되지 않게 하는것도 있습니다.
 다음과 같이 수정하자.
 ```js
 function handler(event){
@@ -268,12 +268,12 @@ document.querySelector('html').addEventListener('click', handler, false);
 ```
 
 
-웹브라우저의 구성요소들은 각각 기본적인 동작 방법을 가지고 있다.
+웹브라우저의 구성요소들은 각각 기본적인 동작 방법을 가지고 있습니다.
 
 텍스트 필드에 포커스를 준 상태에서 키보드를 입력하면 텍스트가 입력됩니다.
 폼에서 submit 버튼을 누르면 데이터가 전송됩니다.
 a 태그를 클릭하면 href 속성의 URL로 이동합니다.
-이러한 기본적인 동작들을 기본 이벤트라고 하는데 사용자가 만든 이벤트를 이용해서 이러한 기본 동작을 취소할 수 있다.
+이러한 기본적인 동작들을 기본 이벤트라고 하는데 사용자가 만든 이벤트를 이용해서 이러한 기본 동작을 취소할 수 있습니다.
 
 
 inline방식
@@ -407,9 +407,9 @@ t.addEventListener('focus', function(event){
 </script>
  ```
 문서 로딩
- 웹페이지를 프로그래밍적으로 제어하기 위해서는 웹페이지의 모든 요소에 대한 처리가 끝나야 합니다. 이것을 알려주는 이벤트가 load, DOMContentLoaded이다.
+ 웹페이지를 프로그래밍적으로 제어하기 위해서는 웹페이지의 모든 요소에 대한 처리가 끝나야 합니다. 이것을 알려주는 이벤트가 load, DOMContentLoaded입니다.
 
-아래 코드의 실행결과는 null이다. <p id="target">Hello</p>가 로딩되기 전에 자바스크립트가 실행되었기 때문이다.
+아래 코드의 실행결과는 null입니다. <p id="target">Hello</p>가 로딩되기 전에 자바스크립트가 실행되었기 때문입니다.
 
 ```html
 <html>
@@ -443,7 +443,7 @@ t.addEventListener('focus', function(event){
 </html>
 ```
 
-이미지 파일은 화면이 전부 출력 된 다음에 출력되는게 좋다.(다 다운받는동안 화면이 멈춰있기 때문에.) 솔직히 나중에 출력되도 상관 없잖아?
+이미지 파일은 화면이 전부 출력 된 다음에 출력되는게 좋습니다.(다 다운받는동안 화면이 멈춰있기 때문에.) 솔직히 나중에 출력되도 상관 없잖아?
 그럴때 사용하는게 DOMContentLoaded DOM에 해당하는 컨텐트가 전부 다운될때
 
 ```html
@@ -650,9 +650,9 @@ jQuery는 이벤트와 관련해서 편리한 기능을 제공합니다.  아래
     })
 </script>
 ```
-코드 분량에 큰차이가 있다. jQuery는 크로스 브라우징을 알아서 처리해주고, 이벤트를 보다 적은 코드로 구현할 수 있도록 해줍니다. 이런 이유 때문에 jQuery와 같은 라이브러리를 사용하는 것 입니다. 
+코드 분량에 큰차이가 있습니다. jQuery는 크로스 브라우징을 알아서 처리해주고, 이벤트를 보다 적은 코드로 구현할 수 있도록 해줍니다. 이런 이유 때문에 jQuery와 같은 라이브러리를 사용하는 것 입니다. 
 
-on은 jQuery에서 가장 중요한 이벤트 API이다. on API를 통해서 jQuery에서 이벤트를 다루는 방법을 알아보자.
+on은 jQuery에서 가장 중요한 이벤트 API입니다. on API를 통해서 jQuery에서 이벤트를 다루는 방법을 알아보자.
 on의 기본적인 문법은 아래와 같다.
 ```js
 .on( events [, selector ] [, data ], handler(eventObject) )
@@ -677,7 +677,7 @@ selector 파라미터는 이벤트 대상을 필터링합니다. 아래 예제�
 </script>
 ```
 
-위의 예제는 ul 엘리먼트의 하위 엘리먼트 중에  a, li 엘리먼트들에 대해서만 이벤트가 발생합니다. 주의 할 것은 ul 엘리먼트는 이벤트가 발생하지 않는다는 점이다. 이것은 jQuery에서 이벤트 버블링을 구현하는 방법이기도 하다.
+위의 예제는 ul 엘리먼트의 하위 엘리먼트 중에  a, li 엘리먼트들에 대해서만 이벤트가 발생합니다. 주의 할 것은 ul 엘리먼트는 이벤트가 발생하지 않는다는 점입니다. 이것은 jQuery에서 이벤트 버블링을 구현하는 방법이기도 하다.
 
 late binding
 jQuery는 존재하지 않는 엘리먼트에도 이벤트를 등록할 수 있는 놀라운 기능을 제공합니다. 아래 코드를 보자. 
@@ -696,7 +696,7 @@ jQuery는 존재하지 않는 엘리먼트에도 이벤트를 등록할 수 있�
 </ul>
 ```html
 
-위의 코드는 실행되지 않는다. ul 엘리먼트가 존재하지 않을 때 이벤트 설치를 시도하고 있기 때문이다. 존재하지 않는 엘리먼트에 이벤트를 달 수 없다는 것은 이미 배운 바가 있다. 그런데 jQuery는 존재하지 않는 엘리먼트에게도 이벤트를 설치할 수 있다. 
+위의 코드는 실행되지 않는다. ul 엘리먼트가 존재하지 않을 때 이벤트 설치를 시도하고 있기 때문입니다. 존재하지 않는 엘리먼트에 이벤트를 달 수 없다는 것은 이미 배운 바가 있습니다. 그런데 jQuery는 존재하지 않는 엘리먼트에게도 이벤트를 설치할 수 있습니다. 
 ```html
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
@@ -820,7 +820,7 @@ xhr.onreadystatechange = function(){
         document.querySelector('#time').innerHTML = xhr.responseText;
     }
 }
-onreadystatechange 이벤트는 서버와의 통신이 끝났을 때 호출되는 이벤트이다. readyState는 통신의 현재 상태를 알려줍니다. 4는 통신이 완료되었음을 의미합니다. status는 HTTP 통신의 결과를 의미하는데 200은 통신이 성공했음을 의미합니다. responseText 프로퍼티는 서버에서 전송한 데이터를 담고 있다. 이것을 id가 time 엘리먼트의 하위로 삽입합니다. 이를 통해서 현재 서버에서 가져온 현재시간을 페이지 리로딩 없이 가져올 수 있다.
+onreadystatechange 이벤트는 서버와의 통신이 끝났을 때 호출되는 이벤트입니다. readyState는 통신의 현재 상태를 알려줍니다. 4는 통신이 완료되었음을 의미합니다. status는 HTTP 통신의 결과를 의미하는데 200은 통신이 성공했음을 의미합니다. responseText 프로퍼티는 서버에서 전송한 데이터를 담고 있습니다. 이것을 id가 time 엘리먼트의 하위로 삽입합니다. 이를 통해서 현재 서버에서 가져온 현재시간을 페이지 리로딩 없이 가져올 수 있습니다.
 
 demo2.html
 
@@ -872,7 +872,7 @@ xhr.send(data);
 
 time2.php
 
-아래는 Ajax를 이용해서 전송한 데이터를 받아서 현재 시간을 출력해주는 서버쪽 구현이다. 
+아래는 Ajax를 이용해서 전송한 데이터를 받아서 현재 시간을 출력해주는 서버쪽 구현입니다. 
 
 ```php
 <?php
@@ -894,7 +894,7 @@ var members = ["egoing", "k9905", "sorialgi"];
 하지만 jsp나 php에서 객체나 배열 그대로 사용할 수 없다.
 이를 해결하기 위해 표준화를 시킨다.
 
-vscode 유저 세팅도 json으로 되어있다.
+vscode 유저 세팅도 json으로 되어있습니다.
 
 JSON.parse()
 인자로 전달된 문사열을 자바스크립트의 데이터로 변환합니다.
@@ -950,7 +950,7 @@ var _str = '';
 
 PHP의 배열을 클라이언트로 전송하기 위해서 콤마로 구분된 문자열을 만들었다. 자바스크립트에서는 이를 받아서 콤마를 구분자로 다시 배열로 만들었다. 
 
-만약 PHP의 배열을 그대로 자바스크립트에서 사용할 수 있다면? 반대로 자바스크립트의 배열을 그대로 PHP에서 사용할 수 있다면 얼마나 편리할까? 이 때 사용하는 것이 JSON이다. 
+만약 PHP의 배열을 그대로 자바스크립트에서 사용할 수 있습니다면? 반대로 자바스크립트의 배열을 그대로 PHP에서 사용할 수 있습니다면 얼마나 편리할까? 이 때 사용하는 것이 JSON입니다. 
 
 위의 예제를 JSON화시켜보자.
 
@@ -1049,10 +1049,10 @@ setting는 Ajax 통신을 위한 옵션을 담고 있는 객체가 들어갑니�
 data
 서버로 데이터를 전송할 때 이 옵션을 사용합니다. 
 dataType
-서버측에서 전송한 데이터를 어떤 형식의 데이터로 해석할 것인가를 지정합니다. 값으로 올 수 있는 것은 xml, json, script, html이다. 형식을 지정하지 않으면 jQuery가 알아서 판단합니다.
+서버측에서 전송한 데이터를 어떤 형식의 데이터로 해석할 것인가를 지정합니다. 값으로 올 수 있는 것은 xml, json, script, html입니다. 형식을 지정하지 않으면 jQuery가 알아서 판단합니다.
 success
 성공했을 때 호출할 콜백을 지정합니다.
 Function( PlainObject data, String textStatus, jqXHR jqXHR )
 type
-데이터를 전송하는 방법을 지정합니다. get, post를 사용할 수 있다.
+데이터를 전송하는 방법을 지정합니다. get, post를 사용할 수 있습니다.
 위의 내용을 바탕으로 Ajax 통신을 해보자. 다음 예제는 Ajax 수업의 예제를 JQuery화한 것 입니다.

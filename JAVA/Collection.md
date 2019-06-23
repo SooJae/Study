@@ -53,7 +53,7 @@ System.out.println(it.next());
 }
 
 HashSet을 ArrayList로 바꿔도 오류가 안난다.
-그 이유는 컬렉션 인터페이스를 구현하고 있기 때문이다.
+그 이유는 컬렉션 인터페이스를 구현하고 있기 때문입니다.
 그래서 ArrayList대신 Collection으로 바꿔도 됩니다.
 
 Collection<Integer> A = new ArrayList<Integer>();
@@ -85,7 +85,7 @@ System.out.println(it.next());
 }
 
 
-key 와 value가 있다.
+key 와 value가 있습니다.
 key는 중복 X
 value는 중복 O
 

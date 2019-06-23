@@ -37,9 +37,9 @@ Servlet 객체생성(최초한번) ->(선처리:@PostConstruct)-> Init()호출(�
 
 
 # 서블릿 초기화 파라미터
-특정 servlet이 생성 될 때 초기에 필요한 데이터들이 있다. 예를들어 특정 경로 및 아이디 정보등.
+특정 servlet이 생성 될 때 초기에 필요한 데이터들이 있습니다. 예를들어 특정 경로 및 아이디 정보등.
 이러한 데이터들을 초기화 파라미터라고 하며, web.xml에 기술하고 servlet파일에서는 ServletConfig 클래스를 이용해서 접근 합니다.
-또한 초기화 파라미터를 web.xml이 아닌 Servlet파일에 직접 기술하는 방법도 있다.
+또한 초기화 파라미터를 web.xml이 아닌 Servlet파일에 직접 기술하는 방법도 있습니다.
 
 web.xml
 
@@ -86,8 +86,8 @@ String path=getServletContext().getInitParameter("path");
 
 
 웹어플리케이션 감시:
-웹 어플리케이션의 생명주기를 감시하는 리스너가 있다.
-ServletContextListener이다.
+웹 어플리케이션의 생명주기를 감시하는 리스너가 있습니다.
+ServletContextListener입니다.
 
 리스너 클래스 제작
 ```java
@@ -124,7 +124,7 @@ JSP 동작원리
 
 
 JSP 내부 객체
-개발자가 객체를 생성하지 않고 바로 사용할 수 있는 객체가 내부객체이다. JSP에서 제공되는 내부 객체는 JSP 컨테이너에 의해 Servlet으로 변화될 때 자동으로 객체가 생성 됩니다.
+개발자가 객체를 생성하지 않고 바로 사용할 수 있는 객체가 내부객체입니다. JSP에서 제공되는 내부 객체는 JSP 컨테이너에 의해 Servlet으로 변화될 때 자동으로 객체가 생성 됩니다.
 
 내부 객체 종류
 입출력 객체 : request, response, out
@@ -165,7 +165,7 @@ http 특징 : 클라이언트에서 서버로 request을하면 서버측에서�
 
  1. 4kb로 용량이 제한적이며, 
  2. 300개까지 데이터정보를 가질 수 있습니다.
- 3. 웹브라우저를 닫아도 정해진 시간만큼 쿠키가 살아있다.
+ 3. 웹브라우저를 닫아도 정해진 시간만큼 쿠키가 살아있습니다.
 
 
 쿠키
@@ -182,13 +182,13 @@ Cookie cookie = new Cookie("변수명","값");
 cookie.setMaxAge(60); 
 //  60초라는 뜻 
 response.addCookie(cookie);
-//  주는것이므로 response이다.
+//  주는것이므로 response입니다.
 ```
 
 
 Session
 1. 보안에 강하다.
-2. 라이프 사이클이 웹 브라우져를 닫는 순간까지이다.
+2. 라이프 사이클이 웹 브라우져를 닫는 순간까지입니다.
 3. 용량의 제한이 없다.
 ```java
 Enumeration enumeration = session.getAttributeNames();
@@ -208,7 +208,7 @@ Cookie
 
 ```jsp
 Cookie cookie = new Cookie("id", id);		
-			//앞의 요소는 getName()으로 가져올수 있고 뒤의 인자는 getValue()로 가져올 수 있다.		
+			//앞의 요소는 getName()으로 가져올수 있고 뒤의 인자는 getValue()로 가져올 수 있습니다.		
 cookie.setMaxAge(60);	//1분				
 response.addCookie(cookie);
 ```
@@ -332,7 +332,7 @@ xml또한 에러페이지에는 밑과같이 적어줘야합니다.
 
 빈이란?
 반복적인 작업을 효율적으로 하기위해 빈을 사용합니다.
-빈이란 JAVA언어의 데이터(속성)와 기능(메소드)으로 이루어진 클래스이다.
+빈이란 JAVA언어의 데이터(속성)와 기능(메소드)으로 이루어진 클래스입니다.
 jsp페이지를 만들고, 액션태그를 이용하여 빈을 사용합니다. 그리고 빈의 내부 데이터를 처리합니다.
 Student.java파일
 ```java
@@ -392,11 +392,11 @@ executeUpdate(query);
 몇개의 값이 수정됐는지 리턴합니다.
 
 
-Tomcat은 사실 **서버**가 아니라 **컨테이너**이다.
+Tomcat은 사실 **서버**가 아니라 **컨테이너**입니다.
 
 # 커넥션 풀
 
-DAO(Data Access Object) : WAS가 DB로 접근해서 데이터를 받아올때, 관련된 일을 하는 것이 DAO. 데이터를 직접 접속을 해서 로직을 수행합니다. 데이터 베이스에 접속해서 데이터 추가, 삭제, 수정등의 작업을 하는 클래스이다. JSP 혹은 Servlet 페이지 내에 함께 기술할 수도 있지만 유지보수 및 코드의 모듈화를 위해 별도의 DAO 클래스를 만들어 사용합니다.
+DAO(Data Access Object) : WAS가 DB로 접근해서 데이터를 받아올때, 관련된 일을 하는 것이 DAO. 데이터를 직접 접속을 해서 로직을 수행합니다. 데이터 베이스에 접속해서 데이터 추가, 삭제, 수정등의 작업을 하는 클래스입니다. JSP 혹은 Servlet 페이지 내에 함께 기술할 수도 있지만 유지보수 및 코드의 모듈화를 위해 별도의 DAO 클래스를 만들어 사용합니다.
 
 DTO(Data transfer Object) : 데이터가 다른 jsp와 서블릿에 섞여 들어갑니다. 데이터만 따로 모아서 하나의 오브젝트로 따로 관리하자는 것이 DTO. 데이터베이스에서 가져온 DATA를 객체 데이터로 바꿔주는 클래스 . DAO를 이용하여, 데이터베이스에서 데이터를 관리할 때 데이터를 일반적인 변수에 할당하여 작업을 할 수도 있지만, 해당 데이터의 클래스를 만들어 사용합니다.
 
@@ -589,9 +589,9 @@ public class MemberDAO {
 
 
 
-DOM이건 BOM이건 JS이건 모든 객체가 WINDOW의 자식 객체들이다.
+DOM이건 BOM이건 JS이건 모든 객체가 WINDOW의 자식 객체들입니다.
 
-우리가 alert이라고 적어주는 내장함수는 사실은 앞에 window가 붙은 alert이다. alert만 적어도 내부적으로 window.alert로 변환해줍니다. 우리가 적어주는 모든 메소드,변수는 window라는 객체의 메소드,변수다.
+우리가 alert이라고 적어주는 내장함수는 사실은 앞에 window가 붙은 alert입니다. alert만 적어도 내부적으로 window.alert로 변환해줍니다. 우리가 적어주는 모든 메소드,변수는 window라는 객체의 메소드,변수다.
 window.a == a
 
 
@@ -659,10 +659,10 @@ public class MemberDao {
 	}
 ```
 
-자세히보면 MemberDao.java의 생성자가 싱글톤인 것을 알수 있다.
+자세히보면 MemberDao.java의 생성자가 싱글톤인 것을 알수 있습니다.
 
-싱글톤 패턴 특징 : 클래스로부터 바로 객체를 get할 수 있다.
-이 객체는 유일하게 하나만 만들어짐. 그래서 모든 곳에서 공유하면서 사용할 수 있다.
+싱글톤 패턴 특징 : 클래스로부터 바로 객체를 get할 수 있습니다.
+이 객체는 유일하게 하나만 만들어짐. 그래서 모든 곳에서 공유하면서 사용할 수 있습니다.
 
 
 파일 업로드 라이브러리 설치
@@ -733,12 +733,12 @@ fileFormOk.jsp
 
 
 # EL이란?
-Expression Language로 표현식 또는 액션 태그를 대신해서 값을 표현하는 언어이다.
+Expression Language로 표현식 또는 액션 태그를 대신해서 값을 표현하는 언어입니다.
 
 <%= value %> => ${value}
   표현식			EL
 
-모든 연산자를 이용 할수 있다.
+모든 연산자를 이용 할수 있습니다.
 <%= (1>2) ? 1 : 2 %>  => { (1>2) ? 1 : 2 }
 
 액션태그로 사용되는 EL
@@ -794,7 +794,7 @@ JSTL의 경우 우리가 사용하는 Tomcat컨테이너에 포함되어 있지 
 
 jstl에서는 다섯가지의 라이브러리를 제공
 1. Core
-core 라이브러리는 기본적인 라이브러리로 출력, 제어문, 반복문 같은 기능이 있다.
+core 라이브러리는 기본적인 라이브러리로 출력, 제어문, 반복문 같은 기능이 있습니다.
 ```
 <%@ taglib uri =http://java.sun.com/jsp/jstl/core prefix="c"%>
 ```
@@ -1021,7 +1021,7 @@ String command = uri.substring(conPath.length());
 
 # 포워딩(Forwarding)
 RequestDispatcher 클래스
-서블릿 또는 JSP에서 요청을 받은 후 다른 콤포넌트로 요청을 위임할 수 있다. 이러한 위임 방법에는 2개의 클래스를 이용합니다. 하나는 RequestDispatcher 클래스고, 또 하나는 HttpServletResponse클래스이다.
+서블릿 또는 JSP에서 요청을 받은 후 다른 콤포넌트로 요청을 위임할 수 있습니다. 이러한 위임 방법에는 2개의 클래스를 이용합니다. 하나는 RequestDispatcher 클래스고, 또 하나는 HttpServletResponse클래스입니다.
 ## RequestDispatcher 클래스
 클라이언트(웹 브라우저) ->요청(doGet이나 doPost등) -> 요청받은 컴포넌트 -> 요청위임 -> 위임받은 컴포넌트
 
@@ -1039,20 +1039,20 @@ private void actionDo(HttpServletRequest request, HttpServletResponse response) 
 		
 	}
 ```
-jsp에서또한 dispatcher를 사용할 수 있다.
+jsp에서또한 dispatcher를 사용할 수 있습니다.
 
 ## HttpServletResponse 클래스
-RequestDispatcher 클래스와 동일하게 요청을 위임하는 클래스이다.
+RequestDispatcher 클래스와 동일하게 요청을 위임하는 클래스입니다.
 차이점은 요청 받은 요청 객체를 위임 받은 컴포넌트에 전달하는 것이 아닌, 새로운 요청객체를 생성 합니다.
   요청받은 컴포넌트 (요청위임)<=> 요청,응답<=> **클라이언트** <=>요청, 응답 <=> 위임받은 컴포넌트
 
-요청은 다른 Request 객체이다. 
+요청은 다른 Request 객체입니다. 
 
 
 MVC패턴
-MVC란 Model, View, Controller를 뜻하는 용어로 개발 형태의 일종이다.
+MVC란 Model, View, Controller를 뜻하는 용어로 개발 형태의 일종입니다.
 Model은 데이터베이스와의 관계를 담당합니다. 클라이언트의 요청에서 필요한 자료를 데이터베이스로부터 추출하거나, 수정하여 Controller로 전달합니다.
-View는 사용자에게 보여지는 UI화면이다. 주로 .jsp파일로 작성하며, Controller에서 어떤 View 컴포넌트를 보여줄지 결정합니다.
+View는 사용자에게 보여지는 UI화면입니다. 주로 .jsp파일로 작성하며, Controller에서 어떤 View 컴포넌트를 보여줄지 결정합니다.
 Controller는 클라이언트의 요청을 받고, 적절한 Model에 지시를 내리며, Model에서 전달된 데이터를 적절한 View에 전달합니다.
 Model1
 MVC에서 View와 Controller가 같이 있는 형태.
@@ -1060,7 +1060,7 @@ MVC에서 View와 Controller가 같이 있는 형태.
 클라이언트 <=> JSP(View+Controller)<=>DAO<=>DB
 
 Model2
-MVC에서 Model, View그리고 Controller가 모두 모듈화(부품화) 되어 있는 형태이다.
+MVC에서 Model, View그리고 Controller가 모두 모듈화(부품화) 되어 있는 형태입니다.
 
 클라이언트 -> Controller(Servlet) <=>Model(Command, DAO)<=>DB
 

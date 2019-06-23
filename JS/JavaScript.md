@@ -1,14 +1,14 @@
-1. 빨강 자바스크립트는 사용자와 상호작용을 하는 언어이다.
+1. 빨강 자바스크립트는 사용자와 상호작용을 하는 언어입니다.
 2. 웹브라우저는 한번 화면에 출력되면 자기자신을 바꿀수 없다.
-BUT 자바스크립트를 이용하면 body 태그를 바꿔줄수 있다.
-즉 JS가 HTML을 제어하는 언어이다. 
+BUT 자바스크립트를 이용하면 body 태그를 바꿔줄수 있습니다.
+즉 JS가 HTML을 제어하는 언어입니다. 
 ```html
 <input type="button" value="hi" onclick="alert('hi')">
     <input type="text" onchange="alert('changed')">
     <input type="text" onkeydown="alert('key down!')">
 ```
 
- on~ 이벤트 약 20개정도 있다.
+ on~ 이벤트 약 20개정도 있습니다.
 
 
 1=="1" 
@@ -17,7 +17,7 @@ BUT 자바스크립트를 이용하면 body 태그를 바꿔줄수 있다.
 1==="1"
 > false
 
-위의 예를 보면 알 수 있듯이 ===은 데이터타입까지 완전히 같다는 의미이다. ===의 사용이 강력히 권장.
+위의 예를 보면 알 수 있듯이 ===은 데이터타입까지 완전히 같다는 의미입니다. ===의 사용이 강력히 권장.
 
 ---
 ```javascript
@@ -49,7 +49,7 @@ https://medium.com/beginners-guide-to-mobile-web-development/why-package-json-np
       
       JavaScript의 this는 기존 언어에서 사용하던 this와는 다릅니다. 비슷한 의미로 사용될 때도 있지만, JavaScript의 this는 여러 가지 함수가 호출되는 방식(호출 패턴)에 따라 참조(바인딩)하는 객체가 다르기 때문입니다.
 
-자바에서의 this는 인스턴스 자신을 가리키는 참조변수입니다. this가 객체 자신에 대한 참조 값을 가지고 있다는 것 입니다. 주로 매개변수와 객체 자신이 가지고 있는 변수의 이름이 같을 경우 이를 구분하기 위해서 사용됩니다.
+자바에서의 this는 인스턴스 자신을 가리키는 참조변수입니다. this가 객체 자신에 대한 참조 값을 가지고 있습니다는 것 입니다. 주로 매개변수와 객체 자신이 가지고 있는 변수의 이름이 같을 경우 이를 구분하기 위해서 사용됩니다.
 
 javascript의 this가 해당 함수 호출 패턴에 따라 어떻게 객체를 참조(바인딩)하는지에 대한 규칙
 
@@ -89,7 +89,7 @@ document.queruySelector(#night_day) 라는 태그는 id="night_day" 와 의미�
 이 코드가 속해 있는 태그(ex: input) 의 인덱스 태그
 ( 인덱스 태그는 해당 태그의 선택자(ex: id , class 등등) 를 의미합니다.)
 를 대신할수 있는 태그는
-this 이다.
+this 입니다.
 
 그러므로
 
@@ -182,7 +182,7 @@ console.log(is2p2.name);  //checkThatTwoPlusTwoEqualsFourAMillionTimes
 
 
 화살표함수에 call, apply 메서드를 사용할 수 없다.
-this키워드 에 효과적이다.
+this키워드 에 효과적입니다.
 
 함수하나당 ()하나씩 붙여주면 됩니다.
 
@@ -205,24 +205,24 @@ if(Array.isArray(arr) === 'Array') console.log('나는 배열이당!');
 else console.log('나는 배열이 아니당!');
 하지만 ES6 들어서 위에 우리가 사용한 Array.isArray 메소드가 표준 메소드로 지정되었다!
 그리고 그 메소드는 우리가 예측한 문자열들이 아닌 Boolean 값을 반환하는 메소드다!
-따라서 우리 라이브러리를 사용해서 개발한 사용자들의 코드가 의도한 대로 작동하지 않을 가능성이 있다!
+따라서 우리 라이브러리를 사용해서 개발한 사용자들의 코드가 의도한 대로 작동하지 않을 가능성이 있습니다!
 하지만 다행히도 위 메소드는 덮어쓰기가 가능하다.
 그래도 우리 라이브러리를 쓰는 개발자가 ES6의 표준 메소드 작동 방식으로 Array.isArray를 썼다간 낭패를 볼 것 입니다.
 
 1
 console.log(Object.getOwnPropertyDescriptor(Array, 'isArray').writable); // true
 하지만 모든 프로퍼티가 덮어쓰기가 가능한 게 아니다.
-아래와 같이 상수(네이밍이 UPPER_SNAKE_CASE로 돼있다.) 프로퍼티도 존재하기 때문이다.
+아래와 같이 상수(네이밍이 UPPER_SNAKE_CASE로 돼있습니다.) 프로퍼티도 존재하기 때문입니다.
 
 1
 console.log(Object.getOwnPropertyDescriptor(Number, 'MAX_SAFE_INTEGER').writable); // false
 
 각각의 웹 페이지는 자신의 문서(document) 객체를 갖는다. Document 인터페이스는 웹 페이지의 컨텐츠(DOM 트리, 즉 <body> 또는 <table>와 같은 요소(Element) 등)에 대한 진입점으로서의 역할을 하며, 또한 해당 문서에 대한 전역 기능(페이지의 URL 가져오기, 문서 내에 새 요소 생성하기 등)을 제공합니다.
 
-자바스크립트의 객체는 자바의 맵과 같다. 인덱스를 first, lee 등 자기 마음대로 정할 수 있다. (key)
+자바스크립트의 객체는 자바의 맵과 같다. 인덱스를 first, lee 등 자기 마음대로 정할 수 있습니다. (key)
 grades.lee === grades['lee'] 
 
-서로 연관되어 있는 값과, 처리를 하나에 그릇안에 담아서 그룹핑 하는것이 객체지향 프로그래밍이다.
+서로 연관되어 있는 값과, 처리를 하나에 그릇안에 담아서 그룹핑 하는것이 객체지향 프로그래밍입니다.
 
 
 모듈(module)
@@ -232,7 +232,7 @@ grades.lee === grades['lee']
 
 - 호스트 환경
 javascript가 구동되는 환경.
-웹브라우저를 위한 언어로 시작했지만(클라이언트), 서버측에서 실행되는 javascript도 있다(서버사이드).
+웹브라우저를 위한 언어로 시작했지만(클라이언트), 서버측에서 실행되는 javascript도 있습니다(서버사이드).
 또한 구글의 App위에서도 돌아가는 것이 있으므로, 호스트 환경에 따라 모듈화 하는 방법을 알아야 합니다.
 
 - 모듈과 라이브러리의 차이 
@@ -242,14 +242,14 @@ javascript가 구동되는 환경.
 
 - 라이브러리를 쓰는 이유
 자기혼자서 만드는 것이 여러가지 이유로 필연적이지 않으면,
-다른사람이 이미 만들어 놓은것을 부품으로 조립해서 만들어 가는것이 소프트웨어를 만드는 '기본중의 기본'이다.
+다른사람이 이미 만들어 놓은것을 부품으로 조립해서 만들어 가는것이 소프트웨어를 만드는 '기본중의 기본'입니다.
 
 정규표현식
 JS뿐만 아니라, JAVA, Perl에 쓰인다.
 
 let pattern = /a/;
 let pattern = new RegExp('a');
-두개가 같은 뜻이다.
+두개가 같은 뜻입니다.
 
 THIS
 함수에서의 this
@@ -263,7 +263,7 @@ function func(){
 func(); //window.func()와 같은뜻
 ```
 
-this가 의미하는 것은 window이다.
+this가 의미하는 것은 window입니다.
 
 
 ### 메소드와 this
@@ -278,7 +278,7 @@ var o = {
 o.func();  //o 
 
 ```
- 객체의 소속인 메소드의 this는 그 객체를 가르킨다. 사실 같은 뜻이다. this가 포함된 o거나 this가 포함된 window거나 그게그거.
+ 객체의 소속인 메소드의 this는 그 객체를 가르킨다. 사실 같은 뜻입니다. this가 포함된 o거나 this가 포함된 window거나 그게그거.
 
 생성자와 this
 ```javascript
@@ -298,7 +298,7 @@ if(funcThis === o2){
 }
 ```
 
-생성자는 빈 객체를 만든다. 그리고 이 객체내에서 this는 만들어진 객체를 가르킨다. 이것은 매우 중요한 사실이다. 생성자가 실행되기 전까지는 객체는 변수에도 할당될 수 없기 때문에 this가 아니면 객체에 대한 어떠한 작업을 할 수 없기 때문이다. 
+생성자는 빈 객체를 만든다. 그리고 이 객체내에서 this는 만들어진 객체를 가르킨다. 이것은 매우 중요한 사실입니다. 생성자가 실행되기 전까지는 객체는 변수에도 할당될 수 없기 때문에 this가 아니면 객체에 대한 어떠한 작업을 할 수 없기 때문입니다. 
 
 ```javascript
 function Func(){
@@ -329,6 +329,6 @@ Object표현 방식
 1. var grade = {'lee' : 10, 'su':5, 'jae':11}
 2. {'name' : leesujae 'introduce':func(name){~~~}}
 
-모든 객체는 Object를 상속받고있다. 그래서 모든 객체에 포함시키고 싶은것이 있을때 Object를 건들면 됩니다.
+모든 객체는 Object를 상속받고있습니다. 그래서 모든 객체에 포함시키고 싶은것이 있을때 Object를 건들면 됩니다.
 
 hasOwnProperty : Object.prototype.~~를 무시할수 있게 해줍니다. (중요!))

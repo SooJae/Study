@@ -9,7 +9,7 @@ fetch('html').then(function(response){
     })
     ">
     
-  서버에 html파일을 요청하고 응답이 끝나면 alert(text); 이 실행되면서 서버가 응답해준 데이터가 text라는 변수에 담겨있다. 
+  서버에 html파일을 요청하고 응답이 끝나면 alert(text); 이 실행되면서 서버가 응답해준 데이터가 text라는 변수에 담겨있습니다. 
   
   
   ==>
@@ -78,7 +78,7 @@ function callbackme(){
     fetch('html').then(function(response){
     }))
     
-    response : 서버에 요청했을 때 서버가 응답한 결과를 담고있는 객체(여러가지 속성이 있다. 서버와 통신하는 귀중한 단서있습니다)
+    response : 서버에 요청했을 때 서버가 응답한 결과를 담고있는 객체(여러가지 속성이 있습니다. 서버와 통신하는 귀중한 단서있습니다)
     
     
     

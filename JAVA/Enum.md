@@ -10,7 +10,7 @@ class Fruit{
 		APPLE, PEACH, BANANA
 	}
   
-  둘이 같은 말이다.
+  둘이 같은 말입니다.
   
   배열 : 서로 연관된 변수들의 집합
   Enum : 서로 연관된 상수들의 집합 (열거형)

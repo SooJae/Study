@@ -38,7 +38,7 @@ VPC안의 특정 어플리케이션만 RDS에 접근 하게 할 수도 있습니
 8. >>> exit()
 
 ## Jupyter 환경 설정
-ssh사용 없이 웹브라우저에서 서버로 접속하게 해주는 기능을 갖고있다.
+ssh사용 없이 웹브라우저에서 서버로 접속하게 해주는 기능을 갖고있습니다.
 1. $ jupyter notebook --generate-config
 2. $ sudo vim /home/ubuntu/.jupyter/jupyter_notebook_config.py
 3. 맨 아래에 입력
@@ -76,7 +76,7 @@ c.NotebookApp.certfile = u'/home/ubuntu/ssl/cert.pem'
 c.NotebookApp.keyfile = u'/home/ubuntu/ssl/cert.key'
 추가
 
-이제 http://아이피값:8888/ 에서 https://아이피값:8888/ 으로 바뀐것을 확인 할 수 있다.
+이제 http://아이피값:8888/ 에서 https://아이피값:8888/ 으로 바뀐것을 확인 할 수 있습니다.
 
 ## 시스템 서비스로 등록
 시스템 서비스로 등록을 하게되면, 재부팅을 하더라도 프로그램을 따로 재 실행시키지 않아도 됩니다.
@@ -120,17 +120,17 @@ Tomcat7
 sudo apt-get install apache2
 
 Router 53 도메인 구매하기
-dig web interface로 정상적으로 작동 했는지 확인 할 수있다.
+dig web interface로 정상적으로 작동 했는지 확인 할 수있습니다.
 
-웹서버로 설정시 HTTP 인바운드 포트를 열어줘야 접근할 수 있다.
+웹서버로 설정시 HTTP 인바운드 포트를 열어줘야 접근할 수 있습니다.
 SSH는 리눅스, RDS는 윈도우에서 접근
 
-elastic IP :고정 아이피를 할당 받는 것, 아마존에서 하나는 공짜로 받을 수 있다.
+elastic IP :고정 아이피를 할당 받는 것, 아마존에서 하나는 공짜로 받을 수 있습니다.
 
-AMIs는 SCALE UP 시 용이하게 사용할 수 있다 (백업 해놓은 것)
+AMIs는 SCALE UP 시 용이하게 사용할 수 있습니다 (백업 해놓은 것)
 
 SCALE UP : 컴퓨터 업그레이드
-SCALE OUT : SCALE UP으로 한계가 올때, SCALE OUT으로 여러대의 컴퓨터로 분산처리를 해줄 수 있다.
+SCALE OUT : SCALE UP으로 한계가 올때, SCALE OUT으로 여러대의 컴퓨터로 분산처리를 해줄 수 있습니다.
 
 ## 메이븐 설치
 1. $ sudo apt-get list maven

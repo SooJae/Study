@@ -7,7 +7,7 @@ DAO에 기능 추가 => 페이지 => 액션페이지
 알 드라이브를 실행하여 서버와 연결해줍니다. www/BBS 폴더에 WebContent폴더 안에 있는 meta-inf와 web-inf 폴더를 제외한
 모든 파일을 업로드합니다. 또한 build폴더 안의 classes파일들을 www/WEB-INF폴더에 넣어줍니다. lib폴더에 있는것 또한 또한 www/WEB-INF/lib폴더에 넣어줍니다.
 
-putty와 같은 프로그램으로 웹서버를 재시작 할 수 있다.
+putty와 같은 프로그램으로 웹서버를 재시작 할 수 있습니다.
 호스트 IP를 입력하고 SSH로 접속
 $ ./tomcat/bin/shutdown.sh
 $ ./tomcat/bin/startup.sh
@@ -48,12 +48,12 @@ onclick="registerCheckFunction()">중복체크</button>
 ```java
 	UserDAO userDAO = new UserDAO(); 
 	return userDAO.register(user);
-	=> return new UserDAO().register(user); 로 바꿀수 있다.
+	=> return new UserDAO().register(user); 로 바꿀수 있습니다.
 ```
 
 ```java
 document.getElementById("registerEmail").value); //ID값이 registerEmail인 경우
-$('input[name=registerGender]:checked').val();	// ID값이 없고 name값만 있을때 jquery를 이용해 위와같은 효과를 줄 수 있다.
+$('input[name=registerGender]:checked').val();	// ID값이 없고 name값만 있을때 jquery를 이용해 위와같은 효과를 줄 수 있습니다.
 
 $('#registerEmail').val(); // 첫번째 있는 것을 jquery를 이용했을때.
 ```
@@ -199,9 +199,9 @@ WAS(Web Application Server)는 크게 **웹 서버 기능**와 **컨테이너 �
 
 # 컨테이너
 
-컨테이너는 **서블릿의 생명 주기**를 관리하고 **JSP를 서블릿**으로 변환하는 기능을 수행하는 프로그램이다.
+컨테이너는 **서블릿의 생명 주기**를 관리하고 **JSP를 서블릿**으로 변환하는 기능을 수행하는 프로그램입니다.
 
-"컨테이너에는 두 종류의 컨테이너가 있다."
+"컨테이너에는 두 종류의 컨테이너가 있습니다."
 
 ## 서블릿 컨테이너
  **서블릿 표준 API**에서 제공하는 **추상 클래스와 인터페이스를 구현한 클래스**를 제공하여 기본적인 동작 방식과 API 호환성을 지원합니다. 즉, 개발시의 서블릿컨테이너와 다른 컨테이너에서도 수행 및 유지보수가 가능하다.
@@ -234,19 +234,19 @@ service( ) 메소드는 **서블릿 요청이 있을 때 마다 재사용되어 
 | TRACE   | doTrace(req,resp)   |
 
 객체의 삭제
-서블릿 객체가 삭제되는 시점은 웹서버에서 웹 **애플리케이션 서비스가 중지되는 시점**이다. 이떄 destory( )메소드가 호출되어 실행되며 **재정의가 가능**하다.
+서블릿 객체가 삭제되는 시점은 웹서버에서 웹 **애플리케이션 서비스가 중지되는 시점**입니다. 이떄 destory( )메소드가 호출되어 실행되며 **재정의가 가능**하다.
 
 
 
  ## 서블릿 클래스를 작성할때 HttpServlet 클래스를 상속 받도록 합니다.
 
-HttpServlet 클래스는 HTTP 프로토콜 기반으로 브라우저로부터 요청을 전달받아서 처리하도록하는 클래스이다. **service 메소드**에는 요청방식(GET/POST)에 따라 doGet(), doPost() 등 정해진 사양의 메소드가 호출되도록 구현되어 있다.
+HttpServlet 클래스는 HTTP 프로토콜 기반으로 브라우저로부터 요청을 전달받아서 처리하도록하는 클래스입니다. **service 메소드**에는 요청방식(GET/POST)에 따라 doGet(), doPost() 등 정해진 사양의 메소드가 호출되도록 구현되어 있습니다.
 
 ## 메소드 정의
 
 init( ) service( )를 오버라이딩 하거나 요청방식에 따른 처리를 위한 메소드 doGet( ) 또는 doPost()를 작성합니다.
 
-## 서블릿을 등록합니다. 서블릿을 등록하는 방법은 두 가지가 있다.
+## 서블릿을 등록합니다. 서블릿을 등록하는 방법은 두 가지가 있습니다.
 
 web.xml을 설정하기
 ```xml
@@ -278,9 +278,9 @@ public class FirstServlet extends HttpServlet{
 ---
 
 # 응답정보 처리(HttpServletResponse)
-**ServletResponse 인터페이스**는 클라이언트의 요청에 **응답하기** 위한 출력스트림을 추출하거나 버퍼의 크기를 설정하고, 응답할 내용의 타입과 문자셋을 설정하는 등의 작업을 수행할 수있다.
+**ServletResponse 인터페이스**는 클라이언트의 요청에 **응답하기** 위한 출력스트림을 추출하거나 버퍼의 크기를 설정하고, 응답할 내용의 타입과 문자셋을 설정하는 등의 작업을 수행할 수있습니다.
 
-**HttpServletResponse**는 ServletResponse 인터페이스를 **상속** 받아 웹 애플리케이션을 개발하면서 응답 관련 작업을 수행하기 위한 **HTTP 프로토콜 통신 기반의 응답 관련 메소드**들도 확장하여 포함하고 있다.
+**HttpServletResponse**는 ServletResponse 인터페이스를 **상속** 받아 웹 애플리케이션을 개발하면서 응답 관련 작업을 수행하기 위한 **HTTP 프로토콜 통신 기반의 응답 관련 메소드**들도 확장하여 포함하고 있습니다.
 
 ```java
 package job.study.web;
@@ -303,7 +303,7 @@ public class ThirdServlet extends HttpServlet {
     }
 }
 ```
-`setContentType( )`은 클라이언트에게 보내는 데이터의 문서타입과 문자셋을 응답정보 헤더에 설정하는 메소드이다. 만약 문서타입와 문자셋을 명시하지 않으면 기본적으로 text/html, 문자셋은 8859_1으로 처리하게됩니다. 그런데 8859_1은 한글을 지원하지 않기 떄문에 한글이 깨지는 현상이 나타납니다.
+`setContentType( )`은 클라이언트에게 보내는 데이터의 문서타입과 문자셋을 응답정보 헤더에 설정하는 메소드입니다. 만약 문서타입와 문자셋을 명시하지 않으면 기본적으로 text/html, 문자셋은 8859_1으로 처리하게됩니다. 그런데 8859_1은 한글을 지원하지 않기 떄문에 한글이 깨지는 현상이 나타납니다.
 
 `getWriter( )`은 클라이언트에 응답하기 위한 **출력 스트림을 반환합니다.** 그리고 이 출력 스트림을 이용해 클라이언트에게 응답을 보내게 됩니다.
 

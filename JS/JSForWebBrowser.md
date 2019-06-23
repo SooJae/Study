@@ -8,11 +8,11 @@
 <br>
 
 # JS 사용방식 (4가지)
- ### 1. inline방식 : 태그에 HTML과 JS가 혼합되어 있다. 좋은방식 X
+ ### 1. inline방식 : 태그에 HTML과 JS가 혼합되어 있습니다. 좋은방식 X
 ```html
 <input type="button" onclick="alert('Hello world')" value="Hello World">
 
-onclick자체는 html인데 속성을 자바스크립트(alert)로 씁니다고 정의 되어있다.
+onclick자체는 html인데 속성을 자바스크립트(alert)로 씁니다고 정의 되어있습니다.
 ```
 
 ### 2. script 태그방식 
@@ -24,7 +24,7 @@ onclick자체는 html인데 속성을 자바스크립트(alert)로 씁니다고 
         hw.addEventListener('click', function(){
             alert('Hello World');
         })
-    </script> // 이것 자체는 HTML이다.
+    </script> // 이것 자체는 HTML입니다.
 ```
 
 ### 3. 외부파일 로드
@@ -33,7 +33,7 @@ onclick자체는 html인데 속성을 자바스크립트(alert)로 씁니다고 
     <input type="button" id="hw" value="Hello World">
     <script src="ex_load.js"></script>
 </body>
-//HTML만 있다!
+//HTML만 있습니다!
 
 
 ex_load.js를 열어보면,
@@ -41,14 +41,14 @@ ex_load.js를 열어보면,
         hw.addEventListener('click', function(){
             alert('Hello World');
         })
-가 있다.
+가 있습니다.
 
 외부파일을 로드하면 실행시 .js파일을 다운로드 합니다.
 캐시를 가지고 있어 한번만 받으면 됩니다!
 ```
 ### 4. 온 로드
 ```html
-스크립트 태그를 body태그가 아닌 head태그에 위치 시킨다.하지만 body태그 밑으로 해주는게 좋다.
+스크립트 태그를 body태그가 아닌 head태그에 위치 시킨다.하지만 body태그 밑으로 해주는게 좋습니다.
 <head>
     <script src="ex_load.js"></script>
 </head>
@@ -94,7 +94,7 @@ onload라는 것은 현재 웹페이지의 모든 코드가 다 읽히고, 웹�
 <br>
 
 # BOM
-BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상화해서 프로그래밍적으로 제어할 수 있도록 제공하는 수단이다. BOM은 전역객체인 Window의 프로퍼티와 메소드들을 통해서 제어할 수 있다. 따라서 BOM에 대한 수업은 Window 객체의 프로퍼티와 메소드의 사용법을 배우는 것이라고 해도 과언이 아닐 것 입니다. 
+BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상화해서 프로그래밍적으로 제어할 수 있도록 제공하는 수단입니다. BOM은 전역객체인 Window의 프로퍼티와 메소드들을 통해서 제어할 수 있습니다. 따라서 BOM에 대한 수업은 Window 객체의 프로퍼티와 메소드의 사용법을 배우는 것이라고 해도 과언이 아닐 것 입니다. 
 
 <br>
 
@@ -106,22 +106,22 @@ BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상
 
 
 ##  window
-모든 것은 window 객체 밑에 있다. window - DOM, BOM, JS
-document도 window 객체에 소속이 되어있다. window.document
-변수도 마찬가지이다. window.a == a
+모든 것은 window 객체 밑에 있습니다. window - DOM, BOM, JS
+document도 window 객체에 소속이 되어있습니다. window.document
+변수도 마찬가지입니다. window.a == a
 
 `alert` : 경고창의 확인을 누르기 전까지 그 다음 동작이 진행되지 않는다.
 
 `confirm` : 확인, 취소 창 (true false값 반환))
 confirm 창의 확인을 누르면 true값을 반환. 취소를 누르면 false값을 반환.
-if를 이용해 분기시킬 수 있다.
+if를 이용해 분기시킬 수 있습니다.
 
 `prompt` : 텍스트 값과 같이 뜨며 사용자의 입력을 받아 그 값을 반환합니다.
 
 <br>
 
 ## Location 
-현재 브라우저의 주소값을 알아 낼 수 있다.
+현재 브라우저의 주소값을 알아 낼 수 있습니다.
 자바스크립트가 브라우저를 제어하기 위해서는 모든 것이 객체여야 합니다.
 
 ```html
@@ -132,7 +132,7 @@ console.log(location)이면 location에 관한 많은 정보가 나온다.
 ```javascript
 console.log(location.protocol, location.host, location.port, location.pathname, location.search, location.hash);
 ```
-를 통해 필요한 프로퍼티를 뽑아 낼 수 있다.
+를 통해 필요한 프로퍼티를 뽑아 낼 수 있습니다.
 
 ```html
 https://opentutorials.org/course/1375/6634?id=10#bookmark
@@ -166,16 +166,16 @@ course/1375/6634 서버 애플리케이션이 갖고있는 특정한 정보
 브라우저의 정보를 제공하는 객체다. 주로 호환성 문제등을 위해서 사용합니다.
 
 `console.dir(navigator)` : 
-navigator객체의 모든 프로퍼티를 볼 수 있다.
+navigator객체의 모든 프로퍼티를 볼 수 있습니다.
 
 `appName` : 
-웹브라우저의 이름이다. IE는 Microsoft Internet Explorer, 파이어폭스, 크롬등은 Nescape로 표시합니다.
+웹브라우저의 이름입니다. IE는 Microsoft Internet Explorer, 파이어폭스, 크롬등은 Nescape로 표시합니다.
 
 `appVersion` : 
 브라우저의 버전을 의미합니다. 
 
 `userAgent` : 
-브라우저가 서버측으로 전송하는 USER-AGENT HTTP 헤더의 내용이다. appVersion과 비슷하다. 
+브라우저가 서버측으로 전송하는 USER-AGENT HTTP 헤더의 내용입니다. appVersion과 비슷하다. 
 
 `platform` : 
 브라우저가 동작하고 있는 운영체제에 대한 정보다.
@@ -184,9 +184,9 @@ navigator객체의 모든 프로퍼티를 볼 수 있다.
 <br>
 
 ## 기능테스트
-Navigator 객체는 브라우저 호환성을 위해서 주로 사용하지만 모든 브라우저에 대응하는 것은 쉬운 일&이 아니므로 아래와 같이 기능 테스트를 사용하는 것이 더 선호되는 방법이다. 
+Navigator 객체는 브라우저 호환성을 위해서 주로 사용하지만 모든 브라우저에 대응하는 것은 쉬운 일&이 아니므로 아래와 같이 기능 테스트를 사용하는 것이 더 선호되는 방법입니다. 
 
-예를 들어 Object.keys라는 메소드는 객체의 key 값을 배열로 리턴하는 Object의 메소드다. 이 메소드는 ECMAScript5에 추가되었기 때문에 오래된 자바스크립트와는 호환되지 않는다. 아래의 코드를 통해서 호환성을 맞출 수 있다. 
+예를 들어 Object.keys라는 메소드는 객체의 key 값을 배열로 리턴하는 Object의 메소드다. 이 메소드는 ECMAScript5에 추가되었기 때문에 오래된 자바스크립트와는 호환되지 않는다. 아래의 코드를 통해서 호환성을 맞출 수 있습니다. 
 
 ```javascript
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
@@ -252,7 +252,7 @@ window.open 메소드는 새 창을 생성합니다. 현대의 브라우저는 �
 script를 통해(즉 웹페이지를 만든사람이 의도한 것이면)팝업이 열리지 않는다.
 
 #Document
-문서를 자바스크립트로 제어하려면 제어의 대상에 해당되는 객체를 찾는 것이 제일 먼저 할 일이다. 문서 내에서 객체를 찾는 방법은 document 객체의 메소드를 이용합니다. 
+문서를 자바스크립트로 제어하려면 제어의 대상에 해당되는 객체를 찾는 것이 제일 먼저 할 일입니다. 문서 내에서 객체를 찾는 방법은 document 객체의 메소드를 이용합니다. 
 
 `document.getElementsByTagName`
 document: 문서 전체에서
@@ -284,7 +284,7 @@ var lis = document.getElementsByClassName('active'); //class에 active라는 이
 ```
 
 `getElementById`
-가장 많이 쓰는 메소드이다.
+가장 많이 쓰는 메소드입니다.
 Element뒤에 s가 없으므로 하나만 찾는다는 뜻.(애초에 ID값은 하나만 쓰는게 국룰)
 
 ```javascript
@@ -292,8 +292,8 @@ Element뒤에 s가 없으므로 하나만 찾는다는 뜻.(애초에 ID값은 �
     li.style.color='red';
 ```
 `querySelector`
-html에도 선택자가 있다(.(class) #(id등)
-js도 있다!
+html에도 선택자가 있습니다(.(class) #(id등)
+js도 있습니다!
 해당되는 엘리먼트중 하나만 리턴합니다!
 전체 리턴을 하려면 querySelectorAll을 사용해야합니다
 ```javascript
@@ -318,11 +318,11 @@ js도 있다!
 
 
 #jQuery
-DOM을 이용해서 문서를 조회할 수 있지만, jQuery를 통해 더 쉽게 조회 할 수 있다.
-DOM과 jQuery를 같이 병행하면서 공부하는게 좋다.
+DOM을 이용해서 문서를 조회할 수 있지만, jQuery를 통해 더 쉽게 조회 할 수 있습니다.
+DOM과 jQuery를 같이 병행하면서 공부하는게 좋습니다.
 
 ##라이브러리 
-DOM, BOM, JScore을 통해 만드는 것이기때문에, 저것들이 못하는 일은 라이브러리도 할 수 없다. 코딩할 때 쓰는 효율적인 도구이다.
+DOM, BOM, JScore을 통해 만드는 것이기때문에, 저것들이 못하는 일은 라이브러리도 할 수 없다. 코딩할 때 쓰는 효율적인 도구입니다.
 
 CDN : content delivery network
 파일을 다운받을 필요없이 코드만 copy하면 됩니다.
@@ -351,7 +351,7 @@ li : css 선택자가 들어온다. (조회하려고) li 태그를 가지고있�
 css라고 하는 메소드를 호출하면 이 메소드는 jqeury객체를 만든 jquery함수의 인자에 해당되는 element들, 리스트 전체에 대해서 css라는 메소드를 실행하는 결과를 가져온다. 
 
 `.` chaining
-(chain처럼 연결되어서 연속적으로 메소드를 호출해서 작업 할 수 있다.)
+(chain처럼 연결되어서 연속적으로 메소드를 호출해서 작업 할 수 있습니다.)
 
 `css('color','red');`
 $('li')통해 조회한 각각의 element의 color를 red를 바꿔줍니다.
@@ -363,7 +363,7 @@ for(var i=0; i < lis.length; i++){
     lis[i].style.color='red';   
 }
 ```
-위와 아래 코드는 같은 뜻이다.
+위와 아래 코드는 같은 뜻입니다.
 ```javascript
 $('.active').css('color', 'red')
 ```
@@ -378,7 +378,7 @@ $('$active').css('color', 'red').css('textDecoration', 'underline');
 ```
 
 웹브라우저를 제어하기 위해서는 제어해야할 태그의 객체를 찾아야 합니다.
-그 객체의 property를 이용해서 조작할 수 있다.
+그 객체의 property를 이용해서 조작할 수 있습니다.
 
 ```html
 <ul>
@@ -395,7 +395,7 @@ $('$active').css('color', 'red').css('textDecoration', 'underline');
 </script>
 ```
 li.constructor.name
-li 객체의 이름을 할 수 있다. 
+li 객체의 이름을 할 수 있습니다. 
 
 ```html
 <a id="anchor" href="http://opentutorials.org">opentutorials</a>
@@ -431,7 +431,7 @@ interface HTMLAnchorElement : HTMLElement{}
 
 [출처](https://web.stanford.edu/class/cs98si/slides/the-document-object-model.html "dom_tree")
 
-Dom을 이해하는 것이 웹페이지를 이용하는 것의 중추이다. 아주 중요!!!!!!!
+Dom을 이해하는 것이 웹페이지를 이용하는 것의 중추입니다. 아주 중요!!!!!!!
 
 ## HTML COllECTION
 
@@ -446,7 +446,7 @@ Dom을 이해하는 것이 웹페이지를 이용하는 것의 중추이다. 아
 <script>
 console.group('before');// 그룹핑 시작
 var lis = document.getElementsByTagName('li');
-//HTMLCollection 유사배열이다.
+//HTMLCollection 유사배열입니다.
 
 for(var i = 0; i < lis.length; i++){
     console.log(lis[i]);
@@ -498,7 +498,7 @@ text-decoration의 설정값 가져오기
 `.` : chaining 연속적으로 작업을 실행.
 
 `var li =  $('li');`
-배열처럼 되어있다.   
+배열처럼 되어있습니다.   
 li[0], li.length 등 사용가능
 그러나 li[i]는 jquery의 객체가 아니고 DOM의 객체이기 때문에 `li[i].css()`은 에러가 발생합니다.
 그래서 이것을 한번 더 jQuery객체로 감싸줍니다.
@@ -514,7 +514,7 @@ jQuery함수 사용방법
 2. var t= document.getElementsByTagName('li');
 t.constructor
 >ƒ HTMLCollection() { [native code] }
-해보면 Dom객체라는 것을 알 수 있다.
+해보면 Dom객체라는 것을 알 수 있습니다.
 var li = $(t); // jQuery객체로 감싸줌
 >n.fn.init(3) [li, li, li]
 
@@ -524,23 +524,23 @@ li.map(function(index, elem){
     console.log(index,elem);
     $(elem).css(`color`,`red`);
 })
-map은 jQuery 객체의 method이다. function을 호출하는데 index에는 index값, elem은 객체 값(여기서는 DOM객체의 HTMLLiElement)이 들어갑니다. 위에서 언급했듯이 내부적으로 반복문이 실행됩니다.
+map은 jQuery 객체의 method입니다. function을 호출하는데 index에는 index값, elem은 객체 값(여기서는 DOM객체의 HTMLLiElement)이 들어갑니다. 위에서 언급했듯이 내부적으로 반복문이 실행됩니다.
 
 elem이 DOM 객체값이기 때문에 jQeury 객체로 감싸줘야합니다. $(elem)
 
 # HTMLElement
 모든 HTML 태그들을 대표하는, 공통적으로 가지고 있는 속성을 가지고 있는 객체
-대표적인 특성은 style이라고 하는 property가 있다.  style은 해당되는 element의 css를 제어하는 역할을 가지고 있다.
+대표적인 특성은 style이라고 하는 property가 있습니다.  style은 해당되는 element의 css를 제어하는 역할을 가지고 있습니다.
 
- HTMLElement는 Element라는 부모객체가 있다.
- HTMLElement 도 있는데 왜 ELement를 쓸까? 그 이유는 DOM이 꼭 HTML만을 프로그래밍적으로 제어하기위한 규격이 아니기 때문이다.
+ HTMLElement는 Element라는 부모객체가 있습니다.
+ HTMLElement 도 있는데 왜 ELement를 쓸까? 그 이유는 DOM이 꼭 HTML만을 프로그래밍적으로 제어하기위한 규격이 아니기 때문입니다.
  markup language(
      
 예) 
  ```html 
  <html></html>
  ```
- )를 제어하기 위한 규격이 DOM이기 때문에 DOM라는 규격 표준은 HTML 뿐만 아니라 XML, SVG, XUL등등 많은 markup langauge를 제어하기 위한 표준이기 때문에 HTML, XML, SVG, XUL 을 전부 제어하기 위한 객체가 Element이다.
+ )를 제어하기 위한 규격이 DOM이기 때문에 DOM라는 규격 표준은 HTML 뿐만 아니라 XML, SVG, XUL등등 많은 markup langauge를 제어하기 위한 표준이기 때문에 HTML, XML, SVG, XUL 을 전부 제어하기 위한 객체가 Element입니다.
 
 DOM을 공부하면 HTML, XML, SVG, XUL 등 다양한 언어들을 제어하기 쉽다.
 
@@ -584,13 +584,13 @@ console.log(document.getElementById('active').tagName)
 ### Element.tagName
 
 document.getElementById('active')
-이부분은 HTMLLIElement라는 객체를 갖게되는데, HTMLElement의 속성을 상속받고, 이것은 Element의 속성중 tagName을 상속받는다. 
+이부분은 HTMLLIElement라는 객체를 갖게되는데, HTMLElement의 속성을 상속받고, 이것은 Element의 속성중 tagName을 상속받습니다. 
 
   *tagName은 읽기 전용이라 `document.getElementById('active').tagName = 'a'` 등 임의로 바꾸지 못합니다.
 
   ### Element.id
 
-  문서에서 id는 단 하나만 등장할 수 있는 식별자이다.
+  문서에서 id는 단 하나만 등장할 수 있는 식별자입니다.
 
 ```javascript
 <ul>
@@ -628,11 +628,11 @@ active.className += " readed"
 그러나 classList가 더 편리하다.
 
 ### Element.classList
-classList에 저장되어있는 객체는 DOMTokenList이다.
+classList에 저장되어있는 객체는 DOMTokenList입니다.
 DOMTokenList는 
-class ="a b c d"등 클래스 4개가 있을때 이것들이 담겨있는 것이 DOMTokenList이다.
+class ="a b c d"등 클래스 4개가 있을때 이것들이 담겨있는 것이 DOMTokenList입니다.
 
-DOMTokenList는 유사배열이다.
+DOMTokenList는 유사배열입니다.
 
 즉 조회할때
 
@@ -745,7 +745,7 @@ console.log(t.hasAttribute('title')); // false, title 속성의 존재여부를 
 | maxlength   | maxLength   |
 
 
-심지어 속성과 프로퍼티는 값이 다를수도 있다. 아래 코드를 실행한 결과는 속성과 프로퍼티의 값이 꼭 같은 것은 아니라는 것을 보여줍니다
+심지어 속성과 프로퍼티는 값이 다를수도 있습니다. 아래 코드를 실행한 결과는 속성과 프로퍼티의 값이 꼭 같은 것은 아니라는 것을 보여줍니다
 
 ```html
 <a id="target" href="./demo1.html">ot</a>
@@ -759,7 +759,7 @@ console.log('target.getAttribute("href")', target.getAttribute("href"));
 </script>
 ```
 
-Query 객체의 메소드 중 setAttribute, getAttribute에 대응되는 메소드는 attr이다. 또한 removeAttribute에 대응되는 메소드로는 removeAttr이 있다. 
+Query 객체의 메소드 중 setAttribute, getAttribute에 대응되는 메소드는 attr입니다. 또한 removeAttribute에 대응되는 메소드로는 removeAttr이 있습니다. 
 
 ```html
 <a id="target" href="http://opentutorials.org">opentutorials</a>
@@ -833,7 +833,7 @@ find를 쓰는 이유는 체인을 끊지 않고 작업의 대상을 변경하�
 </script>
 ```
 
-Node객체는 DOM에서 시조와 같은 역할을 합니다. 다시말해서 모든 DOM객체는 Node객체를 상속 받는다.
+Node객체는 DOM에서 시조와 같은 역할을 합니다. 다시말해서 모든 DOM객체는 Node객체를 상속 받습니다.
 
 ![node-image](images/node.png)
 
@@ -885,7 +885,7 @@ Node 객체의 자식을 추가하는 방법에 대한 API
 </ul>
 <script>
 var s = document.getElementById('start');
-console.log(1, s.firstChild); // #text (공백문자, 문자열이기때문에 #text로 되어있다.)
+console.log(1, s.firstChild); // #text (공백문자, 문자열이기때문에 #text로 되어있습니다.)
 var ul = s.firstChild.nextSibling
 console.log(2, ul); // ul
 console.log(3, ul.nextSibling); // #text
@@ -897,7 +897,7 @@ console.log(7, ul.parentNode); // body
 </body>
 ```
 
-노드 작업을 하게 되면 현재 선택된 노드가 어떤 타입인지를 판단해야 하는 경우가 있다. 이런 경우에 사용할 수 있는 API가 nodeType, nodeName이다. 
+노드 작업을 하게 되면 현재 선택된 노드가 어떤 타입인지를 판단해야 하는 경우가 있습니다. 이런 경우에 사용할 수 있는 API가 nodeType, nodeName입니다. 
 
 Node.nodeType
 node의 타입을 의미합니다. 
@@ -934,7 +934,7 @@ DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC 32
 
 body.firstChild.nodeType === 3
 body.firstChild.nodeType === TEXT_NODE
-위의 두개는 같은뜻이다.
+위의 두개는 같은뜻입니다.
 
 
 ```html
@@ -977,7 +977,7 @@ traverse(document.getElementById('start'), function(elem){
 노드의 마지막 자식으로 주어진 엘리먼트 추가
 `insertBefore(newElement, referenceElement)`
 appendChild와 동작방법은 같으나 두번째 인자로 엘리먼트를 전달 했을 때 이것 앞에 엘리먼트가 추가됩니다.
-노드를 추가하기 위해서는 추가할 엘리먼트를 생성해야 하는데 이것은 document 객체의 기능이다. 아래 API는 노드를 생성하는 API이다.
+노드를 추가하기 위해서는 추가할 엘리먼트를 생성해야 하는데 이것은 document 객체의 기능입니다. 아래 API는 노드를 생성하는 API입니다.
 
 `document.createElement(tagname)`
 엘리먼트 노드를 추가합니다.
@@ -1045,7 +1045,7 @@ appendChild와 동작방법은 같으나 두번째 인자로 엘리먼트를 전
 </script>
 ```
 
-jQuery를 이용해서 노드를 제어하는 방법을 알아보자. jQuery에서 노드를 제어하는 기능은 주로 Manipulation 카테고리에 속해 있다. 
+jQuery를 이용해서 노드를 제어하는 방법을 알아보자. jQuery에서 노드를 제어하는 기능은 주로 Manipulation 카테고리에 속해 있습니다. 
 
 
 ```html
@@ -1072,7 +1072,7 @@ jQuery를 이용해서 노드를 제어하는 방법을 알아보자. jQuery에�
 </script>
 ```
 
-제거와 관련된 API는 remove와 empty가 있다. remove는 선택된 엘리먼트를 제거하는 것이고 empty는 선택된 엘리먼트의 텍스트 노드를 제거하는 것 입니다.
+제거와 관련된 API는 remove와 empty가 있습니다. remove는 선택된 엘리먼트를 제거하는 것이고 empty는 선택된 엘리먼트의 텍스트 노드를 제거하는 것 입니다.
 
 
 
@@ -1104,7 +1104,7 @@ jQuery를 이용해서 노드를 제어하는 방법을 알아보자. jQuery에�
 
 
 
-replaceAll과 replaceWith는 모두 노드의 내용을 교체하는 API이다. replaceWith가 제어 대상을 먼저 지정하는 것에 반해서 replaceAll은 제어 대상을 인자로 전달합니다. 
+replaceAll과 replaceWith는 모두 노드의 내용을 교체하는 API입니다. replaceWith가 제어 대상을 먼저 지정하는 것에 반해서 replaceAll은 제어 대상을 인자로 전달합니다. 
 ```html
 <div class="target" id="target1">
     target 1
@@ -1175,7 +1175,7 @@ dom manipulation API의 인자로 특정 노드를 선택하면 이동의 효과
 </script>
 ```
 
-innerHTML는 문자열로 자식 노드를 만들 수 있는 기능을 제공합니다. 또한 자식 노드의 값을 읽어올 수도 있다. 
+innerHTML는 문자열로 자식 노드를 만들 수 있는 기능을 제공합니다. 또한 자식 노드의 값을 읽어올 수도 있습니다. 
 ```html
 <ul id="target">
     <li>HTML</li>
@@ -1271,27 +1271,27 @@ insertAdjacentHTML()
 
 ```
 
-Document 객체는 DOM의 스팩이고 이것이 웹브라우저에서는 HTMLDocument 객체로 사용됩니다. HTMLDocument 객체는 문서 전체를 대표하는 객체라고 할 수 있다. 아래 코드는 이를 보여줍니다.
+Document 객체는 DOM의 스팩이고 이것이 웹브라우저에서는 HTMLDocument 객체로 사용됩니다. HTMLDocument 객체는 문서 전체를 대표하는 객체라고 할 수 있습니다. 아래 코드는 이를 보여줍니다.
 ```html
 <script>
-//document 객체는 window 객체의 소속이다.
+//document 객체는 window 객체의 소속입니다.
 console.log(window.document);
-//document 객체의 자식으로는 Doctype과 html이 있다. 
+//document 객체의 자식으로는 Doctype과 html이 있습니다. 
 console.log(window.document.childNodes[0]);
 console.log(window.document.childNodes[1]);
 </script>
 ```
 
-document객체는 window 객체의 프로퍼티이다.
+document객체는 window 객체의 프로퍼티입니다.
 document === window.document
 
-document객체는 문서에서 사용 될 노드를 만들어 주는 역할이다.
+document객체는 문서에서 사용 될 노드를 만들어 주는 역할입니다.
 element = tag로 보면됩니다.
 
 
-텍스트 객체는 텍스트 노드에 대한 DOM 객체로 CharcterData를 상속 받는다. 
+텍스트 객체는 텍스트 노드에 대한 DOM 객체로 CharcterData를 상속 받습니다. 
 
-아래는 텍스트 노드를 찾는 예제다. 주목할 것은 DOM에서는 **공백이나 줄바꿈**도 텍스트 노드라는 점이다.
+아래는 텍스트 노드를 찾는 예제다. 주목할 것은 DOM에서는 **공백이나 줄바꿈**도 텍스트 노드라는 점입니다.
 
 ```html
 <p id="target1"><span>Hello world</span></p>

@@ -162,7 +162,7 @@ var joinCheckService =(function(){
                      dataType:"json",
                      data:{"val":val, "ine":ine},
                      success: function(data){
-                         //비어있다면 오류가 발생하거나 데이터가 비어있다면, 함수를 바로 종료, 즉 파싱 가능한 데이터만 파싱하겠다.
+                         //비어있습니다면 오류가 발생하거나 데이터가 비어있습니다면, 함수를 바로 종료, 즉 파싱 가능한 데이터만 파싱하겠다.
                          if(data == "" ) return;
                          if(data.result.value == 1){ // 중복되는 아이디 없음
                              $("#ID").siblings("label").text("가입 가능한 아이디입니다");
@@ -324,7 +324,7 @@ var joinCheckService =(function(){
                      dataType:"json",
                      data:{"val":val, "ine":ine},
                      success: function(data){
-                         //비어있다면 오류가 발생하거나 데이터가 비어있다면, 함수를 바로 종료, 즉 파싱 가능한 데이터만 파싱하겠다.
+                         //비어있습니다면 오류가 발생하거나 데이터가 비어있습니다면, 함수를 바로 종료, 즉 파싱 가능한 데이터만 파싱하겠다.
                          if(data == "" ) return;
                          if(data.result.value == 1){ // 중복되는 아이디 없음
                              $("#ID").siblings("label").text("가입 가능한 아이디입니다");
@@ -344,7 +344,7 @@ var joinCheckService =(function(){
                          dataType:"json",
                          data:{"val":val, "ine":ine},
                          success: function(data){
-                             //비어있다면 오류가 발생하거나 데이터가 비어있다면, 함수를 바로 종료, 즉 파싱 가능한 데이터만 파싱하겠다.
+                             //비어있습니다면 오류가 발생하거나 데이터가 비어있습니다면, 함수를 바로 종료, 즉 파싱 가능한 데이터만 파싱하겠다.
                              if(data == "" ) return;
                              if(data.result.value === 0){
                                  $("#NickName").siblings("label").text("이미 가입한 닉네임입니다");
@@ -367,7 +367,7 @@ var joinCheckService =(function(){
                          dataType:"json",
                          data:{"val":encodeURIComponent(val), "ine":ine},
                          success: function(data){
-                             //비어있다면 오류가 발생하거나 데이터가 비어있다면, 함수를 바로 종료, 즉 파싱 가능한 데이터만 파싱하겠다.
+                             //비어있습니다면 오류가 발생하거나 데이터가 비어있습니다면, 함수를 바로 종료, 즉 파싱 가능한 데이터만 파싱하겠다.
                              if(data == "" ) return;
                              if(data.result.value == 1){ // 중복되는 아이디 없음
                                  $("#Email").siblings("label").text("가입 가능한 이메일입니다");

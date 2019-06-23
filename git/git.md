@@ -85,37 +85,37 @@ git의 파일을 저장할 때, 파일의 이름이 달라도 같은 내용이�
 그리고 **index라는 파일**에 **f1.txt의 내용은 이것 입니다라는 것을 적어주면** 작업이 끝나다.
 
 **commit을 하면 그 버젼도 파일의 내용처럼 objects 안에 들어갑니다. commit도 객체다.**
-tree옆에 object가 링크되어있다.sha-1으로 만들어진 값이 있다.
-현재 우리가 작성한 파일의 이름과 파일의 내용이 링크되어 있다.
+tree옆에 object가 링크되어있습니다.sha-1으로 만들어진 값이 있습니다.
+현재 우리가 작성한 파일의 이름과 파일의 내용이 링크되어 있습니다.
 
 첫번째 커밋후에 수정한 두번째 커밋을 열어보면 parent가 있는데 눌러보면 첫번째 커밋이 나타난다.
 tree값도 서로 다르다.
 
-commit은 중요한 것이 2개있다.
+commit은 중요한 것이 2개있습니다.
 1. 부모 parent값
-2. commit이 일어난 시점에 우리의 작업디렉토리 안에 있는 파일 이름과. 파일 이름이 담고있는 내용사이에 정보가 담겨있다.
-버전에 담겨있는 트리를 통해서 버전이 만들어진 시점의 프로젝트 폴더에 대한 상태를 얻어 낼수 있다. = snapshot
-각각의 버전은 만들어질 시점의 스냅샷을 가지고 있다.
+2. commit이 일어난 시점에 우리의 작업디렉토리 안에 있는 파일 이름과. 파일 이름이 담고있는 내용사이에 정보가 담겨있습니다.
+버전에 담겨있는 트리를 통해서 버전이 만들어진 시점의 프로젝트 폴더에 대한 상태를 얻어 낼수 있습니다. = snapshot
+각각의 버전은 만들어질 시점의 스냅샷을 가지고 있습니다.
 
-objects안에 들어가는 파일은 object이고 object는 크게 3가지중 하나이다.
+objects안에 들어가는 파일은 object이고 object는 크게 3가지중 하나입니다.
 1. blob
 2. blob에대한 정보를 담고있는 tree
 3. commit
 
 git status는 어떻게 commit할게 있는지 없는지 알수 있을까?
-index와 최신 commit의 차이를 비교하면 commit할게 있는지 알수 있다. 
+index와 최신 commit의 차이를 비교하면 commit할게 있는지 알수 있습니다. 
 
 git은 index에 있는 f2.txt의 (해쉬id)값과, f2.txt파일의 내용이 만들어낸 (해쉬id)값(폴더안에 있는)이 다르다면, 
-f2.txt가 수정되었다고 알려줄 수 있다.
+f2.txt가 수정되었다고 알려줄 수 있습니다.
 
 git add f2.txt
 **git add와 git commit의 차이**는 무엇인가.
 index가 가리키고 있는 f2.txt와 우리가 수정한 f2.txt값이 같으니까 (폴더 안에 있는)
-f2.txt라는 파일이 commit대기 상태라는 것을 알 수있다.
+f2.txt라는 파일이 commit대기 상태라는 것을 알 수있습니다.
 또한
 git은 index의 내용과 (04ec로 시작하는) f2.txt의 내용이 다르다고 생각하면 
 현재 f2.txt의 인덱스의 내용과 commit의 트리가 가리키고 있는 f2.txt의 내용이 다르다면
-f2.txt는 add가 되어서 commit 대기상태라는 것을 알수 있다.
+f2.txt는 add가 되어서 commit 대기상태라는 것을 알수 있습니다.
 
 commit을 하면 인덱스도 04ec이고, 저장소와, 인덱스와, 프로젝트 폴더(working copy)가 정확하게 일치하기 때문에
 git status를 할때 더이상 commit할게 없다고 합니다.
@@ -131,7 +131,7 @@ branch = 가지
 그리고 업데이트할때 report3.xls로 바꾼다.
 
 파일을 나누는 행위를 branch라고 합니다. 
-branch를 하건 하지 않았건, 작업을 계속 해왔다면 하나의 branch를 갖고 있다고 생각할 수 있다.
+branch를 하건 하지 않았건, 작업을 계속 해왔다면 하나의 branch를 갖고 있습니다고 생각할 수 있습니다.
 
 원래 branch는 있었다. 그러나 느렸다. git은 branch의 성능을 최대한 끌어올렸다. 편리해지고 최적화됐다.
 
@@ -139,10 +139,10 @@ $ git commit -am
 -a : 자동으로 add를 해주지만, 한번도 add가 되지 않은(버전관리가 되지 않은) 파일은 적용이 안됩니다.
 
 1.쓸모없는 기능을 달아달라고 할때(나중에 지워야 할 것 같은 기능) branch로 나눈다.
-2.지금까지 작업한 것들을 서버에 저장할때, main의 되는 작업과 test를할 작업을 나눌 경우 branch를 쓸수있다.
+2.지금까지 작업한 것들을 서버에 저장할때, main의 되는 작업과 test를할 작업을 나눌 경우 branch를 쓸수있습니다.
 
 $ git branch
-master가 뜨는데 master가 되는 branch를 쓰고있다는 뜻(기본 branch)
+master가 뜨는데 master가 되는 branch를 쓰고있습니다는 뜻(기본 branch)
 $ git branch exp
 exp
 master
@@ -157,10 +157,10 @@ $ git log --branches --decorate
 현재 자신의 위치와 모든 branch를 가르쳐줍니다.
 
 (master)의 최신 커밋이 2
-(HEAD-> exp)현재 checkout된 branch는 exp이다. 최신커밋이 4
+(HEAD-> exp)현재 checkout된 branch는 exp입니다. 최신커밋이 4
 
 $ git log --branches --decorate --graph
-서로 커밋상태가 각자의 길을 걷고있을때 효율적이다.
+서로 커밋상태가 각자의 길을 걷고있을때 효율적입니다.
 
 $ git log --branches --decorate --graph --oneline
 간결하게 보여줍니다.
@@ -214,7 +214,7 @@ index 422c2b7..de98044 100644
 +c
 
 master에는 없지만 exp에는 있는 커밋이 4, 3이라는 것과
-master에는 파일이 없는데 exp는 있는 파일이 f2.txt라는 것과, 그 안에 내용이 a가 추가되었다는 것을 알수 있다.
+master에는 파일이 없는데 exp는 있는 파일이 f2.txt라는 것과, 그 안에 내용이 a가 추가되었다는 것을 알수 있습니다.
 
 git diff master..exp
 master와 exp의 차이를 보여줍니다.
@@ -251,15 +251,15 @@ abc가 master로부터 독립한 이후에 master의 변화가 생기면, fast f
 https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
 
 
-stash를 사용하면 작업했던 내용을 어딘가에 숨겨둘 수 있다.
-그 후에 head의 버전으로 이동해서 작업할 수 있다.
+stash를 사용하면 작업했던 내용을 어딘가에 숨겨둘 수 있습니다.
+그 후에 head의 버전으로 이동해서 작업할 수 있습니다.
 
 
 $ git stash
 The file will have its original line endings in your working directory
 Saved working directory and index state WIP on exp: 606784f 1
 working directory의 내용과 index의 상태가 exp에 save 되었다. Working In Process 작업중이라는 뜻.
-하게되면 내가 수정되었던 부분이 감춰져있다.
+하게되면 내가 수정되었던 부분이 감춰져있습니다.
 
 $ git stash apply
 하면 숨겨져있던 내가 수정한 부분이 살아난다.
@@ -269,7 +269,7 @@ $ git stash list
 $ git reset --hard HEAD
 하면 최신 commit 삭제.
 $ git stash list
-여기에 stash에 정보가 아직 살아있다.
+여기에 stash에 정보가 아직 살아있습니다.
 그래서
 
 $ git stash apply

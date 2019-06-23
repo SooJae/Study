@@ -17,7 +17,7 @@ test패키지에서 해당 테스트 파일을 만듬.
 ```
 를 달아둠.
 
-@ContextConfiguration은 자동으로 만들어줄 애플리케이션의 컨텍스트의 설정파일 위치를 지정해줍니다. classes 속성으로 @Configuration이 적용된 클래스를 지정 해줄 수도 있다.
+@ContextConfiguration은 자동으로 만들어줄 애플리케이션의 컨텍스트의 설정파일 위치를 지정해줍니다. classes 속성으로 @Configuration이 적용된 클래스를 지정 해줄 수도 있습니다.
 
 
 
@@ -33,7 +33,7 @@ assertNotNull(restaurant); //restaurant의 변수가 null이 아니어야만 테
 ## 테스트 주목할 점
 new Restaurant()와 같이 Restaurant 클래스에서 객체를 생성한 적이 없는데도 객체가 만들어 졌다 
 =>  
-스프링은 관리가 필요한 객체(Bean)를 어노테이션을 이용해서 객체를 생성하고 관리하는 일종의 컨테이너, 팩토리의 기능을 갖고있다.
+스프링은 관리가 필요한 객체(Bean)를 어노테이션을 이용해서 객체를 생성하고 관리하는 일종의 컨테이너, 팩토리의 기능을 갖고있습니다.
 
 ## @Setter
 ### value
@@ -46,7 +46,7 @@ setter메서드 생성시 메서드에 추가할 어노테이션을 지정.
 setter메서드의 파라미터에 어노테이션을 사용하는 경우.
 
 ## @Log4j
-log.info()메서드를 이용해서 로그를 찍을 수 있다.
+log.info()메서드를 이용해서 로그를 찍을 수 있습니다.
 
 @Log와 같다.
 클래스쪽에 붙여주면 내부적으로 static final로 Logger 객체가 생성.
@@ -55,10 +55,10 @@ log.info()메서드를 이용해서 로그를 찍을 수 있다.
 4.3이후에는 @Autowired이 없어도 생성자 주입이 됩니다.
 
 @AllArgsConstructor는 변수로 선언된 모든것을 파라미터로 받는 생성자를 작성합니다.
-@RequiredArgsConstructor는 @NonNull이다 final이 붙은 인스턴스 변수에 대한 생성자를 생성
+@RequiredArgsConstructor는 @NonNull입니다 final이 붙은 인스턴스 변수에 대한 생성자를 생성
 
 # @Component와 @Bean의 차이
-@Component는 클래스 상단에 적으며 그 default로 **클래스 이름이 bean**의 이름이 됩니다. 또한 spring에서 자동으로 찾고 관리해주는 bean이다.
+@Component는 클래스 상단에 적으며 그 default로 **클래스 이름이 bean**의 이름이 됩니다. 또한 spring에서 자동으로 찾고 관리해주는 bean입니다.
 
 @Bean은 @Configuration으로 선언된 클래스 내에 있는 메소드를 정의할 때 사용합니다. **이 메소드가 반환하는 객체**가 bean이 되며 default로 **메소드 이름이 bean**의 이름이 됩니다.
 
@@ -86,21 +86,25 @@ root-context.xml이 처리되면 파일에 있는 빈(Bean)설정들이 동작�
 1.2.15를 1.2.17로 바꾸고 log4j에 <exclusions>로 추가된 부분을 모두 주석처리(혹은 제거)해주면 됨.
 
 # @Controller
-Controller를 작성할때 가장 편리한 기능은 파라미터가 자동으로 수집되는 기능.
-이 기능을 이용하면 매번 request.getParameter()를 이용하는 불편함을 없앨 수 있다.
-Controller가 파라미터를 수집하는 방식은 파라미터 타입에 따라 자동으로 변환하는 방식을 이용합니다.
-예를 들어, **int 타입으로 선언된 age가 자동으로 숫자로 변환되는 것**을 확인 할 수 있다.
+Controller를 작성할때 가장 편리한 기능은 파라미터가 자동으로 수집되는 기능.   
+이 기능을 이용하면 매번 request.getParameter()를 이용하는 불편함을 없앨 수 있습니다.   
+Controller가 파라미터를 수집하는 방식은 파라미터 타입에 따라 자동으로 변환하는 방식을 이용합니다.   
+예를 들어, **int 타입으로 선언된 age가 자동으로 숫자로 변환되는 것**을 확인 할 수 있습니다.   
 
 # @RequestParam
 
 @RequestParam은 파라미터로 사용된 **변수의 이름과 전달되는 파라미터의 이름이 다른 경우**에 유용하게 사용됩니다.
-동일한 이름의 파라미터가 전달되는 경우에 @RequestParam("e") ArrayList<String> d 등으로 처리 가능하다
+동일한 이름의 파라미터가 전달되는 경우에 
+```java
+@RequestParam("e") ArrayList<String> d 
+```
+등으로 처리 가능하다
 
 # @InitBinder
 파라미터의 수집을 다른 용어로 binding이라고 합니다.
 변환이 가능한 데이터는 자동으로 변환되지만, 파라미터를 변환해서 처리해야하는 경우도 존재합니다.
 2019-01-01 과 같이 문자열로 전달된 데이터를 java.util.Date 타입으로 변환하는 작업이 그러하다.
-스프링 Controller에서는 파라미터를 바인딩할 때 자동으로 호출되는 @InitBinder를 이용해서 이러한 변환을 처리할 수 있다.
+스프링 Controller에서는 파라미터를 바인딩할 때 자동으로 호출되는 @InitBinder를 이용해서 이러한 변환을 처리할 수 있습니다.
 
 ex)
 DTO.java
@@ -123,7 +127,7 @@ public void ex03(Dto dto){
 }
 ```
 
-또는 다음과 같은 방식으로 쉽게 할 수 있다.
+또는 다음과 같은 방식으로 쉽게 할 수 있습니다.
 DTO.java
 ```java
 @DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -150,9 +154,10 @@ Model 객체는 JSP에 컨트롤러에 생성된 데이터를 담아서 전달�
         return "home";
     }
 
-    Model을 사용하는 경우는 주로 **Controller에 전달된 데이터를 이용해서 추가적인 데이터를 가져와야 할때** 이다.
 ```
-ex)
+Model을 사용하는 경우는 주로 **Controller에 전달된 데이터를 이용해서 추가적인 데이터를 가져와야 할때** 입니다.   
+
+ex)**(중요)**
 - 리스트 페이지 번호를 파라미터로 전달받고, 실제 데이터를 View로 전달해야 하는 경우
 - 파라미터들에 대한 처리 후 결과를 전달해야 하는 경우
 
@@ -184,9 +189,10 @@ public String ex04(SampleDTO dto, @ModelAttribute("page") int page){
 
 
 ## @ModelAttribute VS @RequestParam
-@ModelAttribute : 요청 파라미터를 컨트롤러에서 도메인 오브젝트(DTO, VO)에 바인딩해서 한번에 받는다.
-- 하나의 오브젝트에 클라이언트 요청 정보를 담아서 한번에 전달되는 것이기 때문에 이를 커맨드 패턴에서 말하는 커맨드 오브젝트라고도 합니다.
-@RequestParam : 요청 파라미터를 컨트롤러에서 1:1로 받는다.
+@ModelAttribute : 요청 파라미터를 컨트롤러에서 도메인 오브젝트(DTO, VO)에 바인딩해서 한번에 받습니다.
+- 하나의 오브젝트에 클라이언트 요청 정보를 담아서 한번에 전달되는 것이기 때문에 이를 커맨드 패턴에서 말하는 커맨드 오브젝트라고도 합니다.   
+
+@RequestParam : 요청 파라미터를 컨트롤러에서 1:1로 받습니다.
 
 @ModelAttribute는 요청 파라미터를 컨트롤러에서 받고 그 데이터를 자동으로 해당 View에 전송합니다.
 
@@ -211,22 +217,22 @@ Controller의 리턴 타입
 스프링 MVC의 구조가 기존의 상속과 인터페이스에서 어노테이션을 사용하는 방식으로 변한 이후에
 **리턴타입이 자유로워졌다.**
 
-String : jsp를 이용하는 경우에는 jsp파일의 경로와 파일이름을 나타내기 위해서 사용합니다.
-void : 호출하는 **URL과 동일한 이름의 jsp를 의미합니다.**
-VO, DTO 타입: 주로 JSON타입의 데이터를 만들어서 반환하는 용도.
-ResponseEntity 타입 : response할 때 Http 헤더정보와 내용을 가공하는 용도로 사용.
-Model, ModelAndView : Model로 데이터를 반환하거나 화면까지 같이 지정하는 경우에 사용합니다.(최근에는 사용 X)
-HttpHeaders : 응답에 내용 없이 Http 헤더 메시지만 전달하는 용도로 사용.
+String : jsp를 이용하는 경우에는 jsp파일의 경로와 파일이름을 나타내기 위해서 사용합니다.   
+void : 호출하는 **URL과 동일한 이름의 jsp를 의미합니다.**   
+VO, DTO 타입: 주로 JSON타입의 데이터를 만들어서 반환하는 용도.   
+ResponseEntity 타입 : response할 때 Http 헤더정보와 내용을 가공하는 용도로 사용합니다.   
+Model, ModelAndView : Model로 데이터를 반환하거나 화면까지 같이 지정하는 경우에 사용합니다.(최근에는 사용 X)   
+HttpHeaders : 응답에 내용 없이 Http 헤더 메시지만 전달하는 용도로 사용합니다.
 
-String 타입에는 다음과 같은 키워드를 넣을수 있다.
-redirect, forward
+String 타입에는 다음과 같은 키워드를 넣을수 있습니다.   
+- redirect, forward
 
-### 객체타입
+## 객체타입
 리턴타입을 VO(Value Object)나 DTO(Data Transfer Object)타입 등 복합적인 데이터가 들어간 객체타입으로 지정할 수 있는데, 주로 JSON 데이터를 만들어내는 용도로 사용합니다.
 이를 위해서는 **jackson-databind라이브러리를 pom.xml에 추가합니다.**
 
-### ResponseEntity 타입
-스프링 MVC의 사상은 HttpServletRequest나 HttpServletResponse를 직접 핸들링하지 않아도 이런 작업이 가능하도록 작성되었기 때문에, 이러한 처리를 위해 ResponseEntity를 통해서 **원하는 헤더정보나 데이터를 전달**할 수 있다.
+## ResponseEntity 타입
+스프링 MVC의 사상은 HttpServletRequest나 HttpServletResponse를 직접 핸들링하지 않아도 이런 작업이 가능하도록 작성되었기 때문에, 이러한 처리를 위해 ResponseEntity를 통해서 **원하는 헤더정보나 데이터를 전달**할 수 있습니다.
 
 ```java
 @GetMapping("/ex07")
@@ -246,7 +252,7 @@ public ResponseEntity<String> ex07(){
 - @ResponseEntity를 이용하는 예외 메시지 구성
 
 # @ControllerAdvice
-@ControllerAdvice는 AOP를 이용한 방식이다. 
+@ControllerAdvice는 AOP를 이용한 방식입니다. 
 
 ```java
 @ControllerAdvice // 이 부분
@@ -267,9 +273,9 @@ public class CommonExceptionAdvice {
 
 @ControllerAdvice는 해당 객체가 스프링의 **컨트롤러에서 발생하는 예외를 처리하는 존재임을 명시하는 용도**로 사용
 @ExceptionHandler는 해당 메서드가 () 들어가는 예외타입을 처리합니다. 위와같은 경우 **Exception.class**를 지정했으므로
-**모든 예외에 대한 처리가 except()**만을 이용해서 처리할 수 있다.
+**모든 예외에 대한 처리가 except()**만을 이용해서 처리할 수 있습니다.
 
-500메세지는 'Internal Server Error' 이므로 @ExceptionHandler를 이용해서 처리되지만, 잘못된 URL을 호출할 때 보이는 404에러 메시지의 경우는 조금 다르게 처리하는 것이 좋다.
+500 메세지는 'Internal Server Error' 이므로 @ExceptionHandler를 이용해서 처리되지만, 잘못된 URL을 호출할 때 보이는 404에러 메시지의 경우는 조금 다르게 처리하는 것이 좋습니다.
 
 ```java
 @ExceptionHandler(NoHandlerFoundException.class)
@@ -281,21 +287,24 @@ public class CommonExceptionAdvice {
 ```
 
 # 3-tier 방식
-Presentation Tier = 화면을 보여주는 기술을 사용하는 영역
-Servlet/JSP나 스프링 MVC가 담당. MVC와 JSP를 이용한 화면 구성
+## Presentation Tier 
+화면을 보여주는 기술을 사용하는 영역.   
+Servlet/JSP나 스프링 MVC가 담당. MVC와 JSP를 이용한 화면 구성.
 
-Business Tier = 순수한 로직을 담고 있는 계층. 고객의 요구 사항을 반영.
+## Business Tier
+순수한 로직을 담고 있는 계층. 고객의 요구 사항을 반영.   
 주로 'xxxService'와 같은 이름을 구성하고, 메서드의 이름 역시 고객들이 사용하는 용어를 그대로 사용합니다.
 
-Persistence Tier = 데이터를 어떤 방식으로 보관하고, 사용하는가에 대한 설계가 들어가는 계층.
-경우에 따라서 네트워크 호출이나 원격 호출 들의 기술이 접목됩니다.
+## Persistence Tier 
+데이터를 어떤 방식으로 보관하고, 사용하는가에 대한 설계가 들어가는 계층.   
+경우에 따라서 네트워크 호출이나 원격 호출 들의 기술이 접목됩니다.   
 이 영역은 MyBatis와 mybatis-spring을 이용해서 구성했던 파트 1을 이용합니다.
 
-스프링 MVC 영역은 Presentation Tier를 구성하게 되는데, 각 영역은 사실 별도의 설정을 가지는 단위.
-RootConfig, ServletConfig 등의 설정 파일이 해당 영역의 설정을 담당.
-스프링 Core영역은 POJO의 영역이다. 스프링의 의존성 주입을 이용해서 객체 간의 연관구조를 완성해서 사용.
+스프링 MVC 영역은 Presentation Tier를 구성하게 되는데, 각 영역은 사실 별도의 설정을 가지는 단위.   
+RootConfig, ServletConfig 등의 설정 파일이 해당 영역의 설정을 담당.   
+스프링 Core영역은 POJO의 영역입니다. 스프링의 의존성 주입을 이용해서 객체 간의 연관구조를 완성해서 사용.
 
-프로젝트를 3-tier로 구성하는 가장 일반적인 설명은 '유지 보수'에 대한 필요성 때문이다.
+프로젝트를 3-tier로 구성하는 가장 일반적인 설명은 **유지 보수**에 대한 필요성 때문입니다.
 
 네이밍 규칙-
 xxxController : 스프링 MVC에서 동작하는 Controller 클래스를 설계할 때 사용합니다.
@@ -319,30 +328,28 @@ com.sujae.security : 스프링 Security 관련 패키지
 com.sujae.util : 각종 유틸리티 클래스 관련 패키지
 
 
-테이블을 생성할 때는 tbl_로 시작하거나 t_와 같이 구분 가능한 단어를 앞에 붙여라.
+테이블을 생성할 때는 tbl_로 시작하거나 t_와 같이 구분 가능한 단어를 앞에 붙여야 합니다.
 
 
-@Log4j는 end of life라 @Slf4j 를 쓰던가 @Log 를 써라
+@Log4j는 end of life라 @Slf4j 또는 @Log 를 써야합니다. 
 @Log (severe) @Slf4j(error)
 
-기본형(primitive type) 변수도 때로는 객체로 다루어져야 하는 경우가 있다.
+## 기본형(primitive type) 변수도 때로는 객체로 다루어져야 하는 경우가 있습니다.
 
 1. 매개변수로 객체가 요구 될때.
-
 2. 기본형 값이 아닌 객체로 저장해야 할 때.
-
 3. 객체간의 비교가 필요할 때. 등등
 
-이 때 사용되는 것이 wrapper class 이다.
+이 때 사용되는 것이 wrapper class 입니다.
 
 int (Primitive 자료형 (long, float, double,. ....)
 
-자료형
+### 자료형
 산술 연산이 가능.
 null 로 초기화 불가능, 0으로 초기화
 Integer (Wrapper 클래스(객체)
 
-클래스
+### 클래스
 Unboxing 을 하지 않으면 산술 연산이 불가능하지만, null값은 처리할 수 있습니다.
 null값 처리가 용이해서 SQL 과 연동할 경우 처리가 용이. 직접적인 산술연산은 불가능
 
@@ -385,7 +392,7 @@ public String hello(ModelMap map) {
     return "hello";
 }
 ```
-ModelAndView : 이 클래스는 컨트롤러가 단일 반환 값으로 **모델과 뷰를 모두 반환** 할 수 있도록하기 위해 둘 다만 보유합니다.
+ModelAndView : 이 클래스는 컨트롤러가 단일 반환 값으로 **모델과 뷰를 모두 반환** 할 수 있도록 둘 다 보유합니다.
 
 예:
 ```java
@@ -508,9 +515,9 @@ def firstIndexOfAny(input: String, searchChars: Seq[Char]) : Option[Int] = {
 
 ## MapperXML 작성 사항
 XML을 작성할때 반드시 
-**<mapper>의 namespace 속성 값을 Mapper 인터페이스와 동일**한 이름을 줘야합니다.
-** \<select\> 태그의 id 속성값은 메서드의 이름과 동일**하게 작성.
-**resultType속성의 값은 select 쿼리의 결과를 특정 클래스의 객체**로 만들기 위해 설정
+**\<mapper>의 namespace 속성 값을 Mapper 인터페이스와 동일**한 이름을 줘야합니다.   
+**\<select\> 태그의 id 속성값은 메서드의 이름과 동일**하게 작성합니다.   
+**resultType속성의 값은 select 쿼리의 결과를 특정 클래스의 객체**로 만들기 위해 설정합니다.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -524,11 +531,11 @@ SELECT * FROM tbl_board2 WHERE bno &gt; 0
 </select>
 ```
 
-웹 프로젝트에서 마지막 영역이 영속영역이지만, **실제로 구현을 가장 먼저 할 수 있는 영역도 영속 영역**이다.
-영속영역은 기본적으로 CRUD 작업을 하기 때문에 테이블과 VO(DTO)등 약간의 준비만으로도 비즈니스 로직과 무관하게 CRUD 작업을 작성 할 수 있다. MyBatis는 내부적으로 JDBC의 PreparedStatement를 활용하고, **? 는 #{속성}**과 같다.
+웹 프로젝트에서 마지막 영역이 영속영역이지만, **실제로 구현을 가장 먼저 할 수 있는 영역도 영속 영역**입니다.
+영속영역은 기본적으로 CRUD 작업을 하기 때문에 테이블과 VO(DTO)등 약간의 준비만으로도 비즈니스 로직과 무관하게 CRUD 작업을 작성 할 수 있습니다. MyBatis는 내부적으로 JDBC의 PreparedStatement를 활용하고,  **? 는 #{속성}** 과 같다.
 
-#CREATE(INSERT) 처리.
-자동으로 PK 값이 정해지는 경우에는 다음과 같은 방식으로 처리할 수 있다.
+# CREATE(INSERT) 처리.
+자동으로 PK 값이 정해지는 경우에는 다음과 같은 방식으로 처리할 수 있습니다.
 - insert만 처리되고 생성된 PK값을 알 필요가 없는 경우
 - insert문이 실행되고 생성된 PK 값을 알아야 하는 경우
 
@@ -553,7 +560,7 @@ insert문은 몇건의 데이터가 변경되었는지만을 알려주기 때문
 
 **insertSelectKey()는** @SelectKey라는 Mybatis의 어노테이션을 이용.
 @SelectKey는 주로 PK값을 미리(before) SQL을 통해서 처리해 두고 특정한 이름으로 결과를 보관.
-@Insert 할 때 SQL문을 보면 #{bno}와 같이 이미 처리된 결과를 이용하는 것을 볼 수있다.
+@Insert 할 때 SQL문을 보면 #{bno}와 같이 이미 처리된 결과를 이용하는 것을 볼 수있습니다.
 
 @SelectKey를 이용하는 방식은 SQL을 한 번 더 실행하는 부담이 있기는 하지만, **자동으로 추가되는 PK값을 확인해야 하는 상황**에서는 유용하게 사용될 수 있습니다. 
 
@@ -591,9 +598,7 @@ Delete : int
 
 list는 **나중에 게시물의 목록을 전달해야 하므로 Model을 파라미터로 지정하고** 이를 통해서 BoardServiceImpl객체의 getList()결과를 담아 전달합니다.
 
-mockMVC
-
-
+## mockMVC
 ```java
 @WebAppConfiguration
 ...
@@ -618,10 +623,10 @@ public class BoardControllerTests {
 	}
 }
 ```
-@WebApplication은 Servlet의 ServletContext를 이용하기 위해서인데, 스프링에서는 WebApplicationContext라는 존재를 이용하기 위해서이다. **@before 어노테이션이 적용된 setUp()에서는 import할 때 JUnit을 이용**해야 합니다.
+@WebApplication은 Servlet의 ServletContext를 이용하기 위해서인데, 스프링에서는 WebApplicationContext라는 존재를 이용하기 위해서입니다. **@before 어노테이션이 적용된 setUp()에서는 import할 때 JUnit을 이용**해야 합니다.
 **@Before가 적용된 메서드는 모든 테스트 전에 매번 실행되는 메서드가 됩니다.**
 
-MockMvc는 말 그대로 가짜MVC이다. testList()는 MockMvcRequestBuilders라는 존재를 이용해 GET방식을 호출합니다. 이후에 Model에 어떤 데이터들이 담겨있는지 확인합니다.
+MockMvc는 말 그대로 가짜MVC입니다. testList()는 MockMvcRequestBuilders라는 존재를 이용해 GET방식을 호출합니다. 이후에 Model에 어떤 데이터들이 담겨있는지 확인합니다.
 
 ```java
 @Test
@@ -642,13 +647,12 @@ param = <input> 이라고 생각하면 됩니다.
 수정을 시작하는 화면의 경우에는 GET방식으로 접근하지만, 실제 작업은 POST 방식으로 동작합니다.
 
 #CSS 적용시
-org.zerock.config.WebConfig 클래스에는 CSS나 JS 파일과 같이 정적인 (Static) 자원들의 경로를 'resources'라는 경로로 지정하고 있다.
+org.zerock.config.WebConfig 클래스에는 **CSS나 JS 파일과 같이 정적**인 (Static) 자원들의 경로를 'resources'라는 경로로 지정하고 있습니다.
 
 ```java
 @Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    	registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 ```
 
@@ -699,36 +703,38 @@ INSERT INTO tbl_board(title,content,writer) (SELECT title,content,writer FROM tb
 
 페이징 처리를 위해서 필요한 파라미터는 1) 페이지 번호(pageNum), 2) 한 페이지당 몇개의 데이터(amount) 를 보여줄 것인지가 결정되어야 합니다.
 
-이 데이터들을 하나로 묶는 것이 좋다.
+이 데이터들을 하나로 묶는 것이 좋습니다.
 
-페이징 화면 처리
+## 페이징 화면 처리
 
 1. 브라우저 주소창에서 페이지 번호를 전달해서 결과를 확인
 2. JSP에서 페이지 번호를 출력하는 단계
 3. 각 페이지 번호에 클릭 이벤트 처리
 4. 전체 데이터 개수를 반영해서 페이지 번호 조절
 
-페이징 처리할 때 필요한 정보들
+### 페이징 처리할 때 필요한 정보들
 - 현재 페이지 번호(page)
 - 이전과 다음으로 이동 가능한 링크의 표시여부 (prev, next)
 - 화면에서 보여지는 페이지의 시작번호와 끝번호 (startPage, endPage)
 
-1. 끝번호를 먼저 계산합니다
+
+
+1 . 끝번호를 먼저 계산합니다
 
 ``` java
 this.endpage = (int)(Math.ceil(페이지번호/10.0))*10;
 ```
 
-1페이지의 경우: Math.ceil(0.1)* 10 = 10
-10페이지의 경우: Math.ceil(1)* 10 = 10
-11페이지의 경우: Math.ceil(1.1)*10 = 20
+1페이지의 경우: Math.ceil(0.1) * 10 = 10  
+10페이지의 경우: Math.ceil(1) * 10 = 10  
+11페이지의 경우: Math.ceil(1.1) * 10 = 20
 
-만약 전체 데이터 수가 적다면, 10페이지로 끝나면 안될 상황이 생길 수도 있다.
-그럼에도 끝번호를 먼저 계산하는 ㅣㅇ유는 시작번호를 계산하기 수월하기 때문이다.
+만약 전체 데이터 수가 적다면, 10페이지로 끝나면 안될 상황이 생길 수도 있습니다.
+그럼에도 끝번호를 먼저 계산하는 ㅣㅇ유는 시작번호를 계산하기 수월하기 때문입니다.
 ```java
 this.startPage = this.endPage - 9;
 ```
-끝 번호는 전체 데이터 수에 의해서 영향을 받는다. 예를 들어, 10개씩 보여주는 경우
+끝 번호는 전체 데이터 수에 의해서 영향을 받습니다. 예를 들어, 10개씩 보여주는 경우
 전체 데이터수가 80개라고 가정하면 끝번호는 10이 아닌 8이 되어야만 합니다.
 
 만일 끝번호(endPage)와 한 페이지당 출력되는 데이터 수(amount)의 곱이 전체데이터 수(total)보다 크다면 끝번호는 다시 total을 이용해서 다시 계산되어야 합니다.
@@ -749,7 +755,7 @@ this.prev = this.startPage>1;
 this.next = this.endPage < realEnd;
 ```
 
-클래스를 구성하면 Controller 계층에서 JSP 화면에 전달할때에도 **객체를 생성해서 Model에 담아 보내는 과정이 단순**해지는 장점이 있다.
+클래스를 구성하면 Controller 계층에서 JSP 화면에 전달할때에도 **객체를 생성해서 Model에 담아 보내는 과정이 단순**해지는 장점이 있습니다.
 
 ```java
 public void get(@RequestParam("bno") Integer bno, @ModelAttribute("cri") Criteria cri ,Model model) {
@@ -765,7 +771,7 @@ CONCAT('%', '안', '%') OR content like CONCAT('%', '안', '%') ) limit 0, 10
 
 
 /*getTypeArr은 검색 조건이 각 글자(T, W, C)로 구성되어 있으므로 검색조건을 배열로
-	 만들어서 한번에 처리 MyBatis의 동적 태그를 활용할 수 있다.*/
+	 만들어서 한번에 처리 MyBatis의 동적 태그를 활용할 수 있습니다.*/
    ```java
 	public String[] getTypeArr() {
 		return type == null? new String[] {}: type.split("");
@@ -773,7 +779,7 @@ CONCAT('%', '안', '%') OR content like CONCAT('%', '안', '%') ) limit 0, 10
 	```
 
 
-UriComponentBuilder를 이용하면, 여러개의 파라미터를 번거롭지 않게 할 수 있다.
+UriComponentBuilder를 이용하면, 여러개의 파라미터를 번거롭지 않게 할 수 있습니다.
 
 
 
@@ -856,7 +862,7 @@ UriComponentBuilder를 이용하면, 여러개의 파라미터를 번거롭지 �
   ```
 
   스마트폰에서는 앱이라 불리는 고유한 애플리케이션ㅇ을 이용해서 데이터를 소비하게되고, 보이는 화면 역시 자신만의 방식으로 서비스 하게 됩니다. 
-  URL과 URI를 같은 의미로 사용하는 경우가 많았다. URL은 URI의 하위개념이다.
+  URL과 URI를 같은 의미로 사용하는 경우가 많았다. URL은 URI의 하위개념입니다.
 
   URL:**이곳에 가면 당신이 원하는 것을 찾을 수 있습니다.** 와 같은 상징적인 의미가 강함
   URI:**당신이 원하는 곳의 주소는 여기입니다.** 와 같이 조금 현실적이고 구체적인 의미
@@ -871,7 +877,7 @@ REST 방식은 **서버에서 전송하는 것이 순수한 데이터**라는 �
 기존의 Controller에서 **Model에 데이터를 담아서 JSP등과 같은 뷰로 전달하는 방식이 아니므로** 기존의 Controller와 다르게 동작합니다.
 
 @RestController이전에는 @Controller와 메서드 선언부에 @ResponseBody를 이용해서 동일한 결과를 얻을 수 있었다.
-@RestController는 메서드의 리턴타입으로 사용자가 정의한 클래스 타입을 사용할 수 있고, 이를 **JSON이나 XML**로 자동으로 처리할 수 있다.
+@RestController는 메서드의 리턴타입으로 사용자가 정의한 클래스 타입을 사용할 수 있고, 이를 **JSON이나 XML**로 자동으로 처리할 수 있습니다.
 
 
 ```java
@@ -891,7 +897,7 @@ public class SampleController {
 기존의 @Controller는 **문자열을 반환하는 경우에는 JSP파일의 이름**으로 처리하지만, 
 @RestController의 경우에는 순수한 데이터가 됩니다.
 @GetMapping에 사용된 **produces속성은 해당 메서드가 생산하는 MIME 타입**을 의미합니다.
-예제와 같이 문자열로 직접 지정할수도 있고, 메서드내의 MediaType이라는 클래스를 이용할 수도 있다.
+예제와 같이 문자열로 직접 지정할수도 있고, 메서드내의 MediaType이라는 클래스를 이용할 수도 있습니다.
 
 @PathVariable : REST방식에서 자주 사용합니다. URL경로의 일부를 파라미터로 사용할 때 이용
 @RequestBody : JSON데이터를 원하는 타입의 객체로 변환해야 하는 경우에 사용
@@ -899,7 +905,7 @@ public class SampleController {
 ## @PathVariable
 Rest방식에서는 URL 내에 최대한 많은 정보를 담으려고 노력합니다. 예전에는 '?' 뒤에 추가되는 쿼리 스트링이라는 형태로 **파라미터를 이용**해서 전달되던 데이터들이 **REST 방식에서는 경로의 일부로 차용**됩니다.
 
-스프링 MVC에서는 @PathVariable 어노테이션을 이용해서 URL 상에 경로의 일부를 파라미터로 사용할 수 있다.
+스프링 MVC에서는 @PathVariable 어노테이션을 이용해서 URL 상에 경로의 일부를 파라미터로 사용할 수 있습니다.
 
 ```
 http://localhost:8080/smaple/{sno}/page/{pno}

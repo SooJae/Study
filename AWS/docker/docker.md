@@ -16,7 +16,7 @@
 9. $ sudo apt update
 10. $ apt-cache policy docker-ce
 11. $ sudo apt install docker-ce
-12. $ sudo systemctl status docker (시스템에 자동으로 등록되어 돌아가는 것을 알 수 있다.= 재부팅 해도 자동 실행됩니다.)
+12. $ sudo systemctl status docker (시스템에 자동으로 등록되어 돌아가는 것을 알 수 있습니다.= 재부팅 해도 자동 실행됩니다.)
 
 # docker 실행    
 1. $ docker pull hello-world (pull은 특정한 서버파일을 이미지형태로 받을 수 있도록 해줍니다.)
@@ -24,7 +24,7 @@
 3. $ docker run hello-world (입력하자마자 바로 우리의 서버위에 하나의 서버가 생성됩니다.)
 4. $ docker ps -a (어떤 컨테이너가 동작했는지 확인 가능)
 5. $ docker rm bebf27d8afab(ps -a 로 확인한 컨테이너 삭제)
-6. $ docker images ( 하지만 도커 이미지는 살아있다. )
+6. $ docker images ( 하지만 도커 이미지는 살아있습니다. )
     
 # docker파일 생성
 1. $ grep . /etc/*-release (서버버전 확인)
@@ -57,7 +57,7 @@ docker: Error response from daemon: driver failed programming external connectiv
 $ sudo systemctl stop apache2
 $ echo manual | sudo tee /etc/init/apache2.override
 ```
-10. http://52.79.141.8/ 에 들어가보면 아파치 서버가 올라가있는 것을 확인 할 수 있다.
+10. http://52.79.141.8/ 에 들어가보면 아파치 서버가 올라가있는 것을 확인 할 수 있습니다.
 
 
 ## 배포 자동화
@@ -95,7 +95,7 @@ CMD ["apachectl","-D","FOREGROUND"]
 
 7. $ docker run -p 80:80 -v /home/ubuntu/docker/html:/var/www/html docker(html폴더에 파일을 넣으면 실제로 php의 기본적인 경로인 /var/www/html에 놓인 것과 같은 효과를 낸다.)
 
-8. $ docker run -p 81:80 -v /home/ubuntu/docker/html:/var/www/html docker로 하면 81번포트에서도 접속할 수 있다. 80번 81번 포트 2개가 동시에 돌아갑니다. (다양한 웹서버를 하나의 서버내에서 다채롭게 여러개 만들어서 구성할 수 있다. 편리하다.)
+8. $ docker run -p 81:80 -v /home/ubuntu/docker/html:/var/www/html docker로 하면 81번포트에서도 접속할 수 있습니다. 80번 81번 포트 2개가 동시에 돌아갑니다. (다양한 웹서버를 하나의 서버내에서 다채롭게 여러개 만들어서 구성할 수 있습니다. 편리하다.)
 
 
 $ docker rm -f `docker ps -a -q`  # 실행중인 docker 전체 삭제
@@ -140,7 +140,7 @@ CMD ["apachectl","-D","FOREGROUND"]
 $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql:5.6
 으로 컨테이너를 띄우고
 $ docker exec -it "해당 컨테이너 아이디" /bin/bash 를 사용하면 실제로 컨테이너에 접속한 효과를 낸다.
-$ docker inspect "컨테이너 아이디" 를 사용하면 해당 컨테이너의 세부정보를 확인 할 수 있다.
+$ docker inspect "컨테이너 아이디" 를 사용하면 해당 컨테이너의 세부정보를 확인 할 수 있습니다.
 
 $ docker build -t docker .
 

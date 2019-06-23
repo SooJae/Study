@@ -4,7 +4,7 @@
 스프링의 내부에서 컨트롤러를 호출할 때 관여합니다. => 스프링의 컨텍스트 내에 있는 **모든자원** 활용합니다.
 
 ## 인증(Authentication)
-**자신**이 자격이 있다고 증명하는 것. (출입증 제시)
+**자신**이 자격이 있습니다고 증명하는 것. (출입증 제시)
 ##권한 부여(Authorization)
 **남에 의해**서 자격이 부여되는 것. (해당 기계를 만질 수 있게 권한을 부여 받음.)
 
@@ -16,7 +16,7 @@
 username = id와 같다.
 
 
-JSESSIONID는 Tomcat에서 발행하는 쿠기의 이름이다.
+JSESSIONID는 Tomcat에서 발행하는 쿠기의 이름입니다.
 
 
 AccessDeniedHandler 인터페이스 : 인터페이스의 메서드는 handle()밖에 없고 HttpsServletRequest, HttpServletResponse를 파라미터를 사용하기 때문에 직접적으로 서블릿 API를 이용 가능
@@ -38,11 +38,11 @@ CSRF 동작방식
 
 AuthenticationSuccessHandler 인터페이스 : 로그인 한 사용자에 부여된 권한 Authentication객체를 객체를 이용해서 사용자가 가진 모든 권한을 문자열로 체크합니다.
 
-스프링 시큐리티에서는 사용자를 확인하는 인증(Authentication)과 권한 등을 부여하는 인가 과정(Authorization)으로 나누어 볼 수 있다.
+스프링 시큐리티에서는 사용자를 확인하는 인증(Authentication)과 권한 등을 부여하는 인가 과정(Authorization)으로 나누어 볼 수 있습니다.
 
 인증과 권한에 대한 처리는 **Authentication Manager**를 통해서 이루어지는데, 이때 인증이나 권한 정보를 제공하는 존재(Provider)가 필요하고, 다시 이를 위해서 UserDetailsService라는 인터페이스를 구현한 존재를 활용합니다.
 
-UserDetailsService는 스프링 시큐리티 API 내에 이미 CachingUserDetailsService, InMemoryUserDetailsManager(문자열로 고정한 방식),JdbcDaoImpl, JdbcUserDetailsManager등 구현클래스들을 제공하고 있다.
+UserDetailsService는 스프링 시큐리티 API 내에 이미 CachingUserDetailsService, InMemoryUserDetailsManager(문자열로 고정한 방식),JdbcDaoImpl, JdbcUserDetailsManager등 구현클래스들을 제공하고 있습니다.
 
 JDBC를 이용해서 인증/권한을 체크하는 방식은 
 1. 지정된 형식으로 테이블을 생성해서 사용하는 방식
