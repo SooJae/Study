@@ -730,10 +730,11 @@ this.endpage = (int)(Math.ceil(페이지번호/10.0))*10;
 11페이지의 경우: Math.ceil(1.1) * 10 = 20
 
 만약 전체 데이터 수가 적다면, 10페이지로 끝나면 안될 상황이 생길 수도 있습니다.
-그럼에도 끝번호를 먼저 계산하는 ㅣㅇ유는 시작번호를 계산하기 수월하기 때문입니다.
+그럼에도 끝번호를 먼저 계산하는 이유는 시작번호를 계산하기 수월하기 때문입니다.
 ```java
 this.startPage = this.endPage - 9;
 ```
+
 끝 번호는 전체 데이터 수에 의해서 영향을 받습니다. 예를 들어, 10개씩 보여주는 경우
 전체 데이터수가 80개라고 가정하면 끝번호는 10이 아닌 8이 되어야만 합니다.
 
@@ -763,15 +764,15 @@ public void get(@RequestParam("bno") Integer bno, @ModelAttribute("cri") Criteri
 		model.addAttribute("board",service.get(bno));
 	}
 ```
-@ModelAttribute는 자동으로 Model에 데이터를 지정한 이름으로 담아줍니다. @ModelAttribute를 사용하지 않아도 Controller에서 화면으로 파라미터가 된 객체는 전달이 되지만 좀더 명시적인 이름을 지정하기 위해 사용합니다.
+@ModelAttribute는 자동으로 Model에 데이터를 지정한 이름으로 담아줍니다.   
+@ModelAttribute를 사용하지 않아도 Controller에서 화면으로 파라미터가 된 객체는 전달이 되지만 좀더 명시적인 이름을 지정하기 위해 사용합니다.
 ```
-select bno, title, content, writer, regdate, updatedate from tbl_board2 where ( title like 
-CONCAT('%', '안', '%') OR content like CONCAT('%', '안', '%') ) limit 0, 10 
+SELECT bno, title, content, writer, regdate, updatedate FROM tbl_board2 where ( title like 
+CONCAT('%', '안', '%') OR content like CONCAT('%', '안', '%') ) LIMIT 0, 10 
 ```
 
 
-/*getTypeArr은 검색 조건이 각 글자(T, W, C)로 구성되어 있으므로 검색조건을 배열로
-	 만들어서 한번에 처리 MyBatis의 동적 태그를 활용할 수 있습니다.*/
+getTypeArr은 검색 조건이 각 글자(T, W, C)로 구성되어 있으므로 검색조건을 배열로 만들어서 한번에 처리 MyBatis의 동적 태그를 활용할 수 있습니다.
    ```java
 	public String[] getTypeArr() {
 		return type == null? new String[] {}: type.split("");
@@ -861,19 +862,21 @@ UriComponentBuilder를 이용하면, 여러개의 파라미터를 번거롭지 �
 	}
   ```
 
-  스마트폰에서는 앱이라 불리는 고유한 애플리케이션ㅇ을 이용해서 데이터를 소비하게되고, 보이는 화면 역시 자신만의 방식으로 서비스 하게 됩니다. 
-  URL과 URI를 같은 의미로 사용하는 경우가 많았다. URL은 URI의 하위개념입니다.
+스마트폰에서는 앱이라 불리는 고유한 애플리케이션ㅇ을 이용해서 데이터를 소비하게되고, 보이는 화면 역시 자신만의 방식으로 서비스 하게 됩니다. 
+URL과 URI를 같은 의미로 사용하는 경우가 많았다. URL은 URI의 하위개념입니다.
 
-  URL:**이곳에 가면 당신이 원하는 것을 찾을 수 있습니다.** 와 같은 상징적인 의미가 강함
-  URI:**당신이 원하는 곳의 주소는 여기입니다.** 와 같이 조금 현실적이고 구체적인 의미
+## URL
+**이곳에 가면 당신이 원하는 것을 찾을 수 있습니다.** 와 같은 상징적인 의미가 강합니다.  
+## URI
+**당신이 원하는 곳의 주소는 여기입니다.** 와 같이 조금 현실적이고 구체적인 의미입니다.
 
-  @RestController : 컨트롤러가 REST방식을 처리하기 위한 것임을 명시
-  @ResponseBody : 일반적인 JSP와 같은 뷰로 전달되는게 아니라 데이터 자체를 전달하기 위한 용도
-  @PathVariable : URL 경로에 있는 값을 파라미터로 추출하려고 할때 사용
-  @RequestBody : JSON 데이터를 원하는 타입으로 바인딩 처리
+@RestController : 컨트롤러가 REST방식을 처리하기 위한 것임을 명시합니다.  
+@ResponseBody : 일반적인 JSP와 같은 뷰로 전달되는게 아니라 **데이터 자체를 전달하기 위한 용도**입니다.  
+@PathVariable : URL 경로에 있는 값을 파라미터로 추출하려고 할때 사용합니다.  
+@RequestBody : JSON 데이터를 원하는 타입으로 바인딩 처리를 합니다.
 
-##@RestController
-REST 방식은 **서버에서 전송하는 것이 순수한 데이터**라는 것 입니다.
+## @RestController
+REST 방식은 **서버에서 전송하는 것이 순수한 데이터**라는 뜻 입니다.
 기존의 Controller에서 **Model에 데이터를 담아서 JSP등과 같은 뷰로 전달하는 방식이 아니므로** 기존의 Controller와 다르게 동작합니다.
 
 @RestController이전에는 @Controller와 메서드 선언부에 @ResponseBody를 이용해서 동일한 결과를 얻을 수 있었다.
@@ -894,12 +897,11 @@ public class SampleController {
 	}
 }
 ```
-기존의 @Controller는 **문자열을 반환하는 경우에는 JSP파일의 이름**으로 처리하지만, 
-@RestController의 경우에는 순수한 데이터가 됩니다.
+기존의 @Controller는 **문자열을 반환하는 경우에는 JSP파일의 이름**으로 처리하지만, @RestController의 경우에는 **순수한 데이터**가 됩니다.  
 @GetMapping에 사용된 **produces속성은 해당 메서드가 생산하는 MIME 타입**을 의미합니다.
 예제와 같이 문자열로 직접 지정할수도 있고, 메서드내의 MediaType이라는 클래스를 이용할 수도 있습니다.
 
-@PathVariable : REST방식에서 자주 사용합니다. URL경로의 일부를 파라미터로 사용할 때 이용
+@PathVariable : REST방식에서 자주 사용합니다. URL경로의 일부를 파라미터로 사용할 때 이용  
 @RequestBody : JSON데이터를 원하는 타입의 객체로 변환해야 하는 경우에 사용
 
 ## @PathVariable
@@ -931,7 +933,7 @@ Mybatis는 두 개 이상이 데이터를 파라미터로 전달하기 위해서
 - MAP을 이용하는 방식
 - @Param을 이용해서 이름을 사용하는 방식
   
-@Pram의 속성값은 '#{}'의 이름으로 사용이 가능하다.
+@Param의 속성값은 '#{}'의 이름으로 사용이 가능하다.
 
 
 ```java
