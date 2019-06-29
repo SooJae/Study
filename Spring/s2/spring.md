@@ -1,0 +1,1 @@
+IOC(Inversion of  Control)컨테이너는 POJO(Plain Old Java Object)를 구성하고 관리합니다. 스프링 프레임워크의 가장 중요한 의의가 이 **POJO로 자바 애플리케이션을 개발**하는 것이므로 스프링의 주요기능은 대부분 IoC 컨테이너 안에서 POJO를 구성 및 관리하는 일과 연관돼 있습니다.
