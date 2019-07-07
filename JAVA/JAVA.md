@@ -1,0 +1,1 @@
+가비지 컬렉션 : https://asfirstalways.tistory.com/159
