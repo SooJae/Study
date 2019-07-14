@@ -44,3 +44,15 @@ alter table board_attach add constraint fk_board_attach foreign key (bno) refere
 
 
 
+
+create table board_reply(
+  rno int(12) PRIMARY KEY AUTO_INCREMENT,
+  bno int not null,
+  reply VARCHAR(1000) not null,
+  replyer VARCHAR(50) not null,
+  reply_dt datetime DEFAULT current_timestamp(),
+  reply_udt_dt datetime DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP()
+);
+
+alter table board_reply add constraint fk_board_reply
+foreign key(bno) references board(bno);
