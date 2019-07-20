@@ -56,3 +56,10 @@ create table board_reply(
 
 alter table board_reply add constraint fk_board_reply
 foreign key(bno) references board(bno);
+
+
+SELECT NOW(); 로 현재시간 확인.
+SHOW GLOBAL VARIABLES LIKE '%zone%'; 로 타임존 확인
+RDS로 들어가서 변경
+
+출처 : https://brtech.tistory.com/95
