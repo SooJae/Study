@@ -58,6 +58,22 @@ alter table board_reply add constraint fk_board_reply
 foreign key(bno) references board(bno);
 
 
+create table persistent_logins(
+  username varchar(64) not null,
+  series varchar(64) primary key,
+  token varchar(64) not null,
+  last_used datetime not null
+);
+
+CREATE TABLE board_like(
+lno BIGINT PRIMARY KEY AUTO_INCREMENT,
+bno INT NOT NULL,
+id VARCHAR(50) NOT NULL,
+FOREIGN KEY (bno) REFERENCES board(bno),
+FOREIGN KEY (id) REFERENCES member(id)
+);
+
+
 SELECT NOW(); 로 현재시간 확인.
 SHOW GLOBAL VARIABLES LIKE '%zone%'; 로 타임존 확인
 RDS로 들어가서 변경
