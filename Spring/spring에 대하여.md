@@ -960,3 +960,119 @@ Controller에 적용이 불가능한 것은 아니지만, Controller의 경우 �
 2. 메서드들의 실행시간을 기록
 
 @EnableTransactionManagement 설정은 'aspect-autoproxy'에 대한 설정이되고, txManager()는 bean태그 설정을 대신하게 됩니다.
+
+
+
+```java
+@Controller
+
+public class SimpleConverterController {
+
+
+
+	@RequestMapping(value = "/test/simpleTest.do", method = RequestMethod.GET)
+
+	public String simpleTestForm() {
+
+		return "test/simpleTestForm";
+
+	}
+
+
+
+	@RequestMapping(method = RequestMethod.POST)	
+
+	// @RequestBody 어노테이션은 @RequestMapping에 의해 POST 방식으로 전송된 HTTP 요청 데이터를 String 타입의 body 파라미터로 전달된다.(수신)
+
+	// 그리고 @ResponseBody 어노테이션이 @RequestMapping 메서드에서 적용되면 해당 메서드의 리턴 값을 HTTP 응답 데이터로 사용한다.
+
+	// simpleTest() 메서드의 리턴 값이 String 타입이므로 String 데이터를 HTTP 응답 데이터로 전송한다.(송신)
+
+	@ResponseBody
+
+	public String simpleTest(@RequestBody String body) {
+
+		return body;
+
+	}
+
+}
+
+```
+
+
+```js
+	
+[jquery] ajax xml 파싱   jquery / 개발  
+2013. 4. 2. 12:15
+복사http://blog.naver.com/afidev/20184680598
+번역하기
+ 
+전용뷰어 보기
+jquery의 ajax 기능을 활용하여 xml을 파싱하는 방법을 분석 해 보도록 하겠습니다.
+
+ 
+
+ 
+
+jquery의 ajax 기능을 사용하면 존 레식(John Resig)이 주장하는 "write less, do more"가 어떤 개념인지 알게 될 것입니다.
+
+ajax가 어떤 역할을 담당 하는지, xml은 무엇이고 어떠한 형태로 구성되는지는 이미 알고 있다는 가정하에 진행되는 포스팅 입니다.
+
+ 
+
+ 
+
+jquery의 ajax 사용 구문은 다음과 같습니다. (제가 사용하는 방식 입니다)
+
+ 
+
+ 
+
+$.ajax( {
+
+url : 'xml.asp', //ajax로 접근해 데이터를 수집해 올 url을 지정 합니다.
+
+type : 'post', //method를 지정 합니다. (get / post)
+
+data : 'pNo=3&pName=k', //지정한 url으로 보낼 파라미터를 입력 합니다. (get / post 동일)
+
+dataType : 'xml', //데이터를 주고 받는 형식 을 지정 합니다. (text, xml, json)
+
+beforeSend : function() {
+
+alert( 'url 접근 전 입니다 :) ');
+
+//ajax 동작 전 수행하고 싶은 내용을 입력 합니다. (로딩 이미지 출력 등)
+
+},
+
+success : function( result ) {
+
+alert( '오류 없이 url 접근과 response 획득이 완료 되었습니다 :)' );
+
+//정상적으로 획득한 response 응답 데이터로 수행하고 싶은 내용을 입력 합니다. (실제 데이터 처리)
+
+},
+
+error : function( result ) {
+
+alert( '오류가 발생 되었습니다' );
+
+//오류 발생시 수행하고 싶은 내용을 입력 합니다.
+
+},
+
+complete : function() {
+
+alert( 'ajax 동작이 완료 되었습니다 :)' );
+
+//ajax 동작 완료 후 수행하고 싶은 내용을 입력 합니다. (로딩 이미지, 완료 문구 출력 등)
+
+//success 또는 error 완료 후 수행 됩니다.
+
+}
+
+});
+[출처] [jquery] ajax xml 파싱|작성자 권개발
+```
