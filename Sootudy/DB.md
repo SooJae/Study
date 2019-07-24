@@ -25,8 +25,11 @@ CREATE TABLE board (
   writer varchar(50) NOT NULL,
   dt datetime DEFAULT current_timestamp(),
   udt_dt datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  v_cnt int DEFAULT 0,
   reply_cnt int(11) DEFAULT 0,
+  like_cnt int DEFAULT 0,
   delete_flag char(1) DEFAULT '0',
+  
   bname varchar(20) DEFAULT NULL,
   PRIMARY KEY (bno)
 )
