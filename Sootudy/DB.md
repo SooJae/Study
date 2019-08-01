@@ -34,6 +34,8 @@ CREATE TABLE board (
   PRIMARY KEY (bno)
 )
 
+
+
 CREATE TABLE board_attach(
   uuid VARCHAR(100) not null,
   uploadPath VARCHAR(200) not null,
@@ -76,6 +78,34 @@ FOREIGN KEY (bno) REFERENCES board(bno),
 FOREIGN KEY (id) REFERENCES member(id)
 );
 
+
+CREATE TABLE study (
+  sno int NOT NULL AUTO_INCREMENT, 
+  title varchar(80) NOT NULL,
+  content varchar(700) NOT NULL,
+  leader varchar(50) NOT NULL,
+  dt datetime DEFAULT current_timestamp(),
+  udt_dt datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  delete_flag char(1) DEFAULT '0',
+  PRIMARY KEY (sno)
+)
+
+CREATE TABLE study_todo(
+  tdno int NOT NULL AUTO_INCREMENT,
+  todo varchar(100),
+  dt datetime DEFAULT current_timestamp(),
+  udt_dt datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  sno int not null,
+  achivement_flag char(1) DEFAULT '0',
+
+  PRIMARY KEY(todono)
+)
+alter table study_todo add constraint fk_study_todo foreign key(sno) references study(sno);
+
+CREATE TABLE study_members(
+  sno int NOT NULL,
+  member varchar(50)  
+)
 
 SELECT NOW(); 로 현재시간 확인.
 SHOW GLOBAL VARIABLES LIKE '%zone%'; 로 타임존 확인
