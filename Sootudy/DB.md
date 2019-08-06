@@ -95,8 +95,8 @@ CREATE TABLE study_todo(
   todo varchar(100),
   dt datetime DEFAULT current_timestamp(),
   udt_dt datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  achive char(1) DEFAULT '0',
   sno int not null,
-  achivement_flag char(1) DEFAULT '0',
 
   PRIMARY KEY(todono)
 )
@@ -104,7 +104,13 @@ alter table study_todo add constraint fk_study_todo foreign key(sno) references 
 
 CREATE TABLE study_members(
   sno int NOT NULL,
-  member varchar(50)  
+  member varchar(50),
+  FOREIGN KEY (sno) REFERENCES study(sno)  
+)
+
+CREATE TABLE chat_rooms(
+  roomId varchar(60) PRIMARY KEY,
+  name varchar(50) UNIQUE KEY NOT NULL
 )
 
 SELECT NOW(); 로 현재시간 확인.
