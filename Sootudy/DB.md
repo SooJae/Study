@@ -93,6 +93,7 @@ CREATE TABLE study (
 CREATE TABLE study_todo(
   tdno int NOT NULL AUTO_INCREMENT,
   todo varchar(100),
+  writer varchat(50)
   dt datetime DEFAULT current_timestamp(),
   udt_dt datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   achive char(1) DEFAULT '0',
