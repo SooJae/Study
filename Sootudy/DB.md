@@ -93,7 +93,7 @@ CREATE TABLE study (
 CREATE TABLE study_todo(
   tdno int NOT NULL AUTO_INCREMENT,
   todo varchar(100),
-  writer varchat(50)
+  leader varchat(50)
   dt datetime DEFAULT current_timestamp(),
   udt_dt datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   achive char(1) DEFAULT '0',
@@ -106,12 +106,23 @@ alter table study_todo add constraint fk_study_todo foreign key(sno) references 
 CREATE TABLE study_members(
   sno int NOT NULL,
   member varchar(50),
+  cnt int,
+  cntMax int 
   FOREIGN KEY (sno) REFERENCES study(sno)  
 )
 
 CREATE TABLE chat_rooms(
   roomId varchar(60) PRIMARY KEY,
-  name varchar(50) UNIQUE KEY NOT NULL
+  name varchar(50) UNIQUE KEY NOT NULL,
+  cnt int
+)
+
+CREATE TABLE study_chat(
+  s_cno BIGINT AUTO_INCREMENT,
+  member varchar(100) not NULL,
+  chat varchar(200) not NULL,
+  dt datetime DEFAULT current_timestamp(),
+  sno int 
 )
 
 SELECT NOW(); 로 현재시간 확인.
@@ -119,3 +130,8 @@ SHOW GLOBAL VARIABLES LIKE '%zone%'; 로 타임존 확인
 RDS로 들어가서 변경
 
 출처 : https://brtech.tistory.com/95
+
+
+DTO는 테이블과 일대일 매칭이고 Vo는 그외에것들 포함해서 검색키워드 나 그런식으로도 씀요 
+
+검색키워드나 페이징처리할때 반드시넘어가야할 파라미터들은 VO에담구요 DTO는테이블컬럼과매칭이요
