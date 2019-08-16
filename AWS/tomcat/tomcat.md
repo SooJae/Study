@@ -139,3 +139,7 @@ $ sudo vi /etc/fstab        # 리부팅시 인식할 수 있도록 fstab에 등�
 $ sudo swapon -s    # sanity test  Swap 에 설정한 용량이 사용되었는지 확인
    
 $ free -m           # sanity test  Swap 에 설정한 용량이 사용되었는지 확인
+
+/usr/share/tomcat8/ = $CATALINA_HOME
+
+@PropertySource( value = "file:${catalina.home}/config/application.properties", ignoreResourceNotFound = true)
