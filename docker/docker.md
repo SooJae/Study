@@ -147,7 +147,7 @@ $ docker build -t docker .
 $ docker run -it --rm mariadb mysql -h"호스트아이피" -u"유저아이디" -p
 
 
-#docker-compose 설치
+# docker-compose 설치
 
 
 1. $ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -176,7 +176,7 @@ mariadb > FLUSH PRIVILEGES;
 
 
 
-#docker-compose.yml을 사용하여 다중 컨테이너 애플리케이션 정의
+# docker-compose.yml을 사용하여 다중 컨테이너 애플리케이션 정의
 https://docs.microsoft.com/ko-kr/dotnet/standard/microservices-architecture/multi-container-microservice-net-applications/multi-container-applications-docker-compose
 
 docker-compose는 기본으로 .env 파일을 환경변수 파일로 인식합니다. 필요한 변수를 .env에 설정해 주고, .gitignore에 추가합니다. 새로 생성한 .env 파일과 변경한 docker-compose 파일은 다음과 같다.
