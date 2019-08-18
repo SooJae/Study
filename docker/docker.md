@@ -4,7 +4,7 @@
 
 
 
-#docker 설치
+# docker 설치
 1. $ df -h로 메모리 확인.(의외로 저장공간을 많이 먹음)
 2. $ sudo apt update
 3. $ sudo apt install apt-transport-https
