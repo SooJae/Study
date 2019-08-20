@@ -4,4 +4,4 @@
 
 
 
-![board](./img/Board_mobile.png)
+![board](./img/Board_com.png)
