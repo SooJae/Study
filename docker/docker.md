@@ -1,10 +1,10 @@
 키페어(.pem) 파일 설정
 우클릭 -> 속성 -> 보안 -> 고급 -> 상속사용안함
--> Administators와 SYSTEM만 사용가능하도록 합니다.
+-> Administators와 SYSTEM만 사용가능하도록 한다.
 
 
 
-#docker 설치
+# docker 설치
 1. $ df -h로 메모리 확인.(의외로 저장공간을 많이 먹음)
 2. $ sudo apt update
 3. $ sudo apt install apt-transport-https
@@ -16,15 +16,15 @@
 9. $ sudo apt update
 10. $ apt-cache policy docker-ce
 11. $ sudo apt install docker-ce
-12. $ sudo systemctl status docker (시스템에 자동으로 등록되어 돌아가는 것을 알 수 있습니다.= 재부팅 해도 자동 실행됩니다.)
+12. $ sudo systemctl status docker (시스템에 자동으로 등록되어 돌아가는 것을 알 수 있습니다.= 재부팅 해도 자동 실행이 된다.)
 
 # docker 실행    
-1. $ docker pull hello-world (pull은 특정한 서버파일을 이미지형태로 받을 수 있도록 해줍니다.)
+1. $ docker pull hello-world (pull은 특정한 서버파일을 이미지형태로 받을 수 있도록 해준다.)
 2. $ docker images ( 다운받은 도커 이미지 확인  )
-3. $ docker run hello-world (입력하자마자 바로 우리의 서버위에 하나의 서버가 생성됩니다.)
+3. $ docker run hello-world (입력하자마자 바로 우리의 서버위에 하나의 서버가 생성된다.)
 4. $ docker ps -a (어떤 컨테이너가 동작했는지 확인 가능)
 5. $ docker rm bebf27d8afab(ps -a 로 확인한 컨테이너 삭제)
-6. $ docker images ( 하지만 도커 이미지는 살아있습니다. )
+6. $ docker images ( 하지만 도커 이미지는 살아있다. )
     
 # docker파일 생성
 1. $ grep . /etc/*-release (서버버전 확인)
@@ -47,7 +47,7 @@ CMD ["apachectl","-D","FOREGROUND"]
 6. $ docker build -t docker .
 7. $ docker images 로 확인
 8. $ docker run -p 80:80 docker(80번 포트와 EC2서버의 포트를 연결)(호스트 즉, 우리 서버의 포트 : 컨테이너의 포트)
-실제로 호스트서버의 80번 포트에 접속하게 되면 이 컨테이너의 80번 포트에 접속합니다.
+실제로 호스트서버의 80번 포트에 접속하게 되면 이 컨테이너의 80번 포트에 접속한다.
 9. AWS 웹페이지 -> 보안그룹 -> 인바운드 규칙-> HTTP 80번 포트를 연다.
 
 다음과 같은 에러가 날 경우
@@ -57,7 +57,7 @@ docker: Error response from daemon: driver failed programming external connectiv
 $ sudo systemctl stop apache2
 $ echo manual | sudo tee /etc/init/apache2.override
 ```
-10. http://52.79.141.8/ 에 들어가보면 아파치 서버가 올라가있는 것을 확인 할 수 있습니다.
+10. http://52.79.141.8/ 에 들어가보면 아파치 서버가 올라가있는 것을 확인 할 수 있다.
 
 
 ## 배포 자동화
@@ -95,7 +95,7 @@ CMD ["apachectl","-D","FOREGROUND"]
 
 7. $ docker run -p 80:80 -v /home/ubuntu/docker/html:/var/www/html docker(html폴더에 파일을 넣으면 실제로 php의 기본적인 경로인 /var/www/html에 놓인 것과 같은 효과를 낸다.)
 
-8. $ docker run -p 81:80 -v /home/ubuntu/docker/html:/var/www/html docker로 하면 81번포트에서도 접속할 수 있습니다. 80번 81번 포트 2개가 동시에 돌아갑니다. (다양한 웹서버를 하나의 서버내에서 다채롭게 여러개 만들어서 구성할 수 있습니다. 편리하다.)
+8. $ docker run -p 81:80 -v /home/ubuntu/docker/html:/var/www/html docker로 하면 81번포트에서도 접속할 수 있다. 80번 81번 포트 2개가 동시에 돌아간다. (다양한 웹서버를 하나의 서버내에서 다채롭게 여러개 만들어서 구성할 수 있다. 편리하다.)
 
 
 $ docker rm -f `docker ps -a -q`  # 실행중인 docker 전체 삭제
@@ -140,14 +140,14 @@ CMD ["apachectl","-D","FOREGROUND"]
 $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql:5.6
 으로 컨테이너를 띄우고
 $ docker exec -it "해당 컨테이너 아이디" /bin/bash 를 사용하면 실제로 컨테이너에 접속한 효과를 낸다.
-$ docker inspect "컨테이너 아이디" 를 사용하면 해당 컨테이너의 세부정보를 확인 할 수 있습니다.
+$ docker inspect "컨테이너 아이디" 를 사용하면 해당 컨테이너의 세부정보를 확인 할 수 있다.
 
 $ docker build -t docker .
 
 $ docker run -it --rm mariadb mysql -h"호스트아이피" -u"유저아이디" -p
 
 
-#docker-compose 설치
+# docker-compose 설치
 
 
 1. $ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -160,7 +160,7 @@ $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 ## PHP와 MariaDB 연결
 1. $sudo vim Dockerfile
- -p : 컨테이너 포트를 개방한 뒤, 호스트 포트와 연결합니다.
+ -p : 컨테이너 포트를 개방한 뒤, 호스트 포트와 연결한다.
 -v : 볼륨 마운팅
 -expose : 컨테이너 포트만 개방합니다.
 -d 옵션
@@ -176,7 +176,7 @@ mariadb > FLUSH PRIVILEGES;
 
 
 
-#docker-compose.yml을 사용하여 다중 컨테이너 애플리케이션 정의
+# docker-compose.yml을 사용하여 다중 컨테이너 애플리케이션 정의
 https://docs.microsoft.com/ko-kr/dotnet/standard/microservices-architecture/multi-container-microservice-net-applications/multi-container-applications-docker-compose
 
 docker-compose는 기본으로 .env 파일을 환경변수 파일로 인식합니다. 필요한 변수를 .env에 설정해 주고, .gitignore에 추가합니다. 새로 생성한 .env 파일과 변경한 docker-compose 파일은 다음과 같다.
@@ -187,10 +187,10 @@ environment:
       - "VHOSTS_DIR: ${VHOSTS_DIR}"
 ```
 
-도커를 연동한 상태에서 깃 허브에 파일을 올리면 서버에서 도커 이미지를 제거해도 됩니다.
+도커를 연동한 상태에서 깃 허브에 파일을 올리면 서버에서 도커 이미지를 제거해도 된다.
 
 의문점
-원래는 mysql, mariaDB가 깔려있지 않아서 오류가 났다고 생각했는데 php를 volume처리 해주지 않아서 오류가 난것 같다. DB가 깔려 있지 않아도 외부 rds에 접속이 됩니다.
+원래는 mysql, mariaDB가 깔려있지 않아서 오류가 났다고 생각했는데 php를 volume처리 해주지 않아서 오류가 난것 같다. DB가 깔려 있지 않아도 외부 rds에 접속이 된다.
 
 
 ## docker-compose.yml 관리법
@@ -219,8 +219,8 @@ Please use the following password to proceed to installation:
 
 **이 부분을 접속한 웹페이지 첫 화면 비밀번호에 붙여넣는다.**
 
-7. 첫번째 것을 눌러 기본 설치를 합니다.
-8. 그다음 사용자를 생성합니다.
+7. 첫번째 것을 눌러 기본 설치를 한다.
+8. 그다음 사용자를 생성한다.
 
 
 # 젠킨스 설치 2
@@ -235,22 +235,20 @@ Please use the following password to proceed to installation:
 **이 부분을 접속한 웹페이지 첫 화면 비밀번호에 붙여넣는다.**
 
 깃 계정 정보를 특정한 서버내에 기록하게하면 깃 계정 정보가 유출될수도 있기때문에
-(젠킨스에 존재하기 때문에) 다음과 같이 2시간만 존재하도록 타임아웃 설정을 합니다.
+(젠킨스에 존재하기 때문에) 다음과 같이 2시간만 존재하도록 타임아웃 설정을 한다..
 git config --global credential.helper "cahce --timeout 7200"
 
 깃허브
 Personal access tokens 탭에 들어가서 
 repository와 repo:hook을 체크해놓으면 
-git pull을 할때 비밀번호 대신에 accessToken을 넣으면 됩니다.
+git pull을 할때 비밀번호 대신에 accessToken을 넣으면 된다
 
 
 
-컨테이너가 중지되면 고정 장치 볼륨이 자동으로 제거되지 않습니다. 컨테이너를 중지 할 때 연관된 볼륨을 제거하려면 다음과 같이하십시오.
+컨테이너가 중지되면 고정 장치 볼륨이 자동으로 제거되지 않는다. 컨테이너를 중지 할 때 연관된 볼륨을 제거하려면 다음과 같이해야한다.
 
 docker rm -v <container id or name>
--v 플래그가 지정되지 않으면, 볼륨은 디스크에 'dangling volume'으로 남아 있습니다. 매달려있는 모든 볼륨을 삭제하려면 다음과 같이하십시오.
+-v 플래그가 지정되지 않으면, 볼륨은 디스크에 'dangling volume'으로 남아 있다. 매달려있는 모든 볼륨을 삭제하려면 다음과 같이해야한다.
 
 docker volume rm $(docker volume ls -qf dangling=true)
-docker volume ls -qf dangling=true 필터는 컨테이너에 연결되지 않은 태그가없는 볼륨을 포함하여 도커 볼륨 이름의 목록을 반환합니다.
-
-2.164.2
+docker volume ls -qf dangling=true 필터는 컨테이너에 연결되지 않은 태그가없는 볼륨을 포함하여 도커 볼륨 이름의 목록을 반환한다.
