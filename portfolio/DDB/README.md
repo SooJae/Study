@@ -28,7 +28,7 @@
 ## LIBRARY
 - JSTL
 - summernote
-
+---
 ## Summernote를 이용한 게시물 작성
 ![summernote](./img/join.png)
 
