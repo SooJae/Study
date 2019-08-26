@@ -33,33 +33,40 @@
 ![summernote](./img/join.png)
 
 
-
 회원가입 폼을 만들었지만, ajax통신이 가끔씩 에러가 나는 상황이 발생합니다.
+
+---
 ## Summernote를 이용한 게시물 작성
 ![summernote](./img/summernote.png)
 
-
 Summernote 라이브러리를 이용하여 게시물 작성 폼을 만들었습니다.
+
+---
 ## 게시물 상세보기와 댓글
 ![board](./img/board1.png)
 
 
-
 게시물의 상세보기와 댓글입니다.
+
+---
 ## 카드 목록
 ![card1](./img/card1.png)
 
-
 드래곤볼 폭렬격전의 카드목록 입니다. (2개의 카드에 대한 정보만 넣은 상태 입니다.)
+
+---
 ## 카드 상세보기
 ![card2](./img/card2.png)
 
 
 카드 상세보기 창에서 카드에 대한 설명과, 카드에 대한 평가를 할 수 있습니다.
 
+---
+
 ## 카드 상세보기 (모바일 최적화)
 ![card3](./img/card3.png)
 
+---
 
 ## 카드의 타입에 대한 설명이 담긴 객체
 ![card3](./img/cardJson.png)
