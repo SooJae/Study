@@ -152,4 +152,38 @@ npm install --save-dev gulp-eslint
 - 노드 소스용 서브 디렉토리 es6
 - 브라우저 소스용 서브 디렉토리 public/es6
 
+```js
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const eslint = require('gulp-eslint');
+//
+gulp.task('default' , function(callback){
+//ESLint를 실행합니다.
+    gulp.src(["es6/**/*.js","public/es6/**/*.js"])
+        .pipe(eslint())
+        .pipe(eslint.format());
+//노드 소스
+    gulp.src("es6/**/*.js")
+        .pipe(babel({
+            presets:["@babel/preset-env"]
+        }))
+        .pipe(gulp.dest("dist"));
+//브라우저 소스
+    gulp.src("public/es6/**/*.js")
+        .pipe(babel({
+            presets:["@babel/preset-env"]
+        }))
+        .pipe(gulp.dest("public/dist"));
 
+    callback();
+});
+```
+
+```yml
+//오류
+[22:08:20] The following tasks did not complete: default
+[22:08:20] Did you forget to signal async completion?
+```
+callback을 사용하면 됩니다.
+
+해결 : https://stackoverflow.com/questions/36897877/gulp-error-the-following-tasks-did-not-complete-did-you-forget-to-signal-async
