@@ -55,3 +55,42 @@ currentRoom = conference_room_a; //에러가 일어납니다. conference_room_a�
 지수 : 3.0e6 = 3,000,000;
 const nan = NaN; // 숫자가 아님
 ```
+
+```js
+const small = Number.EPSILON; // 1에 더했을 때 1과 구분되는 결과를 만들 수 있는 가장 작은 값입니다. 근사치는 2.2e-16입니다.
+
+const bigInt = Number.MAX_SAFE_INTEGER; // 표현할 수 있는 가장 큰 정수
+const max = Number.MAX_VALUE; // 표현할 수 있는 가장 큰 숫자
+const minInt = Number.MIN_SAFE_INTEGER; // 표현할 수 있는 가장 작은 정수
+const min = Number.MIN_VALUE; // 표현할 수 있는 가장 작은 숫자
+const nan = Number.NaN; // NaN
+const nInf = Number.NEGATIVE_INFINITY; // -Infinity
+const nInf = Number.POSITIVE_INFINITY; // Infinity
+```
+
+## " vs '
+개인의 취향 차이지만 저는
+" : 표시될 텍스트
+' : 문자열 안에 HTML을 쓸 때. HTML 문자열을 작은따옴표로 감싸면 속성값에 큰 따옴표를 쓸 수 있기 때문입니다.
+
+## 백틱 `
+따옴표와 백틱을 섞어써도 됩니다.
+
+## 심볼
+Symbol은 유일한 토큰을 나타내기 위해 ES6에서 도입한 **새 데이터 타입**입니다. 심볼은 항상 **유일**합니다. 다른 어떤 심볼과도 일치하지 않습니다. 객체와 유사합니다. **객체는 모두 유일합니다.**
+유일하다는 점을 제외하면 **심볼은 원시 값의 특징을 모두 가지고 있으므로** 확장성 있는 코드를 만들 수 있습니다.
+
+심볼은 Symbol() 생성자로 만듭니다. 원한다면 생성자에 간단한 설명을 추가 할 수 있습니다.
+**심볼을 만들 때 new 키워드를 사용하지 않는다(원래 대문자로 시작하는 식별자는 new와 함께쓰는게 룰이다.)**
+
+# null과 undefined 규칙
+
+## null 
+프로그래머에게 허용된 타입
+
+## undefined
+자바스크립트 자체에서 사용합니다. 프로그래머도 사용할 수 있지만, 꼭 필요할 때만 사용해야 합니다. 값이 아직 주어지지 않은 변수일때 입니다.(값이 들어갈 것이라는 뜻)
+
+# 객체
+원시타입 : 단 하나의 값만 나타냄, 불변
+객체 : 여러 가지 값이나 복잡한 값을 나타낼 수 있다. 변할 수 있다. 본질은 컨테이너. 즉, 내용물이 변해도 컨테이너는 변하지 않음.
