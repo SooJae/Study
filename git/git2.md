@@ -219,6 +219,15 @@ $ git clone(복제라는 뜻 <=>init) https://github.com/git/git.git gitsrc(디�
 $ git checkout e83c5163316f89bfbde7d9ab23ca2e25604af290
  e83c5163316f89bfbde7d9ab23ca2e25604af290 에 해당하는 커밋ID로 branch checkout한것
 
+```
+//에러 발생
+fatal: 'origin' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```
+
   
 git remote add origin https://github.com/SooJae/gitfth.git
 현재 로컬저장소의 remote저장소를 https://github.com/SooJae/gitfth.git 에add시킨다.
@@ -319,5 +328,14 @@ $ git clone git@github.com:SooJae/gitfth_ssh.git gitfth_ssh
 그 후에 질문에 yes를 하고 clone성공합니다.
 
 
+$ git pull origin master
+```에러발생
+From https://github.com/SooJae/JSP-Learning
+ * branch            master     -> FETCH_HEAD
+fatal: refusing to merge unrelated histories
+```
 
+ 이 명령 옵션은 이미 존재하는 두 프로젝트의 기록(history)을 저장하는 드문 상황에 사용된다고 한다. 즉, git에서는 서로 관련 기록이 없는 이질적인 두 프로젝트를 병합할 때 기본적으로 거부하는데, 이것을 허용해 주는 것이다.
+
+$ git pull origin 브런치명 --allow-unrelated-histories
 
