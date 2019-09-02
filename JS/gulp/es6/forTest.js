@@ -7,4 +7,4 @@
 
 const hand = [4, 5, 6];
 for(let face of hand)
- console.log(`you rolled ... ${face}`);
+console.log(`you rolled ... ${face}`);
