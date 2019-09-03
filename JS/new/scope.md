@@ -98,3 +98,156 @@ console.log(typeof x); //"undefined" x는 스코프 밖에 있습니다.
 }
 console.log(typeof x); //"undefined" x는 스코프 밖에 있습니다.
 ```
+```js
+{
+//외부블록
+    let x ={color : "blue"};
+    let y = x;  // y와 x는 같은 객체를 가리킵니다.
+    let z = 3;
+    {
+        //내부블록
+        let x = 5; // 이제 바깥의 x는 가려졌습니다.
+        console.log(x); // 5
+        console.log(y.color) // "blue"; y가 가리키는 외부 스코프의 x가 가리키는 객체는 스코프 안에 있습니다.
+        y.color = "red"
+        console.log(z) // 3; z는 숨겨지지 않았습니다.
+    }
+    console.log(x);
+    console.log(x.color); // "red"; 객체는 내부 스코프에서 수정됐습니다.
+    console.log(y.color); // "red"; x와 y는 같은 객체를 가리킵니다.
+    console.log(z); // 3
+}
+
+```
+# 클로저
+**스코프를 함수 주변으로 좁히는 것**이라고 생각해도 됩니다.
+```js
+let globalFunc;
+{
+    let blockVar = 'a';
+    globalFunc = function(){
+        console.log(blockVar);
+    }
+}
+
+globalfunc(); //a
+```
+
+globalFunc는 블록안에서 값을 할당 받았습니다. 이 블록 스코프와 그 부모인 전역 스코프가 클로저를 형성합니다.
+globalFunc를 어디에서 호출하든 이 함수는 클로저에 있는 식별자에 접근할 수 있습니다.
+
+globalFunc을 호출하면 이 함수는 스코프에서 빠져나왔음에도 불구하고 blockVar에 접근할 수 있습니다. 일반적으로 **스코프에서 빠져나가면 해당 스코프에서 선언한 변수는 메모리에서 제거해도 안전**합니다.
+하지만 여기서는 스코프 안에서 함수를 정의했고, 해당 함수는 스코프 밖에서도 참조할 수 있으므로 자바스크립트는 스코프를 계속 유지합니다.
+또한 일반적으로 접근할 수 없는 것에 접근하는 효과도 있습니다.
+```js
+let f;
+{
+    let o = {note : "Safe"};
+    f = function(){
+        return o;
+    }
+}
+
+console.log(f()); //  {note : "Safe"}
+let oRef = f();
+oRef.note = "Not so safe after all!";
+console.log(oRef); //  {note : "Not so safe after all!"}
+```
+
+# 즉시 호출하는 함수 표현식
+
+6장에서 함수 표현식에 대해 설명했습니다. 함수 표현식을 사용하면 **즉시 호출하는 함수표현식(IIFE)**이라는 것을 만들 수 있습니다.
+```js
+(function(){
+    //IIFE 바디
+})();
+```
+
+함수 표현식으로 익명 함수를 만들고 그 함수를 즉시 호출합니다. IIFE의 장점은 내부에 있는 것들이 모두 자신만의 스코프를 가지지만, IIFE자체는 함수이므로 그 스코프 밖으로 무언가를 내보낼 수 있다는 겁니다.
+```js
+const message = (function() {
+    const secret = "I'm a secret!";
+    return `The secret is ${secret.length} characters long.`;
+})();
+console.log(message);
+```
+
+변수 secret은 IIFE의 스코프 안에서 안전하게 보호되며 외부에서 접근할 수 없습니다.
+IIFE는 함수이므로 무엇이든 반환할 수 있습니다. 
+```js
+const f =(function(){
+    let count = 0;
+    return function(){
+        return `${++count} times`;
+    }
+})();
+f();// 1 times
+f();// 2 times
+```
+
+# 함수 스코프와 호이스팅
+ES6에서 let을 도입하기 전에는 var를 써서 변수를 선언했고, 이렇게 선언된 변수들은 함수 스코프라 불리는 스코프를 가졌습니다.
+let으로 변수를 선언하면, 그 변수는 선언하기 전에는 존재하지 않습니다.
+아직 선언되지 않은 변수와 값이 undefined인 변수는 다릅니다.
+
+```js
+let var1;
+let var2 = undefined;
+var1 ; // undefined;
+var2; //undefined
+undefindVar // Error
+```
+let을 쓰면 변수를 선언하기 전 사용하려 할 때 에러가 일어납니다.
+```js
+x // Error
+let x =3 // 에러가 일어났으므로 여기까지 도달할 수 없습니다.
+```
+```js
+x; //undefined
+var x =3;
+x; //3
+```
+## 자바스크립트는 함수나 전역 스코프 전체를 살펴보고 var로 선언한 변수를 맨 위로 끌어올립니다.
+```js
+var x; // var x= 3에서 var를 인식하고 맨 위로 올립니다.
+x;
+x=3;
+x; // 3
+```
+
+# 함수 호이스팅
+var로 선언된 변수와 마찬가지로, 함수 선언도 스코프 맨 위로 끌어올려집니다.
+```js
+f();
+function f(){
+    console.log('f');
+}
+```
+변수에 할당된 함수표현식은 끌어올려지지 않습니다.
+```js
+f(); // error
+var f = function(){ // var건 let이건 다 에러가 난다.
+    console.log('f');
+}
+```
+
+## 사각지대
+사각지대란 let으로 선언하는 변수가 선언하기 전까지 존재하지 않는다는 직관적 개념을 잘 나타내는 표현입니다.
+스코프 안에서 변수의 사각지대는 변수가 선언되기전의 코드입니다.
+하지만 변수를 선언하기 전에 사용할 일은 거의 없습니다.
+
+### typeof
+typeof 연산자는 변수가 선언됐는지 알아볼 때 널리 쓰이고 존재를 확인하는 안전한 방법으로 알려져 있습니다.
+```js
+if(typeof x === "undefined"){
+    console.log("x는 존재하지 않습니다.");
+} else{
+    //x를 사용해도 안전한 코드
+}
+```
+ES6에서는 typeof 연산자로 변수가 정의됐는지 확인할 필요가 없으므로 **typeof를 사용할 필요가 없습니다.**
+
+# 스트릭트 모드
+
+스트릭트 모드에서는 암시적 전역변수를 허용하지 않습니다. 
+
