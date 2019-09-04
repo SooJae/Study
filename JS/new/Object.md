@@ -7,3 +7,14 @@
 
 # 프로퍼티 나열
 프로퍼티 나열에서 기억해야 할 것은 **순서가 보장되지 않는다.**는 점입니다. 여러번 테스트를 해 봤는데도 프로퍼티가 입력한 순서대로 나열될 수도 있습니다. 거의 항상 그렇게 될 수도 있습니다.
+
+
+```js
+const SYM = Symbol();
+
+const o = {a:1, b:2, c:3, [SYM]:4};
+
+for(let prop in o){
+    if(!o.hasOwnProperty(prop)) continue;
+    console.log(`${prop}:${o[prop]}`);
+}
