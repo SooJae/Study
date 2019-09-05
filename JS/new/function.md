@@ -376,3 +376,4 @@ bind에 매개변수를 넘기면 항상 그 매개변수를 받으면서 호출
 const updateBruce1949 = update.bind(bruce,1949);
 updateBruce1949("singer, songwriter"); //bruce는 이제 {name : "bruce", birthYear:1949, occupation : "singer, songwriter"} 입니다.
 ```
+
