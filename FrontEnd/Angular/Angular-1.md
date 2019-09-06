@@ -70,5 +70,69 @@ export class AppComponent {
 ```
 ### app.component.html
 ```html
-<span>{{ title }} app is running!</span>
+<div style="text-align: center">
+    <h1>{{ title }} app is running!</h1>
+
+    <app-test></app-test>
+  </div>
 ```
+
+
+이제 컴포넌트를 더 이해해봅시다.
+새로운 컴포넌트를 만듭니다.
+```yml
+$ ng g c test #ng g(generate) c(component) 파일이름
+```
+
+다음과 같이 출력
+```yml
+CREATE src/app/test/test.component.html (19 bytes)
+CREATE src/app/test/test.component.spec.ts (614 bytes)
+CREATE src/app/test/test.component.ts (261 bytes)
+CREATE src/app/test/test.component.css (0 bytes)
+UPDATE src/app/app.module.ts (388 bytes)
+```
+
+src/app/test/test.component.spec.ts 이건 왜 생성된걸까요? 필요하지 않으므로 지웁니다.
+
+이제 \<app-test> 태그를 삽입해 봅시다.
+### app.component.html
+```html
+<div style="text-align: center">
+    <h1>{{ title }} app is running!</h1>
+
+    <app-test></app-test>
+</div>
+```
+$ ng serve == $ npm start
+
+```js
+@Component({
+  selector: '.app-test'// class,
+  selector: '[app-test]'// 태그의 attribute, <div app-test>
+  //templateUrl: './test.component.html',
+  template:`<div> 
+             Inline template
+            </div>`,
+  styleUrls: [`
+  div{
+    color:red;
+  }
+  `] // 이것도 백틱으로 가능
+})
+
+export class TestComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+# templateUrl에 비해 template 사용의 장점?
+1 . class와 template을 동시에 보고 컨셉을 파악할 수 있습니다. 
+2 . html과 typescript 파일을 왔다갔다 하면서 바꿀 필요가 없습니다.
+
+컴포넌트는 클래스와 데코레이터 그리고 템플릿을 가지고 있습니다.
+app.module.ts에 import돼서 사용됩니다.
