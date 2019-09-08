@@ -146,3 +146,143 @@ System.import('./lib.js').then(libModule => {
 });
 ```
 
+# SystemJS 설정
+System.config() 함수를 사용하면 SystemJS 동작 방식을 얼마든지 바꿀 수 있다.
+그리고 System.config() 함수는 각각 다른 설정으로 여러 번 실행될 수도 있는데, 같은 옵션이 한 번 이상 설정되면 나중에 설정된 값만 유효하다.
+SystemJS 설정 함수는 HTML 파일의 script 태그 안에서 실행될 수도 있고, systemjs.config.js와 같이 별개의 파일로 분리되어 script 태그로 불러올 수도 있다.
+
+## baseURL
+System.import() 함수에 파일의 이름만 전달되면 이 옵션으로 설정된 위치에서 모듈을 찾는다. import() 함수에 모듈 이름을 지정하거나 상대 주소, 절대 주소를 지정하는 경우에는 무시한다.
+```js
+System.config({baseURL : '/app'});
+System.import('es6module.js'); // GET /app/es6module.js
+System.import('./es6module.js'); // GET /es6module.js
+System.import('http://example.com/es6module.js'); // GET http://example.com/es6module.js
+
+```
+## defaultJSExtensions
+.js가 붙는다. .js가 붙은 파일은 붙지 않는다.
+```js
+System.config({defaultJSExtensions:true});
+System.import('./es6module'); // GET /es6module.js
+System.import('./es6module.js')// GET /es6module.js
+System.import('./es6module.ts.js')// GET /es6module.ts.js
+```
+
+## map
+map 옵션을 설정하면 미리 지정한 이름으로 모듈을 참조할 수 있는 맵을 만든다.
+이 맵은 System.import() 함수에 상대 주소나 절대 주소를 전달하는 경우에는 사용되지 않으며, BaseURL 설정의 영향을 받는다.
+
+
+```js
+System.config({map: {'es6module.js' : 'exSixModule.js'}});
+System.import('es6module.js'); // GET /esSixModule.js
+System.import('./es6module.js'); // GET /es6module.js
+
+// map + baseURL 사용하기
+System.config({
+    baseURL:'/app',
+    map:{ 'es6module' : 'esSixModule.js'}
+});
+System.import('es6module'); // GET /app/esSixModule.js
+```
+
+## package
+packages 옵션을 사용하면 SystemJS의 옵션을 패키지 단위로 설정할 수 있다.
+아래 코드는 System.import('app') 명령을 실행하면 TypeScript로 작성된 main_router_sample.ts 파일을 불러오는 예제 코드다.
+
+```js
+System.config({
+    packages : {
+        app : {
+            defaultExtension : 'ts',
+            main : 'main_router_sample'
+        }
+    }
+});
+System.import('app');
+```
+
+## paths
+paths옵션은 map과 비슷한데, 추가로 특수문자 매칭을 지원한다.
+paths 옵션은 baseUrl 옵션 적용 이후에, map 옵션 적용 이전에 적용된다. map과 paths 옵션을 동시에 사용할 수도 있는데, paths는 로더 표준안에 있고 ES6 모듈 로더 구현안에도 있지만, map은 SystemJS에서만 제공하는 방식이라는 것에 주의해야한다.
+```js
+System.config({
+    baseURL : '/app',
+    map : {'es6module' : 'esSixModule.js'},
+    paths : {'*' : 'lib/*'}
+});
+System.import('es6module'); //GET /app/lib/esSixModule.js
+```
+이 책에서는 System.import('app')과 같은 코드를 자주 볼 수 있는데, 미리 map이나 package 항목을 설정해두기위해 이렇게 사용할 수 있다.
+```js
+import { Component } from '@angular/core';
+```
+와 같은 코드를 보면 @angular는 Angular 프레임워크가 있는 폴더를 매핑한 이름이라고 이해하면 된다. core는 그 패키지의 하위 폴더이며, 시작점이 되는 파일에 지정한다. 예를 들면 다음과 같이 설정한다.
+```js
+packages : {
+    '@angular/core' : {main : 'index.js'}
+}
+```
+
+## transpiler
+transpiler 옵션을 사용하면 애플리케이션 모듈을 불러올 때 어떤 코드 변환기를 사용할지 정할 수 있다. 이때 모듈로 불러오는 파일에 **import나 export 구문이 없다면 변환되지 않는다.**
+
+```js
+System.config({
+    transpiler : 'traceur',
+    map : {
+        'traceur' : 'https://unpkg.com/traceur@0.0.111/bin/traceur.js'
+    }
+});
+```
+
+# package.json
+script 항목은 커맨드 라인에서 npm 명령을 실행했을 때 수행되는 작업을 정의하며, 위 로드에서는 npm start 명령을 실행하면 live-server를 시작한다. dependencies 항목에서는 애플리케이션이 배포되어 실행되는 환경에 필요한 서드파티 라이브러리나 툴 목록을 정의한다.
+
+```yml
+"script" : {
+    "start" : "live-server"
+},
+"dependencies" : {
+    "@angular/common" : "^4.1.0",
+    "@angular/compiler" : "^4.1.0",
+    "@angular/core" : "^4.1.0",
+    "@angular/forms" : "^4.1.0",
+    "@angular/http" : "^4.1.0",
+    "@angular/platform-browse" : "^4.1.0",
+    "@angular/platform-browser-dynamic" : "^4.1.0",
+    "@angular/router" : "^4.1.0",
+    "core-js" : "^2.4.1",
+    "rxjs" : "5.3.0",
+    "systemjs" : "0.19.47",
+    "zone.js" : "0.8.5",
+    "bootstrap" : "^3.3.7",
+    "jquery" : "^3.2.1"
+},
+"devDependencies" : {
+    "live-server" : "1.2.0",
+    "typescript" : "^2.3.3"
+}
+```
+scripts : 커맨드 라인에서 npm 명령을 실행했을 때 수행되는 작업을 정의하며, 위 코드에서는 npm start 명령을 실행하면 live-server를 시작한다.
+dependencies : 애플리케이션이 배포되어 실행되는 환경에 필요한 서드파티 라이브러리나 툴 목록을 정의한다.
+devDependencies : 개발 환경에는 사용하지만 운영 환경에 사용하지 않는 라이브러리를 따로 정의한다. 
+ 이렇게 dependencies 항목과 devDependencies에 있는 typescript를 보면 TypeScript
+컴파일러도 개발 단계에서만 필요한 것을 확인할 수 있으며, 운영 환경에서는 TypeScript 코드를 JavaScript로 변환해서 배포할 것이라고 짐작할 수 있다.
+
+라이브러리 이름 뒤에는 버젼을 적는다. 버전 숫자 앞에있는 **^ 기호**는 지정된 버전이나 지정된 버전 이상이 필요하다는 것을 의미하며, ^ 기호를 사용하지 않으면 지정된 버전을 설치한다.
+
+Angular를 개발하면서 **모듈 로더**는 SystemJS를 사용한다고 했다. 이 SystemJS를 만든 Guy Bedford는 패키지 매니저인 jspm을 만들기도 했는데, jspm은 내부에서 SystemJS를 사용하기 때문에 SystemJS를 사용한다면 jspm도 쉽게 사용할 수 있다.
+
+```js
+var x = require('module1');
+var y = require('module2');
+var z = require('module3');
+```
+module2 로딩은 module1 로딩이 끝나지 않으면 시작되지 않으며, module3도 module2가 완전히 로딩되어야 시작된다.
+
+yarn은 기존의 npm 패키지 매니저가 만든 package.json 파일과 node_modules 폴더를 그대로 사용하면서, 실행 속도를 크게 개선했다. yarn은 npm 저장소인 npmjs.org와는 다르게 독자적인 패키지를 저장소를 마련해두고 있지만, 최신버전은 비슷하게 업데이트 된다.
+책에서는
+yarn : 기본 패키지 매니저
+npm : 전역에 패키지를 설치
