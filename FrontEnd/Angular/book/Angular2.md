@@ -109,3 +109,45 @@ Angular 코드가 .ts 파일 그대로 배포되고 브라우저에서 동적으
 app.component.ts : 컴포넌트를 정의한다.
 app.module.ts : 컴포넌트를 사용하는 모듈을 정의한다.
 main.ts : 모듈을 부트스트랩한다.
+
+
+# ngFor
+```html
+<div *ngFor="let prod of products" class="col-sm-4 col-lg-4 col-md-4">
+    <auction-product-item [product]="prod"></auction-product-item>
+</div>
+```
+ngFor 디렉티브는 컴포넌트의 template 안에서 데이터의 개수만큼 HTML 마크업을 렌더링 한다.
+예시의 ngFor 디렉티브가 div 태그에 사용되었기 때문에, 데이터의 개수마다 auction-product-item 를 자식 엘리먼트로 갖는 div가 렌더링된다.
+그리고 상품 정보를 ProductComponent에 전달하기 위해 대괄호를 사용해서 \[product]="prod"와 같은 형태의 프로퍼티 바인딩을 사용하는데, \[product]는 \<auction-product>로 표현되는 컴포넌트에서 프로퍼티의 이름을 product로 사용할 것을 의미하며, prod는 이 템플릿에서 *ngFor 디렉티브에 의해 사용되는 지역 변수로, let prod의 의미와 동일하다.
+
+
+# @Input
+```js
+@Input() product : Product; // product프로퍼티가 부모 컴포넌트에서 접근할 수 있도록 컴포넌트 외부로 공개되어 있고, 부모 컴포넌트에서 값을 지정할 수 있다는 것을 의미한다.
+```
+
+# star
+```js
+export default class StarsComponent implements OnInit {
+    @Input() count : number = 5; //데이터 바인딩 표현식을 사용해서 부모 컴포넌트에서 count와 rating 변수를 설정할 수 있도록 한다.
+    @Input() rating : number = 0;
+    stars : boolean[] = []; 
+
+    ngOnInit() { // 부모 컨포넌트에서 전달되는 값으로 stars 변수를 초기화한다.
+        for(let i = 1; i<=this.count; i++){
+            this.stars.push(i > this.rating); // true와 false로 저장된다.
+            //false면 별을 색칠한다. 4.5점일때 0,1,2,3,4는 false가 들어간다.
+        }
+    }
+}
+```
+이 방식 대신 stars 프로퍼티에 게터(getter)를 사용해서 값이 할당될 때마다 원하는 로직을 동작하게 만들 수도 있지만, 게터는 Angular가 모델과 뷰를 동기화 할때마다 계속 실행되기 때문에 같은 값이 할당되어도 여러 번 계산되는 단점이 있다.
+
+에러!
+```js
+(SystemJS) Cannot read property 'base64encode' of undefined
+```
+해결~
+https://github.com/Microsoft/TypeScript/issues/24638
+타입스크립트 버전을 2.9 이상으로 바꾼다.

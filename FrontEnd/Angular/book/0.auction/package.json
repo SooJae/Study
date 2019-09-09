@@ -1,6 +1,6 @@
 {
-  "name": "0.auction",
-  "description": "An initial yarn-managed project for Chapter 2",
+  "name": "auction_ch2",
+  "description": "Sample Online Auction from Chapter 2",
   "private": true,
   "scripts": {
     "start": "live-server"
@@ -9,19 +9,17 @@
     "@angular/common": "^4.1.0",
     "@angular/compiler": "^4.1.0",
     "@angular/core": "^4.1.0",
-    "@angular/forms": "^4.1.0",
-    "@angular/http": "^4.1.0",
     "@angular/platform-browser": "^4.1.0",
     "@angular/platform-browser-dynamic": "^4.1.0",
-    "@angular/router": "^4.1.0",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.2.1",
     "rxjs": "5.3.0",
     "systemjs": "0.19.47",
-    "zone.js": "0.8.5"
+    "zone.js": "^0.8.5"
   },
   "devDependencies": {
-    "live-server": "1.2.0"
+    "live-server": "1.2.0",
+    "typescript": "^3.0"
   }
 }
