@@ -98,3 +98,14 @@ System.config({
 
 Angular 패키지에 있는 소스코드를 사용하지 않고, 번들링된 버전을 사용했다. 번들링된 코드는 원래 있던 소스 코드를 압축해서 크기를 줄였다.
 SystemJS 설정파일의 package 항목에서는 app이라는 이름으로 스크립트 파일들의 진입점을 main.ts로 매핑하고 있기 때문에 index.html 파일에서 System.import(app)이라고 사용하면 main.ts파일을 불러온다.
+그리고 TypeScript 컴파일러의 옵션을 지정하는 내용도 추가한다. 이 내용은 `tsconfig.json`파일로 따로 작성할 수도 있다.
+SystemJS에서 스크립트 파일을 불러올 때 내부적으로 tsc를 사용해서 TypeScript코드를 JavaScript로 변환합니다.
+```
+Angular 코드가 .ts 파일 그대로 배포되고 브라우저에서 동적으로 컴파일하는 방식 JIT(just-in-time) 컴파일이라고 한다. 
+그리고 .ts 파일의 코드가 Angular 컴파일러에 의해 미리 컴파일 되어 배포되는 방식을 AoT(ahead-of-time) 컴파일이라고 한다. 이 책에서는 JIT 컴파일 방식을 사용한다.
+```
+
+### 애플리케이션 코드는 3개의 파일로 만든다.
+app.component.ts : 컴포넌트를 정의한다.
+app.module.ts : 컴포넌트를 사용하는 모듈을 정의한다.
+main.ts : 모듈을 부트스트랩한다.
