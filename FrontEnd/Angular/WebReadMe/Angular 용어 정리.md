@@ -69,3 +69,26 @@ BrowserModule은 **NgIf 및 NgFor**와 같은 **빌트인 디렉티브**와 빌�
 
 # Angular의 모듈(NgModule)
 관련된 Angular 구성 요소를 하나로 묶어 애플리케이션을 구성하는 하나의 단위로 만드는 역할을 한다. 컴포넌트, 디렉티브, 서비스 등의 Angular 구성요소는 **모듈에 등록되어야 사용할 수 있다**. Angular의 모듈은 이후에 자세히 살펴볼 것이다.
+
+# @Component 데코레이터
+일반 클래스를 컴포넌트화하기 위해서는 @Component 데코레이터를 해당 클래스 바로 앞에서 호출하여 Angular에게 해당 클래스가 일반 클래스가 아니라 **컴포넌트 클래스임을 알려야 한다**. 
+@Component 데코레이터는 자신의 바로 아래에 있는 클래스를 컴포넌트 클래스로 인식한다.
+
+
+## 클래스 데코레이터
+@Component, @NgModule, @Directive, @Injectable, @Pipe
+
+## 프로퍼티 데코레이터
+@Input, @Output, @ViewChild, @ViewChildren, @ContentChild, @ContentChildren, @HostBinding
+
+## 메소드 데코레이터
+@HostListener
+
+## 파라미터 데코레이터
+@Inject
+
+# 메타데이터
+일반 클래스를 컴포넌트화하기 위해서는 @Component 데코레이터를 해당 클래스 바로 앞에서 호출하여 Angular에게 해당 클래스가 **일반 클래스가 아니라 컴포넌트 클래스임을 알려야 한다**. @Component 데코레이터의 또 하나의 역할은 컴포넌트 **설정 정보를 담고 있는 메타데이터 객체를 인자로 전달받아서 컴포넌트 클래스에 반영**하는 것이다.
+
+# Selector 프로퍼티
+seletor는 컴포넌트의 뷰를 마크업으로 표현할 때 사용하는 이름으로 템플릿에서 HTML 요소의 태그 이름처럼 사용한다. Angular는 다른 애플리케이션의 selector 또는 HTML 요소와 충돌을 방지하기 위해 접두사(prefix)를 추가하여 케밥 표기법(예를 들어 app-todo)으로 seletor를 명명하도록 권장하고 있다. 기본 접두사는 app이며 이것은 angular.json에서 확인할 수 있다. 프로젝트의 성격에 맞추어 독자적인 접두사를 사용하는 것이 좋으나 우선은 기본 접두사인 app을 사용하도록 한다.
