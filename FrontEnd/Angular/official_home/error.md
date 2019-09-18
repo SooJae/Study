@@ -81,12 +81,32 @@ ngOnInit() {
 
 # 폼 빌더 메서드가 뭐야?
 FormBuilder는 FormControl 인스턴스 생성을 syntactic sugar로 짧게 줄여주는것.
+- FormControl
+- FormGroup
+- FormArray
+  
+FormBuilder는 복잡한 폼을 만드는데 필요한 보일러 플레이트를 줄여준다.
 
 ```js
-// 폼 빌더 메소드
+// 폼 빌더 메소드 
     this.checkoutForm = this.formBuilder.group({
-      name: '',
+        name: '',
       address: ''
     });
   }
 ```
+# boilerplate ?
+보일러플레이트는 프로그래밍에서 상용구 코드를 말한다. 어떤일을 하기위해서 꼭 작성해야 하는 코드로 자바에서는 클래스의 getter, setter 메소드를 말한다.
+
+# FormBuilder 메소드 종류
+## group()
+새로운 폼 그룹 인스턴스를 생성한다.
+
+## control()
+상태, 유효성 검사, 그리고 옵션을 가진 FormControl을 생성한다.
+
+## array()
+배열
+
+
+디렉티브는 컴포넌트와 같은 라이크싸이클을 갖습니다.
