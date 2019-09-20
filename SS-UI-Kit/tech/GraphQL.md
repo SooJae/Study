@@ -1,0 +1,278 @@
+# GraphQL
+
+Graph QL은 SQL와 마찬가지로 쿼리 언어이다. 
+## 차이점
+SQL : 백엔드 시스템에서 작성하고 호출   
+GQL : 클라이언트 시스템에서 작성하고 호출
+
+### SQL 쿼리
+```sql
+SELECT plot_id, species_id, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
+```
+
+### GQL 쿼리
+```
+{
+  hero {
+    name
+    friends {
+      name
+    }
+  }
+}
+```
+
+HTTP API 자체가 특정 **데이터베이스**나 **플랫폼**에 종속적이지 않는 것처럼 GQL 역시 종속적이지 않는다.
+심지어 네트워크 방식에도 종속적이지 않는다.
+일반적으로 GQL의 인터페이스간 송수신은 네트워크 레이어 L7의 HTTP POST 메서드와 웹소켓 프로토콜을 활용한다. 
+필요에 따라서는 얼마든지 L4의 TCP/UDP를 활용하거나 심지어 L2 형식의 이더넷 프레임을 활용 할 수도 있다.
+
+### GraphQL 파이프라인
+![slickgrid_formatters](/assets/tech/img/graphql-pipeline.png)
+
+
+# VS REST API
+REST API는 **URL, METHOD등을 조합**하기 때문에 **다양한 Endpoint**가 존재 한다. 반면, GQL은 단 하나의 Endpoint가 존재 한다. 또한, GQL API에서는 불러오는 데이터의 종류를 쿼리 조합을 통해서 결정 한다.   
+ 예를 들면, REST API에서는 각 Endpoint마다 데이터베이스 SQL 쿼리가 달라지는 반면, GQL API는 GQL 스키마의 타입마다 데이터베이스 SQL 쿼리가 달라진다.
+
+![slickgrid_formatters](/assets/tech/img/graphql-stack.png)
+---
+# HTTP와 GQL의 기술 스택 비교
+![slickgrid_formatters](/assets/tech/img/graphql-mobile-api.png)
+
+위 그림처럼, gql API를 사용하면 여러번 네트워크 호출을 할 필요 없이, 한번의 네트워크 호출로 처리 할 수 있다.
+
+# GraphQL의 구조
+## 쿼리/뮤테이션(query/mutation)
+쿼리와 뮤테이션 그리고 응답 내용의 구조는 상당히 직관적이다. 요청하는 쿼리문의 구조와 응답 내용의 구조는 거의 일치한다.
+
+### GraphQL 쿼리문(좌측)과 응답 데이터 형식(우측)
+![slickgrid_formatters](/assets/tech/img/graphql-example.png)
+
+사실 쿼리와 뮤테이션은 큰 차이가 없다.   
+쿼리 : 데이터를 읽는데(R) 사용   
+뮤테이션 : 데이터를 변조(CUD)하는데 사용
+
+```
+{
+  human(id: "1000") {
+    name
+    height
+  }
+}
+
+query HeroNameAndFriends($episode: Episode) {
+  hero(episode: $episode) {
+    name
+    friends {
+      name
+    }
+  }
+}
+```
+
+하나는 처음 시작이 중괄호(‘{‘) 문자가 붙어있다. 다른 하나는 앞에 query가 붙어있다.   
+이것을 이해하는데에는 **오퍼레이션 네임**과 **변수**의 쓰임새를 살펴보는 것이 도움이 된다.
+일반적인 경우 클라이언트에서 static한 쿼리문을 작성하지는 않을 것이다. 주로 정보를 불러올때 **id 값**이나, **다른 인자 값**을 가지고 데이터를 불러 올 것이다. 
+GQL에는 쿼리에 **변수**라는 개념이 있는데, 이 개념은 이러한 용처를 위해 존재 하는 것이다. 
+GQL을 구현한 클라이언트에서는 이 변수에 프로그래밍으로 값을 할당 할 수 있는 **함수 인터페이스**가 존재한다.  
+react apollo client의 경우에는 variables 라는 파라메터에 원하는 값을 넣어주면 된다.
+
+```
+query getStudentInfomation($studentId: ID){
+  personalInfo(studentId: $studentId) {
+    name
+    address1
+    address2
+    major
+  }
+  classInfo(year: 2018, studentId: $studentId) {
+    classCode
+    className
+    teacher {
+      name
+      major
+    }
+    classRoom {
+      id
+      maintainer {
+        name
+      }
+    }
+  }
+  SATInfo(schoolCode: 0412, studentId: $studentId) {
+    totalScore
+    dueDate
+  }
+}
+```
+**오퍼레이션 네임 쿼리**는 매우 편리 하다. 굳이 비유하자면 쿼리용 함수다. 데이터베이스에서의 **프로시져(procedure) 개념과 유사하다고 생각하면 된다.** 이 개념 덕분에 REST API를 호출할때와 다르게, 한번의 인터넷 네트워크 왕복으로 원하는 모든 데이터를 가져 올 수 있다.
+
+GQL이 제공하는 추가 기능 덕분에 백엔드 프로그래머와 프론트엔드 프로그래머의 협업 방식 에도 영향을 준다. 
+이전 협업 방식(REST API)에서는 프론트앤드 프로그래머는 백앤드 프로그래머가 작성하여 전달하는 API의 request / response의 형식에 의존하게 된다.   
+그러나, GQL을 사용한 방식에 서는 이러한 의존도가 많이 사라진다. 다만 여전히 데이터 schema에 대한 협업 의존성은 존재한다.
+
+# 스키마/타입(schema/type)
+### 오브젝트 타입과 필드
+```js
+type Character {
+  name: String!
+  appearsIn: [Episode!]!
+}
+```
+
+```
+오브젝트 타입 : Character   
+필드 : name, appearsIn   
+스칼라 타입 : String, ID, Int 등
+느낌표(!) : 필수 값을 의미(non-nullable)
+대괄호([, ]) : 배열을 의미(array)
+```
+
+
+
+
+# 리졸버(resolver)
+데이터베이스 사용시, 데이터를 가져오기 위해서 sql을 작성 했다.   
+또한, 데이터베이스에는 데이터베이스 어플리케이션을 사용하여 데이터를 가져오는 구체적인 과정이 구현 되어 있다.   
+그러나 GQL 에서는 데이터를 가져오는 구체적인 과정을 직접 구현 해야한다.   
+GQL 쿼리문 파싱은 대부분의 GQL 라이브러리에서 처리를 하지만, GQL에서 데이터를 가져오는 구체적인 과정은 resolver(이하 리졸버)가 담당하고, 이를 직접 구현 해야 한다. 
+
+프로그래머는 리졸버를 직접 구현해야하는 부담은 있지만, 이를 통해서 **데이터 source의 종류에 상관 없이 구현이 가능**하다.   
+예를 들어서, 리졸버를 통해 
+1 . 데이터를 데이터베이스에서 가져 올수 있다
+2 . 일반 파일에서 가져 올 수 있다
+3 . 심지어 Http, SOAP와 같은 네트워크 프로토콜을 활용해서 원격 데이터를 가져올 수 있다.
+
+덧붙여서, 이러한 특성을 이용하면 **legacy 시스템을 GQL 기반으로 바꾸는데** 활용 할 수 있다.
+
+
+GQL 쿼리에서는 각각의 **필드마다 함수가 하나씩 존재** 한다고 생각하면 된다.   
+이 함수는 다음 타입을 반환한다. 이러한 각각의 함수를 리졸버(resolver)라고 한다. 
+만약 필드가 **스칼라 값(문자열이나 숫자와 같은 primitive 타입)**인 경우에는 실행이 종료된다. 즉 더 이상의 **연쇄적인 리졸버 호출**이 일어나지 않는다.    
+하지만 필드의 타입이 스칼라 타입이 아닌 **우리가 정의한 타입**이라면 해당 타입의 리졸버를 호출되게 된다.
+
+이러한 연쇄적 리졸버 호출은 **DFS(Depth First Search)로 구현 되어있을것으로 추측**한다. 이점이 바로 GQL이 Graph라는 단어를 쓴 이유가 아닐까 생각한다. 연쇄 리졸버 호출은 여러모로 장점이 있다. 연쇄 리졸버 특성을 잘 활용하면 DBMS의 관계에 대한 쿼리를 매우 쉽고, 효율적으로 처리 할 수 있다. 예를들어 GQL의 query에서 어떤 타입의 필드 중 하나가 해당 타입과 1:n의 관계를 맺고 있다고 가정해본다.
+
+```
+type Query {
+  users: [User]
+  user(id: ID): User
+  limits: [Limit]
+  limit(UserId: ID): Limit
+  paymentsByUser(userId: ID): [Payment]
+}
+
+type User {
+	id: ID!
+	name: String!
+	sex: SEX!
+	birthDay: String!
+	phoneNumber: String!
+}
+
+type Limit {
+	id: ID!
+	UserId: ID
+	max: Int!
+	amount: Int
+	user: User
+}
+
+type Payment {
+	id: ID!
+	limit: Limit!
+	user: User!
+	pg: PaymentGateway!
+	productName: String!
+	amount: Int!
+	ref: String
+	createdAt: String!
+	updatedAt: String!
+}
+```
+
+
+여기에서는 User와 Limit는 1:1의 관계이고 User와 Payment는 1:n의 관계입니다.
+
+```
+{
+  paymentsByUser(userId: 10) {
+    id
+    amount
+  }
+}
+{
+```
+
+```
+{
+  paymentsByUser(userId: 10) {
+    id
+    amount
+    user {
+      name
+      phoneNumber
+    }
+  }
+}
+```
+
+위 두 쿼리는 동일한 쿼리명을 가지고 있지만, 호출 되는 리졸버 함수의 갯수는 아래가 더 많다. 
+각각의 리졸버 함수에는 내부적으로 데이터베이스 쿼리가 존재한다. 
+이 말인즉, 쿼리에 맞게 필요한 만큼만 최적화하여 호출 할 수 있다는 의미이다.   
+내부적으로 로직 설계를 어떻게 하느냐에 따라서 달라 질 수 있겠지만, 이러한 재귀형의 리졸버 체인을 잘 활용 한다면, 효율적인 설계가 가능 하다. (기존에 REST API 시대에는 정해진 쿼리는 무조건 전부 호출이 되었다.)
+
+
+리졸버 함수는 다음과 같이 총 4개의 인자를 받는다.
+```
+Query: {
+    paymentsByUser: async (parent, { userId }, context, info) => {
+        const limit = await Limit.findOne({ where: { UserId: userId } })
+        const payments = await Payment.findAll({ where: { LimitId: limit.id } })
+        return payments        
+    },  
+  },
+  Payment: {
+    limit: async (payment, args, context, info) => {
+      return await Limit.findOne({ where: { id: payment.LimitId } })
+    }
+  }
+  ```
+
+# GraphQL을 활용 할 수 있게 도와주는 다양한 라이브러리들
+gql 자체는 쿼리 언어이다. 이것 만으로는 할 수 있는 것이 없습니다. gql을 실제 구체적으로 활용 할 수 있도록 도와주는 라이브러리들이 몇가지 존재 합니다. gql 자체는 개발 언어와 사용 네트워크에 완전히 독립적입니다. 이를 어떻게 활용 할지는 여러분에게 달려 있습니다.
+
+대표적인 gql 라이브러리 셋에 대한 링크는 2개를 소개합니다. 릴레이는 GraphQL의 어머니인 Facebook이 만들었습니다. 하지만 개인적인 의견으로는 현재(2019년 7월)버전의 릴레이는 사용하기 매우 번거롭게 디자인 되어 있다고 생각합니다. 개인적으로는 아폴로가 사용하기 편했습니다.
+
+![slickgrid_logic](/assets/tech/img/graphql-business-layer.png)
+
+앞서서 gql에 대한 개념을 익혔고, 비지니스 로직 작성을 간단히 보여드리겠습니다. 구현시, 비지니스 로직은 실제 리졸버 함수에 담지 않습니다. 로직은 비지니스 로직 레이어 (다른 파일의 다른 함수)에 작성을 하는 것을 권장합니다. 위 그림에도 나왔지만 이는 REST API를 제작할때 사용하는 패턴과 동일한 패턴입니다.
+
+```
+ requestPaymentSession: async (parent, { 
+      pgId, name, sex, birthDay, phoneNumber, amount, productName, ref 
+    }, context, info) => {
+      const ret = await requestPaymentSession({ pgId, name, birthDay, phoneNumber, sex, amount, productName, ref })
+
+      return removeSymbol(ret)
+    },
+    requestPaymentApprove: async (parent, {
+      sessionKey, authNumber
+    }, context, info) => {
+      const ret = await requestApprovePayment({ sessionKey, authNumber })
+
+      return removeSymbol(ret)
+    }
+```
+
+실제 구현한 비지니스 로직 관련 리졸버
+
+# 정리
+gql은 퍼포먼스적인 장점이 분명 존재합니다. 하지만 개인적으로 더 관심이 가는 장점은 바로 생산성 향상입니다. gql은 기존 백앤드-프론트앤드 협업 문화를 많이 바꿀것으로 예상합니다. gql의 협업 구조상 프론트앤드쪽에 조금 더 할일이 많아지고 힘이 실리는 느낌입니다. 에자일하게 웹사이트 프로젝트를 진행하는데 gql이 많은 도움이 될 것이라고 생각합니다.
+
+개발자 여러분에게 안타까운 소식을 전하자면, 이 글을 읽었다고 해서 gql을 바로 실전에서 사용하기는 쉽지 않을 것입니다. 이 글에서는 gql의 클라이언트 모듈에 대해서는 구체적으로 언급하지도 않았습니다. 특히 react를 혼합해서 사용하려면, 또 다시 가파른 고개를 넘어서야 제대로 사용 할 수 있을 것입니다. 요즘 react는 flux 아키텍쳐가 점령 했습니다. flux 아키텍쳐는 아름답지만, flux와 함께 gql을 구현하는 일은 또 다른 숙제가 될 것입니다. 개인적인 생각으로는 apollo client의 local statment management 기능은 flux 아키텍쳐를 구체화하여 구현한 redux를 완전히 대처 가능하다고 생각합니다. 추후에 기회가 된다면 react와 apollo 조합에 대해서 이야기 해볼까 합니다. 항상 공부하는 개발자의 모습은 아름답습니다. 이 세상의 모든 개발자 화이팅입니다.
+
+
+참조 : https://tech.kakao.com/2019/08/01/graphql-basic/   
+https://bricoler.tistory.com/1?category=778866
