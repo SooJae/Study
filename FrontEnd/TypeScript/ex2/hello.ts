@@ -6,5 +6,8 @@ let timeoutPromise = new Promise((resolve, reject) => {
 
 timeoutPromise.then(console.log);
 
+import add from './util';
+const value = add(1,2);
+console.log(value);
 
-// $ tsc hello.ts --lib es5, es2015.promise, es2015.iterable, dom
+// $ tsc hello.ts --lib es2015,dom
