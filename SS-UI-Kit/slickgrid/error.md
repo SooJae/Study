@@ -67,3 +67,14 @@ Math가 인식을 못받는다 => tsconfig.json에 들어가서 lib을 "es2018" 
 
 By Default 기본적으로 
 So if 따라서
+
+
+# 시그니처 (함수)
+함수 시그니처(타입 시그니처, 메소드 시그니처)는 functions 그리고 methods의 입력과 출력을 정의합니다.
+
+시그니처는 다음을 포함합니다:
+
+parameters와 그들의 types
+반환값과 타입
+던져지거나 콜백으로 반환되는 exceptions
+object-oriented 프로그램에서 메소드의 접근 권한에 대한 정보 (public, static, 혹은 prototype와 같은 키워드들).

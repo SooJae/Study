@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HEROES } from "../mock-heroes";
 import { HeroService } from "../hero.service";
+
+
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
@@ -25,7 +27,19 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
 
+  // getHeroes(): Observable<Hero[]> {
+  //   // this.heroes = this.heroService.getHeroes();
+  //   return of(HEROES);
+  // }
+
+
+  // 기존코드
+  // getHeroes(): void {
+  //   this.heroes = this.heroService.getHeroes();
+  // }
+
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroes()
+        .subscribe(heroes => this.heroes = heroes);
   }
 }
