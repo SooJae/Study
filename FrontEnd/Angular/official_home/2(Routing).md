@@ -126,3 +126,102 @@ outlet에 로드된 구성 요소와 연관된 경로에 대한 정보에 대한
 
 ## ParamMap
 경로와 관련된 필수 및 선택적 매개 변수에 대한 액세스를 제공하는 맵입니다. 맵은로 단일 값 get() 또는 여러 값을 검색하는 것을 지원합니다 getAll().
+
+# 라우터 가드
+라우트 가드는 사용자에게 allow와 disallow기능을 제공한다. (예: 로그인시와 로그아웃시)
+사용자는 앵귤러 가드를 사용하여 컴포넌트를 지키거나 모듈을 완성시킨다.
+
+라우트를 지키기 위해서, 사용자는 먼저 `CanActivate`인터페이스를 서브클래싱하여 guard를 만들어야 합니다. 그리고 canActivate() 메소드를 오버라이딩한다 (boolean값을 사용하기 위해, ture값은 접근할 수 있다는 뜻) 그리고 canActivate속성을 통해 경로 정의에 추가해야 합니다. 
+
+## 예
+```js
+{ path:  'product/:id, canActivate:[ExampleGuard], component:  ProductDetailComponent }
+```
+
+# CanActivate인터페이스를 상속받는 ExampleGuard를 만들어보자
+
+```js
+class MyGuard implements CanActivate {
+  canActivate(){
+    return true;
+  }
+}
+```
+canActivate() 메서드는 항상 true를 리턴하기 때문에, 이 가드는 항상 `ProductDetailComponent`에 접근한다.
+
+# The Router Outlet
+`Router-Outlet`은 `RouterModule`에서 export하는 디렉티브다. 그리고 placeholder로서 라우터에 지시한다. 그 라우터는 컴포넌트가 필요한 부분이다. 그 컴포넌트는 router outlet을 갖고있는데, 이것은 application shell을 참조한다.
+
+```html
+<router-outlet></router-outlet>
+```
+Angular 라우터는 동일한 애플리케이션에서 하나 이상의 outlet을 지원한다. 메인 outlet(or top-leve)은 `primary outlet`이라 불린다. 다른 outlet들은 `secondary outlet`이라 불린다.
+
+사용자는 target outlet에 `outlet을 이용하여 명시할 수 있다.
+
+# 네비게이션 디렉티브
+앵귤러 라우터는 네비게이션을 위한 두개의 디렉티브를 제공한다. 라우터링크 디렉티브는 a태그 안에있는 href속성을 `routerLinkActive`로 대체한다.
+
+## 예
+```js
+<a [routerLink]="'/products'">Products</a>
+```
+
+
+**forRoot() 스태틱 메서드**는
+1. 모든 디렉티브들, 
+2. 주어진 라우터들 
+3. 그리고 라우터 서비스 
+그 자체들이 포함된 모듈을 만든다.
+
+**forChild() 스태틱 메서드**는 
+1. 모든 디렉티브들
+2. 주어진 라우터들
+3. 하지만 라우터 서비스는 포함이 **되지 않는다**.
+
+### app.component.html
+```html
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <!-- [...] -->
+<router-outlet></router-outlet>
+```
+
+# 메인 어플리케이션 모듈 안의 라우팅 모듈
+```js
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    // AppRoutingModule
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+우리는 `./app-routing.module`로부터 `AppRoutingModule`를 임포트했다. 그리고 `AppModule`배열을 `imports` 가능.
+
+끝!
+
+# 데이터를 가져오기위한 서비스 세팅
+이것은 Angular에서 라우팅이 작동하는 방식의 일부가 아니지만 데모 애플리케이션의 목적을 위해 애플리케이션 컴포넌트에 일부 데이터를 표시하는 데 사용할 수있는 서비스를 작성해야합니다. 데이터를 제공하는 백엔드 프로젝트가 없으므로 angular-in-memory-web-api패키지 에서 사용 가능한 In-Memory Web API 인 Angular의 매우 유용한 기능을 사용할 수 있습니다.
+
+이 모듈은 요청을 가로 채서 백엔드 웹 애플리케이션을 시뮬레이트하고 HttpClient일부 데이터를 작성하고 제공해야하는 메모리 저장소로 리디렉션합니다.
+
+나중에 실제 백엔드가있는 경우 간단히 **In-Memory Web API 모듈**을 **제거**하면 모든 요청이 실제 백엔드로 이동합니다.
+
+먼저 터미널에서 다음 명령을 사용하여 npm에서 패키지를 설치하십시오.
+
+`$npm install --save angular-in-memory-web-api`
+그 다음 데이터를 리턴하는 서비스를 만들어봅시다.
+`ng generate service data`
