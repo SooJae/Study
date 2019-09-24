@@ -2,6 +2,32 @@
 
 ---
 
+
+
+
+그리고 @NgModule.exports 배열을 추가하고 이 배열에 RouterModule을 등록하면 **AppModule 범위에 있는 모든 컴포넌트에 라우터와 관련된 디렉티브를 사용할 수 있습니다.**
+
+이 내용으로 수정하면 AppRoutingModule이 다음과 같이 정의될 것입니다:
+```js
+import { NgModule }             from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+@NgModule({
+  exports: [ RouterModule ]
+})
+export class AppRoutingModule {}
+```
+
+
+# RouterModule.forRoot()
+라우팅 규칙을 적용하려면 브라우저에서 주소가 변경되는 것을 감지하기 위해 라우터를 초기화해야 합니다.
+
+라우터를 초기화하기 위해 @NgModule.imports 배열에 RouterModule을 추가하는데, 이 때 RouterModule.forRoot() 함수를 사용하면서 이전에 정의한 routes를 인자로 전달합니다:
+
+content_copy
+imports: [ RouterModule.forRoot(routes) ],
+
+
 # 라우터의 동작
 1 . 주소표시줄에 **URL을 새로 입력해서 새로운 페이지로 이동**할 때   
 2 . 페이지에 있는 **링크를 클릭해서 새로운 페이지로 이동**할 때   
