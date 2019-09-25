@@ -5,9 +5,9 @@
 
 
 
-그리고 @NgModule.exports 배열을 추가하고 이 배열에 RouterModule을 등록하면 **AppModule 범위에 있는 모든 컴포넌트에 라우터와 관련된 디렉티브를 사용할 수 있습니다.**
+그리고 @NgModule.exports 배열을 추가하고 이 배열에 RouterModule을 등록하면 **AppModule 범위에 있는 모든 컴포넌트에 라우터와 관련된 디렉티브를 사용할 수 있다.**
 
-이 내용으로 수정하면 AppRoutingModule이 다음과 같이 정의될 것입니다:
+이 내용으로 수정하면 AppRoutingModule이 다음과 같이 정의될 것이다:
 ```js
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,9 +20,9 @@ export class AppRoutingModule {}
 
 
 # RouterModule.forRoot()
-라우팅 규칙을 적용하려면 브라우저에서 주소가 변경되는 것을 감지하기 위해 라우터를 초기화해야 합니다.
+라우팅 규칙을 적용하려면 브라우저에서 주소가 변경되는 것을 감지하기 위해 라우터를 초기화해야 한다.
 
-라우터를 초기화하기 위해 @NgModule.imports 배열에 RouterModule을 추가하는데, 이 때 RouterModule.forRoot() 함수를 사용하면서 이전에 정의한 routes를 인자로 전달합니다:
+라우터를 초기화하기 위해 @NgModule.imports 배열에 RouterModule을 추가하는데, 이 때 RouterModule.forRoot() 함수를 사용하면서 이전에 정의한 routes를 인자로 전달한다:
 
 content_copy
 imports: [ RouterModule.forRoot(routes) ],
@@ -131,7 +131,7 @@ path는 URL의 조각이다. path는 확실하게 어디에 리소스(혹은 페
 { path: 'products', pathMatch: 'full', component: ProductListComponent} 
 ```
 
-이 full속성 을 사용하는 특별한 경우 는 빈 경로를 일치시키려는 경우입니다 . full 프로퍼티를 사용하는 특별한 경우는 empty path에 매칭하려는 경우이다. 빈 경로는 모든 경로에 접두사이므로 접두사 전략을 사용하면 모든 경로와 일치한다.
+이 full속성 을 사용하는 특별한 경우 는 빈 경로를 일치시키려는 경우이다 . full 프로퍼티를 사용하는 특별한 경우는 empty path에 매칭하려는 경우이다. 빈 경로는 모든 경로에 접두사이므로 접두사 전략을 사용하면 모든 경로와 일치한다.
 
 예를들어 사용자가가 /products에 리다이렉트 되길 원하면 아래와 같이 설정 하면 됩니다.
 ```js
@@ -140,7 +140,7 @@ path는 URL의 조각이다. path는 확실하게 어디에 리소스(혹은 페
 또한 커스텀으로 변경할 수도 있다. (UrlMatcher)[https://angular.io/api/router/UrlMatcher#description]를 이용해서.
 
 # 라우터 파라미터
-동적 경로는 종종 웹 응용 프로그램에서 데이터 (매개 변수) 또는 상태를 응용 프로그램으로 전달하거나 다양한 구성 요소와 페이지간에 전달하는 데 사용됩니다. Angular 라우터는 동적 경로를 지원하며 API를 사용하여 경로 매개 변수에 쉽게 액세스 할 수 있습니다.
+동적 경로는 종종 웹 응용 프로그램에서 데이터 (매개 변수) 또는 상태를 응용 프로그램으로 전달하거나 다양한 구성 요소와 페이지간에 전달하는 데 사용됩니다. Angular 라우터는 동적 경로를 지원하며 API를 사용하여 경로 매개 변수에 쉽게 액세스 할 수 있다.
 
 ### 예
 ```js
@@ -148,16 +148,16 @@ path는 URL의 조각이다. path는 확실하게 어디에 리소스(혹은 페
 ```
 
 ## ActivatedRoute
-outlet에 로드된 구성 요소와 연관된 경로에 대한 정보에 대한 액세스를 제공합니다. RouterState트리를 탐색하고 노드에서 정보를 추출 하는 데 사용합니다.
+outlet에 로드된 구성 요소와 연관된 경로에 대한 정보에 대한 액세스를 제공한다. RouterState트리를 탐색하고 노드에서 정보를 추출 하는 데 사용한다.
 
 ## ParamMap
-경로와 관련된 필수 및 선택적 매개 변수에 대한 액세스를 제공하는 맵입니다. 맵은로 단일 값 get() 또는 여러 값을 검색하는 것을 지원합니다 getAll().
+경로와 관련된 필수 및 선택적 매개 변수에 대한 액세스를 제공하는 맵이다. 맵은로 단일 값 get() 또는 여러 값을 검색하는 것을 지원한다 getAll().
 
 # 라우터 가드
 라우트 가드는 사용자에게 allow와 disallow기능을 제공한다. (예: 로그인시와 로그아웃시)
 사용자는 앵귤러 가드를 사용하여 컴포넌트를 지키거나 모듈을 완성시킨다.
 
-라우트를 지키기 위해서, 사용자는 먼저 `CanActivate`인터페이스를 서브클래싱하여 guard를 만들어야 합니다. 그리고 canActivate() 메소드를 오버라이딩한다 (boolean값을 사용하기 위해, ture값은 접근할 수 있다는 뜻) 그리고 canActivate속성을 통해 경로 정의에 추가해야 합니다. 
+라우트를 지키기 위해서, 사용자는 먼저 `CanActivate`인터페이스를 서브클래싱하여 guard를 만들어야 한다. 그리고 canActivate() 메소드를 오버라이딩한다 (boolean값을 사용하기 위해, ture값은 접근할 수 있다는 뜻) 그리고 canActivate속성을 통해 경로 정의에 추가해야 한다. 
 
 ## 예
 ```js
@@ -240,14 +240,14 @@ export class AppModule { }
 끝!
 
 # 데이터를 가져오기위한 서비스 세팅
-이것은 Angular에서 라우팅이 작동하는 방식의 일부가 아니지만 데모 애플리케이션의 목적을 위해 애플리케이션 컴포넌트에 일부 데이터를 표시하는 데 사용할 수있는 서비스를 작성해야합니다. 데이터를 제공하는 백엔드 프로젝트가 없으므로 angular-in-memory-web-api패키지 에서 사용 가능한 In-Memory Web API 인 Angular의 매우 유용한 기능을 사용할 수 있습니다.
+이것은 Angular에서 라우팅이 작동하는 방식의 일부가 아니지만 데모 애플리케이션의 목적을 위해 애플리케이션 컴포넌트에 일부 데이터를 표시하는 데 사용할 수있는 서비스를 작성해야한다. 데이터를 제공하는 백엔드 프로젝트가 없으므로 angular-in-memory-web-api패키지 에서 사용 가능한 In-Memory Web API 인 Angular의 매우 유용한 기능을 사용할 수 있다.
 
-이 모듈은 요청을 가로 채서 백엔드 웹 애플리케이션을 시뮬레이트하고 HttpClient일부 데이터를 작성하고 제공해야하는 메모리 저장소로 리디렉션합니다.
+이 모듈은 요청을 가로 채서 백엔드 웹 애플리케이션을 시뮬레이트하고 HttpClient일부 데이터를 작성하고 제공해야하는 메모리 저장소로 리디렉션한다.
 
-나중에 실제 백엔드가있는 경우 간단히 **In-Memory Web API 모듈**을 **제거**하면 모든 요청이 실제 백엔드로 이동합니다.
+나중에 실제 백엔드가있는 경우 간단히 **In-Memory Web API 모듈**을 **제거**하면 모든 요청이 실제 백엔드로 이동힌다.
 
-먼저 터미널에서 다음 명령을 사용하여 npm에서 패키지를 설치하십시오.
+먼저 터미널에서 다음 명령을 사용하여 npm에서 패키지를 설치해야된다.
 
 `$npm install --save angular-in-memory-web-api`
-그 다음 데이터를 리턴하는 서비스를 만들어봅시다.
+그 다음 데이터를 리턴하는 서비스를 만들어보자.
 `ng generate service data`
