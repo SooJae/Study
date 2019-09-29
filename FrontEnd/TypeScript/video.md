@@ -80,3 +80,53 @@ board[0].piece = {
 견고하게 코드를 만들 수 있다.
 
 서버에서 회원가입을 할 때, 꼭 있어야 할 것들 (아이디, 패스워드 등)을 interface를 이용하여 정의할 수 있다.
+
+# 함수형 타입
+
+```ts
+function buildUserInfo(name?:string, email?:string){
+    return {name, email}
+}
+
+const user = buildUserInfo();
+```
+
+## Default 값이 있을 경우
+```ts
+function buildUserInfo(name = "soojae" , email ="soojae@"){
+    return {name, email}
+}
+
+const user = buildUserInfo();
+```
+
+## 함수형
+```ts
+const add2 = (a: number, b:number): number => a+b;
+```
+
+## 오버로딩
+```ts
+interface Storage {
+    a: string;
+}
+interface ColdStorage {
+    b: string;
+}
+// 함수 시그니처를 여러개 만들면 함수 오버로딩이라 한다.
+function store(type: "통조림"): Storage;
+function store(type: "아이스크림"): ColdStorage;
+// |을 Union Type이라 한다.
+function store(type: "통조림" | "아이스크림"){
+    if(type === "통조림"){
+        return { a: "통조림" } 
+    } else if (type ==="아이스크림"){
+        return { b: "아이스크림" }
+    } else {
+        throw new Error('unsurpported type');
+    }
+}
+
+const s = store('통조림');
+s.b
+```
