@@ -13,6 +13,7 @@ $ node init -Y
 
 이제 tsc만으로 컴파일이 된다!
 
+tsconfig의 sourceMap을 사용하면 js파일과 연결되어있는 ts파일을 볼 수 있다.(없으면 js파일만 볼 수 있다.)
 
 # Interface
 인터페이스는 **속성**, **행위**를 정한다. 
@@ -129,4 +130,47 @@ function store(type: "통조림" | "아이스크림"){
 
 const s = store('통조림');
 s.b
+```
+
+# Enum
+Enum을 열거할 때 사용한다.
+```ts
+enum StarbucksGrade {
+    WELCOME, // 0 이 생략되어 있다.
+    GREEN, // 1 이 생략되어 있다.
+    GOLD // 2 가 생략되어 있다.
+}
+
+function getDiscount(v: StarbucksGrade): number {
+    switch(v) {
+        case StarbucksGrade.WELCOME:
+            return 0;
+        case StarbucksGrade.GREEN:
+            return 5;
+        case StarbuksGrade.GOLD:
+            return 10;
+    }
+}
+
+console.log(getDiscount(StarbucksGrade.GREEN));
+console.log(StarbucksGrade["0"])
+```
+
+Enum Default값 대신 직접 값을 정해놓는 것이 유지보수 측면에서 좋다.
+```ts
+enum StarbucksGrade{
+    WELCOME = 0,
+    BRONZE = 3, // 직접 값을 할당했기 때문에 나중에 등급이 중간에 추가되더라도 문제가 없다.
+    GREEN = 1,
+    GOLD = 2
+}
+```
+문자열로 할당해주는 것도 좋다. (대문자)
+```ts
+enum StarbucksGrade{
+    WELCOME = "WELCOME",
+    BRONZE = "BRONZE", // 직접 값을 할당했기 때문에 나중에 등급이 중간에 추가되더라도 문제가 없다.
+    GREEN = "GREEN",
+    GOLD = "GOLD"
+}
 ```
