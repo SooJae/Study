@@ -10,3 +10,24 @@ branch바꿀때 사용!
 "@types/lodash": "^4.14.123",
 
 로대쉬 : 각종 기능이 있다 네임 스페이스 기능이나 _기능 등등
+
+
+tslint에 air bnb 규칙을 적용하고 싶다면
+
+
+
+### tslint.json
+```json
+{
+  "extends": "tslint-config-airbnb",
+  "rules": {
+    "max-line-length": [],
+    "trailing-comma": false,
+    "no-var-self": false
+  }
+}
+
+```
+다음과 같이 확장하면 된다.
+
+출처 : https://pravusid.kr/javascript/2019/03/10/eslint-prettier.html
