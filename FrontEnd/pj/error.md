@@ -30,4 +30,7 @@ tslint에 air bnb 규칙을 적용하고 싶다면
 ```
 다음과 같이 확장하면 된다.
 
-출처 : https://pravusid.kr/javascript/2019/03/10/eslint-prettier.html
+출처 : https://pravusid.kr/javascript/2019/03/10/eslint-prettier.html\
+
+
+swagger에서는 데이터를 모두 넣어야 작동한다.
