@@ -37,3 +37,26 @@ swagger에서는 데이터를 모두 넣어야 작동한다.\
 
 
 상태 Css 관련해서 사용하고 싶다면 getActionCss를 첨부하자
+
+## 프록시를 이용해서 해당 주소로 접속하면 서버에 접근함
+
+### proxy.conf.json
+```json
+ {
+   "/api/*":
+   {
+    //  서버주소
+     "target":"http://localhost:8080",
+     "secure":false,
+     "logLevel":"debug"
+   }
+ }
+```
+
+예 : localhost:4200/api/ 로 접속
+http://locathost:8080
+
+
+
+## 참고자료
+https://juristr.com/blog/2016/11/configure-proxy-api-angular-cli/
