@@ -60,3 +60,65 @@ http://locathost:8080
 
 ## 참고자료
 https://juristr.com/blog/2016/11/configure-proxy-api-angular-cli/
+
+
+## MultipartFile parameter is not present 에러!
+
+임의대로 CommonsMultipartResolver를 바꿀 시 에러가 생긴다. (예민한 듯 하다.)
+
+
+### 예) WebMvcConfig.java
+```java
+    @Bean
+    public MultipartResolver multipartResolver() {
+        return new CommonsMultipartResolverMine();
+    }
+
+
+    public static class CommonsMultipartResolverMine extends CommonsMultipartResolver {
+
+        @Override
+        public boolean isMultipart(HttpServletRequest request) {
+            final String header = request.getHeader("Content-Type");
+            if(header == null){
+                return false;
+            }
+            return header.contains("multipart/form-data");
+        }
+
+    }
+```
+
+## 해결 방안
+1. 임의대로 확장시킨 CommonsMultipartResolver를 없앤다.
+2. org.springframework.web.multipart.commons.CommonsMultipartResolver를 사용하지 말고 org.springframework.web.multipart.support.StandardServletMultipartResolver를 사용한다.
+   
+## 문제 발생의 이유
+참고 사이트를 참조하자
+
+참고 사이트 : https://java.ihoney.pe.kr/351
+
+
+
+### 400 BadRequest
+json.stringify 는 스프링에서 requestbody로 받아야 한다.
+
+### 405 Method Not Allowed
+
+
+
+## a링크를 disabled 시키기
+https://bryan7.tistory.com/206
+
+
+## javax.persistence.EntityNotFoundException: Unable to find ... with id 0 에러
+
+데이터를 저장할 때 @OneToOne, @OneToMany.. 등의 annotation이 선언되어 있을 경우에는 매핑된 id값이 0이거나 매핑되어있는 id의 자식객체가 없을 때 오류가 발생하는 경우가 있다. 이 경우 매핑되는 애들이 없을 때 값을 null 처리를 하게되면 문제없이 조회를 할 수 있다. 
+
+
+
+즉, 매핑 id 값을 null로 처리하자.
+
+
+
+출처: https://bkjeon1614.tistory.com/35 [아무거나]
