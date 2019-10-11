@@ -122,3 +122,17 @@ https://bryan7.tistory.com/206
 
 
 출처: https://bkjeon1614.tistory.com/35 [아무거나]
+
+
+# 스프링 pageable
+page : 요청할 페이지를 뜻한다. 3페이지면 page에 3을 넣어 요청한다.
+
+sort : 어떤 노드를 기준으로 정렬할 것인지 설정한다.
+
+sort.dir : 정렬의 내림차순과 오름차순을 설정한다.
+
+offset : 페이지 offset을 설정한다. 10으로 설정하면 10개의 리스트가 return 된다.
+https://www.popit.kr/spring-boot-jpa-%ED%8E%98%EC%9D%B4%EC%A7%95-api-%EB%A7%8C%EB%93%A4%EA%B8%B0/
+https://m.blog.naver.com/PostView.nhn?blogId=bluelivesky&logNo=220629546864&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+
+https://www.popit.kr/spring-boot-jpa-%ED%8E%98%EC%9D%B4%EC%A7%95-api-%EB%A7%8C%EB%93%A4%EA%B8%B0/
