@@ -136,3 +136,12 @@ https://www.popit.kr/spring-boot-jpa-%ED%8E%98%EC%9D%B4%EC%A7%95-api-%EB%A7%8C%E
 https://m.blog.naver.com/PostView.nhn?blogId=bluelivesky&logNo=220629546864&proxyReferer=https%3A%2F%2Fwww.google.com%2F
 
 https://www.popit.kr/spring-boot-jpa-%ED%8E%98%EC%9D%B4%EC%A7%95-api-%EB%A7%8C%EB%93%A4%EA%B8%B0/
+
+
+
+
+# clickOutside 사용하기
+1. package에 라이브러리 추가
+"ng-click-outside": "^4.0.0",
+2. clickOutside 함수 사용
+3. (clickOutside)="clickOutSide($event)"
