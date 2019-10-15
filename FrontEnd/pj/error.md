@@ -141,7 +141,10 @@ https://www.popit.kr/spring-boot-jpa-%ED%8E%98%EC%9D%B4%EC%A7%95-api-%EB%A7%8C%E
 
 
 # clickOutside 사용하기
-1. package에 라이브러리 추가
-"ng-click-outside": "^4.0.0",
+1. $ npm i ng-click-outside
 2. clickOutside 함수 사용
 3. (clickOutside)="clickOutSide($event)"
+
+
+# 맥에서 8080포트 죽이기
+https://didadico.tistory.com/entry/Mac%EC%97%90%EC%84%9C-8080%ED%8F%AC%ED%8A%B8-%EC%82%AC%EC%9A%A9%EC%A4%91%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%B0%BE%EA%B8%B0
