@@ -20,3 +20,7 @@ providers: [{
 
 모든 컴포넌트는 @Component 어노테이션을 사용하기 때문에 위 코드만 있어도 동작한다.
 왜냐하면 TypeScript 컴파일 옵션에 **emitDecoratorMetaData 값을 true로 설정**했기 때문에, 주입되는 객체에 대한 **메타데이터가 필요하면 Angular가 자동으로 생성**하기 때문이다.
+```js
+constructor(productService : ProductService);
+constructor(@Inject(ProductService) productService);
+```

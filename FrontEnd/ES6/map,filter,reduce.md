@@ -132,3 +132,22 @@ console.log(filter(p=>p.price<20000, products));
 // [ { name: '반팔티', price: 15000 }, { name: '핸드폰케이스', price: 15000 } ]
 // rest는 대 괄호가 없는 것을 알 수 있다. 대괄호 안의 값을 전부 return
 ```
+
+# reduce
+```js
+const reduce = (f, acc, iter) => {
+    for(const a of iter){
+        acc = f(acc, a);
+    }
+    return acc;
+
+}
+
+const add = (a, b) => a + b;
+console.log(reduce(add, 0, [1,2,3,4,5]));
+// 15
+
+//reduce는 재귀함수이다.
+console.log(add(add(add(add(add(0, 1), 2), 3),4),5));
+//15
+```
