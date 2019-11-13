@@ -151,3 +151,40 @@ console.log(reduce(add, 0, [1,2,3,4,5]));
 console.log(add(add(add(add(add(0, 1), 2), 3),4),5));
 //15
 ```
+```js
+  log(
+    reduce(
+      add,
+      map(p => p.price,
+        filter(p => p.price < 20000, products))));
+
+  log(
+    reduce(
+      add,
+      filter(n => n >= 20000,
+        map(p => p.price, products))));
+```
+오른쪽에서 왼쪽으로 읽어나가면 된다.
+함수형적으로 사고를 하려면
+
+reduce를 하고싶은데 add를 하려면
+
+```js
+console.log(
+    reduce(
+    add,
+    [10,20,30,40] // 미리 더미값을 만든 후, 이 자리에 숫자들이 들어 갈 것이라는 기대를 가진다.
+    // 그 후에 
+    map(p => p.price, products) // 가 특정 숫자를 반환 할 것이라는 기대 값을 가지면 된다.
+));
+```
+## 함수형 프로그래밍은 ~~ 할 것이다라는 생각을 가지면서 프로그래밍 한다.
+```js
+const go = () => {};
+go(
+    0,
+    a=>a+1,
+    a=>a+10,
+    a=>a+100,
+    console.log
+)
