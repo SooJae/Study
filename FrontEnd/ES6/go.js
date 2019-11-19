@@ -13,3 +13,4 @@ const total_quantity = pipe(
   reduce((a,b)=>a+b)
 );
 console.log(total_quantity(products));
+
