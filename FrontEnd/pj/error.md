@@ -148,3 +148,38 @@ https://www.popit.kr/spring-boot-jpa-%ED%8E%98%EC%9D%B4%EC%A7%95-api-%EB%A7%8C%E
 
 # 맥에서 8080포트 죽이기
 https://didadico.tistory.com/entry/Mac%EC%97%90%EC%84%9C-8080%ED%8F%AC%ED%8A%B8-%EC%82%AC%EC%9A%A9%EC%A4%91%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%B0%BE%EA%B8%B0
+
+
+
+## Can't bind to 'ngForOf' since it isn't a known property of 'li'에러
+안에 있는 모듈에 CommonModule을 해줘야한다.
+https://hassantariqblog.wordpress.com/2016/10/28/angular2-error-cant-bind-to-ngforof-since-it-isnt-a-known-property/
+
+## Cannot read property 'nativeElement' of undefined
+https://stackoverflow.com/questions/42826105/angular-2-get-input-element-value
+
+mplements AfterViewInit is just a Typescript construct which gets removed on transpilation to javascript..It is used to make sure you have implemented the correct lifecycle hook.. that really doesnt make a difference in this case 
+
+
+## Error:Component HomeComponent is not part of any NgModule or the module has not been imported into your module.
+declare를 안해서 생긴 원인
+
+https://stackoverflow.com/questions/44827999/component-is-not-part-of-any-ngmodule-or-the-module-has-not-been-imported-into-y
+
+If your are not using lazy loading, you need to import your HomeComponent in app.module and mention it under declarations. Also, don't forget to remove from imports
+
+## 화면에 위치가 맞지 않다면?
+아래와 같이 html부분을 의심해보자
+```html
+<!-- 문제 발생 -->
+<!doctype html>
+<html lang="en">
+<!-- 문제 해결 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+```
+
+
+## 400 error: "Bad Request"
+message: "JSON parse error: Cannot deserialize instance of '' out of START_ARRAY token; nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize instance of 
+'' out of START_ARRAY token↵ at [Source: (PushbackInputStream); line: 1, column: 1]
