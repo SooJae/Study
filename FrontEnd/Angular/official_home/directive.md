@@ -9,7 +9,7 @@
   <div [class.odd]="odd">({{i}}) {{hero.name}}</div>
 </ng-template>
 ```
-
+.
 
  ng-container는 항상 view에 렌더링 됩니다.
  두 번째 차이점은 *ngIf 구문을 사용합니다. 따라서 위에서 ng-template에서는 템플릿 참조 변수를 사용하라고 했지만, 동일하게 ng-container에서 *ngIf로 표현할 수 있습니다.
