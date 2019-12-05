@@ -7,7 +7,7 @@ $ tsc FrontEnd/TypeScript/main
 
 후에 main.js가 생긴다
 ## 타입 스크립트 실시간 변화 적용
-$ tsc FrontEnd/TypeScript/main --watch 
+$ tsc FrontEnd/TypeScript/main --w
 
 ### 실시간 변화 적용으로 인해 에러를 바로 발견
 ```js
@@ -174,3 +174,7 @@ console.log(m1.employeeName);
 public : 전부 접근 가능!
 private : 클래스 안에서만 접근 가능
 protected : 클래스를 상속받은 클래스까지만 가능
+
+
+
+참고 https://ivvve.github.io/2019/10/09/js/ts/typescript-eslint&airbnb/
