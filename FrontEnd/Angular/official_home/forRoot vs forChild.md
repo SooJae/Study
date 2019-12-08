@@ -145,7 +145,7 @@ In simple terms, when importing ExampleModule by delivering the object to forRoo
 
 We are telling ExampleModule to use the values defined as parameters as their provider named CONFIG. If we call CONFIG.environment, its value will be "testing."
 
-We can use forChild in the same way, however; we will use it when we want to configure a lazy loaded module. This is especially useful for configuring modules that will later be exported independently.
+We can use forChild in the same way, however; **we will use it when we want to configure a lazy loaded module.** This is especially useful for configuring modules that will later be exported independently.
 
 
 A warning about using logic in the forRoot and forChild methods
