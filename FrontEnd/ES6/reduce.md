@@ -33,3 +33,21 @@ const sum = numbers.reduce((acc, cur, index, array) => {
 // acc = 0, cur = 1; 
 console.log(avg); // 15/5 => 3
 ```
+
+# Reduce 3
+
+```js
+const alphabets = ['a','a','a','b','c','c','d','e'];
+const counts =alphabets.reduce((acc, cur)=> {
+    if(acc[cur]){
+        acc[cur] += 1;
+    } else {
+        acc[cur] = 1;
+    }
+    return acc;
+}, {})
+
+console.log( counts );
+// {a:3,b:1,c:2,d:1,e:1}
+
+```
