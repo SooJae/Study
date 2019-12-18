@@ -33,3 +33,5 @@ Observable.unsubscribe()
 
 
 https://d2.naver.com/helloworld/12864
+https://beomseok95.tistory.com/32
+https://softwaree.tistory.com/30
