@@ -132,3 +132,12 @@ console.log(filter(p=>p.price<20000, products));
 // [ { name: '반팔티', price: 15000 }, { name: '핸드폰케이스', price: 15000 } ]
 // rest는 대 괄호가 없는 것을 알 수 있다. 대괄호 안의 값을 전부 return
 ```
+
+```js
+const nums =[1,2,3,4,5];
+let total = 0;
+for(const n of nums){
+    total = total +n;
+}
+console.log(total); //15
+```
