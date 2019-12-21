@@ -14,16 +14,12 @@ export class ButtonsComponent implements OnInit {
 
   constructor() { }
 
-  start() {
-    //부모객체가 이벤트를 기다리고 있다가
-    //자식 컴포넌트가 부모 컴포넌트에게 데이터를 전달해주는 구조로 만든다.
-    this.clickEvent.emit();
+  excuteButton(command) {
+    this.clickEvent.emit(command);
   }
 
   ngOnInit() {
   }
 
-  test($event: any) {
-    console.log($event);
-  }
+
 }

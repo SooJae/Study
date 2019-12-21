@@ -1,14 +1,13 @@
 <p>
 
-    {{count}}
     
-    <button class="start-btn" (click)="start()">
+    <button class="start-btn" (click)="excuteButton('start')">
         시작
     </button>
-    <button class="stop-btn">
+    <button class="stop-btn" (click)="excuteButton('stop')">
         멈춤
     </button>
-    <button class="reset-btn">
+    <button class="reset-btn" (click)="excuteButton('reset')">
         리셋
     </button>
 </p>

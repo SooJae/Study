@@ -7,11 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SectionComponent implements OnInit {
 
+  present;
+
+  commandText
+  
   constructor() { }
 
-  startTime(){
-    console.log('섹션');
+  startTime($event) {
+    this.present = $event;
   }
+
 
 
 
