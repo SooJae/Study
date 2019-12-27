@@ -1391,5 +1391,53 @@ _metadata는 savepoint파일로서 savepoint resume할때 필요하다.
 
 
 
-Savepoint-CLI
+
+
+
+
+
+
+## GET http://localhost:8081/jars/176f09df-3d29-4be7-ae52-5faa8feab57b_examples-java-1.0.jar/plan?entry-class=io.github.streamingwithflink.chapter1.AverageSensorReadings
+
+그래프를 그리기 위한 요소들
+```json
+{
+    "plan": {
+        "jid": "ded57289d462f764c091e51b4b352d4d",
+        "name": "Compute average sensor temperature",
+        "nodes": [
+            {
+                "id": "c27dcf7b54ef6bfd6cff02ca8870b681",
+                "parallelism": 1,
+                "operator": "",
+                "operator_strategy": "",
+                "description": "Window(TumblingEventTimeWindows(1000), EventTimeTrigger, TemperatureAverager) -&gt; Sink: Print to Std. Out",
+                "inputs": [
+                    {
+                        "num": 0,
+                        "id": "cbc357ccb763df2852fee8c4fc7d55f2",
+                        "ship_strategy": "HASH",
+                        "exchange": "pipelined_bounded"
+                    }
+                ],
+                "optimizer_properties": {}
+            },
+            {
+                "id": "cbc357ccb763df2852fee8c4fc7d55f2",
+                "parallelism": 1,
+                "operator": "",
+                "operator_strategy": "",
+                "description": "Source: Custom Source -&gt; Timestamps/Watermarks -&gt; Map",
+                "optimizer_properties": {}
+            }
+        ]
+    }
+}
+```
+
+
+
+
+
+### Savepoint-CLI
 https://riptutorial.com/ko/apache-flink/example/29306/%EC%84%B8%EC%9D%B4%EB%B8%8C-%ED%8F%AC%EC%9D%B8%ED%8A%B8
