@@ -13,7 +13,7 @@
 ```
 
 ## /jobs/overview
-플링크의 전반적인 내용을 뿌려준다.
+플링크의 전반적인 내용을 뿌려준다. jid값을 갖고올 수 있다.
 
 ```json
 {
@@ -557,6 +557,348 @@ includeSerializedValue (optional): Boolean value that specifies whether serializ
 ```
 
 
+## /jobs/:jobid/checkpoints
+job에 대한 체크포인트의 통계를 갖고온다.
+```ts
+{
+    "counts": {
+        "restored": 0,
+        "total": 38,
+        "in_progress": 0,
+        "completed": 38,
+        "failed": 0
+    },
+    "summary": {
+        "state_size": {
+            "min": 7825,
+            "max": 8491,
+            "avg": 8279
+        },
+        "end_to_end_duration": {
+            "min": 3,
+            "max": 17,
+            "avg": 4
+        },
+        "alignment_buffered": {
+            "min": 0,
+            "max": 0,
+            "avg": 0
+        }
+    },
+    "latest": {
+        "completed": {
+            "@class": "completed",
+            "id": 38,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409169695,
+            "latest_ack_timestamp": 1577409169698,
+            "state_size": 8077,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": false
+        },
+        "savepoint": null,
+        "failed": null,
+        "restored": null
+    },
+    "history": [
+        {
+            "@class": "completed",
+            "id": 38,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409169695,
+            "latest_ack_timestamp": 1577409169698,
+            "state_size": 8077,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": false
+        },
+        {
+            "@class": "completed",
+            "id": 37,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409167692,
+            "latest_ack_timestamp": 1577409167695,
+            "state_size": 8419,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 36,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409165696,
+            "latest_ack_timestamp": 1577409165701,
+            "state_size": 8140,
+            "end_to_end_duration": 5,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 35,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409163697,
+            "latest_ack_timestamp": 1577409163701,
+            "state_size": 8239,
+            "end_to_end_duration": 4,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 34,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409161695,
+            "latest_ack_timestamp": 1577409161699,
+            "state_size": 8122,
+            "end_to_end_duration": 4,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 33,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409159693,
+            "latest_ack_timestamp": 1577409159697,
+            "state_size": 8356,
+            "end_to_end_duration": 4,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 32,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409157693,
+            "latest_ack_timestamp": 1577409157697,
+            "state_size": 8392,
+            "end_to_end_duration": 4,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 31,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409155697,
+            "latest_ack_timestamp": 1577409155701,
+            "state_size": 8437,
+            "end_to_end_duration": 4,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 30,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409153694,
+            "latest_ack_timestamp": 1577409153697,
+            "state_size": 8419,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 29,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577409151695,
+            "latest_ack_timestamp": 1577409151699,
+            "state_size": 8410,
+            "end_to_end_duration": 4,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        }
+    ]
+}
+}            
+```
+
+## jobs/:jobId/checkpoints/config
+체크포인트의 설정 값을 갖고온다.
+```ts
+{
+    "mode": "exactly_once",
+    "interval": 2000,
+    "timeout": 600000,
+    "min_pause": 0,
+    "max_concurrent": 1,
+    "externalization": {
+        "enabled": false,
+        "delete_on_cancellation": true
+    }
+}
+```
+
+# /jobs/:jobid/execution-result
+job의 실행에 대한 결과를 리턴한다.
+```ts
+{
+  "type" : "object",
+  "id" : "urn:jsonschema:org:apache:flink:runtime:rest:messages:job:JobExecutionResultResponseBody",
+  "properties" : {
+    "status" : {
+      "type" : "object",
+      "id" : "urn:jsonschema:org:apache:flink:runtime:rest:messages:queue:QueueStatus",
+      "required" : true,
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "required" : true,
+          "enum" : [ "IN_PROGRESS", "COMPLETED" ]
+        }
+      }
+    },
+    "job-execution-result" : {
+      "type" : "any"
+    }
+  }
+}            
+```
+
+## /jobs/:jobId/metrics
+```ts
+[
+    {
+        "id": "numberOfFailedCheckpoints"
+    },
+    {
+        "id": "lastCheckpointSize"
+    },
+    {
+        "id": "totalNumberOfCheckpoints"
+    },
+    {
+        "id": "lastCheckpointExternalPath"
+    },
+    {
+        "id": "lastCheckpointRestoreTimestamp"
+    },
+    {
+        "id": "lastCheckpointAlignmentBuffered"
+    },
+    {
+        "id": "uptime"
+    },
+    {
+        "id": "restartingTime"
+    },
+    {
+        "id": "numberOfInProgressCheckpoints"
+    },
+    {
+        "id": "downtime"
+    },
+    {
+        "id": "numberOfCompletedCheckpoints"
+    },
+    {
+        "id": "fullRestarts"
+    },
+    {
+        "id": "lastCheckpointDuration"
+    }
+]
+```
+
+## /jobs/:jobId/plan
+job의 데이터 플로우 플랜을 리턴한다.
+```ts
+{
+    "plan": {
+        "jid": "10ff2295f9402a8eb9a69679d91dfc98",
+        "name": "State machine job",
+        "nodes": [
+            {
+                "id": "20ba6b65f97481d5570070de90e4e791",
+                "parallelism": 1,
+                "operator": "",
+                "operator_strategy": "",
+                "description": "Flat Map -&gt; Sink: Print to Std. Out",
+                "inputs": [
+                    {
+                        "num": 0,
+                        "id": "bc764cd8ddf7a0cff126f51c16239658",
+                        "ship_strategy": "HASH",
+                        "exchange": "pipelined_bounded"
+                    }
+                ],
+                "optimizer_properties": {}
+            },
+            {
+                "id": "bc764cd8ddf7a0cff126f51c16239658",
+                "parallelism": 1,
+                "operator": "",
+                "operator_strategy": "",
+                "description": "Source: Custom Source",
+                "optimizer_properties": {}
+            }
+        ]
+    }
+}
+```
+
+
+
+
 # PATCH
 
 ## /jobs/:jobid
@@ -564,3 +906,490 @@ includeSerializedValue (optional): Boolean value that specifies whether serializ
 job을 종료시킨다.
 query parameters
 mode( 선택사항 ) : 종료 모드를 설정한다. (cancel, stop)
+
+
+
+# checkpoint detail값 갖고오는 방법 :
+checkpoints를 보내서 갖고 온 깂을 보자
+```ts
+{
+    "counts": {
+        "restored": 0,
+        "total": 638,
+        "in_progress": 0,
+        "completed": 638,
+        "failed": 0
+    },
+    "summary": {
+        "state_size": {
+            "min": 7825,
+            "max": 8680,
+            "avg": 8309
+        },
+        "end_to_end_duration": {
+            "min": 1,
+            "max": 17,
+            "avg": 3
+        },
+        "alignment_buffered": {
+            "min": 0,
+            "max": 0,
+            "avg": 0
+        }
+    },
+    "latest": {
+        "completed": {
+            "@class": "completed",
+            "id": 638,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410369720,
+            "latest_ack_timestamp": 1577410369723,
+            "state_size": 8221,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        "savepoint": null,
+        "failed": null,
+        "restored": null
+    },
+    "history": [
+        {
+            "@class": "completed",
+            "id": 638,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410369720,
+            "latest_ack_timestamp": 1577410369723,
+            "state_size": 8221,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 637,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410367720,
+            "latest_ack_timestamp": 1577410367723,
+            "state_size": 8329,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 636,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410365720,
+            "latest_ack_timestamp": 1577410365723,
+            "state_size": 8230,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 635,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410363720,
+            "latest_ack_timestamp": 1577410363723,
+            "state_size": 8500,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 634,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410361720,
+            "latest_ack_timestamp": 1577410361723,
+            "state_size": 8464,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 633,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410359720,
+            "latest_ack_timestamp": 1577410359723,
+            "state_size": 8536,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 632,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410357721,
+            "latest_ack_timestamp": 1577410357725,
+            "state_size": 8293,
+            "end_to_end_duration": 4,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 631,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410355721,
+            "latest_ack_timestamp": 1577410355724,
+            "state_size": 8338,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 630,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410353721,
+            "latest_ack_timestamp": 1577410353724,
+            "state_size": 8149,
+            "end_to_end_duration": 3,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        },
+        {
+            "@class": "completed",
+            "id": 629,
+            "status": "COMPLETED",
+            "is_savepoint": false,
+            "trigger_timestamp": 1577410351720,
+            "latest_ack_timestamp": 1577410351722,
+            "state_size": 8239,
+            "end_to_end_duration": 2,
+            "alignment_buffered": 0,
+            "num_subtasks": 2,
+            "num_acknowledged_subtasks": 2,
+            "tasks": {},
+            "external_path": "<checkpoint-not-externally-addressable>",
+            "discarded": true
+        }
+    ]
+}
+
+```
+
+latest 나 history에 id값이 있는 것을 확인 할 수 있다.
+그 후에 /checkpoints/detail/:id를 넣으면 detail값을 갖고 올 수 있다.
+## 714에 대한 값
+```ts
+{
+    "@class": "completed",
+    "id": 714,
+    "status": "COMPLETED",
+    "is_savepoint": false,
+    "trigger_timestamp": 1577410521722,
+    "latest_ack_timestamp": 1577410521724,
+    "state_size": 8527,
+    "end_to_end_duration": 2,
+    "alignment_buffered": 0,
+    "num_subtasks": 2,
+    "num_acknowledged_subtasks": 2,
+    "tasks": {
+        "20ba6b65f97481d5570070de90e4e791": {
+            "id": 714,
+            "status": "COMPLETED",
+            "latest_ack_timestamp": 1577410521724,
+            "state_size": 8527,
+            "end_to_end_duration": 2,
+            "alignment_buffered": 0,
+            "num_subtasks": 1,
+            "num_acknowledged_subtasks": 1
+        },
+        "bc764cd8ddf7a0cff126f51c16239658": {
+            "id": 714,
+            "status": "COMPLETED",
+            "latest_ack_timestamp": 1577410521723,
+            "state_size": 0,
+            "end_to_end_duration": 1,
+            "alignment_buffered": 0,
+            "num_subtasks": 1,
+            "num_acknowledged_subtasks": 1
+        }
+    },
+    "external_path": "<checkpoint-not-externally-addressable>",
+    "discarded": true
+}
+```
+
+
+
+# savepoint
+POST
+## http://localhost:8081/jobs/7bf83cc75065683e8e97b12cd94ff774/savepoints
+```json
+//request 
+{
+	 "target-directory":"file:///tmp/flink/savepoints/tmp",
+	 "cancel-job":true  // flink job을 cancel상태로 만듬
+}
+//response 
+{
+    "request-id": "6b45dd342a3244b26d9d575fc4df0b77" // 이 값으로 location값을 갖고 온다.
+}
+```
+
+## http://localhost:8081/jobs/7bf83cc75065683e8e97b12cd94ff774/savepoints/6b45dd342a3244b26d9d575fc4df0b77
+GET
+```json
+//response
+{
+    "status": {
+        "id": "COMPLETED"
+    },
+    "operation": {
+        "location": "file:/tmp/flink/savepoints/tmp/savepoint-7bf83c-a3c8c5190b01"
+    }
+}
+```
+
+
+
+## savepoint path 값으로 resume하기
+$ bin/flink run -s /tmp/flink/savepoints/tmp/sepoint-7bf83c-a3c8c5190b01 examples/streaming/StateMachineExample.jar
+
+etc : GET http://localhost:8081/jars/7bf83cc75065683e8e97b12cd94ff774/run의 경우 web에서 업로드한 파일만 가능하다.
+
+
+
+## 그래프 그리기
+GET http://localhost:8081/jobs/6e39f4f9e212beb7f0e11e24d0e59f1f 에서
+
+```json
+{
+    "jid": "6e39f4f9e212beb7f0e11e24d0e59f1f",
+    "name": "State machine job",
+    "isStoppable": false,
+    "state": "RUNNING",
+    "start-time": 1577429995227,
+    "end-time": -1,
+    "duration": 1160665,
+    "now": 1577431155892,
+    "timestamps": {
+        "FAILED": 0,
+        "RESTARTING": 0,
+        "RUNNING": 1577429995241,
+        "FAILING": 0,
+        "CANCELLING": 0,
+        "RECONCILING": 0,
+        "FINISHED": 0,
+        "CREATED": 1577429995227,
+        "CANCELED": 0,
+        "SUSPENDED": 0
+    },
+    "vertices": [
+        {
+            "id": "bc764cd8ddf7a0cff126f51c16239658",
+            "name": "Source: Custom Source",
+            "parallelism": 1,
+            "status": "RUNNING",
+            "start-time": 1577429995316,
+            "end-time": -1,
+            "duration": 1160576,
+            "tasks": {
+                "CREATED": 0,
+                "CANCELING": 0,
+                "FINISHED": 0,
+                "DEPLOYING": 0,
+                "SCHEDULED": 0,
+                "RUNNING": 1,
+                "FAILED": 0,
+                "RECONCILING": 0,
+                "CANCELED": 0
+            },
+            "metrics": {
+                "read-bytes": 0,
+                "read-bytes-complete": true,
+                "write-bytes": 12620945,
+                "write-bytes-complete": true,
+                "read-records": 0,
+                "read-records-complete": true,
+                "write-records": 906680,
+                "write-records-complete": true
+            }
+        },
+        {
+            "id": "20ba6b65f97481d5570070de90e4e791",
+            "name": "Flat Map -> Sink: Print to Std. Out",
+            "parallelism": 1,
+            "status": "RUNNING",
+            "start-time": 1577429995319,
+            "end-time": -1,
+            "duration": 1160573,
+            "tasks": {
+                "CREATED": 0,
+                "CANCELING": 0,
+                "FINISHED": 0,
+                "DEPLOYING": 0,
+                "SCHEDULED": 0,
+                "RUNNING": 1,
+                "FAILED": 0,
+                "RECONCILING": 0,
+                "CANCELED": 0
+            },
+            "metrics": {
+                "read-bytes": 12652428,
+                "read-bytes-complete": true,
+                "write-bytes": 0,
+                "write-bytes-complete": true,
+                "read-records": 906673,
+                "read-records-complete": true,
+                "write-records": 0,
+                "write-records-complete": true
+            }
+        }
+    ],
+    "status-counts": {
+        "CREATED": 0,
+        "CANCELING": 0,
+        "FINISHED": 0,
+        "DEPLOYING": 0,
+        "SCHEDULED": 0,
+        "RUNNING": 2,
+        "FAILED": 0,
+        "RECONCILING": 0,
+        "CANCELED": 0
+    },
+    "plan": {
+        "jid": "6e39f4f9e212beb7f0e11e24d0e59f1f",
+        "name": "State machine job",
+        "nodes": [
+            {
+                "id": "20ba6b65f97481d5570070de90e4e791",
+                "parallelism": 1,
+                "operator": "",
+                "operator_strategy": "",
+                "description": "Flat Map -&gt; Sink: Print to Std. Out",
+                "inputs": [
+                    {
+                        "num": 0,
+                        "id": "bc764cd8ddf7a0cff126f51c16239658",
+                        "ship_strategy": "HASH",
+                        "exchange": "pipelined_bounded"
+                    }
+                ],
+                "optimizer_properties": {}
+            },
+            {
+                "id": "bc764cd8ddf7a0cff126f51c16239658",
+                "parallelism": 1,
+                "operator": "",
+                "operator_strategy": "",
+                "description": "Source: Custom Source",
+                "optimizer_properties": {}
+            }
+        ]
+    }
+}
+```
+vertieces의 각 수를 가지고 그림을 그린다.
+
+
+또한, vertices 보면 id값이 보인다. (bc764cd8ddf7a0cff126f51c16239658, 20ba6b65f97481d5570070de90e4e791)
+
+그 후에 아래와 같이 
+GET http://localhost:8081/jobs/6e39f4f9e212beb7f0e11e24d0e59f1f/vertices/bc764cd8ddf7a0cff126f51c16239658/metrics?get=0.currentInputWatermark
+GET http://localhost:8081/jobs/6e39f4f9e212beb7f0e11e24d0e59f1f/vertices/20ba6b65f97481d5570070de90e4e791/metrics?get=0.currentInputWatermark
+
+보내면 각각 [], [
+    {
+        "id": "0.currentInputWatermark",
+        "value": "-9223372036854775808"
+    }
+] 값이 나온다.
+
+
+
+또한
+
+GET http://localhost:8081/jobs/6e39f4f9e212beb7f0e11e24d0e59f1f/checkpoints 을 보면 어떤 Savepoint에서 Restore한 것인지 볼 수 있다.
+
+# POST http://localhost:8081/savepoint-disposal/
+
+해당 Savepoint를 삭제하고 triggerId를 반환한다.
+
+```json
+//request
+{
+    "savepoint-path" : "file:///tmp/flink/savepoints/tmp/savepoint-7bf83c-a3c8c5190b01"
+}        
+//response    
+{
+    "request-id": "09d560675a13889d40c0078bede885a1"
+}
+```
+
+# GET http://localhost:8081/savepoint-disposal/09d560675a13889d40c0078bede885a1
+
+savepoint가 삭제 됐는지 진행중인지 확인하는 용도이다.
+```json
+{
+    "status": {
+        "id": "COMPLETED"
+    },
+    "operation": {}
+}
+```
+
+
+_metadata는 savepoint파일로서 savepoint resume할때 필요하다.
+
+
+
+Savepoint-CLI
+https://riptutorial.com/ko/apache-flink/example/29306/%EC%84%B8%EC%9D%B4%EB%B8%8C-%ED%8F%AC%EC%9D%B8%ED%8A%B8
