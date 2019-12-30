@@ -1,7 +1,6 @@
 /**
  *   combineLatest
  */
-import  from 'rxjs';
 import {Observable} from 'rxjs';
 
 let boys = Observable.from(["tom","jhon","jack"])

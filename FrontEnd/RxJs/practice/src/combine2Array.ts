@@ -175,7 +175,7 @@ import {concatMap, concatAll,zip} from './functions';
 
 
 	//------------ COMPLETE THIS EXPRESSION --------------
-	const result = movieLists.
+	let result = movieLists.
         concatMap(movieList => movieList.videos
             .concatMap(video => Array
                 .zip(video.boxarts

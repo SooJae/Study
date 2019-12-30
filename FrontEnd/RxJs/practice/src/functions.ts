@@ -1,9 +1,9 @@
-export * from './functions';
+export {concatAll, concatMap, zip};
 
 
-const concatAll = function(this: any) {
-	var results: any[] | never[] = [];
-	this.forEach(function(subArray: never[]) {
+Array.prototype.concatAll = function() {
+	var results = [];
+	this.forEach(function(subArray) {
 		results.push.apply(results, subArray);
 	});
 	
@@ -13,10 +13,10 @@ const concatAll = function(this: any) {
 	// [1,2,3].concatAll(); // throws an error because this is a one-dimensional array
 };
 
-const concatMap = function(this: any, projectionFunctionThatReturnsArray: (arg0: any) => void) {
+Array.prototype.concatMap = function(projectionFunctionThatReturnsArray) {
 	
 	return this.
-		map(function(item: any) {
+		map(function(item) {
 			return projectionFunctionThatReturnsArray(item);
 		}).
 		// apply the concatAll function to flatten the two-dimensional array
@@ -34,11 +34,9 @@ const concatMap = function(this: any, projectionFunctionThatReturnsArray: (arg0:
 	*/
 };
 
-
-
 // JSON.stringify(Array.zip([1,2,3],[4,5,6], function(left, right) { return left + right })) === '[5,7,9]'
 
-const zip = function(left: any[], right: any[], combinerFunction: (arg0: any, arg1: any) => void) {
+Array.zip = function(left, right, combinerFunction) {
 	var counter,
 		results = [];
 
