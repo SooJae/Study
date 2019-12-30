@@ -1,5 +1,9 @@
+http://reactivex.io/tutorials.html
+http://reactivex.io/learnrx/
+
+
 # concatAll()
-이중 배열일경우 배열 하나로 변환한다.
+이중 배열일경우 2번째 배열을 꺼내서 하나로 변환한다.
 ```js
 function() {
 	var movieLists = [
