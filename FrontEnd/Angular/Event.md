@@ -58,3 +58,10 @@ Listening to global events in a reusable component is not recommended as it coul
 Parent component can hear and catch DOM events (not custom Angular events) fired inside child components as the events bubble up.
 Event bindings will be active once they are set on an element and they will stay active until the elements are removed from the DOM so that means you cannot control when to add or remove event listeners dynamically.
 Stay tuned for the next blog posts on event listeners as I explore the other methods of listening to DOM events in Angular.
+
+
+
+https://medium.com/claritydesignsystem/four-ways-of-listening-to-dom-events-in-angular-part-2-hostlistener-1b66d45b3e3d
+
+@HostListener() : 이벤트 리스너
+@HostBinding(): 이벤트 리스너로 인해 값이 변경되면 그것에 대한 속성값을 변경한다(배경색 등)
