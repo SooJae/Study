@@ -157,16 +157,16 @@ var movieLists = [
     }
 ];
 //------------ COMPLETE THIS EXPRESSION --------------
-var result = movieLists.
-    concatMap(function (movieList) { return movieList.videos
-    .concatMap(function (video) { return Array
+let result = movieLists.
+    concatMap(movieList => movieList.videos
+    .concatMap(video => Array
     .zip(video.boxarts
-    .reduce(function (acc, curr) {
+    .reduce((acc, curr) => {
     if (acc.width * acc.height < curr.width * curr.height) {
         return [acc];
     }
     else {
         return [curr];
     }
-}), video.interestingMoments.filter(function (interestingMoment) { return interestingMoment.type === 'Middle'; }), function (boxart, interestingMoment) { return { id: video.id, title: video.title, time: interestingMoment.time, url: boxart.url }; }); }); });
+}), video.interestingMoments.filter(interestingMoment => interestingMoment.type === 'Middle'), (boxart, interestingMoment) => { return { id: video.id, title: video.title, time: interestingMoment.time, url: boxart.url }; })));
 console.log(result);

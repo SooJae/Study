@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var rxjs_1 = require("rxjs");
+const rxjs_1 = require("rxjs");
 function (button) {
     var buttonClicks = rxjs_1.fromEvent(button, "click");
     // Use take() to listen for only one button click
