@@ -80,7 +80,7 @@ https://javaexpert.tistory.com/794?category=678737
 https://huns.me/development/2051
 https://gracefullight.dev/2019/04/30/RxJS%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83/
 https://beomseok95.tistory.com/32
-https://softwaree.tistory.com/30
+                                                                                                                                                                                                                                                                                                                                                                           https://softwaree.tistory.com/30
 https://jungwoon.github.io/rxjava2/2019/07/05/RxJava-1/
 
 http://reactivex.io/documentation/ko/operators.html
