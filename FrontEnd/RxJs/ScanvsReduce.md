@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/45350806/whats-difference-between-reduce-and-scan

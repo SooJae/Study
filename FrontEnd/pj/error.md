@@ -183,3 +183,43 @@ If your are not using lazy loading, you need to import your HomeComponent in app
 ## 400 error: "Bad Request"
 message: "JSON parse error: Cannot deserialize instance of '' out of START_ARRAY token; nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize instance of 
 '' out of START_ARRAY token↵ at [Source: (PushbackInputStream); line: 1, column: 1]
+
+
+Basic Auth
+```js
+ public abc(url: string) {
+    const scope = this;
+    return this.httpClient
+      .get(url, {
+        headers: new HttpHeaders({
+          Accept: '*/*;',
+          'Authorization': 'Basic ' + btoa('username:password'),
+          // 'Content-Type': 'application/json'
+        }),
+      })
+      .then((response) => response)
+      .catch(error => scope.errorHandler(scope, error));
+  }
+  ```
+
+
+## postman to curl 만들기
+
+
+
+
+
+
+curl -L -X POST 'http://abc' -H 'Authorization: Basic ZGVtcGFo' -F 'jarFile=@/Users/soojae/Documents/example.jar' -v -0
+
+
+
+```text
+* HTTP/2 stream 0 was not closed cleanly: PROTOCOL_ERROR (err 1)
+* stopped the pause stream!
+* Connection #1 to host examples-java-1-76a5-f42b.flow.svc.dev.apm.cloud.metatron.app left intact
+curl: (92) HTTP/2 stream 0 was not closed cleanly: PROTOCOL_ERROR (err 1)
+* Closing connection 1
+```
+
+HTTP를 강제로 HTTP/2로 전송해서 생기는 오류, -0을 붙여주면 된다. (HTTP/1을 사용하겠다는 의미)
