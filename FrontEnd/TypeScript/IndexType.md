@@ -24,3 +24,11 @@ interface User {
 }
 
 let keysOfUser: keyof User;
+
+let helloMethod: User["Hello"];
+helloMethod = function(msg: string) {
+
+}
+
+```
+

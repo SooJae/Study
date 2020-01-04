@@ -96,7 +96,7 @@ function(window, $, showMovieLists, showError) {
 }
         
 
-/////////////////////////////////////////////////2 번
+/////////////////////////////////////////////////2 번 
 function(window, $) {
 	var getJSON = function(url) {
 		return Observable.create(function(observer) {
