@@ -45,7 +45,7 @@ deepCopy = oldObj => {
 const shallowClone = originalArray.slice();
 // const deepClone = {...originalObject};
 // const deepClone = _.cloneDeep(originalArray);
-// const JSONClone = JSON.parse(JSON.stringify(originalObject));
+const JSONClone = JSON.parse(JSON.stringify(originalObject));
 // const JSONClone2 = JSON.stringify(originalObject);
 
 // deepClone.age = 30;
@@ -59,7 +59,7 @@ const shallowClone = originalArray.slice();
 // deepClone[0] = 10;
 // deepClone[4][0] = 20;
 // console.log('OriginalObject: ',originalObject);
-console.log('ShallowClone: ',shallowClone);
+console.log('ShallowClone: ',JSONClone);
 // console.log('OriginalArray', originalArray);
 
 

@@ -143,4 +143,29 @@ ShareReplay를 추가하면 한번만 호출하게 된다!
     result$.subscribe(console.log);
 ```
 
+# Form에서 유효성 검사한 후 서버로 수정 보내기
+
+```js
+ngOnInit(
+      this.form.valueChanges
+        .pipe(
+          filter(() => this.form.valid)
+        )
+        .subscribe(changes => {
+          
+          const saveCourse$ = fromPromise(fetch(`/api/courses/${this.course.id}`,{
+            method: 'PUT',
+            body: JSON.stringify(changes),
+            headers: {
+              'content-type': 'application/json'
+            }
+          }));
+          
+          saveCourse$.subscribe();
+
+        });
+)
+```
+filter로 유효성이 있는 폼만을 걸러낸 후(즉, 폼이 유효하면)
+서버로 PUT을 날린다. (fetch는 원래 promise인데, fromPromise함수를 쓰면 Observable로 바뀐다!) 
 
