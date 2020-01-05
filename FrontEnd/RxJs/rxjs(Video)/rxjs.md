@@ -169,3 +169,53 @@ ngOnInit(
 filter로 유효성이 있는 폼만을 걸러낸 후(즉, 폼이 유효하면)
 서버로 PUT을 날린다. (fetch는 원래 promise인데, fromPromise함수를 쓰면 Observable로 바뀐다!) 
 
+
+```js
+ ngOnInit() {
+
+      this.form.valueChanges
+        .pipe(
+          filter(() => this.form.valid),
+        )
+        .subscribe(changes => {
+          const saveCourse$ = this.saveCourse(changes);
+          saveCourse$.subscribe();
+        });
+    }
+
+    saveCourse(changes) {
+      return fromPromise(fetch(`/api/courses/${this.course.id}`,{
+        method: 'PUT',
+        body: JSON.stringify(changes),
+        headers: {
+          'content-type': 'application/json'
+        }
+      }));
+    }
+```
+
+```js
+ ngOnInit() {
+
+      this.form.valueChanges
+        .pipe(
+          filter(() => this.form.valid),
+          // const saveCourse$ = this.saveCourse(changes);
+          // saveCourse$.subscribe(); 
+          //로 일일이 구독을 해야 하는걸 밑의 한줄로 가능해졌다.
+          concatMap(changes => this.saveCourse(changes))
+        )
+        .subscribe();
+    }
+
+    saveCourse(changes) {
+      return fromPromise(fetch(`/api/courses/${this.course.id}`,{
+        method: 'PUT',
+        body: JSON.stringify(changes),
+        headers: {
+          'content-type': 'application/json'
+        }
+      }));
+    }
+```
+
