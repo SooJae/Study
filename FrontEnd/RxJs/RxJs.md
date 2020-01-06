@@ -73,6 +73,18 @@ RxJava의 javadoc에 다르면 create()는 RxJava에 익숙한 사용자만 활�
 지정된 시간이 지나고 난 후 항목을 하나 배출하는 Observable을 생성한다
 
 
+# RXJS 여러개를 쓰고싶을때,
+1. 서로간의 의존성이 없을 때
+Promise.all === forkJoin (서로 의존성 없이 한번에 다 일어날 때)
+
+2. 서로간의 의존성이 있을때. (Promise.then()) **중괄호 쓰지 않도록 조심!!**
+this.service.service1().pipe(
+  flatMap((res1) => this.service.service2(res1)),
+  flatMap((res2) => this.service.service3(res2))
+).subscribe((res3) => {
+  // Do something with res3.
+});
+
 출처 :https://medium.com/@pks2974/rxjs-%EA%B0%84%EB%8B%A8%EC%A0%95%EB%A6%AC-41f67c37e028
 https://d2.naver.com/helloworld/12864
 https://brunch.co.kr/@tilltue/6
