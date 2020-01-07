@@ -2,7 +2,9 @@
 1. Race Condition이 적다.
 멀티스레딩에서 간섭현상이 생기는 경우가 적다.
 바꾼거를 뽑아내는 방식. 
+
 ===========함수==========함수==========함수============ 인풋된거를 바꾸지 않고 아웃풋만 바꿀꺼야. (Immutable)
+
 1인 경우
 1번째 스레드 : 1을 증가시킴
 2번째 스레드 : 1을 증가시킴
@@ -30,3 +32,27 @@ recursive(n){
     return tailRecursive(n-1, n*acc); // 꼬리 재귀
   }
 ```
+스택을 사용하지 않기 때문에 스택오버플로가 발생하지 않는다.(**컴파일러가 해주기 때문에 자바는 해주지 않는다.**)
+멱등성 : 같은 인자에 의해서 같은 출력만 나온다.
+순수함수와 참조 투명성
+불변성
+영속성 자료구조(2개를의 값을 합해야 할때, 새로 전체를 복사할 필요없다. 뒤의 함수를 앞의 함수 뒤에 붙이면 된다.)
+메모이제이션(캐쉬)
+
+
+무엇을 하느냐 > 어떻게 하느냐
+
+
+
+1. 높은 표현력을 통해 불필요한 코드를 줄일 수 있다.
+
+2. 함수형 프로그래밍 언어군은 프로그래밍 언어론의 최신 연구 결과를 반영하고 있다.
+
+소프트웨어 트랜잭셔널 메모리(Lock 걸고 하는 것), 타입 클래스(자바 인터페이스가 좋아지는 느낌, ), 
+대수적 자료형: 다른 자료형의 값으로 구성된 자료형 곱타입: class/ struct와 비슷, 합타입 : enum / union과 유사 한 번에 한 값이 존재함
+패턴매칭
+
+forEach : forEach가 돌고있을때는 return값이 안 먹히기 때문에 외부 변수가 필요하다. https://www.competa.com/blog/the-javascript-array-foreach-method-doesnt-return-anything/
+
+map : return 안쓰는법 https://gofore.com/en/why-you-should-replace-foreach/
+꼬리재귀 : https://maxglassie.github.io/2017/08/24/tail-recursion.html
