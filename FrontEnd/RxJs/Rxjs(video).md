@@ -41,3 +41,18 @@ for(const v of leesujaeIterable) {
     // 'l','e','e' ... 
 }
 ```
+
+course-dialog.component.ts에서 input과 save 버튼을 viewchild로 한 이유 : 
+
+# exhaustMap
+
+데이터를 보내면 데이터가 완료될 때까지 그 이후의 값들이 들어와도 실행되지 않는다.
+
+
+```js
+ fromEvent(this.saveButton.nativeElement, 'click')
+        .pipe(
+          exhaustMap(() => this.saveCourse(this.form.value))
+        )
+        .subscribe();
+```
