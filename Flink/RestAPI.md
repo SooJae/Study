@@ -1401,6 +1401,8 @@ _metadata는 savepoint파일로서 savepoint resume할때 필요하다.
 
 그래프를 그리기 위한 요소들
 ```json
+
+
 {
     "plan": {
         "jid": "ded57289d462f764c091e51b4b352d4d",
@@ -1441,3 +1443,15 @@ _metadata는 savepoint파일로서 savepoint resume할때 필요하다.
 
 ### Savepoint-CLI
 https://riptutorial.com/ko/apache-flink/example/29306/%EC%84%B8%EC%9D%B4%EB%B8%8C-%ED%8F%AC%EC%9D%B8%ED%8A%B8
+
+
+
+
+curl savepoint
+
+curl -X POST 'http://localhost:8081/jobs/a1387000fbba896f6842d39c9ba9cb61/savepoints' \
+-H 'Content-Type: application/json' \
+-d '{
+ "target-directory": "file:///tmp/flink/savepoints/tmp",
+ "cancel-job":false
+}'
