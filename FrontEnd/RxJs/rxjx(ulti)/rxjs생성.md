@@ -85,7 +85,97 @@ from([1,2,3,4,5])
 
 fromEvent(document,'click')
 
-setInterval(() => {},1000)
+setInterval(() => {},1000);
+=> interval(1000)로 변환
+```
+옵저버블은 fromEvent, from, of, timer, interval, range등으로 쉽게 만들 수 있다.
+
+
+# of
+```js
+import {of} from 'rxjs'
+
+
+function hello() {
+    return 'hello world';
+}
+
+const observer = {
+    next(val:any){console.log('next', val)},
+    error(err:any){console.log('error', err)},
+    complete(){console.log('complete!')}
+}
+
+const source$ = of(1,2,3,4,5);
+source$.subscribe(observer);
+console.log(hello());
+/*
+next 1
+next 2
+next 3
+next 4
+next 5
+complete!
+hello world
+*/
+
+```
+동기적으로 실행된다는 것을 확인할 수 있다. (subscribe 이후에 console.log)
+
+1,2,3,4,5를 적기 귀찮다면 range를 이용해보자
+
+of(1,2,3,4,5) === range(1,5)
+
+
+
+# from
+```js
+// 이터레이터를 생성한다 (제너레이터)
+function* hello() {
+    yield 'Hello';
+    yield 'world';
+}
+=== ['Hello','world'] 처럼 된다.
+const observer = {
+    next(val:any){console.log('next', val)},
+    error(err:any){console.log('error', err)},
+    complete(){console.log('complete!')}
+}
+
+const source$ = from(hello());
+source$.subscribe(observer);
+/*
+next Hello
+next world
+complete!
+*/
 ```
 
+이터러블인 것들을 flat(하나씩 뽑아낸다?)한다.
+(flat이란?
+ Flatmap은 Flattening 작업을 합니다. 
+ 예를들어 map에서 또다른 Observable을 return할때 기본적으로 map operator에서는 하나의 observable을 return하지만 내부에 또다른 observable을 리턴하게되면 2개의 스트림이 됩니다. 
+ 이때 하나로 줄여주는 stream을 평평하게 만들어 주는 역할을 합니다. 
+ 
+ https://arnoldyoo.tistory.com/17)
+ 
+ 
+of는 ([1,2,3,4])일 경우 [1,2,3,4]를 뽑아내고, 위의 예시에서도
+Object [Generator] {} 를 뽑아낸다.
+
+flatten이란?
+of(1,2,3,4)로 했을 경우
+map(num => `${num}`)
+을 하면 1,2,3,4로 값을 리턴한다.
+이렇게 하면 쉬운데...
+어려운 것은 사용자가 map함수로부터 observable을 리턴했을 때이다.
+
+of로 하면 [Object object]로 결과가 출력된다... 왜냐하면 Observable을 리턴하니까
+
+
+https://medium.com/@shairez/a-super-ninja-trick-to-learn-rxjss-switchmap-mergemap-concatmap-and-exhaustmap-forever-88e178a75f1b
+
+
+각종 옵저버블 연습
+https://stackblitz.com/edit/i-switched-a-map-examples
 
