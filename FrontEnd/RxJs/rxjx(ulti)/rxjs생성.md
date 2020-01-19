@@ -179,3 +179,19 @@ https://medium.com/@shairez/a-super-ninja-trick-to-learn-rxjss-switchmap-mergema
 각종 옵저버블 연습
 https://stackblitz.com/edit/i-switched-a-map-examples
 
+
+
+
+/*
+ * If you need the first item to be emitted on an interval
+ * different than the rest, you can use the timer operator instead.
+ * For example, let's have the first item emit immediately, followed
+ * by a value every 1000ms after.
+ */
+// const timer$ = timer(0, 1000); == Interval(1000)
+
+/*
+ * You can also emit a single item after a specified duration, then complete,
+ * by just supplying the first argument.
+ */
+// const timer$ = timer(1000);
