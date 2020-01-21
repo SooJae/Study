@@ -29,9 +29,70 @@ observer.complete()
 Observable.unsubscribe()
 구독 해제 시점에 구독하고 있는 모든 대상의 구독을 종료한다.
 
+
+## RactiveX는 Observer패턴과 Iterator패턴, 그리고 함수형 프로그래밍을 결합한 것이다.
+functional reactive programming은 시간이 지남에 따라 **지속적으로 변하는 값**에서 작동한다.
+ReactiveX는 시간이 지남에 따라 **emit되는 불연속 값**에서 작동한다.
+
+
+Observable을 사용함으로써 배열과 같은 콜렉션의 단순하거나 복잡한 연산 작업을 비동기 이벤트 스트림으로 처리를 할 수 있다.
+
+Observables Are Composable
+Observables Are Flexible
+Observables Are Less Opinionated
+Callbacks Have Their Own Problems
+ReactiveX Is a Polyglot Implementation
+
+
+# Observable 생성
+새로운 Observable을 만드는 연산자들
+
+## Create
+직접적인 코드 구현을 통해 옵저버 메서드를 호출하여 Observable을 생성한다
+RxJava의 javadoc에 다르면 create()는 RxJava에 익숙한 사용자만 활용하도록 권고합니다. 이유는 개발자가 하나하나 수동으로 잡아줘야 하는 옵션들이 많아지기 때문입니다.
+
+## Defer
+옵저버가 구독하기 전까지는 Observable 생성을 지연하고 구독이 시작되면 **옵저버 별로 새로운 Observable을 생성**한다
+
+## Empty/Never/Throw 
+아주 정확하고 제한된 행동을 하는 Observable을 생성한다
+## From 
+다른 객체나 자료 구조를 Observable로 변환한다
+## Interval 
+특정 시간별로 연속된 정수형을 배출하는 Observable을 생성한다
+## Just 
+객체 하나 또는 객채집합을 Observable로 변환한다. 변환된 Observable은 원본 객체들을 발행한다
+## Range 
+연속된 범위(Range)의 정수를 발행하는 Observable을 생성한다
+
+## Repeat 
+특정 항목이나 연속된 항목들을 반복적으로 배출하는 Observable을 생성한다
+## Start
+함수의 실행 결과를 배출하는 Observable을 생성한다
+## Timer 
+지정된 시간이 지나고 난 후 항목을 하나 배출하는 Observable을 생성한다
+
+
+# RXJS 여러개를 쓰고싶을때,
+1. 서로간의 의존성이 없을 때
+Promise.all === forkJoin (서로 의존성 없이 한번에 다 일어날 때)
+
+2. 서로간의 의존성이 있을때. (Promise.then()) **중괄호 쓰지 않도록 조심!!**
+this.service.service1().pipe(
+  flatMap((res1) => this.service.service2(res1)),
+  flatMap((res2) => this.service.service3(res2))
+).subscribe((res3) => {
+  // Do something with res3.
+});
+
 출처 :https://medium.com/@pks2974/rxjs-%EA%B0%84%EB%8B%A8%EC%A0%95%EB%A6%AC-41f67c37e028
-
-
 https://d2.naver.com/helloworld/12864
+https://brunch.co.kr/@tilltue/6
+https://javaexpert.tistory.com/794?category=678737
+https://huns.me/development/2051
+https://gracefullight.dev/2019/04/30/RxJS%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83/
 https://beomseok95.tistory.com/32
-https://softwaree.tistory.com/30
+                                                                                                                                                                                                                                                                                                                                                                           https://softwaree.tistory.com/30
+https://jungwoon.github.io/rxjava2/2019/07/05/RxJava-1/
+
+http://reactivex.io/documentation/ko/operators.html
