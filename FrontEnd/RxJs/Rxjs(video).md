@@ -41,3 +41,24 @@ for(const v of leesujaeIterable) {
     // 'l','e','e' ... 
 }
 ```
+
+IO, 시간과 관련된 일은 대부분 비동기 처리이다.
+
+```js
+function asyncFunc(param){
+    return new Promise ((resolve, reject) =>{
+        setTimeout(() => {
+            if(param) resolve({data:'resolve!'});
+            else reject(new Error('reject!'));
+        }, 1000)
+    })
+}
+
+asyncFunc(true)
+.then(v => {
+    console.log(v.data);
+    return v.data.length
+    })
+.then( length =>
+    console.log(length);
+)
