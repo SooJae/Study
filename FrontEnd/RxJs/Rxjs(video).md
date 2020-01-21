@@ -42,8 +42,6 @@ for(const v of leesujaeIterable) {
 }
 ```
 
-<<<<<<< HEAD
-=======
 course-dialog.component.ts에서 input과 save 버튼을 viewchild로 한 이유 : 
 
 # exhaustMap
@@ -76,7 +74,6 @@ setTimeout(() => sub.unsubscribe(), 0);
 
 # Rxjs 보는 곳 
 https://stackoverflow.com/questions/52317494/is-it-good-way-to-call-subscribe-inside-subscribe
->>>>>>> a972105f061e7abde7a2eebb2aefe1d0dfc14bb3
 IO, 시간과 관련된 일은 대부분 비동기 처리이다.
 
 ```js
@@ -96,8 +93,4 @@ asyncFunc(true)
     })
 .then( length =>
     console.log(length);
-<<<<<<< HEAD
 )
-=======
-)
->>>>>>> a972105f061e7abde7a2eebb2aefe1d0dfc14bb3
