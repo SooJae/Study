@@ -55,7 +55,7 @@ course-dialog.component.ts에서 input과 save 버튼을 viewchild로 한 이유
           exhaustMap(() => this.saveCourse(this.form.value))
         )
         .subscribe();
-```
+``` 
 
 ```js
 const interval1$ = interval(1000);
