@@ -55,4 +55,42 @@ course-dialog.component.ts에서 input과 save 버튼을 viewchild로 한 이유
           exhaustMap(() => this.saveCourse(this.form.value))
         )
         .subscribe();
+``` 
+
+```js
+const interval1$ = interval(1000);
+const sub = interval1$.subscribe(console.log);
+setTimeout(() => sub.unsubscribe(), 5000);
 ```
+을 다음과 같이 바꿀 수 있다.
+
+```js
+const http$ = createHttpObservable('/api/courses');
+const sub = http$.subscribe(console.log);
+setTimeout(() => sub.unsubscribe(), 0);
+```
+구독 취소를 할 수 있다.
+
+
+# Rxjs 보는 곳 
+https://stackoverflow.com/questions/52317494/is-it-good-way-to-call-subscribe-inside-subscribe
+IO, 시간과 관련된 일은 대부분 비동기 처리이다.
+
+```js
+function asyncFunc(param){
+    return new Promise ((resolve, reject) =>{
+        setTimeout(() => {
+            if(param) resolve({data:'resolve!'});
+            else reject(new Error('reject!'));
+        }, 1000)
+    })
+}
+
+asyncFunc(true)
+.then(v => {
+    console.log(v.data);
+    return v.data.length
+    })
+.then( length =>
+    console.log(length);
+)
