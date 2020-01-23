@@ -96,3 +96,7 @@ https://beomseok95.tistory.com/32
 https://jungwoon.github.io/rxjava2/2019/07/05/RxJava-1/
 
 http://reactivex.io/documentation/ko/operators.html
+
+
+# reduce와 concat으로 flat()하는 방법 
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/flat

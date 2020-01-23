@@ -65,3 +65,6 @@ https://medium.com/claritydesignsystem/four-ways-of-listening-to-dom-events-in-a
 
 @HostListener() : 이벤트 리스너
 @HostBinding(): 이벤트 리스너로 인해 값이 변경되면 그것에 대한 속성값을 변경한다(배경색 등)
+
+@Input을 받는 자식이 Input갯수가 3개일경우는 부모에서 3개 전부 값을 바꿔줘야 자식에서 인식을 한다.
+(예: 생성 취소 이후 자식에서 줬던 값 3개를 전부 null처리를 해줘야 다시 자식에게 값을 보내준다.)
