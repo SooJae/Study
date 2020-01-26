@@ -65,3 +65,16 @@ https://medium.com/claritydesignsystem/four-ways-of-listening-to-dom-events-in-a
 
 @HostListener() : 이벤트 리스너
 @HostBinding(): 이벤트 리스너로 인해 값이 변경되면 그것에 대한 속성값을 변경한다(배경색 등)
+
+@Input을 받는 자식 컴포넌트에서 ngOnchages에서 인식이 가능하게 설정 가능하다.
+(예: 생성 취소 이후 자식에서 줬던 값 3개를 전부 null처리를 해줘야 다시 자식에게 값을 보내준다.)
+public ngOnChanges(changes: SimpleChanges) {
+    if (
+      (changes.app && changes.app.currentValue !== changes.app.previousValue) &&
+      (changes.modalType && changes.modalType.currentValue !== changes.modalType.previousValue) &&
+      (changes.appName && changes.appName.currentValue !== changes.appName.previousValue)
+
+    ) {
+      this.confirm();
+    }
+  }
