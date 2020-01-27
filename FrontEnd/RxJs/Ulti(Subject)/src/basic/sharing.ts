@@ -12,9 +12,9 @@ const interval$ = interval(2000).pipe(
 );
 
 const multicastedInterval$ = interval$.pipe(
-    multicast(() => new Subject()),
-    refCount()
-    // share()
+    // multicast(() => new Subject()),
+    // refCount()
+    share()
 );
 
 // 내부적으로 `source.subscrbe(subject)를 호출

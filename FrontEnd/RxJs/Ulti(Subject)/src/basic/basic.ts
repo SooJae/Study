@@ -9,7 +9,7 @@ const observer = {
 
 const subject = new Subject();
 
-const subscription = subject.subscribe(observer);
+// const subscription = subject.subscribe(observer);
 
 subject.next('Hello');
 
@@ -39,7 +39,7 @@ next 1
 
  */
 
-// interval$.subscribe(subject);
+interval$.subscribe(subject);
 /*
 next Hello
 next World

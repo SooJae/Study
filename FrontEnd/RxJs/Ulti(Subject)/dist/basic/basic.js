@@ -8,7 +8,7 @@ const observer = {
     complete() { console.log('complete!'); }
 };
 const subject = new rxjs_1.Subject();
-const subscription = subject.subscribe(observer);
+// const subscription = subject.subscribe(observer);
 subject.next('Hello');
 const subscriptionTwo = subject.subscribe(observer);
 subject.next('World');
@@ -29,7 +29,7 @@ new interval 1
 next 1
 
  */
-// interval$.subscribe(subject);
+interval$.subscribe(subject);
 /*
 next Hello
 next World

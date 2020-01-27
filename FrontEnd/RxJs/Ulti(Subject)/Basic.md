@@ -20,3 +20,107 @@ https://medium.com/@rkdthd0403/rxswift-subject-99b401e5d2e5
 
 asObservable 보다 subject를 노출하는 것이 좋다?(타입스크립트에서 Observable로 return)
 https://stackoverflow.com/questions/48448364/should-rxjs-subjects-be-public-in-the-class
+
+
+
+# Subject ConnectableObservable 
+https://moka.land/android/rxAndroid_study/
+
+
+#Behaivor Subject
+```js
+const subject = new Subject();
+
+const subscription = subject.subscribe(
+    observer
+);
+
+subject.next('Hello');
+
+const secondSubscription = subject.subscribe(
+    observer
+);
+
+subject.next('World');
+/*
+next Hello
+next World
+next World
+*/
+```
+```js
+const subject = new BehaviorSubject('Hello');
+
+...
+
+/*
+next Hello // 얘는 subject.next('Hello');
+next Hello
+next Hello
+next World
+next World
+*/
+```
+
+
+```js
+...
+
+setTimeout(() => {
+    subject.subscribe(
+        observer
+    )
+}, 3000);
+
+/*
+next Hello 
+next Hello
+next Hello
+next World
+next World
+next World // 마지막 값인 World 출력 
+*/
+```
+
+
+# 코드 분석
+```js
+this._stateUpdates.pipe(
+            tap(console.log),
+            scan((acc, curr) => {
+                return {...acc, ...curr}; // 이전값에 최신값을 concat한다 (변화가 생긴 것만 수정한다.)
+            }, initialState),
+).subscribe(this._store); // _store은 subject이다. 즉 값이 변화되면 해당 subject에게 변화를 알린다.
+```
+
+# ReplaySubject
+```js
+const observer = {
+    next(val:any){console.log('next', val)},
+    error(err:any){console.log('error', err)},
+    complete(){console.log('complete!')}
+};
+
+const subject = new ReplaySubject(2); // 숫자를 적지 않으면 그 전의 next 요소를 전부 갖고온다.(버퍼역할)
+subject.next('hello');
+subject.next('world');
+subject.next('goodbye');
+subject.subscribe(observer);
+```
+
+#AsyncSubject
+
+```js
+const subject = new AsyncSubject();
+
+subject.subscribe(observer);
+subject.subscribe(observer);
+
+subject.next('Hello');
+subject.next('World');
+subject.next('GoodBye');
+
+subject.complete();
+```
+
+complete가 되기 전까지 next한 값들이 출력되지 않고, complete가 되면 가장 마지막 값이 출력된다.
