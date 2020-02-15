@@ -1,5 +1,6 @@
 스코프란?
-스코프는 변수와 상수, 매개변수가 언제 **어디서 정의되는지 결정**합니다.
+스코프는 변수와 상수, 매개변수가 언제 **어디서 정의되는지 결정**합니다. 
+스코프에는 전역(global)과 지역(local) 스코프가 있습니다.
 
 ```js
 const f = x => {
@@ -67,12 +68,12 @@ y : 함수 f를 정의할때 존재 X
 const name = 'soojae' 
 const age = 29;
 
-const greet = () => {
-  console.log(`Hello, ${name}`);
+const displayName = () => {
+  console.log(`My name is ${name}`);
 }
 
-const getBirthYear = () => {
-  return new Date().getFullYear() - age;
+const displayAge = () => {
+  console.log(`I'm ${age}`)
 }
 ```
 greet와 getBirthYear은 전역변수에 의존합니다.
