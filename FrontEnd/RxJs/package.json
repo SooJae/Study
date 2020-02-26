@@ -16,5 +16,9 @@
     "eslint-plugin-import": "^2.18.2",
     "typescript": "^3.7.3",
     "rxjs": "^6.5.3"
+  },
+  "dependencies": {
+    "@types/jasmine": "^3.5.7",
+    "@types/karma": "^4.4.0"
   }
 }

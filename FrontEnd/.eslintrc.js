@@ -23,5 +23,7 @@ module.exports = {
             "error",
             2
         ],
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "off"
     }
 };
