@@ -207,7 +207,7 @@ f(); // I have beean called 2 time(s)
 # 함수 스코프와 호이스팅
 ES6에서 let을 도입하기 전에는 var를 써서 변수를 선언했고, 이렇게 선언된 변수들은 함수 스코프라 불리는 스코프를 가졌습니다.(var로 선언한 전역 변수는 명시적인 함수 안에 있지는 않지만 함수 스코프와 똑같이 동작합니다.)
 
-let으로 변수를 선언하면, 그 변수는 선언하기 전에는 존재하지 않습니다. var로 선언한 변수는 현재 스코프 안이라면 어디서든 사용할 수 있으며, 심지어 선언하기도 전에 사용할 수 있습니다.
+let으로 변수를 선언하면, 그 변수는 할당하기 전에는 존재하지 않습니다. var로 선언한 변수는 현재 스코프 안이라면 어디서든 사용할 수 있으며, 심지어 선언하기도 전에 사용할 수 있습니다.
 아직 **선언되지 않은 변수와 값이 undefiend인 변수는 다르다**는 점을 상기해봅시다.
 아직 선언되지 않은 변수는 에러를 일으키지만, 존재하되 값이 undefined인 변수는 에러를 일으키지 않습니다.
 
@@ -267,3 +267,43 @@ Strict 모드
 })();
 ```
 
+```js
+function outerFunction () {
+  const outer = 'I’m the outer function!'
+    
+  function innerFunction() {
+     const inner = 'I’m the inner function!'
+     console.log(outer) // I’m the outer function!
+  }
+    
+  console.log(outer)
+  console.log(inner) // Error, inner is not defined
+}
+```
+
+
+
+살짝만 깊게 들어가볼까요? 자바스크립트 엔진은 변수의 범위를 어떻게 결정하고, 변수 조회를 할까요?
+이를 이해하기 위해서는 자바스크립트의 렉시컬 환경(lexical environment)을 이해해야합니다.
+
+렉시컬 환경(Lexical environment)
+렉시컬 환경은 식별자(identifier)-변수(variable) 매핑을 보유하는 구조입니다. (여기서 식별자는 변수/ 함수를 뜻하고, 변수는 객체[함수 객체, 배열 객체] 또는 기본 값에 대한 참조입니다.)
+즉, 렉시컬 환경은 객체에 대한 변수와 참조가 저장되는 장소입니다.
+렉시컬 스코프와 렉시컬 환경은 다릅니다. 
+렉시컬 스코프 : 컴파일시 결정되는 범위,
+렉시컬 환경 : 프로그램 실행중에 변수가 저장되는 장소
+
+lexicalEnvironment = { 
+  a : 25, 
+  obj : 객체의 참조 값
+}
+
+새로운 렉시컬 환경은 각 렉시컬 스코프에 대해 작성되지만, 해당 범위의 코드가 실행될 때만 작성됩니다.
+
+렉시컬 환경은 외부 렉시컬 환경에대한 참조값을 가지고 있습니다.
+lexicalEnvironment = {
+  a: 25,
+  obj: 객체의 참조 값
+  
+  outer: 외부 렉시컬 환경
+}
