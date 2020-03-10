@@ -47,10 +47,12 @@ export class HeroDetailComponent implements OnInit, AfterViewInit {
     );
 
     this.back$.pipe(
-      switchMap(v => this.go$),
-      tap(v => console.log(v)),
+      switchMap(
+        (v) => this.go$,
+        (c,v) => {console.log(c,v)},
+        ),
     ).subscribe(
-      console.log
+
     );
 
     // switchMap 쓰고 tap에다 검색어 저장
