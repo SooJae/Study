@@ -168,3 +168,36 @@ console.log(character);
 //{name:'Han Solo', role:'Captain'};
 console.log(updatedCharacter);
 ```
+
+# What is ngrx/store?
+
+- Redux inspired reactive state management
+
+## ngrx/store
+- Based on Redux
+- Written with Observables
+- Made for Angular
+
+## Benefits of ngrx/store
+
+- single source of truth
+- Testability
+- Performance benefits
+-- ChangeDetectionStrategy.OnPush
+-- Immutable @Inputs
+-- Object reference checks are fase
+- Root and feature module support
+-- Eagerly loaded modules
+-- Lazily loaded modules
+
+## Reactive Angular
+### Container
+- Aware of Store
+- Dispatches Actions
+- Reads data from Store
+
+### Presentational
+- Not aware of Store
+- Invokes callbacks via @Output
+- Read data from @Inputs
+
