@@ -1,58 +1,31 @@
-class Vitellius {
-    constructor() {};
-    approve(commander) {
-      commander.execute();
-    };
-  };
+var name = '이름이 없습니다.';
+function displaySoojae() {
+  var name = '수재';
+  var age = 28;
+  
+  console.log(`My name is ${name}`);
+  console.log(`I was born in ${new Date().getFullYear() - age}`);
+}
+
+function displayJunbeom(){
+  var name ='준범';
+  var age = 29;
+  
+  console.log(`My name is ${name}`);
+  console.log(`I was born in ${new Date().getFullYear() - age}`);
+}
+
+{
+  var name = '블록 스코프입니다.';
+}
 
 
-  class Commander {
-    constructor() {
-      this.commands = [];
-    }
-    execute() {
-      this.commands.forEach(function(command) {
-        command();
-      });
-    }
+// My name is 수재
+// I was born in 1992
+displaySoojae();  
 
-    do(command, args) {
-      this.commands.push(function() {
-        command.call(null, args);
-      });
-    }
-    undo() {
-      this.commands.pop();
-    };
-  }
-//   var strategy = {
-//     climbAlps: function() {
-//       console.log('알프스를 오릅니다');
-//     },
-//     prepareSupply: function(number) {
-//       console.log('보급품을 ' + number + '만큼 준비합니다');
-//     },
-//     attackRome: function() {
-//       console.log('로마를 공격합니다');
-//     },
-//   };
-  var strategy = {
-    climbAlps: function() {
-      console.log('알프스를 오릅니다');
-    },
-    prepareSupply: function(number) {
-      console.log('보급품을 ' + number + '만큼 준비합니다');
-    },
-    attackRome: function() {
-      console.log('로마를 공격합니다');
-    },
-  };
+// My name is 준범
+// I was born in 1992
+displayJunbeom();  
 
-  var vitellius = new Vitellius();
-  var caecina = new Commander();
-  caecina.do(strategy.prepareSupply, 5000);
-  caecina.undo(); // prepareSupply 취소
-  caecina.do(strategy.prepareSupply, 10000);
-  caecina.do(strategy.climbAlps);
-  caecina.do(strategy.attackRome);
-  vitellius.approve(caecina); // 보급품을 10000만큼 준비합니다. 알프스를 오릅니다. 로마를 공격합니다.
+console.log(name); //  name is not defined
