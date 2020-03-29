@@ -84,3 +84,19 @@ registry.addResourceHandler("/m/**")
         .setCachePeriod(20); // 캐싱 전략
 }
 ```
+
+# 웹JAR
+자바 라이브러리 - Jquery나 부트스트랩 심지어 프론트 프레임워크도 웹 JAR파일로 있다.
+mvnrepository에서 찾아서 pom.xml에 추가해주면 된다.
+
+# Index페이지, 파비콘
+기본 리소스 위치
+classpath:/static
+classpath:/public
+classpath:/resources/
+classpath:/META-INF/resources
+4개중 아무 곳이나 index.html을 두면 홈파일로 사용한다.
+
+파비콘 주소 : https://favicon.io/
+파비콘도 위의 리소스에 놓자
+파비콘이 안 바뀔때? https://stackoverflow.com/questions/2208933/how-do-i-force-a-favicon-refresh
