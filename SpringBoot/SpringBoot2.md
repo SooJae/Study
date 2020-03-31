@@ -100,3 +100,152 @@ classpath:/META-INF/resources
 파비콘 주소 : https://favicon.io/
 파비콘도 위의 리소스에 놓자
 파비콘이 안 바뀔때? https://stackoverflow.com/questions/2208933/how-do-i-force-a-favicon-refresh
+
+
+# 템플릿 엔진
+스프링 부트가 자동 설정을 지원하는 템플릿 엔진
+FreeMarker
+Groovy
+Thymeleaf
+Mustache
+
+## JSP를 권장하지 않는 이유
+JAR 패키징 할 때는 동작하지 않고, WAR 패키징 해야 함.
+Undertow는 JSP를 지원하지 않음.
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-jsp-limitations
+Thymeleaf 사용하기
+https://www.thymeleaf.org/
+https://www.thymeleaf.org/doc/articles/standarddialect5minutes.html
+의존성 추가: spring-boot-starter-thymeleaf
+템플릿 파일 위치: /src/main/resources/template/
+예제: https://github.com/thymeleaf/thymeleafexamples-stsm/blob/3.0-master/src/main/webapp/WEB-INF/templates/seedstartermng.html
+
+
+
+# ExceptionHandler
+
+html 요청한 응답일 경우 html로 반환, 그렇지 않을 경우 JSON으로 반환 
+```java
+@RequestMapping(
+    produces = {"text/html"}
+  )
+  public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
+    HttpStatus status = this.getStatus(request);
+    Map<String, Object> model = Collections.unmodifiableMap(this.getErrorAttributes(request, this.isIncludeStackTrace(request, MediaType.TEXT_HTML)));
+    response.setStatus(status.value());
+    ModelAndView modelAndView = this.resolveErrorView(request, response, status, model);
+    return modelAndView != null ? modelAndView : new ModelAndView("error", model);
+  }
+
+  @RequestMapping
+  public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+    HttpStatus status = this.getStatus(request);
+    if (status == HttpStatus.NO_CONTENT) {
+      return new ResponseEntity(status);
+    } else {
+      Map<String, Object> body = this.getErrorAttributes(request, this.isIncludeStackTrace(request, MediaType.ALL));
+      return new ResponseEntity(body, status);
+    }
+  }
+```
+
+
+스프링 @MVC 예외 처리 방법
+@ControllerAdvice
+@ExceptionHandler
+스프링 부트가 제공하는 기본 예외 처리기
+BasicErrorController
+HTML과 JSON 응답 지원
+커스터마이징 방법
+ErrorController 구현
+커스텀 에러 페이지
+상태 코드 값에 따라 에러 페이지 보여주기
+src/main/resources/static|template/error/
+404.html
+5xx.html
+ErrorViewResolver 구현
+
+```java
+@RequestMapping({"${server.error.path:${error.path:/error}}"})
+// 프로퍼티에 server.error.path가 정의 되어있으면 그 값을 사용하고 없으면 error.path값을 사용하고 없으면 error를 사용한다.
+```
+BasicErrorController를 상속받아 사용하는 것도 좋다.
+
+
+ErrorViewResolver를 이용해서 동적으로 에러페이지를 생성할 수 있다.
+
+
+Hypermedia As The Engine Of Application State
+서버: 현재 리소스와 연관된 링크 정보를 클라이언트에게 제공한다.
+클라이언트: 연관된 링크 정보를 바탕으로 리소스에 접근한다.
+연관된 링크 정보
+Relation
+Hypertext Reference)
+spring-boot-starter-hateoas 의존성 추가
+https://spring.io/understanding/HATEOAS
+https://spring.io/guides/gs/rest-hateoas/
+https://docs.spring.io/spring-hateoas/docs/current/reference/html/
+ObjectMapper 제공
+spring.jackson.*
+Jackson2ObjectMapperBuilder
+LinkDiscovers 제공
+클라이언트 쪽에서 링크 정보를 Rel 이름으로 찾을때 사용할 수 있는 XPath 확장 클래스
+
+
+
+heteos를 사용하는이유?
+
+요청 URI가 변경되더라도 클라이언트에서 동적으로 생성된 URI를 사용함으로써, 클라이언트가 URI 수정에 따른 코드를 변경하지 않아도 되는 편리함을 제공합니다.
+하지만 api를 사용하는 클라이언트는 해당 uri 로 결국 한번의 요청은 해야지만 link정보를 가져오게
+
+
+
+Resource -> EntityModel 로 변경되었습니다.
+현재 스프링 부트 공식 페이지 보고 알았네요.
+
+따라하시는 분들, 아마 Resource 임포트 안되실 겁니다.
+
+강의 이후에 공식 클래스 이름이 바뀌었나보네요.
+
+도큐먼트에 다음과 같이 나와있습니다. 참고하세요.
+
+ResourceSupport is now RepresentationModel
+
+Resource is now EntityModel
+
+Resources is now CollectionModel
+
+PagedResources is now PagedModel
+
+마찬가지로 linkTo 임포트 안되시는 분들은 임포트 부분을 다음으로 바꿔보세요 ㅎㅎ
+
+
+```java
+@GetMapping("/hello")
+public EntityModel<Hello> hello(){
+Hello hello = new Hello();
+hello.setPrefix("Hey,");
+hello.setName("Soojae");
+
+EntityModel<Hello> helloEntity = new EntityModel<>(hello);
+helloEntity.add(linkTo(methodOn(SampleController.class).hello()).withSelfRel());
+
+return helloEntity;
+```
+
+
+결과값   Body = {"prefix":"Hey,","name":"Soojae","_links":{"self":{"href":"http://localhost/hello"}}} 으로 self 링크가 들어간다.
+
+
+# CORS
+SOP과 CORS
+Single-Origin Policy
+Cross-Origin Resource Sharing
+Origin?
+URI 스키마 (http, https)
+hostname (whiteship.me, localhost)
+포트 (8080, 18080)
+스프링 MVC @CrossOrigin
+https://docs.spring.io/spring/docs/5.0.7.RELEASE/spring-framework-reference/web.html#mvc-cors
+@Controller나 @RequestMapping에 추가하거나
+WebMvcConfigurer 사용해서 글로벌 설정
