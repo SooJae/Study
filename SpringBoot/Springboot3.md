@@ -402,3 +402,57 @@ CMD + P로 인자가 뭐가 들어가는지 확인 가능하다.
 
 완성을 다하고 실행을 해도 패스워드 인코딩 문제때문에 정상적으로 작동하지 않는다 (스프링 5부터 인코딩 방식이 복잡해짐)
 
+
+# Actuator
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints   의존성 추가
+spring-boot-starter-actuator
+애플리케이션의 각종 정보를 확인할 수 있는 Endpoints
+다양한 Endpoints 제공.
+JMX 또는 HTTP를 통해 접근 가능 함.
+shutdown을 제외한 모든 Endpoint는 기본적으로 활성화 상태.
+활성화 옵션 조정
+management.endpoints.enabled-by-default=false
+management.endpoint.info.enabled=true
+
+## metrics
+핵심이 되는 정보들 (메모리, CPU등)을 제 3의 모니터링 어플리케이션과 연동해서 모니터링 할 수 있다.
+특정 수치를 넘어서면 알림이 받도록 설정할 수 있음. 유용하다.
+
+JMX bean JavaManagement Bean 
+어플리케이션 밖에서 오퍼레이션을 호출할 수 있다.
+
+
+localhost:8080/actuator에 들어가면
+{"_links":{"self":{"href":"http://localhost:8080/actuator","templated":false},"health":{"href":"http://localhost:8080/actuator/health","templated":false},"health-path":{"href":"http://localhost:8080/actuator/health/{*path}","templated":true},"info":{"href":"http://localhost:8080/actuator/info","templated":false}}}
+라는 hateos가 나온다. 현재 리소스와 연관되어있는 정보
+
+
+# REST 클라이언트
+## RestTemplate
+Blocking I/O 기반의 Synchronous API
+RestTemplateAutoConfiguration
+프로젝트에 spring-web 모듈이 있다면 RestTemplateBuilder를 빈으로 등록해 줍니다.
+https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#rest-client-access
+ 
+## WebClient
+Non-Blocking I/O 기반의 Asynchronous API
+WebClientAutoConfiguration
+프로젝트에 spring-webflux 모듈이 있다면 WebClient.Builder를 빈으로 등록해 줍니다.
+https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-client
+
+
+## RestTemplate
+기본으로 java.net.HttpURLConnection 사용.
+커스터마이징
+로컬 커스터마이징
+글로벌 커스터마이징
+RestTemplateCustomizer
+빈 재정의
+ 
+## WebClient
+기본으로 Reactor Netty의 HTTP 클라이언트 사용.
+커스터마이징
+로컬 커스터마이징
+글로벌 커스터마이징
+WebClientCustomizer
+빈 재정의
