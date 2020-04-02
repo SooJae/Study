@@ -65,3 +65,26 @@ basePackageClasses는 적어준 **클래스** 이하의 패키지를 컴포넌�
 더 타입 safe하다.
 
 이것조차 @SpringBootApplication으로 컴포넌트 스캔을 따로 만들지 않아도 된다.
+
+
+# Autowired
+경우의 수 
+- 해당 타입의 빈이 없는 경우
+- 해당 타입의 빈이 한개인 경우
+- 해당 타입의 빈이 여러개인 경우( 
+@Primary 어노테이션으로 하나만 받을 수 있다.
+또는 리스트로 받아도 된다.
+```java
+@Autowired
+List<BookRepository> bookRepositories
+```
+안좋은 방법
+
+```java
+@Autowired
+BookRepository myBookRepository // 빈을 주입 받을때 이름까지 확인 한다. 그것을 이용해서 MyRepository를 주입 받는데, 비추천이다.
+```
+
+그 이후에 @PostConstruct를 사용하면 라이프 사이클이 @Autowired로 주입받고 그 후에 @PostConstruct가 실행된다.
+
+
