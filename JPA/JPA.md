@@ -251,3 +251,58 @@ protected OrderItem(){} 대신 아래와 같이 쓸 수도 있다.
   }
 ```
 스프링에서 오류가 발생하면 튕기지만, BindingResult가 있으면 오류가 result에 담겨서 클라이언트로 보낼 수 있다.
+
+## 데이터베이스 스키마 자동생성
+*운영 장비에는 절대 create, create-drop, update를 사용하면 안된다.*
+
+개발 초기단계는 create 또는 update
+테스트 서버는 update 또는 validate
+스테이징 운영서버는 validate 또는 none
+
+@Temporal은 사실 사용안해도 된다. Data => LocalDate 또는 LocalDateTime 을 사용하자
+
+@Lob
+Lob에는 지정할 수 있는 속성이 없다.
+CLOB : String, char[], java.sql.CLOB
+BLOB: Byte, java.sql.BLOB
+
+# IDENTITY 전략
+기본 키 생성을 데이터베이스에 위임
+• 주로 MySQL, PostgreSQL, SQL Server, DB2에서 사용  (예: MySQL의 AUTO_ INCREMENT)
+• JPA는 보통 트랜잭션 커밋 시점에 INSERT SQL 실행
+• AUTO_ INCREMENT는 데이터베이스에 INSERT SQL을 실행
+한 이후에 ID 값을 알 수 있음
+• IDENTITY 전략은 em.persist() 시점에 즉시 INSERT SQL 실행 하고 DB에서 식별자를 조회
+
+persist시점에 즉시 INSERT_SQL실행을 하므로 모았다가 쏘는 버퍼링 방식을 이용하지 못하는게 단점이다. ( 사실 한 트랜잭션안에서 여러 네트워크를 타는것은 그닥 성능저하를 못느낀다. 여러 트랜잭션일때 문제가 되는거지)
+
+
+# SEQUENCE 전략
+데이터베이스 시퀀스는 유일한 값을 순서대로 생성하는 특별한 데이터베이스 오브젝트(예: 오라클 시퀀스)
+오라클, PostgreSQL, DB2, H2 데이터베이스에서 사용
+
+데이터베이스에서 시퀀스 값만 살짝 갖고온다. (INSERT는 하지 않는다.) commit시점에 insert한다. (버퍼링 가능)
+데이터베이스에서 시퀀스 값만 next call로 갖고오면 네트워크가 발생하는데 차라리 insert하는게 낫지 않나?
+
+그래서 allocationSize를 사용한다. (default가 50, 미리 50개를 땡긴다.) 
+DB에는 51을 이미 가리키고 있다.(데이터를 50개 넣지 않았는데도)
+50개를 다 채우면 next call을 호출한다.
+call next value for MEMBER_SEQ;
+
+[twice_call_next](./twice_call_next.png)
+call next가 2번 호출된 이유는??
+
+JPA: 처음 호출했을때 1이 호출됐네? 성능 최적화로 인해 50개를 호출해야하는데 왜 1만 오지 다시 호출해보자
+DB_SEQ 51이 옴 
+그래서 2번 호출이 되는 것이다. 그 다음부터는 메모리에서 호출한다. (DB접근 없이)
+
+DB SEQ = 1 | 1 (1, 51 2번 호출)
+DB SEQ = 51 | 2 (MEM)
+DB SEQ = 51 | 3 (MEM)
+...
+DB SEQ = 51 | 50(MEM)
+
+51을 만나는 순간 미리 101까지 호출해야 하므로 next call이 일어난다
+
+
+
