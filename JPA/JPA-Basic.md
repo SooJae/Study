@@ -111,3 +111,58 @@ em.persist(member21);
 JPA : JPA에서 엔티티를 업데이트할때는 if문을 사용하면 안된다. 나
 (데이터가 변경시 데이터가 이전 데이터와 다르면(if문을 써서) update를 할꺼야 X => JPA는 데이터를 변경하면 tx.commit되는 시점에 무조건 업데이트 쿼리를 날리는구나)
 
+
+# 플러시
+영속성 컨텍스트의 변경내용을 데이터베이스에 반영
+
+## 플러시 발생
+데이터베이스 커밋될시 자동으로 발생
+
+- 변경 감지
+- 수정된 엔티티 쓰기 지연 SQL 저장소에 등록
+- 쓰기지연 SQL 저장소의 쿼리를 데이터베이스에 전(등록, 수정, 삭제 쿼리)
+
+## 영속성 컨텍스트를 플러시하는 방법
+
+- em.flush() -직접 
+- 트랜잭션 커밋 - 자동
+-JPQL 쿼리 실행 -자동
+
+```java
+Member2 member1 = new Member2(150L, "A");
+em.persist(member);
+// tx 커밋까지 못 기다리고 DB에 보내야 할 경우  <----------- em.flush를 써주면 된다.
+...
+
+tx.commit();
+```
+쓰기지연 SQL 저장소에 있는 바뀐 데이터를 데이터에 보내는 것이지 flush를 쓴다고 해서 1차캐시가 비워지는 것은 아니다.
+
+### JPQL실행시 플러시가 자동으로 호출 되는 이유
+```java
+em.persist(memberA);
+em.persist(memberB);
+em.persist(memberC);
+
+query = em.createQuery("select m from Member m", Member.class);
+List<Member> members = query.getResultList();
+```
+일경우 사실 persist만 하면 플러시가 발생하지 않는다. (commit을 해야 플러시가 발생하니)
+그럴경우 JPQL에서는 조회할 것이 없다. 이런 상황을 방지하기 위해 JPQL을 사용할때는 flush()를 미리 실행한다.
+
+
+## 결론
+플러시는 영속성 컨텍스트를 비우지 않음
+영속성 컨텍스트의 변경내용을 데이터베이스에 동기화
+(중요)트랜잭션이라는 작업 단위가 중요 -> 커밋 직전에만 동기화 하면 된다.
+
+# 준영속 상태
+- 영속(em.persist, em.find로 DB에서 갖고왔을때, 1차캐시에 없을 경우 DB에서 조회해와 1차캐시에 저장) -> 준영속
+- 영속 상태의 엔티티가 영속성 컨텍스트에서 분리(detached)
+- 영속성 컨텍스트가 제공하는 기능(업데이트, 더티체킹)을 못합
+
+## 준영속 상태로 만들기
+
+- em.detach(entity) : 특정 엔티티만 준영속 상태로 전환
+- em.clear() : em에 있는 영속성 컨텍스트를 완전히 초기화.
+- em.close() : 영속성 컨텍스트 종료
