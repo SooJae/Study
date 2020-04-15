@@ -183,3 +183,200 @@ JPA를 사용해서 테이블과 매핑할 클래스는 @Entity 필수
 final클래스, enum, interface, inner클래스 사용 x
 저장할 필드에 final 사용 x
 
+
+# 연관관계
+
+em.persist(team)으로 하면 항상 team에 id값이 들어간다 (PK값이 세팅(id)되고 영속상태 된다.)
+
+객체지향스럽지 않은 방
+```java
+// 첫번째 경우
+Team team = new Team();
+team.setName("TeamA");
+em.persist(team);
+
+Member2 member2 = new Member2();
+member2.setUsername("member1");
+member2.setTeamId(team.getId()); // 팀 id를 바꾸려면  team객체를 만들고 Id값을 갖고와서 그것을 setTeamId에 세팅해야한다...
+em.persist(member2);
+
+// 두 번째 경우
+Member2 findMember = em.find(Member2.class, member2.getId()); // 해당 멤버를 찾아서
+Long findTeamId = findMember.getTeamId(); // TeamId를 굳이 가져와서 해야한다.
+Team findTeam = em.find(Team.class, findTeamId);
+```
+
+객체를 테이블에 맞추어 데이터 중심으로 모델링하면, 협력관계를 만들 수 없다.
+테이블은 외래키로 조인을 해서 연관된 테이블을 찾는다.
+객체는 참조를 사용해서 연관된 객체를 찾는다.
+
+TeamId를 이용해서 찾으면 안된다.!
+
+```java
+@ManyToOne // Many : Member, One : team
+@JoinColumn(name = "team_id") // join해야하는 컬럼명은?
+private Team team;
+```
+
+```java
+//    @Column(name = "team_id")
+//    private Long teamId;
+
+@ManyToOne
+@JoinColumn(name = "team_id")
+private Team team;
+```
+
+```java
+//            Team team = new Team();
+            Team team = new Team();
+//            team.setName("TeamA");
+            team.setName("TeamA");
+//            em.persist(team);
+            em.persist(team);
+//
+//            Member2 member2 = new Member2();
+            Member2 member2 = new Member2();
+//            member2.setUsername("member1");
+            member2.setUsername("member1");
+//            member2.setTeamId(team.getId());
+            member2.setTeam(team); // JPA가 알아서 team에서 PK값을 꺼내서 insert할때 foreign key로 사용한다.
+//            em.persist(member2);
+            em.persist(member2);
+//            Member2 findMember = em.find(Member2.class, member2.getId());
+            Member2 findMember = em.find(Member2.class, member2.getId());
+//            Long findTeamId = findMember.getTeamId();
+//            Team findTeam = em.find(Team.class, findTeamId);
+            Team findTeam = findMember.getTeam(); // 위에서 teamId를 갖고와서 그 값으로 다시 찾는것이 아닌 바로 뽑아 쓴다.
+            System.out.println("findTeam.getName() = " + findTeam.getName());
+```
+객체지향스럽게 된다.
+또 위의 로직은 sql문을 날리지 않는다.
+영속성 컨텍스트에 들어가 있기때문에 (em.persist(team)) db에 접근하지 않고 1차캐시에서 바로 갖고온다.
+
+em.flush(); 싱크 맞추고
+em.clear(): 영속성 컨텍스트를 초기화
+위의 두개를 em.persist 밑에 적어주면 sql을 날린다.
+
+
+## 양방향 매핑
+테이블 연관 관계는 FK키는 갖고있으면 양방향으로 가능하다 (join을 이용해서 Member에서 Team을 조회할 수 있고, Team에서 Member를 조회할 수 있다.)
+하지만 양방향 객체 연관관계는 Member에 Team객체를 갖고있다고 해도 Team에서 멤버를 조회할 수 없다.
+그래서 Team에 List members를 만들어줘야 한다.
+
+## 연관관계 주인
+외래키가 있는 곳을 연관관계 주인으로 잡는다.
+(연관관계 주인)N(Member) : 1(Team)
+(연관관계 주인)자동차 바퀴 : 자동차
+
+
+```java
+Member2 findMember = em.find(Member2.class, member2.getId());
+List<Member2> members = findMember.getTeam().getMembers(); // 찾은 멤버의 팀의 멤버들 (양방향이다.)
+```
+
+
+### 팀에 새로운 멤버 추가
+```java
+// 연관관계의 주인
+Member2 member2 = new Member2();
+member2.setUsername("member1");
+em.persist(member2);
+
+// 연관관계의 주인 X
+Team team = new Team();
+team.setName("TeamA");
+team.getMembers().add(member2);
+em.persist(team);
+```
+### 결과
+```yaml
+SELECT * FROM MEMBER2;
+MEMBER_ID  	USERNAME  	TEAM_ID  
+1	member1	null
+(1 row, 0 ms)
+
+SELECT * FROM TEAM;
+TEAM_ID  	NAME  
+2	TeamA
+(1 row, 0 ms)
+```
+TEAM_ID가 null인것을 확인 할 수 있다.
+
+
+```java
+//연관관계의 주인 X
+Team team = new Team();
+team.setName("TeamA");
+//            team.getMembers().add(member2);
+em.persist(team);
+
+//연관관계의 주인
+Member2 member2 = new Member2();
+member2.setUsername("member1");
+member2.setTeam(team);
+em.persist(member2);
+```
+
+### 결과
+```java
+SELECT * FROM MEMBER2;
+MEMBER_ID  	USERNAME  	TEAM_ID  
+2	member1	1
+(1 row, 1 ms)
+
+SELECT * FROM TEAM;
+TEAM_ID  	NAME  
+1	TeamA
+(1 row, 0 ms)
+```
+
+이렇게만 하면 JPA에서 인식을 하지만 객체지향적으로 생각해보면, 양쪽에 걸어야 한다.
+
+### em.flush(), em.clear() 를 사용하지 않을때
+```java
+Team team = new Team();
+team.setName("TeamA");
+em.persist(team);
+
+Member2 member2 = new Member2();
+member2.setUsername("member1");
+member2.setTeam(team);
+em.persist(member2);
+
+//team.getMembers().add(member2);
+
+Team findTeam = em.find(Team.class, team.getId()); //1차캐시에서 갖고온다.
+List<Member2> members = findTeam.getMembers(); //(members가 null이다.)
+```
+영속성 컨텍스트에 들어갈때, em.find하면 DB에 굳이 쿼리를 안보내고 1차캐시에서 Team객체가 그대로 출력된다. ( add를 하지 않은 상태로 )
+commit을 해야 제대로 동작한다.
+그래서 team.getMembers().add(member2)를 해야 커밋을 하기 전에도 제대로 동작하는 것을 확인할 수 있다.
+또한 테스트 케이스 작성할때도 null이 나올 수 있기때문에 양쪽에 값을 세팅해줘야 한다.
+
+
+연관관계 편의 메서드를 만들자!
+```java
+member2.setTeam(team);
+team.getMembers().add(members2);
+
+//을 다음과 같이 바꾸자
+
+public void setTeam(Team team){
+    this.team = team;
+    team.getMembers().add(this);
+}
+//혹은
+
+public void addMember(Member member){
+    member.setTeam(this);
+    members.add(member);
+}
+```
+setTeam => changeTeam으로 메서드명을 바꾸는 습관 (로직이 바뀌니)
+
+JSON라이브러리의 무한루프 => 컨트롤에서는 엔티티를 반환하지 말자 (DTO로 변환)
+
+설계할땐 단방향 매핑으로 다 끝내야 한다.
+
+N:M 매핑은 1:N M:1로 매핑시켜야 한다.
