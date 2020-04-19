@@ -240,6 +240,10 @@ protected OrderItem(){} 대신 아래와 같이 쓸 수도 있다.
   @PostMapping("/members/new")
   public String create(@Valid MemberForm form, BindingResult result) {
 
+    if (result.hasErrors()){
+      return "member/createMemberForm";
+    }
+
     Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
 
     Member member = new Member();
@@ -305,4 +309,13 @@ DB SEQ = 51 | 50(MEM)
 51을 만나는 순간 미리 101까지 호출해야 하므로 next call이 일어난다
 
 
+
+
+# DTO, VO ENTITY
+https://stackoverflow.com/questions/21554977/should-services-always-return-dtos-or-can-they-also-return-domain-models
+
+## API를 만들 땐 이유를 불문하고 절대 엔티티를 웹으로 넘기면 안된다. 
+API라는 것은 스펙인데, 멤버 엔티티를 반환할때, password가 있으면 지워줘야하는데, 그렇게 되면 
+로직이 들어가게 되고 API스펙이 변한다.
+그러니 꼭 ! 서버에서 클라이언트에게 값을 전달할 때 멤버 DTO로 변환해서 전송해주자
 
