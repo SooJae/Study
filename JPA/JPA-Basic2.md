@@ -21,3 +21,7 @@
 @ManyToOne은 mappedBy 가 없다!
 @OneToMany는 mappedBy가 있다! 
 ManyToOne를 쓰면 연관관계의 주인이 되어야 한다는 것! (꼼수로 insertable = false, updatable = false를 사용하면 mappedBy처럼 동작하지만 굳이?)
+
+#상속관계 매핑
+Item(부모클래스)만 단독으로 테이블에 저장할 일이 있다. abstract X
+Item(부모클래스)만 단독으로 테이블에 저장할 일이 없다. abstract O
