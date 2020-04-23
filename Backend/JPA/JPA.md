@@ -319,3 +319,58 @@ API라는 것은 스펙인데, 멤버 엔티티를 반환할때, password가 있
 로직이 들어가게 되고 API스펙이 변한다.
 그러니 꼭 ! 서버에서 클라이언트에게 값을 전달할 때 멤버 DTO로 변환해서 전송해주자
 
+# (중요)변경 감지와 병합?
+## 준영속 엔티티?
+영속성 컨텍스트가 더는 관리하지 않는 엔티티를 말한다.
+
+이것은 DB에 접근해서 식별값 (Id)를 갖고옴으로 비영속 상태이다.
+데이터베이스에 갔다와서 식별자가 존재하는 것
+JPA가 식별할 수 있는 값을 갖고 있다.
+
+```java
+Book book = new Book();
+book.setId(form.getId());
+book.setName(form.getName());
+book.setPrice(form.getPrice());
+book.setStockQuantity(form.getStockQuantity());
+book.setAuthor(form.getAuthor());
+book.setIsbn(form.getIsbn());
+```
+    
+
+DB에서 영속상태인 아이템을 갖고온다.
+```java
+@Transactional
+public void updateItem(Long itemId, Book bookParam){
+Item findItem = itemRepository.findOne(itemId);
+findItem.setPrice(bookParam.getPrice());
+findItem.setName(bookParam.getName());
+findItem.setStockQuantity(bookParam.getStockQuantity());
+}
+```
+
+@Transactional이 끝나면
+flush를 하는데 이때 변경된 애를 찾는다.
+@Transactional *안에서* 엔티티를 조회해야 영속 상태로 조회가 되고, 거기서 값 변경을 해야 변경감지가 일어난다. 
+
+2. merge
+
+```java
+Book book = new Book();
+book.setId(form.getId());
+book.setName(form.getName());
+book.setPrice(form.getPrice());
+book.setStockQuantity(form.getStockQuantity());
+book.setAuthor(form.getAuthor());
+book.setIsbn(form.getIsbn());
+```
+에서 
+이 것을 em.merge(item)을 하면 된다.
+
+기존에 넘어온 파라미터인 item은 영속성 상태로 변하진 않는다.
+Item mergeItem = em.merge(item);의 mergeItem 영속성 상태이다.
+
+merge는 전체를 갈아치운다 (Patch라는 개념이 없다 무조건 PUT)
+하지만! 값이 없으면 null로 업데이트 된다 그러므로 실무에서는 사용하지 말자
+
+
