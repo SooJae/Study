@@ -19,3 +19,13 @@ routerLink는 현재위치를 기억하고 있기때문에, '/'를 쓰지않고 
 
 현재위치를 알게하려면(그리고 상대경로로 가게 하려면)
 `this.router.navigate(['servers'], {relativeTo: this.route});`로 쓰면된다. 여기서 this.route는 activateRoute이다.
+
+```js
+ngOnInit(){
+this.user = {
+  id: this.route.snapshot.params['id'],
+  name: this.route.snapshot.params['name']
+};
+}
+```
+/users/3/soojae로 접속하면 채집해준다.
