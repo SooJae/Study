@@ -95,3 +95,96 @@ ngOnInit(): void {
 this.forbiddenNames는 이 클래스 안에서 호출되지 않는다. Validate체크를 위해 앵귤러에서 관리하고 호출된다. this.forbiddenUsernames를 앵귤러 내에서 찾는다.
 (윈도우 같은 느낌)앵귤러 내에서 this.forbiddenUsernames가 없기 때문에 자연스럽게 에러가 발생한다.
 그래서 '이 클래스에서 사용해라' 라는 의미로 this.forbiddenNames.bind(this)를 쓰면, 이 타입스크립트에서 this.forbiddenUsernames.indexOf가 실행된다.
+
+
+## 초기값
+```js
+id: number;
+  editMode = false;
+  recipeForm: FormGroup;
+
+  constructor(private route: ActivatedRoute,
+              private recipeService: RecipeService,
+              private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = +params.id;
+        this.editMode = params.id != null;
+        this.initForm();
+      }
+    );
+  }
+
+  onSubmit() {
+    // const newRecipe = new Recipe(
+    //   this.recipeForm.value.name,
+    //   this.recipeForm.value.description,
+    //   this.recipeForm.value.imagePath,
+    //   this.recipeForm.value.ingredients);
+
+    if (this.editMode) {
+      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+    } else {
+      this.recipeService.addRecipe(this.recipeForm.value);
+    }
+    this.onCancel();
+  }
+
+  onAddIngredients() {
+    (<FormArray>this.recipeForm.get('ingredients')).push(
+      new FormGroup({
+        'name': new FormControl(null, Validators.required),
+        'amount': new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/)
+        ])
+      })
+    );
+  }
+
+  private initForm() {
+    let recipeName = '';
+    let recipeImagePath = '';
+    let recipeDescription = '';
+    const recipeIngredients = new FormArray([]);
+
+    if (this.editMode) {
+      const recipe = this.recipeService.getRecipe(this.id);
+      recipeName = recipe.name;
+      recipeImagePath = recipe.imagePath;
+      recipeDescription = recipe.description;
+      if (recipe?.ingredients) {
+        for (const ingredient of recipe.ingredients) {
+          recipeIngredients.push(
+            new FormGroup({
+              'name': new FormControl(ingredient.name, Validators.required),
+              'amount': new FormControl(ingredient.amount, [
+                Validators.required,
+                Validators.pattern(/^[1-9]+[0-9]*$/)
+              ])
+            })
+          );
+        }
+      }
+    }
+
+    this.recipeForm = new FormGroup({
+      'name': new FormControl(recipeName, Validators.required),
+      'imagePath': new FormControl(recipeImagePath, Validators.required),
+      'description': new FormControl(recipeDescription, Validators.required),
+      'ingredients': recipeIngredients
+    });
+  }
+
+  get RecipeFormControl() {
+    return (<FormArray>this.recipeForm.get('ingredients')).controls;
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
+  }
+```
+
