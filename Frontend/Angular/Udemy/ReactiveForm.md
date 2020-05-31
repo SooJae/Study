@@ -188,3 +188,9 @@ id: number;
   }
 ```
 
+### 데이터를 공유하고 싶으면 공유하고 싶은 컴포넌트들이 공통으로 사용하는 모듈에 서비스를 위치시켜야 한다.
+
+## FormArray 를 삭제하는 방법
+```js
+(<FormArray>this.recipeForm.get('ingredients')).clear();
+```
