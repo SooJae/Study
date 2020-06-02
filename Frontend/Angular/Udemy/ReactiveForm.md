@@ -97,6 +97,47 @@ this.forbiddenNames는 이 클래스 안에서 호출되지 않는다. Validate�
 그래서 '이 클래스에서 사용해라' 라는 의미로 this.forbiddenNames.bind(this)를 쓰면, 이 타입스크립트에서 this.forbiddenUsernames.indexOf가 실행된다.
 
 
+## html에서 여러가지 error 컨트롤 하기
+
+```html
+<span
+  *ngIf="!signupForm.get(['userData','username']).valid && signupForm.get(['userData','username']).touched"
+  class="help-block">
+  <span
+    *ngIf="signupForm.get(['userData','username']).errors['nameIsForbidden']">This name is Invalid!</span>
+  <span
+    *ngIf="signupForm.get(['userData','username']).errors['required']">This field is required!</span>
+  </span>
+</div>
+```
+
+```js
+this.signupForm.statusChanges.subscribe(value => console.log(value));
+```
+로 하면 INVALID, VALID, PENDING(비동기 시)로 나타난다.
+
+##SetValue, PatchValue
+```js
+    this.signupForm.setValue({
+      'userData': {
+        'username': 'Max',
+        'email': 'max@test.com'
+      },
+      'gender': 'male',
+      'hobbies': []
+    });
+
+    this.signupForm.patchValue({
+      'userData': {
+        'username': 'Anna',
+        'email': 'anna@test.com'
+      }
+    });
+```
+SetValue는 폼에 맞게 다 채워 넣지 않으면 에러가 발생한다
+PatchValue는 일부를 바꿀 수 있다.
+
+
 ## 초기값
 ```js
 id: number;
@@ -194,3 +235,5 @@ id: number;
 ```js
 (<FormArray>this.recipeForm.get('ingredients')).clear();
 ```
+
+https://loiane.com/2017/08/angular-reactive-forms-trigger-validation-on-submit/
