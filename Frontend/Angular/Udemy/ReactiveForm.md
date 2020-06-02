@@ -237,3 +237,8 @@ id: number;
 ```
 
 https://loiane.com/2017/08/angular-reactive-forms-trigger-validation-on-submit/
+
+
+https://nehalist.io/working-with-models-in-angular/
+
+https://nehalist.io/angular-7-models/
