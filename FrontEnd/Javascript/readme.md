@@ -251,5 +251,5 @@ window.open 메소드는 새 창을 생성합니다. 현대의 브라우저는 �
 내가 클릭하면 팝업이 열리고,
 script를 통해(즉 웹페이지를 만든사람이 의도한 것이면)팝업이 열리지 않는다.
 
-[2페이지](JSForWebBrowser.md)
+[2페이지](Javascript/JSForWebBrowser.md)
 

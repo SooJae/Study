@@ -24,7 +24,7 @@ console.log(t.getBoundingClientRect());
 </script>
 ```
 
-![findElementSize](images/findElementSize.png)
+![findElementSize](Javascript/images/findElementSize.png)
 
 view포트의 좌표
 

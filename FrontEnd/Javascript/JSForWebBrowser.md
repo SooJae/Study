@@ -99,7 +99,7 @@ BOM(Browser Object Model)이란 웹브라우저의 창이나 프래임을 추상
 <br>
 
 <p align="center">
-<img src="images/window-dom-bom-js.png">
+<img src="Javascript/images/window-dom-bom-js.png">
 </p>
 
 <!-- <img src="window-dom-bom-js.png" style= "align: center"> -->
@@ -426,7 +426,7 @@ interface HTMLAnchorElement : HTMLElement{}
 ## Dom tree
 
 <p align="center">
-<img src="images/dom_tree.png">
+<img src="Javascript/imagesm_tree.png">
 </p>
 
 [출처](https://web.stanford.edu/class/cs98si/slides/the-document-object-model.html "dom_tree")
@@ -835,7 +835,7 @@ find를 쓰는 이유는 체인을 끊지 않고 작업의 대상을 변경하�
 
 Node객체는 DOM에서 시조와 같은 역할을 합니다. 다시말해서 모든 DOM객체는 Node객체를 상속 받습니다.
 
-![node-image](images/node.png)
+![node-image](Javascript/imagesde.png)
 
 ```html
 <ul>
