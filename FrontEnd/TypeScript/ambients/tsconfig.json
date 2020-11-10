@@ -7,5 +7,6 @@
 //
 //    "sourceMap": false,
 //    "experimentalDecorators":true
+    "typeRoots": ["calc"]
   }
 }
