@@ -1,4 +1,4 @@
-// / <reference path = "Calc.d.ts" />
-const obj = new TutorialPoint.Calc();
-obj.doSum('Hello'); // compiler error
-console.log(obj.doSum(10));
+// / <reference path = "CalcSum.d.ts" />
+const obj = new TestSum.Calc();
+console.log(`Sum: ${obj.doSum(15, 25)}`);
+console.log(`Sum: ${obj.doSum(15, 'abc')}`);
