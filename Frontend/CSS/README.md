@@ -820,3 +820,7 @@ fontello 사이트에 들어가서 custom Icons에 드래그 하면 아이콘에
 fontello 사이트는 회원가입을 할수없다. 
 그래서 다른 컴퓨터나 다른 웹 브라우저에서 fontello를 사용할 시, 내가 선택했던 이미지들이 체크해제가 되어있는걸 볼 수 있습니다.
 연장을 누른후에 import버튼을 누르고 config.json을 import해주면 내가 선택했던 이미지들이 선택되어있습니다.
+
+Note: Outline differs from borders! Unlike border, the outline is drawn outside the element's border, and may overlap other content. Also, the outline is NOT a part of the element's dimensions; the element's total width and height is not affected by the width of the outline.
+
+https://medium.com/@jbbpatel94/difference-between-offsetheight-clientheight-and-scrollheight-cfea5c196937
