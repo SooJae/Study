@@ -42,6 +42,8 @@ Props또는 State가 바뀌면 화면이 다시 그려진다.
 ```
 e.preventDefault();는 a태그의 기본 동작방식을 못하게 한다.
 
+태그 프로퍼티 data-id 값은 e.target.dataset.id 값에 들어간다.
+
 ## Props vs State
 - Props
 읽기전용이다.
